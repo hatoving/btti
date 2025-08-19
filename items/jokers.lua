@@ -166,9 +166,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mug',
         text = {
-            "{C:mult}+#2# {} Mult to this Joker if played", 
+            "{C:mult}+#2#{} Mult to this Joker if played", 
             "hand has more Mult than Chips",
-            "{C:mult}-#2# {} Mult if played hand has more",
+            "{C:mult}-#2#{} Mult if played hand has more",
             "Chips than Mult",
             "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
@@ -198,20 +198,21 @@ SMODS.Joker {
             }
         end
 
-        if context.before then
-            if G.GAME.current_round.current_hand.mult > G.GAME.current_round.current_hand.chips then
+        if context.final_scoring_step then --We check if we're in the final scoring step...
+            if mult > hand_chips then
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
                 return {
                     message = 'Upgraded!',
                     color = G.C.MULT,
-                    card = card
                 }
-            else
+            elseif hand_chips > mult then
                 card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_gain
+                if card.ability.extra.mult < 0 then
+                    card.ability.extra.mult = 0
+                end
                 return {
                     message = ':(',
                     color = G.C.CHIPS,
-                    card = card
                 }
             end
         end
