@@ -77,8 +77,8 @@ SMODS.Joker {
 		name = 'God Taco',
 		text = {
 			"Shuffles Jokers around every time",
-            "you play a hand and retriggers the",
-            "Joker to the right"
+            "you play a hand and copies the",
+            "Joker to the right's ability"
 		}
 	},
 
@@ -116,16 +116,20 @@ SMODS.Joker {
                 message = "Whoosh!",
             }
         end 
-        if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= self then
-            if context.other_card == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
-                sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
-                return {
-                    message = "AGAIN !!",
-                    repetitions = 1,
-                    card = card
-                }
-            else
-                return nil, true end
+        
+        if context.retrigger_joker_check and context.other_card ~= self then
+            if G.jokers.cards[getJokerID(card) + 1] then
+                if context.other_card == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
+                    sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
+                    return {
+                        message = "AGAIN !!",
+                        repetitions = 1,
+                        card = card,
+                        colour = G.C.PURPLE,
+                    }
+                else
+                    return nil, true end
+            end
         end
 	end,
     in_pool = function(self, args)
