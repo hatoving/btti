@@ -127,14 +127,14 @@ SMODS.Joker {
             }
         end 
         
-        if context.retrigger_joker_check and context.other_card ~= self then
+        if context.other_joker and card ~= context.other_joker then
             if G.jokers.cards[getJokerID(card) + 1] then
-                if context.other_card == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
+                if context.other_joker == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
                     sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
                     return {
                         message = "AGAIN !!",
                         repetitions = 1,
-                        card = card,
+                        card = context.other_joker,
                         colour = G.C.PURPLE,
                     }
                 else
