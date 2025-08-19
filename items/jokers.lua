@@ -8,6 +8,11 @@ function getJokerID(card)
     end
 end
 
+-- MISC JOKERS
+-- MISC JOKERS
+-- MISC JOKERS
+-- MISC JOKERS
+
 -- Jonker
 SMODS.Atlas {
     key = "bttiJonker",
@@ -63,6 +68,11 @@ SMODS.Joker {
 		return true, { allow_duplicates = true }
 	end
 }
+
+-- ITTI JOKERS
+-- ITTI JOKERS
+-- ITTI JOKERS
+-- ITTI JOKERS
 
 -- God Taco
 SMODS.Atlas {
@@ -131,6 +141,64 @@ SMODS.Joker {
                     return nil, true end
             end
         end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
+}
+
+-- CREATICA JOKERS
+-- CREATICA JOKERS
+-- CREATICA JOKERS
+-- CREATICA JOKERS
+
+-- Joozie
+SMODS.Atlas {
+    key = "bttiJoozie",
+    path = "bttiJoozie.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'bttiJoozie',
+	loc_txt = {
+		name = 'Joozie',
+		text = {
+			"Upgrades played {C:attention}Kings{} and {C:attention}Queens{}",
+            "({C:chips}+117{} chips)"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 2 } },
+	loc_vars = function(self, info_queue, card)
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'bttiJoozie',
+	pos = { x = 0, y = 0 },
+	cost = 6,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.cardarea == G.play and context.individual and context.other_card then
+            local _trigger = false
+            if context.other_card:get_id() == 12 then _trigger = true end --Kings
+            if context.other_card:get_id() == 13 then _trigger = true end --Queens
+            if _trigger then
+                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + 117
+                context.other_card:juice_up()
+                return {
+                    message = "Upgrade!"
+                }
+            end
+		end
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
