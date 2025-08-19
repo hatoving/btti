@@ -166,15 +166,15 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mug',
         text = {
-            "{C:mult}+#1# {} Mult to this Joker if played", 
+            "{C:mult}+#2# {} Mult to this Joker if played", 
             "hand has more Mult than Chips",
-            "{C:mult}-#1# {} Mult if played hand has more",
+            "{C:mult}-#2# {} Mult if played hand has more",
             "Chips than Mult",
-            "{C:inactive}(Currently {C:mult}+#0#{C:inactive} Mult)"
+            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
     },
 
-    config = {extra = {mult = 0, mult_gain = 0}},
+    config = {extra = {mult = 0, mult_gain = 1}},
     loc_vars = function(self, info_queue, card)
         return {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
@@ -199,7 +199,7 @@ SMODS.Joker {
         end
 
         if context.before then
-            if card.ability.current_hand_mult > card.ability.current_hand_chips then
+            if G.GAME.current_round.current_hand.mult > G.GAME.current_round.current_hand.chips then
                 card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
                 return {
                     message = 'Upgraded!',
@@ -207,7 +207,7 @@ SMODS.Joker {
                     card = card
                 }
             else
-                card.ability.extra.mult = card.ability.extra_mult - card.ability.extra.mult_gain
+                card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_gain
                 return {
                     message = ':(',
                     color = G.C.CHIPS,
