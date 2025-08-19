@@ -194,7 +194,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main then
             return {
-                mult_mod = card.ability.extra.mult
+                mult_mod = card.ability.extra.mult,
+                message = "Mugtastic!"
             }
         end
 
