@@ -1,3 +1,5 @@
+local mod_path = "" .. SMODS.current_mod.path
+
 -- REMOVE THIS WHEN WE RELEASE IT ??
 SMODS.Keybind{
 	key = 'imrich',

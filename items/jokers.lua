@@ -76,8 +76,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-			"Randomly shuffles Jokers around",
-            "and retriggers the Joker next to itself"
+			"Triggers the Joker to the right",
+            "and shuffles all Jokers around"
 		}
 	},
 
