@@ -1,3 +1,5 @@
+G.C.BTTIPINK = HEX('FFA5A5')
+
 local mod_path = "" .. SMODS.current_mod.path
 
 -- Load items

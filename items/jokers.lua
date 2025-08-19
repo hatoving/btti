@@ -15,13 +15,13 @@ end
 
 -- Jonker
 SMODS.Atlas {
-    key = "bttiJonker",
+    key = "Jonker",
     path = "bttiJonker.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'bttiJonker',
+	key = 'Jonker',
 	loc_txt = {
 		name = 'Jonker',
 		text = {
@@ -30,14 +30,14 @@ SMODS.Joker {
 		}
 	},
 
-	config = { extra = { mult = 10, odds = 2 } },
+	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
 	end,
 	rarity = 1,
-	atlas = 'bttiJonker',
+	atlas = 'Jonker',
 	pos = { x = 0, y = 0 },
 	cost = 4,
 
@@ -49,7 +49,7 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
 		if context.joker_main then
-            if pseudorandom('bttiJonker') < G.GAME.probabilities.normal / card.ability.extra.odds then
+            if pseudorandom('Jonker') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 local rand = math.random(-7, -2)
                 return {
                     dollars = rand,
@@ -71,7 +71,7 @@ SMODS.Joker {
 
 -- Gambler Cat
 --[[ SMODS.Atlas {
-    key = "bttiGamblerCat",
+    key = "GamblerCat",
     path = "", 
 
 } ]]
@@ -83,19 +83,19 @@ SMODS.Joker {
 
 -- God Taco
 SMODS.Atlas {
-    key = "bttiGodTaco",
+    key = "GodTaco",
     path = "bttiGodTaco.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'bttiGodTaco',
+	key = 'GodTaco',
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-			"Shuffles Jokers around every time",
-            "you play a hand and copies the",
-            "Joker to the right's ability"
+			"Copies the Joker to the right",
+            "and shuffles all Jokers around",
+            "at the end of a hand"
 		}
 	},
 
@@ -106,7 +106,7 @@ SMODS.Joker {
         }
 	end,
 	rarity = 1,
-	atlas = 'bttiGodTaco',
+	atlas = 'GodTaco',
 	pos = { x = 0, y = 0 },
 	cost = 4,
 
@@ -116,36 +116,149 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = true,
 
-    update = function(self, card, front)
-        if G.jokers then
-            if G.jokers.cards[getJokerID(card) + 1] then
-                card.ability.extra.gtTarget = G.jokers.cards[getJokerID(card) + 1]
-            elseif getJokerID(card) == #G.jokers.cards and G.jokers.cards[1] and G.jokers.cards[1] ~= card then
-                card.ability.extra.gtTarget = G.jokers.cards[1]
-            end
-        end
-    end,
-
 	calculate = function(self, card, context)
-        if context.before then
+        if context.final_scoring_step then
             G.E_MANAGER:add_event(Event({ trigger = 'immediate', blocking = false, delay = 0.0, func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end }))
             return {
                 message = "Whoosh!",
             }
         end 
         
-        if context.other_joker and card ~= context.other_joker then
+        if context.joker_main then
             if G.jokers.cards[getJokerID(card) + 1] then
-                if context.other_joker == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
-                    sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
-                    return {
-                        message = "AGAIN !!",
-                        repetitions = 1,
-                        card = context.other_joker,
+                sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
+                local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
+                return SMODS.merge_effects {
+                    {
+                        message = "AGAIN, AGAIN!!",
                         colour = G.C.PURPLE,
+                    },
+                    ret
+                }
+            elseif G.jokers.cards[1] then
+                sendInfoMessage("supposed to retrigger: 1", "BTTI")
+                local ret = SMODS.blueprint_effect(card, G.jokers.cards[1], context)
+                return SMODS.merge_effects {
+                    {
+                        message = "AGAIN, AGAIN!!",
+                        colour = G.C.PURPLE,
+                    },
+                    ret
+                }
+            end
+        end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
+}
+
+-- Strawberry Lemonade
+SMODS.Atlas {
+    key = "SL",
+    path = "bttiSL.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'SL',
+	loc_txt = {
+		name = 'Strawberry Lemoande',
+		text = {
+			"Copies either a random Joker or a random Card in Hand",
+            "Triggers twice if {C:purple}God Taco{} is present"
+		}
+	},
+
+	config = { extra = { } },
+	loc_vars = function(self, info_queue, card)
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'SL',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+        if context.joker_main then
+            local rand = math.random(0, 1)
+            if rand == 0 then
+                sendInfoMessage("SL rand: " .. rand, "BTTI")
+                local idx = math.random(1, #G.jokers.cards)
+                sendInfoMessage("SL idx: " .. idx, "BTTI")
+                if idx == getJokerID(card) then
+                    idx = (getJokerID(card) % #G.jokers.cards) + 1
+                    if idx == getJokerID(card) then
+                        return {
+                            message = "Can't copy myself...",
+                            colour = G.C.BTTIPINK,
+                        }
+                    end
+                end
+
+                if G.jokers.cards[idx] then
+                    sendInfoMessage("yay: " .. idx, "BTTI")
+                    if next(SMODS.find_card("j_btti_GodTaco")) then
+                        local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
+                        local ret2 = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
+                        return SMODS.merge_effects {
+                            {
+                                message = "Go, GT!!",
+                                colour = G.C.BTTIPINK
+                            }, ret, ret2
+                        }
+                    else
+                        local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
+                        return SMODS.merge_effects {
+                            {
+                                message = "Yay!",
+                                colour = G.C.BTTIPINK
+                            }, ret
+                        }
+                    end
+                else
+                    return {
+                        message = "I got nothin'...",
+                        colour = G.C.BTTIPINK,
+                    }
+                end
+            else
+                sendInfoMessage("SL rand: " .. rand, "BTTI")
+                local idx = math.random(1, #context.scoring_hand)
+                sendInfoMessage("SL idx: " .. idx, "BTTI")
+
+                if next(SMODS.find_card("j_btti_GodTaco")) then
+                    local ret = {
+                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
+                        chip_mod = context.scoring_hand[idx]:get_id(),
+                        colour = G.C.BTTIPINK,
+                    }
+                    local ret2 = {
+                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
+                        chip_mod = context.scoring_hand[idx]:get_id(),
+                        colour = G.C.BTTIPINK,
+                    }
+                    return SMODS.merge_effects {
+                        {
+                            message = "Go, GT!!",
+                            colour = G.C.BTTIPINK
+                        }, ret, ret2
                     }
                 else
-                    return nil, true end
+                    return {
+                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
+                        chip_mod = context.scoring_hand[idx]:get_id(),
+                        colour = G.C.BTTIPINK,
+                    }
+                end
             end
         end
 	end,
@@ -156,13 +269,13 @@ SMODS.Joker {
 
 -- Mug
 SMODS.Atlas {
-    key = "bttiMug",
+    key = "Mug",
     path = "bttiMug.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'bttiMug',
+    key = 'Mug',
     loc_txt = {
         name = 'Mug',
         text = {
@@ -181,7 +294,7 @@ SMODS.Joker {
         }
     end,
     rarity = 1,
-    atlas = 'bttiMug',
+    atlas = 'Mug',
     pos = {x = 0, y = 0},
     cost = 7,
 
@@ -227,13 +340,13 @@ SMODS.Joker {
 
 -- Joozie
 SMODS.Atlas {
-    key = "bttiJoozie",
+    key = "Joozie",
     path = "bttiJoozie.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'bttiJoozie',
+	key = 'Joozie',
 	loc_txt = {
 		name = 'Joozie',
 		text = {
@@ -249,7 +362,7 @@ SMODS.Joker {
         }
 	end,
 	rarity = 1,
-	atlas = 'bttiJoozie',
+	atlas = 'Joozie',
 	pos = { x = 0, y = 0 },
 	cost = 6,
 
