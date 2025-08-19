@@ -69,6 +69,13 @@ SMODS.Joker {
 	end
 }
 
+-- Gambler Cat
+--[[ SMODS.Atlas {
+    key = "bttiGamblerCat",
+    path = "", 
+
+} ]]
+
 -- ITTI JOKERS
 -- ITTI JOKERS
 -- ITTI JOKERS
@@ -145,6 +152,69 @@ SMODS.Joker {
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
 	end
+}
+
+-- Mug
+SMODS.Atlas {
+    key = "bttiMug",
+    path = "bttiMug.png",
+    px = 71,
+    px = 95
+}
+SMODS.Joker {
+    key = 'bttiMug',
+    loc_txt = {
+        name = 'Mug',
+        text = {
+            "{C:mult}+#1# {} Mult to this Joker if played", 
+            "hand has more Mult than Chips",
+            "{C:mult}-#1# {} Mult if played hand has more",
+            "Chips than Mult",
+            "{C:inactive}(Currently {C:mult}+#0#{C:inactive} Mult)"
+        }
+    },
+
+    config = {extra = {mult = 0, mult_gain = 0}},
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
+        }
+    end,
+    rarity = 1,
+    atlas = 'bttiMug',
+    pos = {x = 0, y = 0},
+    cost = 7,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult_mod = card.ability.extra.mult
+            }
+        end
+
+        if context.before then
+            if card.ability.current_hand_mult > card.ability.current_hand_chips then
+                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
+                return {
+                    message = 'Upgraded!',
+                    color = G.C.MULT,
+                    card = card
+                }
+            else
+                card.ability.extra.mult = card.ability.extra_mult - card.ability.extra.mult_gain
+                return {
+                    message = ':(',
+                    color = G.C.CHIPS,
+                    card = card
+                }
+            end
+        end
 }
 
 -- CREATICA JOKERS
