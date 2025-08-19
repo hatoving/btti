@@ -159,7 +159,7 @@ SMODS.Atlas {
     key = "bttiMug",
     path = "bttiMug.png",
     px = 71,
-    px = 95
+    py = 95
 }
 SMODS.Joker {
     key = 'bttiMug',
@@ -215,6 +215,7 @@ SMODS.Joker {
                 }
             end
         end
+    end
 }
 
 -- CREATICA JOKERS
