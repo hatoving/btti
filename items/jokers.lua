@@ -76,18 +76,19 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-			"Triggers the Joker to the right",
-            "and shuffles all Jokers around"
+			"Shuffles Jokers around every time",
+            "you play a hand and retriggers the",
+            "Joker to the right"
 		}
 	},
 
-	config = { extra = { mult = 10, odds = 2 } },
+	config = { extra = { gtTarget = 0 } },
 	loc_vars = function(self, info_queue, card)
 		return {
             vars = { },
         }
 	end,
-	rarity = 2,
+	rarity = 1,
 	atlas = 'bttiGodTaco',
 	pos = { x = 0, y = 0 },
 	cost = 4,
@@ -95,31 +96,37 @@ SMODS.Joker {
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
+    eternal_compat = true,
+    perishable_compat = true,
+
+    update = function(self, card, front)
+        if G.jokers then
+            if G.jokers.cards[getJokerID(card) + 1] then
+                card.ability.extra.gtTarget = G.jokers.cards[getJokerID(card) + 1]
+            elseif getJokerID(card) == #G.jokers.cards and G.jokers.cards[1] and G.jokers.cards[1] ~= card then
+                card.ability.extra.gtTarget = G.jokers.cards[1]
+            end
+        end
+    end,
 
 	calculate = function(self, card, context)
-		if context.joker_main then
-            if #G.jokers.cards > 1 then
-                local _id = getJokerID(card)
-                G.E_MANAGER:add_event(Event({ trigger = 'immediate', blocking = false, delay = 0.0, func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end }))
-                if G.jokers.cards[_id+1] and context.other_card == G.jokers.cards[_id + 1] then --if selfid+1 is a joker, retrigger it
-                    return {
-                        message = "Whoosh!",
-                        repetitions = 1,
-                        card = card
-                    }
-                elseif _id == #G.jokers.cards and context.other_card == G.jokers.cards[1] then -- if selfid is at the end retrigger the first joker card
-                    return {
-                        message = "Whoosh!",
-                        repetitions = 1,
-                        card = card
-                    }
-                else
-                    return nil, true 
-                end
-            end
-		end
+        if context.before then
+            G.E_MANAGER:add_event(Event({ trigger = 'immediate', blocking = false, delay = 0.0, func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end }))
+            return {
+                message = "Whoosh!",
+            }
+        end 
+        if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= self then
+            if context.other_card == G.jokers.cards[getJokerID(card) + 1] then --If there's a joker to the right of this one, retrigger it
+                sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
+                return {
+                    message = "AGAIN !!",
+                    repetitions = 1,
+                    card = card
+                }
+            else
+                return nil, true end
+        end
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
