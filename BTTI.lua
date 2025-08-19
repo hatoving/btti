@@ -12,3 +12,14 @@ for _, file in ipairs(files) do
 	end
 	f()
 end
+
+--Load Localization file
+local files = NFS.getDirectoryItems(mod_path .. "localization")
+for _, file in ipairs(files) do
+	print("[BTTI] Loading localization file " .. file)
+	local f, err = SMODS.load_file("localization/" .. file)
+	if err then
+		error(err) 
+	end
+	f()
+end

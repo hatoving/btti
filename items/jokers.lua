@@ -76,6 +76,71 @@ SMODS.Joker {
 
 } ]]
 
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+
+-- Jonker
+SMODS.Atlas {
+    key = "Teeriffic",
+    path = "bttiTeeriffic.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Teeriffic',
+	loc_txt = {
+		name = 'Teeriffic!',
+		text = {
+			"{C:mult}+#1#{} Mult per card",
+            "Will debuff 1-2 played cards"
+		}
+	},
+
+	config = { extra = { mult = 8, howMuch = 0 } },
+	loc_vars = function(self, info_queue, card)
+		return {
+            vars = { card.ability.extra.mult, card.ability.extra.howMuch },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Teeriffic',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.before then
+            local rand = math.random(1, 2)
+            if #context.scoring_hand > rand then
+                for i=1,rand,1 do
+                    local rand2 = math.random(1, #context.scoring_hand)
+                    context.scoring_hand[rand2]:set_debuff(true)
+                end
+            elseif #context.scoring_hand == 2 then
+                local rand2 = math.random(1, #context.scoring_hand)
+                context.scoring_hand[rand2]:set_debuff(true)
+            end
+		end
+
+        if context.cardarea == G.play and context.individual and context.other_card then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+            }
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
+}
+
 -- ITTI JOKERS
 -- ITTI JOKERS
 -- ITTI JOKERS
@@ -101,6 +166,7 @@ SMODS.Joker {
 
 	config = { extra = { gtTarget = 0 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
 		return {
             vars = { },
         }
@@ -165,13 +231,16 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Strawberry Lemoande',
 		text = {
-			"Copies either a random Joker or a random Card in Hand",
-            "Triggers twice if {C:purple}God Taco{} is present"
+			"Copies either a random Joker",
+            "or a random Card in Hand",
+            "Triggers twice if {C:purple}God Taco{}",
+            "is present"
 		}
 	},
 
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
 		return {
             vars = { },
         }
@@ -289,6 +358,7 @@ SMODS.Joker {
 
     config = {extra = {mult = 0, mult_gain = 1}},
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
         return {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
         }
@@ -357,6 +427,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 2 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Creatica" }}
 		return {
             vars = { },
         }
