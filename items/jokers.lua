@@ -100,6 +100,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 8, howMuch = 0 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "DRAMATIZED" }}
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.howMuch },
         }
