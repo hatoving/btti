@@ -74,7 +74,21 @@ SMODS.Joker {
 }
 
 -- Metal Pipe
-SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg", })
+SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg" })
+
+local ORIGINAL_play_sound = play_sound
+function play_sound(sound_code, per, vol)
+    if string.find(sound_code, 'multhit') ~= nil then
+        for i, jk in ipairs(G.jokers.cards) do
+            sendInfoMessage("checking joker!! " .. jk.config.center.key .. "..", "BTTI")
+            if jk.config.center.key == "j_btti_MetalPipe" then
+                sendInfoMessage("playing metal pipe instead", "BTTI")
+                return ORIGINAL_play_sound('btti_metalPipeMult', per, vol)
+            end
+        end
+    end
+    return ORIGINAL_play_sound(sound_code, per, vol)
+end
 
 SMODS.Atlas {
     key = "MetalPipe",
@@ -135,8 +149,7 @@ SMODS.Joker {
                 return {
                     Xmult_mod = card.ability.extra.xmult * cardAmount,
                     "*metal pipe SFX*",
-                    colour = G.C.GREY,
-                    sound = "btti_metalPipeMult"
+                    colour = G.C.GREY
                 }
             end
         end
@@ -1124,28 +1137,43 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
 		if context.joker_main then
+            local killedLight = false
             for i, jk in ipairs(G.jokers.cards) do
                 sendInfoMessage("checking joker " .. jk.config.center.key .. "..", "BTTI")
                 if jk.config.center.key == "j_btti_LightShine" then
                     jk:start_dissolve()
-                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "stfu", colour = G.C.BLUE, })
+                    killedLight = true
                     break
                 end
             end
 
             if not next(SMODS.find_card("j_btti_Hatoving")) and not next(SMODS.find_card("j_btti_Juicimated")) and not next(SMODS.find_card("j_btti_BlueBen8")) then
                 sendInfoMessage("them bitches aren't present!! party!!", "BTTI")
-                return SMODS.merge_effects {
-                    {
-                        colour = G.C.BLUE,
-                        message = "i carried",
-                    },
-                    {
-                        mult_mod = card.ability.extra.mult,
-                        colour = G.C.RED,
-                        message = "+" .. card.ability.extra.mult .. " Mult",
+                if not killedLight then
+                    return SMODS.merge_effects {
+                        {
+                            colour = G.C.BLUE,
+                            message = "i carried",
+                        },
+                        {
+                            mult_mod = card.ability.extra.mult,
+                            colour = G.C.RED,
+                            message = "+" .. card.ability.extra.mult .. " Mult",
+                        }
                     }
-                }
+                else 
+                    return SMODS.merge_effects {
+                        {
+                            colour = G.C.BLUE,
+                            message = "stfu",
+                        },
+                        {
+                            mult_mod = card.ability.extra.mult,
+                            colour = G.C.RED,
+                            message = "+" .. card.ability.extra.mult .. " Mult",
+                        }
+                    }
+                end
             else
                 sendInfoMessage("nvm", "BTTI")
                 return SMODS.merge_effects {
