@@ -90,7 +90,7 @@ SMODS.Joker {
             "{X:mult,C:white}x2.75{} Mult per Steel Card in Deck",
             "1 in 20 Chance to turn played",
             "Cards into Steel Cards",
-            "Soothens your ears"
+            "{C:inactive}Soothens your ears"
         }
     },
 
@@ -1031,4 +1031,133 @@ SMODS.Joker {
     in_pool = function(self, args)
         return true, { allow_duplicates = true }
     end
+}
+
+-- DIRECTOR JOKERS
+-- DIRECTOR JOKERS
+-- DIRECTOR JOKERS
+-- DIRECTOR JOKERS
+
+-- LightShine
+SMODS.Atlas {
+    key = "LightShine",
+    path = "bttiLightShine.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'LightShine',
+    loc_txt = {
+        name = 'LightShine',
+        text = {
+            "1 in 10 chance to sloppily",
+            "backread Jokers in hand",
+            "{C:mult}+10{} Mult per Autism Joker",
+            "{X:chips,C:white}x300{} Chips if an",
+            "{C:purple}Inn-to the Insanity{} joker",
+            "is present"
+        }
+    },
+
+    config = { extra = { mult = 10 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult },
+        }
+    end,
+    rarity = 4,
+    atlas = 'LightShine',
+    pos = { x = 0, y = 0 },
+    cost = 20,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+--ca850
+-- Jonker
+SMODS.Atlas {
+    key = "Ca850",
+    path = "bttiCa850.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Ca850',
+	loc_txt = {
+		name = 'ca850',
+		text = {
+			"{C:mult}+100{} Mult if {C:pink}hatoving{},",
+            "{C:orange}Juicimated{}, and {C:chips}BlueBen8{} aren't present",
+            "Kills LightShine if she is present",
+            "{C:inactive}He carries you{}"
+		}
+	},
+
+	config = { extra = { mult = 100 } },
+	loc_vars = function(self, info_queue, card)
+		return {
+            vars = { card.ability.extra.mult },
+        }
+	end,
+	rarity = 4,
+    atlas = 'Ca850',
+	pos = { x = 0, y = 0 },
+	cost = 20,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.joker_main then
+            for i, jk in ipairs(G.jokers.cards) do
+                sendInfoMessage("checking joker " .. jk.config.center.key .. "..", "BTTI")
+                if jk.config.center.key == "j_btti_LightShine" then
+                    jk:start_dissolve()
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "stfu", colour = G.C.BLUE, })
+                    break
+                end
+            end
+
+            if not next(SMODS.find_card("j_btti_Hatoving")) and not next(SMODS.find_card("j_btti_Juicimated")) and not next(SMODS.find_card("j_btti_BlueBen8")) then
+                sendInfoMessage("them bitches aren't present!! party!!", "BTTI")
+                return SMODS.merge_effects {
+                    {
+                        colour = G.C.BLUE,
+                        message = "i carried",
+                    },
+                    {
+                        mult_mod = card.ability.extra.mult,
+                        colour = G.C.RED,
+                        message = "+" .. card.ability.extra.mult .. " Mult",
+                    }
+                }
+            else
+                sendInfoMessage("nvm", "BTTI")
+                return SMODS.merge_effects {
+                    {
+                        colour = G.C.BLUE,
+                        message = "i hate those guys",
+                    }
+                }
+            end
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
 }
