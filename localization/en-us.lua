@@ -1,12 +1,17 @@
 return {
     descriptions = {
         Other = {
-            btti_FromWhere = {
+            bttiFromWhere = {
                 name = "From where?!",
                 text = {
                     "{C:purple}#1#{}"
                 },
             },
         },
+    },
+    misc = {
+        dictionary = {
+            bttiSavedByRegBen = 'Saved by Reg!Ben'
+        }
     }
 }

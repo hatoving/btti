@@ -1,3 +1,7 @@
+function percentOf(value, percent)
+    return value * (percent / 100)
+end
+
 function getJokerID(card)
     if G.jokers then
         local _selfid = 0
@@ -70,43 +74,32 @@ SMODS.Joker {
 }
 
 -- Gambler Cat
---[[ SMODS.Atlas {
-    key = "GamblerCat",
-    path = "", 
-
-} ]]
-
--- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
-
--- Jonker
 SMODS.Atlas {
-    key = "Teeriffic",
-    path = "bttiTeeriffic.png",
+    key = "GamblerCat",
+    path = "bttiGamblerCat.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'Teeriffic',
+	key = 'GamblerCat',
 	loc_txt = {
-		name = 'Teeriffic!',
+		name = 'Gambler Cat',
 		text = {
-			"{C:mult}+#1#{} Mult per card",
-            "Will debuff 1-2 played cards"
+			"1 in 2 chance of losing 75%",
+            "of your money OR 1 in 2 chance",
+            "of gaining 110% of your money",
+            "{C:inactive}He's all in{}"
 		}
 	},
 
-	config = { extra = { mult = 8, howMuch = 0 } },
+	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "DRAMATIZED" }}
 		return {
-            vars = { card.ability.extra.mult, card.ability.extra.howMuch },
+            vars = { card.ability.extra.mult, card.ability.extra.money },
         }
 	end,
 	rarity = 1,
-	atlas = 'Teeriffic',
+	atlas = 'GamblerCat',
 	pos = { x = 0, y = 0 },
 	cost = 4,
 
@@ -117,25 +110,35 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		if context.before then
-            local rand = math.random(1, 2)
-            if #context.scoring_hand > rand then
-                for i=1,rand,1 do
-                    local rand2 = math.random(1, #context.scoring_hand)
-                    context.scoring_hand[rand2]:set_debuff(true)
-                end
-            elseif #context.scoring_hand == 2 then
-                local rand2 = math.random(1, #context.scoring_hand)
-                context.scoring_hand[rand2]:set_debuff(true)
-            end
-		end
+		if context.final_scoring_step then
+            local rand = math.random(0, 1)
+            
+            local loserMoney = math.ceil(G.GAME.dollars * 0.75)
+            local winnerMoney = math.floor(G.GAME.dollars * 1.1)
 
-        if context.cardarea == G.play and context.individual and context.other_card then
-            return {
-                mult_mod = card.ability.extra.mult,
-                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
-            }
-		end
+            if rand == 1 then
+                return {
+                    dollars = -loserMoney,
+                    message = "Whoops",
+                    colour = G.C.RED
+                }
+            end
+
+            rand = math.random(0, 1)
+
+            if rand == 1 then
+                return {
+                    dollars = winnerMoney,
+                    message = "GAMBLING!!!",
+                    colour = G.C.YELLOW
+                }
+            else
+                return {
+                    message = "Nothing...",
+                    colour = G.C.WHITE
+                }
+            end
+        end 
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
@@ -167,7 +170,7 @@ SMODS.Joker {
 
 	config = { extra = { gtTarget = 0 } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
 		return {
             vars = { },
         }
@@ -241,7 +244,7 @@ SMODS.Joker {
 
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
 		return {
             vars = { },
         }
@@ -359,7 +362,7 @@ SMODS.Joker {
 
     config = {extra = {mult = 0, mult_gain = 1}},
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
         return {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
         }
@@ -377,10 +380,12 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            return {
-                mult_mod = card.ability.extra.mult,
-                message = "Mugtastic!"
-            }
+            if card.ability.extra.mult > 0 then
+                return {
+                    mult_mod = card.ability.extra.mult,
+                    message = "Mugtastic!"
+                }
+            end
         end
 
         if context.final_scoring_step then --We check if we're in the final scoring step...
@@ -402,6 +407,72 @@ SMODS.Joker {
             end
         end
     end
+}
+
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+-- DRAMATIZED JOKERS
+
+-- Teeriffic!
+SMODS.Atlas {
+    key = "Teeriffic",
+    path = "bttiTeeriffic.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Teeriffic',
+	loc_txt = {
+		name = 'Teeriffic!',
+		text = {
+			"{C:mult}+#1#{} Mult per card",
+            "Will debuff 1-2 played cards"
+		}
+	},
+
+	config = { extra = { mult = 8, howMuch = 0 } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "DRAMATIZED" }}
+		return {
+            vars = { card.ability.extra.mult, card.ability.extra.howMuch },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Teeriffic',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.before then
+            local rand = math.random(1, 2)
+            if #context.scoring_hand > rand then
+                for i=1,rand,1 do
+                    local rand2 = math.random(1, #context.scoring_hand)
+                    context.scoring_hand[rand2]:set_debuff(true)
+                end
+            elseif #context.scoring_hand == 2 then
+                local rand2 = math.random(1, #context.scoring_hand)
+                context.scoring_hand[rand2]:set_debuff(true)
+            end
+		end
+
+        if context.cardarea == G.play and context.individual and context.other_card then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+            }
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
 }
 
 -- CREATICA JOKERS
@@ -428,7 +499,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 2 } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'btti_FromWhere', set = 'Other', vars = { "Creatica" }}
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creatica" }}
 		return {
             vars = { },
         }
@@ -457,6 +528,83 @@ SMODS.Joker {
                 }
             end
 		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
+}
+
+-- REGALITY JOKERS
+-- REGALITY JOKERS
+-- REGALITY JOKERS
+-- REGALITY JOKERS
+
+-- Reg!Ben
+SMODS.Atlas {
+    key = "RegBen",
+    path = "bttiRegBen.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'RegBen',
+	loc_txt = {
+		name = 'Reg!Ben',
+		text = {
+			"Saves you from death if scored chips",
+            "are 10% of required amount. 1 in 9",
+            "chance of being destroyed at the end",
+            "of each round."
+		}
+	},
+
+	config = { extra = { odds = 9 } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'RegBen',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.game_over then
+            sendInfoMessage("Need at least " .. math.floor(percentOf(G.GAME.blind.chips, 10)) .. " chips", "BTTI")
+            if G.GAME.current_round.hands_left == 0 and G.GAME.chips >= math.floor(percentOf(G.GAME.blind.chips, 10)) then
+                sendInfoMessage("Reg!Ben!! Requirement met!!", "BTTI")
+                if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            play_sound("tarot1")
+                            card:start_dissolve()
+                            return true
+                        end
+                    }))
+                    return {
+                        saved = "bttiSavedByRegBen",
+                        dollars = 1,
+                        message = "Crystallized!",
+                        colour = G.C.PURPLE,
+                    }
+                else
+                    return {
+                        saved = "bttiSavedByRegBen",
+                        dollars = 1,
+                        colour = G.C.PURPLE,
+                        message = "Alive!",
+                    }
+                end
+            end
+        end
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
