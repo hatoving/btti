@@ -503,7 +503,7 @@ SMODS.Joker {
 		}
 	},
 
-	config = { extra = { mult = 10, odds = 2 } },
+	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creatica" }}
 		return {
@@ -599,14 +599,12 @@ SMODS.Joker {
                     }))
                     return {
                         saved = "bttiSavedByRegBen",
-                        dollars = 1,
                         message = "Crystallized!",
                         colour = G.C.PURPLE,
                     }
                 else
                     return {
                         saved = "bttiSavedByRegBen",
-                        dollars = 1,
                         colour = G.C.PURPLE,
                         message = "Alive!",
                     }
@@ -619,6 +617,7 @@ SMODS.Joker {
 	end
 }
 
+--Reg!Vince
 SMODS.Atlas {
     key = "RegVince",
     path = "bttiRegVince.png",
@@ -714,4 +713,169 @@ SMODS.Joker {
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
 	end
+}
+
+-- ???
+SMODS.Atlas {
+    key = "Myst",
+    path = "bttiMyst.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Myst',
+    loc_txt = {
+        name = '???????????',
+        text = {
+            "+{C:mult}#1#{} Mult for each Non-Steel/",
+            "Non-Stone Card in current Deck",
+            "1 in 30 chance to turn a random Card into a Stone Card",
+            "1 in 30 chance to turn a random Card into a Steel Card"
+        }
+    },
+
+    config = { extra = { mult = 20, odds = 30 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.odds },
+        }
+    end,
+    rarity = 3,
+    atlas = 'Myst',
+    pos = { x = 0, y = 0 },
+    cost = 12,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        local cardAmount = 0
+        if G.playing_cards then
+            for _, pc in ipairs(G.playing_cards) do
+                if pc.config.center.key ~= "m_stone" and pc.config.center.key ~= "m_steel" then
+                    cardAmount = cardAmount + 1
+                end
+            end
+        end
+
+        if context.before then
+            local done = false
+            if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                local idx = math.random(1, #context.scoring_hand)
+                context.scoring_hand[idx]:set_ability("m_stone")
+                done = true
+            end
+            if not done then
+                if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                    local idx = math.random(1, #context.scoring_hand)
+                    context.scoring_hand[idx]:set_ability("m_stone")
+                end
+            end
+        end
+
+        if context.cardarea == G.play and context.individual and context.other_card then
+            if context.other_card.config.center.key == "m_stone" or context.other_card.config.center.key == "m_steel" then
+                context.other_card:set_debuff(true)
+            end
+        end
+
+        if context.joker_main then 
+            sendInfoMessage("Found " .. cardAmount .. " cards = +" .. card.ability.extra.mult * cardAmount .. " Mult")
+            return SMODS.merge_effects {
+                { message = "Gray... oh so gray...", colour = G.C.GREY }, {
+                    mult_mod = card.ability.extra.mult * cardAmount,
+                    colour = G.C.RED,
+                    message = "+" .. card.ability.extra.mult * cardAmount .. " Mult",
+                }
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- Royal Regality
+SMODS.Atlas {
+    key = "RoyalRegality",
+    path = "bttiRoyalRegality.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'RoyalRegality',
+    loc_txt = {
+        name = 'Royal Regality',
+        text = {
+            "{C:mult}+#1#{} mult",
+            "Played Flushes count as Royal Flushes,",
+            "but retain Flush's current level"
+        }
+    },
+
+    config = { extra = { mult = 17 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        return {
+            vars = { card.ability.extra.mult },
+        }
+    end,
+    rarity = 1,
+    atlas = 'RoyalRegality',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.evaluate_poker_hand then
+            if context.poker_hands and next(context.poker_hands['Flush']) then
+                local c = G.GAME.hands['Straight Flush'].s_chips +
+                    (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
+                local m = G.GAME.hands['Straight Flush'].s_mult +
+                    (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
+                update_hand_text({ delay = 0 }, { chips = c, mult = m })
+
+                return {
+                    replace_scoring_name = "Flush",
+                    replace_display_name = "Royal Flush",
+                }
+            end
+        end
+
+        if context.initial_scoring_step and not context.blueprint then
+            if context.poker_hands and next(context.poker_hands['Flush']) then
+                -- I don't actually know how to change the hand,
+                -- but we can pretend. :D
+                return {
+                    func = function ()
+                        hand_chips = G.GAME.hands['Straight Flush'].s_chips +
+                            (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
+                        mult = G.GAME.hands['Straight Flush'].s_mult +
+                            (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
+                        update_hand_text({ delay = 0 }, { chips = hand_chips, mult = mult })
+                    end
+                }
+            end
+        end
+
+        if context.joker_main then
+            return {
+                mult_mod = card.ability.extra.mult,
+                colour = G.C.RED,
+                message = "+" .. card.ability.extra.mult .. " Mult",
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
 }
