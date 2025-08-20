@@ -114,7 +114,7 @@ SMODS.Joker {
             vars = { card.ability.extra.xmult },
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'MetalPipe',
     pos = { x = 0, y = 0 },
     cost = 4,
@@ -338,7 +338,7 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'GodTaco',
 	pos = { x = 0, y = 0 },
 	cost = 4,
@@ -413,7 +413,7 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'SL',
 	pos = { x = 0, y = 0 },
 	cost = 4,
@@ -537,7 +537,7 @@ SMODS.Joker {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'Mug',
     pos = {x = 0, y = 0},
     cost = 7,
@@ -674,7 +674,7 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'Joozie',
 	pos = { x = 0, y = 0 },
 	cost = 6,
@@ -737,7 +737,7 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'RegBen',
 	pos = { x = 0, y = 0 },
 	cost = 4,
@@ -805,7 +805,7 @@ SMODS.Joker {
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
 		return { vars = { card.ability.extra.xmult, card.ability.extra.xmultres, card.ability.extra.mult } }
 	end,
-	rarity = 1,
+	rarity = 2,
 	atlas = 'RegVince',
 	pos = { x = 0, y = 0 },
 	cost = 4,
@@ -990,7 +990,7 @@ SMODS.Joker {
             vars = { card.ability.extra.mult },
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'RoyalRegality',
     pos = { x = 0, y = 0 },
     cost = 4,
