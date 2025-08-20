@@ -162,9 +162,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-			"Copies the Joker to the right",
-            "and shuffles all Jokers around",
-            "at the end of a hand"
+            "Shuffles all Jokers around before",
+            "a hand is played and copies the",
+			"Joker to the right",
 		}
 	},
 
@@ -187,8 +187,9 @@ SMODS.Joker {
     perishable_compat = true,
 
 	calculate = function(self, card, context)
-        if context.final_scoring_step then
-            G.E_MANAGER:add_event(Event({ trigger = 'immediate', blocking = false, delay = 0.0, func = function() G.jokers:shuffle('aajk'); play_sound('cardSlide1', 0.85);return true end }))
+        if context.before and not context.blueprint then
+            G.jokers:shuffle('aajk')
+            play_sound('cardSlide1', 0.85)
             return {
                 message = "Whoosh!",
             }
