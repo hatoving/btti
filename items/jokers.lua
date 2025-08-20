@@ -313,13 +313,13 @@ SMODS.Joker {
 
 -- God Taco
 SMODS.Atlas {
-    key = "GodTaco",
+    key = "GT",
     path = "bttiGodTaco.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'GodTaco',
+	key = 'GT',
 	loc_txt = {
 		name = 'God Taco',
 		text = {
@@ -337,7 +337,7 @@ SMODS.Joker {
         }
 	end,
 	rarity = 3,
-	atlas = 'GodTaco',
+	atlas = 'GT',
 	pos = { x = 0, y = 0 },
 	cost = 4,
 
@@ -441,21 +441,27 @@ SMODS.Joker {
 
                 if G.jokers.cards[idx] then
                     sendInfoMessage("yay: " .. idx, "BTTI")
-                    if next(SMODS.find_card("j_btti_GodTaco")) then
+                    if next(SMODS.find_card("j_btti_GT")) then
                         local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
                         local ret2 = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
                         return SMODS.merge_effects {
                             {
                                 message = "Go, GT!!",
-                                colour = G.C.BTTIPINK
+                                colour = G.C.BTTIPINK,
+                                func = function ()
+                                    G.jokers.cards[idx]:juice_up()
+                                end
                             }, ret, ret2
                         }
                     else
                         local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
                         return SMODS.merge_effects {
                             {
-                                message = "Yay!",
-                                colour = G.C.BTTIPINK
+                                message = "Again!",
+                                colour = G.C.BTTIPINK,
+                                func = function()
+                                    G.jokers.cards[idx]:juice_up()
+                                end
                             }, ret
                         }
                     end
@@ -470,9 +476,9 @@ SMODS.Joker {
                 local idx = math.random(1, #context.scoring_hand)
                 sendInfoMessage("SL idx: " .. idx, "BTTI")
 
-                if next(SMODS.find_card("j_btti_GodTaco")) then
+                if next(SMODS.find_card("j_btti_GT")) then
                     local ret = {
-                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
+                        message = 'Again! +' .. context.scoring_hand[idx]:get_id(),
                         chip_mod = context.scoring_hand[idx]:get_id(),
                         colour = G.C.BTTIPINK,
                         func = function()
@@ -1064,8 +1070,8 @@ SMODS.Joker {
             "1 in 10 chance to sloppily",
             "backread Jokers to the left",
             "{C:mult}+10{} Mult per Autism Joker",
-            "{X:chips,C:white}x300{} Chips if an",
-            "{C:purple}Inn-to the Insanity{} joker",
+            "{X:mult,C:white}x69{} Mult if an",
+            "{C:purple}Inn-to the Insanity{} Joker",
             "is present"
         }
     },
@@ -1088,8 +1094,101 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.selling_card then
+            if context.card == card then
+                return {
+                    message = "omga, ow",
+                    colour = G.C.RED
+                }
+            end
         end
+
+        if not context.joker_main then return end
+
+        local rets = {}
+        local curmult = 0
+        local itti = false
+        local backread = true
+
+        local extra = (card and card.ability and card.ability.extra) or {}
+        local odds = extra.odds or 1
+        local mult = extra.mult or 0
+        local prob_normal = (G.GAME and G.GAME.probabilities and G.GAME.probabilities.normal) or 0
+
+        -- Backread
+        if getJokerID(card) ~= 1 then
+            local jokersToBackRead = {}
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                sendInfoMessage("checking joekr : " .. key .. "...", "BTTI")
+                if math.random(0, 1) == 1 then
+                    if key ~= card.config.center.key then
+                        sendInfoMessage("adding joekr : " .. key .. "...", "BTTI")
+                        table.insert(jokersToBackRead, jk)
+                    end
+                end
+            end
+
+            if #jokersToBackRead ~= 0 then
+                for _, targetJk in ipairs(jokersToBackRead) do 
+                    local ret = SMODS.blueprint_effect(card, targetJk, context)
+                    
+                    -- blueprint_effect may return a single effect (table) or a list of effects.
+                    if type(ret) == "table" then
+                        if #ret > 0 then
+                            for _, e in ipairs(ret) do
+                                table.insert(rets, {
+                                    message = "Huh?",
+                                    colour = G.C.GREEN,
+                                    func = function()
+                                        targetJk:juice_up()
+                                    end
+                                })
+                                table.insert(rets, e)
+                            end
+                        else
+                            table.insert(rets, {
+                                message = "Huh?",
+                                colour = G.C.GREEN,
+                                func = function()
+                                    targetJk:juice_up()
+                                end
+                            })
+                            table.insert(rets, ret)
+                        end
+                    end
+                end
+            else
+                table.insert(rets, { message = "I'm not backreading.", colour = G.C.GREY })
+            end
+        else
+            table.insert(rets, { message = "I'm not backreading.", colour = G.C.GREY })
+        end
+
+        -- Scan jokers for multiplier keys and ITTI flags
+        for _, jk in ipairs(G.jokers.cards) do
+            local key = jk and jk.config and jk.config.center and jk.config.center.key
+            if key then
+                if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" then
+                    curmult = curmult + mult
+                end
+
+                if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" then
+                    itti = true
+                end
+            end
+        end
+
+        if itti then
+            table.insert(rets, { message = "Bazinga!!", Xmult_mod = 69, colour = G.C.RED })
+        end
+
+        if curmult ~= 0 then
+            table.insert(rets, { message = "Me = gender!!", mult_mod = curmult, colour = G.C.RED })
+        end
+
+        --sendInfoMessage(rets, "BTTI")
+        return SMODS.merge_effects(rets)
     end,
     in_pool = function(self, args)
         return true, { allow_duplicates = true }
@@ -1110,7 +1209,7 @@ SMODS.Joker {
 		name = 'ca850',
 		text = {
 			"{C:mult}+100{} Mult if {C:pink}hatoving{},",
-            "{C:orange}Juicimated{}, and {C:chips}BlueBen8{} aren't present",
+            "{C:orange}Juicimated{}, or {C:chips}BlueBen8{} aren't present",
             "Kills LightShine if she is present",
             "{C:inactive}He carries you{}"
 		}
@@ -1134,44 +1233,32 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		if context.joker_main then
-            local killedLight = false
+        if context.before then
             for i, jk in ipairs(G.jokers.cards) do
                 sendInfoMessage("checking joker " .. jk.config.center.key .. "..", "BTTI")
                 if jk.config.center.key == "j_btti_LightShine" then
-                    jk:start_dissolve()
-                    killedLight = true
-                    break
+                    SMODS.destroy_cards(jk)
+                    return {
+                        message = "stfu light",
+                        colour = G.C.BLUE,
+                    }
                 end
             end
-
-            if not next(SMODS.find_card("j_btti_Hatoving")) and not next(SMODS.find_card("j_btti_Juicimated")) and not next(SMODS.find_card("j_btti_BlueBen8")) then
+        end
+		if context.joker_main then
+            if not next(SMODS.find_card("j_btti_Hatoving")) or not next(SMODS.find_card("j_btti_Juicimated")) or not next(SMODS.find_card("j_btti_BlueBen8")) then
                 sendInfoMessage("them bitches aren't present!! party!!", "BTTI")
-                if not killedLight then
-                    return SMODS.merge_effects {
-                        {
-                            colour = G.C.BLUE,
-                            message = "i carried",
-                        },
-                        {
-                            mult_mod = card.ability.extra.mult,
-                            colour = G.C.RED,
-                            message = "+" .. card.ability.extra.mult .. " Mult",
-                        }
+                return SMODS.merge_effects {
+                    {
+                        colour = G.C.BLUE,
+                        message = "i carried",
+                    },
+                    {
+                        mult_mod = card.ability.extra.mult,
+                        colour = G.C.RED,
+                        message = "+" .. card.ability.extra.mult .. " Mult",
                     }
-                else 
-                    return SMODS.merge_effects {
-                        {
-                            colour = G.C.BLUE,
-                            message = "stfu light",
-                        },
-                        {
-                            mult_mod = card.ability.extra.mult,
-                            colour = G.C.RED,
-                            message = "+" .. card.ability.extra.mult .. " Mult",
-                        }
-                    }
-                end
+                }
             else
                 sendInfoMessage("nvm", "BTTI")
                 return SMODS.merge_effects {
