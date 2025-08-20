@@ -2,6 +2,11 @@ G.C.BTTIPINK = HEX('FFA5A5')
 
 local mod_path = "" .. SMODS.current_mod.path
 
+SMODS.current_mod.optional_features = {
+	retrigger_joker = true,
+	post_trigger = true
+}
+
 -- Load items
 local files = NFS.getDirectoryItems(mod_path .. "items")
 for _, file in ipairs(files) do

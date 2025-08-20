@@ -73,6 +73,83 @@ SMODS.Joker {
 	end
 }
 
+-- Good Morning, Good Morning!
+SMODS.Sound({ key = "goodMorningMult", path = "bttiGoodMorning0.ogg", })
+SMODS.Sound({ key = "goodMorningOnceMore", path = "bttiGoodMorning1.ogg", })
+
+SMODS.Atlas {
+    key = "GoodMorning",
+    path = "bttiGoodMorning.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'GoodMorning',
+    loc_txt = {
+        name = 'Good Morning, Good Morning!',
+        text = {
+            "{C:mult}+#1#{} Mult per round",
+            "Repeats itself for each Mult",
+            "Blesses your ears when triggered"
+        }
+    },
+
+    config = { extra = { mult = 1, rep = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.rep },
+        }
+    end,
+    rarity = 1,
+    atlas = 'GoodMorning',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = "Good morning!",
+                sound = "btti_goodMorningMult",
+                pitch = 1,
+            }
+        end
+
+        if context.retrigger_joker_check and not context.retrigger_joker and context.other_card == card then
+            local rep = card.ability.extra.rep or 1
+            return {
+                repetitions = rep,
+            }
+        end
+
+        -- Thank you to the Balatro Discord for being awesome
+        if (context.end_of_round == true and context.cardarea == G.jokers) and
+            (context.main_eval and context.game_over == false) and
+                (not context.retrigger_joker and not context.retrigger_joker_check)
+                    and not context.repetition then
+            sendInfoMessage("once more....", "BTTI")
+            return {
+                message = "SO SAY GOOD MORNING!!",
+                colour = G.C.RED,
+                func = function ()
+                    local rep = card.ability.extra.rep or 1
+                    card.ability.extra.rep = rep + 1
+                    play_sound("btti_goodMorningOnceMore")
+                end
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Gambler Cat
 SMODS.Atlas {
     key = "GamblerCat",
@@ -730,8 +807,10 @@ SMODS.Joker {
         text = {
             "+{C:mult}#1#{} Mult for each Non-Steel/",
             "Non-Stone Card in current Deck",
-            "1 in 30 chance to turn a random Card into a Stone Card",
-            "1 in 30 chance to turn a random Card into a Steel Card"
+            "1 in 30 chance to turn a",
+            "random Card into a Stone Card",
+            "1 in 30 chance to turn",
+            "a random Card into a Steel Card"
         }
     },
 
