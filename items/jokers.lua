@@ -73,6 +73,79 @@ SMODS.Joker {
 	end
 }
 
+-- Metal Pipe
+SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg", })
+
+SMODS.Atlas {
+    key = "MetalPipe",
+    path = "bttiMetalPipe.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'MetalPipe',
+    loc_txt = {
+        name = 'Metal Pipe',
+        text = {
+            "{X:mult,C:white}x2.75{} Mult per Steel Card in Deck",
+            "1 in 20 Chance to turn played",
+            "Cards into Steel Cards",
+            "Soothens your ears"
+        }
+    },
+
+    config = { extra = { xmult = 2.75, odds = 20 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.xmult },
+        }
+    end,
+    rarity = 1,
+    atlas = 'MetalPipe',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        local cardAmount = 0
+        if G.playing_cards then
+            for _, pc in ipairs(G.playing_cards) do
+                if pc.config.center.key == "m_steel" then
+                    cardAmount = cardAmount + 1
+                end
+            end
+        end
+
+        if context.before then
+            if pseudorandom('MetalPipe') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                for i, pc in ipairs(context.scoring_hand) do
+                    pc:set_ability("m_steel")
+                end
+            end
+        end
+
+        if context.joker_main then
+            sendInfoMessage("Found " .. cardAmount .. " cards = x" .. card.ability.extra.xmult * cardAmount .. " Mult")
+            if card.ability.extra.xmult * cardAmount > 0 then
+                return {
+                    Xmult_mod = card.ability.extra.xmult * cardAmount,
+                    "*metal pipe SFX*",
+                    colour = G.C.GREY,
+                    sound = "btti_metalPipeMult"
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Good Morning, Good Morning!
 SMODS.Sound({ key = "goodMorningMult", path = "bttiGoodMorning0.ogg", })
 SMODS.Sound({ key = "goodMorningOnceMore", path = "bttiGoodMorning1.ogg", })
