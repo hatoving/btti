@@ -182,7 +182,8 @@ SMODS.Joker {
         text = {
             "{C:mult}+#1#{} Mult per round",
             "Repeats itself for each Mult",
-            "Blesses your ears when triggered"
+            "Blesses your ears when triggered",
+            "{C:inactive]+#2# Mult"
         }
     },
 
@@ -291,20 +292,11 @@ SMODS.Joker {
                     message = "Whoops",
                     colour = G.C.RED
                 }
-            end
-
-            rand = math.random(0, 1)
-
-            if rand == 1 then
-                return {
-                    dollars = winnerMoney,
-                    message = "GAMBLING!!!",
-                    colour = G.C.YELLOW
-                }
             else
                 return {
-                    message = "Nothing...",
-                    colour = G.C.WHITE
+                    dollars = winnerMoney,
+                    message = "YEAHHH GAMBLING!!!",
+                    colour = G.C.YELLOW
                 }
             end
         end 
@@ -1070,7 +1062,7 @@ SMODS.Joker {
         name = 'LightShine',
         text = {
             "1 in 10 chance to sloppily",
-            "backread Jokers in hand",
+            "backread Jokers to the left",
             "{C:mult}+10{} Mult per Autism Joker",
             "{X:chips,C:white}x300{} Chips if an",
             "{C:purple}Inn-to the Insanity{} joker",
@@ -1171,7 +1163,7 @@ SMODS.Joker {
                     return SMODS.merge_effects {
                         {
                             colour = G.C.BLUE,
-                            message = "stfu",
+                            message = "stfu light",
                         },
                         {
                             mult_mod = card.ability.extra.mult,
