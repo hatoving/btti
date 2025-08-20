@@ -313,11 +313,17 @@ SMODS.Joker {
                         message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
                         chip_mod = context.scoring_hand[idx]:get_id(),
                         colour = G.C.BTTIPINK,
+                        func = function()
+                            context.scoring_hand[idx]:juice_up()
+                        end
                     }
                     local ret2 = {
                         message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
                         chip_mod = context.scoring_hand[idx]:get_id(),
                         colour = G.C.BTTIPINK,
+                        func = function()
+                            context.scoring_hand[idx]:juice_up()
+                        end
                     }
                     return SMODS.merge_effects {
                         {
@@ -539,6 +545,8 @@ SMODS.Joker {
 -- REGALITY JOKERS
 -- REGALITY JOKERS
 
+-- G.GAME.consumeable_usage_total.tarot
+
 -- Reg!Ben
 SMODS.Atlas {
     key = "RegBen",
@@ -605,6 +613,103 @@ SMODS.Joker {
                 end
             end
         end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = true }
+	end
+}
+
+SMODS.Atlas {
+    key = "RegVince",
+    path = "bttiRegVince.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'RegVince',
+	loc_txt = {
+		name = 'Reg!Vince',
+		text = {
+			"{X:mult,C:white}x5{} Mult per Tarot Card sold",
+            "Removes {C:mult}-15{} Mult from played Hand",
+            "per Tarot Card used",
+            "{C:inactive}Currently {X:inactive,C:white}x#2#{C:inactive} Mult, #3# Mult{}"
+		}
+	},
+
+	config = { extra = { xmult = 0 } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
+		return { vars = { card.ability.extra.xmult, card.ability.extra.xmultres, card.ability.extra.mult } }
+	end,
+	rarity = 1,
+	atlas = 'RegVince',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        local tarot_uses = G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0
+        local xmult = card.ability.extra.xmult or 0
+
+        card.ability.extra.xmultres = xmult * 5
+        card.ability.extra.mult = tarot_uses * -15
+    end,
+
+	calculate = function(self, card, context)
+        if context.selling_card then
+            if context.card.ability.set == "Tarot" then
+                card.ability.extra.xmult = card.ability.extra.xmult + 1
+                return {
+                    message = "Proud of you.",
+                    colour = G.C.GREEN
+                }
+            end
+        end
+
+        if context.using_consumeable then
+            if context.consumeable.ability.set == "Tarot" then
+                return {
+                    message = "Not proud.",
+                    colour = G.C.GREEN
+                }
+            end
+        end
+
+		if context.joker_main then
+            local tarot_uses = G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0
+            local xmult = card.ability.extra.xmult or 0
+
+            card.ability.extra.xmult = xmult
+
+            local neg_mult = -15 * tarot_uses
+            local pos_xmult = 5 * xmult
+
+            if neg_mult < 0 and pos_xmult < 1 then
+                return SMODS.merge_effects {
+                    { message = "Magic is bad.", colour = G.C.GREEN },
+                    { mult_mod = neg_mult, message = neg_mult .. " Mult", colour = G.C.MULT }
+                }
+            elseif pos_xmult > 0 and neg_mult > -1 then
+                return SMODS.merge_effects {
+                    { message = "Choose gears!", colour = G.C.GREEN },
+                    { Xmult_mod = pos_xmult, message = 'X' .. pos_xmult .. " Mult", colour = G.C.MULT }
+                }
+            elseif neg_mult < 0 and pos_xmult > 0 then
+                return SMODS.merge_effects {
+                    { message = "Magic is bad.", colour = G.C.GREEN },
+                    { mult_mod = neg_mult, message = neg_mult .. " Mult", colour = G.C.MULT },
+                    { message = "Choose gears!", colour = G.C.GREEN },
+                    { Xmult_mod = pos_xmult, message = 'X' .. pos_xmult .. " Mult", colour = G.C.MULT }
+                }
+            end
+        end
+
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
