@@ -1452,7 +1452,7 @@ SMODS.Joker {
 
                 return {
                     replace_scoring_name = "Flush",
-                    replace_display_name = "Royal Flush",
+                    replace_display_name = "Regality Flush",
                 }
             end
         end
@@ -1736,13 +1736,12 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.evaluate_poker_hand then
-            sendInfoMessage("wow... " .. context.scoring_name .. "!!", "BTTI")
-            if context.poker_hands and context.scoring_name == "Straight" then
+        if context.evaluate_poker_hand and context.poker_hands then
+            if context.scoring_name == "Straight" then
                 return {
                     replace_scoring_name = "Bisexual",
                 }
-            elseif context.poker_hands and context.scoring_name == "Straight Flush" then
+            elseif context.scoring_name == "Straight Flush" then
                 return {
                     replace_scoring_name = "BisexualFlush",
                 }
@@ -1775,6 +1774,99 @@ SMODS.Joker {
             end
             if #rets > 0 then
                 return SMODS.merge_effects(rets)
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- BlueBen8
+SMODS.Atlas {
+    key = "Hatoving",
+    path = "bttiHatoving.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Hatoving',
+    loc_txt = {
+        name = 'hatoving',
+        text = {
+            "Stores the final scored {C:mult}Mult{} and {C:chips}Chips{}",
+            "of one ended round and unleashes it",
+            "a random amount of rounds later",
+            "{C:inactive}Currently {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
+        }
+    },
+
+    config = { extra = { mult = 0, chips = 0, roundsLeft = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.chips, card.ability.extra.roundsLeft },
+        }
+    end,
+    rarity = 4,
+    atlas = 'Hatoving',
+    pos = { x = 0, y = 0 },
+    cost = 5,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            if card.ability.extra.roundsLeft <= 0 and (card.ability.extra.chips > 0 and card.ability.extra.mult > 0) then
+                local ch = card.ability.extra.chips
+                local m = card.ability.extra.mult
+                card.ability.extra.chips = 0
+                card.ability.extra.mult = 0
+                return SMODS.merge_effects {
+                    {
+                        message = "Awersome...",
+                        colour = G.C.BTTIPINK
+                    },
+                    {
+                        message = "+" .. ch .. " Chips",
+                        colour = G.C.CHIPS,
+                        chip_mod = ch,
+                    },
+                    {
+                        message = "+" .. m .. " Mult",
+                        colour = G.C.MULT,
+                        mult_mod = card.ability.extra.mult,
+                    }
+                }
+            end
+        end
+        if context.end_of_round and context.cardarea == G.jokers then
+            if (card.ability.extra.mult <= 0 and card.ability.extra.chips <= 0) or card.ability.extra.roundsLeft <= 0 then
+                card.ability.extra.mult = mult
+                card.ability.extra.chips = hand_chips
+                card:juice_up()
+                sendInfoMessage(
+                    "chips and mult for hatoving.. " .. card.ability.extra.mult .. ", " .. card.ability.extra.chips .. "",
+                    "BTTI")
+            end
+            if card.ability.extra.roundsLeft <= 0 then
+                card.ability.extra.roundsLeft = math.random(1, 5)
+                sendInfoMessage("rounds left for hatoving... " .. card.ability.extra.roundsLeft .. "", "BTTI")
+                return {
+                    message = "Not yet...",
+                    colour = G.C.BTTIPINK
+                }
+            else
+                card.ability.extra.roundsLeft = card.ability.extra.roundsLeft - 1
+                sendInfoMessage("rounds left for hatoving... " .. card.ability.extra.roundsLeft .. "", "BTTI")
+
+                return {
+                    message = "Not yet...",
+                    colour = G.C.BTTIPINK
+                }
             end
         end
     end,

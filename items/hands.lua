@@ -53,6 +53,14 @@ SMODS.PokerHand {
     },
     evaluate = function(parts, hand)
         if not next(parts._straight) or not next(parts._flush) then return end
-        return { SMODS.merge_lists(parts._straight, parts._flush) }
+        if G.jokers then
+            if G.jokers.cards then
+                if next(SMODS.find_card("j_btti_BlueBen8")) then
+                    return { SMODS.merge_lists(parts._straight, parts._flush) }
+                else
+                    return {}
+                end
+            end
+        end
     end
 }
