@@ -345,8 +345,8 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        local rets = {}
-        if context.final_scoring_step and context.cardarea == G.play then
+        if context.joker_main then
+            local rets = {}
             card.ability.extra.cardAmount = 0
             if context.scoring_hand then
                 for _, pc in ipairs(context.scoring_hand) do
@@ -401,49 +401,30 @@ SMODS.Joker {
                     Xmult_mod = card.ability.extra.cardAmount * 3
                 })
             end
-            local autistic = true
-            if autistic then
+            if pseudorandom('AutismCreature') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 if G.play.cards then
-                    local idx = math.random(1, #G.play.cards)
-                    if G.play.cards[idx].seal ~= nil then
-                        if G.play.cards[idx].seal ~= "btti_autismSeal" then
-                            table.insert(rets {
-                                G.E_MANAGER:add_event(Event({
-                                    trigger = 'immediate',
-                                    blocking = false,
-                                    delay = 0,
-                                    func = function()
-                                        sendInfoMessage("Making that shity ass card autistic...", "BTTI")
-                                        G.play.cards[idx]:juice_up()
-                                        G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
-                                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                                            { message = "Yay!", colour = G.C.DARK_EDITION })
-                                    end,
-                                }))
-                            })
-                        end
-                    else
-                        table.insert(rets {
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'immediate',
-                                blocking = false,
-                                delay = 0,
-                                func = function()
-                                    sendInfoMessage("Making that shity ass card autistic...", "BTTI")
-                                    G.play.cards[idx]:juice_up()
-                                    G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
-                                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                                        { message = "Yay!", colour = G.C.DARK_EDITION })
-                                end,
-                            }))
-                        })
-                    end
+                    table.insert(rets, {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                local idx = math.random(1, #G.play.cards)
+                                sendInfoMessage("Making that shity ass card autistic 2...", "BTTI")
+                                G.play.cards[idx]:juice_up()
+                                G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
+                                card_eval_status_text(card, 'extra', nil, nil, nil,
+                                    { message = "Yay!", colour = G.C.DARK_EDITION })
+                                return true
+                            end,
+                        }))
+                    })
                 end
             else
-                return {
+                table.insert(rets, {
                     message = "Nope!",
                     colour = G.C.DARK_EDITION,
-                }
+                })
             end
             return SMODS.merge_effects(rets)
         end
@@ -489,8 +470,8 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        local rets = {}
         if context.joker_main then
+            local rets = {}
             card.ability.extra.cardAmount = 0
             if G.playing_cards then
                 for _, pc in ipairs(G.playing_cards) do
@@ -534,8 +515,7 @@ SMODS.Joker {
                     end
                 })
             end
-            local autistic = true
-            if autistic then
+            if pseudorandom('BentismCreature') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 if G.play.cards then
                     table.insert(rets, {
                         G.E_MANAGER:add_event(Event({
