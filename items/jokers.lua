@@ -259,7 +259,8 @@ SMODS.Joker {
 		name = 'Gambler Cat',
 		text = {
 			"{C:red}Lose{} 75% of your {C:attention}money{}",
-            "or {C:green}Win{} 110% of your {C:attention}money{}",
+            "OR",
+            "{C:green}Win{} 110% of your {C:attention}money{}",
             "{C:inactive}He's all in{}"
 		}
 	},
@@ -707,7 +708,7 @@ SMODS.Joker {
 		name = 'Strawberry Lemoande',
 		text = {
             "Copies either a random {C:attention}Joker{}",
-            "or a random {C:attention}Card{} in Hand",
+            "or a random {C:attention}Card{} in hand",
             "Triggers twice if {C:purple}God Taco{}",
             "is present"
 		}
@@ -1044,9 +1045,8 @@ SMODS.Joker {
 		name = 'Reg!Ben',
 		text = {
 			"Saves you from death if scored chips",
-            "are 10% of required amount. {C:green}1 in 9{}",
-            "chance of being destroyed at the end",
-            "of each round."
+            "are {C:attention}10%{} of required amount.",
+            "{C:green}1 in 9{} chance of being destroyed"
 		}
 	},
 
