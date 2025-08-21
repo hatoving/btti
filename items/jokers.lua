@@ -135,7 +135,7 @@ SMODS.Joker {
             end
         end
 
-        card.abillity.extra.cur = card.ability.extra.xmult * cardAmount
+        card.ability.extra.cur = card.ability.extra.xmult * cardAmount
 
         if context.before then
             if pseudorandom('MetalPipe') < G.GAME.probabilities.normal / card.ability.extra.odds then
@@ -894,6 +894,68 @@ SMODS.Joker {
     end
 }
 
+-- Candle
+SMODS.Atlas {
+    key = "Candle",
+    path = "bttiCandle.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Candle',
+    loc_txt = {
+        name = 'Candle',
+        text = {
+            "If {C:attention}played hand{} has more",
+            "{C:chips}Chips{} than {C:mult}Mult{}, switch",
+            "{C:chips}Chips{} and {C:mult}Mult{}"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Candle',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main and context.other_joker == card then
+            local ch = hand_chips
+            local m = mult
+            if ch > m then
+                sendInfoMessage("gaming candle", "BTTI")
+                hand_chips = m
+                mult = ch
+                update_hand_text({delay = 0}, {mult = ch, chips = m})
+                return {
+                    message = "Switched!",
+                    colour = G.C.YELLOW,
+                    card = card
+                }
+            else
+                return {
+                    message = "Nope!",
+                    colour = G.C.YELLOW
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Cubey
 SMODS.Atlas {
     key = "Cubey",
@@ -1492,33 +1554,20 @@ SMODS.Joker {
                 end
             end
 
-            if #jokersToBackRead ~= 0 then
+            if #jokersToBackRead > 0 then
                 for _, targetJk in ipairs(jokersToBackRead) do 
                     local ret = SMODS.blueprint_effect(card, targetJk, context)
                     
                     -- blueprint_effect may return a single effect (table) or a list of effects.
-                    if type(ret) == "table" then
-                        if #ret > 0 then
-                            for _, e in ipairs(ret) do
-                                table.insert(rets, {
-                                    message = "Huh?",
-                                    colour = G.C.GREEN,
-                                    func = function()
-                                        targetJk:juice_up()
-                                    end
-                                })
-                                table.insert(rets, e)
+                    if ret ~= nil then
+                        table.insert(rets, {
+                            message = "Huh?",
+                            colour = G.C.GREEN,
+                            func = function()
+                                targetJk:juice_up()
                             end
-                        else
-                            table.insert(rets, {
-                                message = "Huh?",
-                                colour = G.C.GREEN,
-                                func = function()
-                                    targetJk:juice_up()
-                                end
-                            })
-                            table.insert(rets, ret)
-                        end
+                        })
+                        table.insert(rets, ret)
                     end
                 end
             else
@@ -1533,7 +1582,7 @@ SMODS.Joker {
             local key = jk and jk.config and jk.config.center and jk.config.center.key
             if key then
                 if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" then
-                    table.insert(rets {
+                    table.insert(rets, {
                         mult_mod = 10,
                         G.E_MANAGER:add_event(Event({
                             trigger = 'immediate',
