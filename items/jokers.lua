@@ -1615,6 +1615,85 @@ SMODS.Joker {
     end
 }
 
+-- Juicimated
+SMODS.Atlas {
+    key = "Juicimated",
+    path = "bttiJuicimated.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Juicimated',
+    loc_txt = {
+        name = 'Juicimated',
+        text = {
+            "{C:green}1 in 17{} chance for {C:mult}+117",
+            "{C:green}1 in 17{} chance to turn",
+            "{C:attention}played hand orange{}"
+        }
+    },
+
+    config = { extra = { mult = 117, odds = 17 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Juicimated',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                table.insert(rets, {
+                    mult_mod = card.ability.extra.mult,
+                    message = "Joozin' it",
+                    colour = G.C.ORANGE,
+                })
+            else
+                table.insert(rets, {
+                    message = "We chillin'",
+                    colour = G.C.ORANGE,
+                })
+            end
+            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                if G.play.cards then
+                    table.insert(rets, {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                sendInfoMessage("Making that shity ass card orange 2...", "BTTI")
+                                for i, c in ipairs(G.play.cards) do
+                                    c:juice_up()
+                                    c:set_seal("btti_orangeSeal", false, true)
+                                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                                        { message = "I joozed", colour = G.C.ORANGE })
+                                end
+                                return true
+                            end,
+                        }))
+                    })
+                end
+            end
+            return SMODS.merge_effects(rets)
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 --ca850
 -- Jonker
 SMODS.Atlas {

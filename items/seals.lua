@@ -1,14 +1,14 @@
+-- Autism Seal
 SMODS.Atlas {
     key = "autismSeal",
     path = "bttiAutismSeal.png",
     px = 71,
     py = 95
 }
-
 SMODS.Seal {
     name = "autismSeal",
     key = "autismSeal",
-    badge_colour = HEX("0A192A"),
+    badge_colour = G.C.DARK_EDITION,
     config = { },
     loc_txt = {
         -- Badge name (displayed on card description when seal is applied)
@@ -105,4 +105,37 @@ SMODS.Seal {
             return SMODS.merge_effects(rets)
         end
     end,
+}
+
+-- Autism Seal
+SMODS.Atlas {
+    key = "orangeSeal",
+    path = "bttiOrangeSeal.png",
+    px = 71,
+    py = 95
+}
+SMODS.Seal {
+    name = "orangeSeal",
+    key = "orangeSeal",
+    badge_colour = G.C.ORANGE,
+    config = { },
+    loc_txt = {
+        -- Badge name (displayed on card description when seal is applied)
+        label = 'Orange Seal',
+        -- Tooltip description
+        name = '{C:attention}Orange Seal',
+        text = {
+            "Makes a card {C:attention}orange"
+        }
+    },
+
+    loc_vars = function(self, info_queue)
+        return { vars = { } }
+    end,
+    atlas = "orangeSeal",
+    pos = { x = 0, y = 0 },
+
+
+    calculate = function(self, card, context)
+    end
 }
