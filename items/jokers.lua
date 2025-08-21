@@ -557,6 +557,63 @@ SMODS.Joker {
         return true, { allow_duplicates = true }
     end
 }
+SMODS.Atlas {
+    key = "jokelinear",
+    path = "bttiHatoving.png", -- placeholder
+    px = 71,
+    py = 95
+
+}
+SMODS.Joker {
+    key = 'jokelinear',
+    loc_txt = {
+        name = 'JokeLinear',
+        text = {
+            "All cards count as {C:attention}Aces{}"
+        }
+    },
+
+    config = { extra= {}},
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    rarity = 2,
+    atlas = 'jokelinear',
+    pos = {x = 0, y = 0},
+    cost = 4,
+
+    unlocked = true,
+    discovered = true, 
+    blueprint_compat = false,
+    eternal_compat = true,
+    perishable_compat = true,
+
+     calculate = function(self, card, context)
+    end,
+
+    add_to_deck = function(self, card, from_debuff)
+        --Combines ranks
+    end,
+
+    remove_from_deck = function(self, card, from_debuff)
+        -- Decombines ranks
+    end
+} 
+      
+local card_get_id_ref = Card.get_id
+function Card:get_id()
+    local original_id = card_get_id_ref(self)
+    if not original_id then return original_id end
+
+    if next(SMODS.find_card("j_btti_jokelinear")) then
+        return 14
+    end
+    return original_id
+end
+
+
 
 -- ITTI JOKERS
 -- ITTI JOKERS
