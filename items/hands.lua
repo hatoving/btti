@@ -27,11 +27,10 @@ SMODS.PokerHand {
             if G.jokers.cards then
                 if next(SMODS.find_card("j_btti_BlueBen8")) then
                     return parts._straight
-                else
-                    return {}
                 end
             end
         end
+        return {}
     end
 }
 
@@ -64,11 +63,10 @@ SMODS.PokerHand {
         if G.jokers then
             if G.jokers.cards then
                 if next(SMODS.find_card("j_btti_BlueBen8")) then
-                    return { SMODS.merge_lists(parts._straight, parts._flush) }
-                else
-                    return {}
+                    return { SMODS.merge_lists(parts._straight, parts._flush) } 
                 end
             end
         end
+        return {}
     end
 }
