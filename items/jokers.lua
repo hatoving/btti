@@ -117,7 +117,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'MetalPipe',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
 
     unlocked = true,
     discovered = true,
@@ -336,7 +336,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'AutismCreature',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
 
     unlocked = true,
     discovered = true,
@@ -467,7 +467,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'BentismCreature',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
 
     unlocked = true,
     discovered = true,
@@ -585,7 +585,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'jokelinear',
     pos = {x = 0, y = 0},
-    cost = 4,
+    cost = 5,
 
     unlocked = true,
     discovered = true, 
@@ -651,7 +651,7 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'GT',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
 
     unlocked = true,
     discovered = true,
@@ -726,7 +726,7 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'SL',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
 
     unlocked = true,
     discovered = true,
@@ -863,7 +863,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Mug',
     pos = {x = 0, y = 0},
-    cost = 7,
+    cost = 5,
 
     unlocked = true,
     discovered = true,
@@ -1097,7 +1097,7 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'RegBen',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 10,
 
     unlocked = true,
     discovered = true,
@@ -1165,7 +1165,7 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'RegVince',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
 
     unlocked = true,
     discovered = true,
@@ -1351,7 +1351,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'RoyalRegality',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
 
     unlocked = true,
     discovered = true,
