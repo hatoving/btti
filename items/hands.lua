@@ -23,7 +23,15 @@ SMODS.PokerHand {
         { 'H_7', true }
     },
     evaluate = function(parts, hand)
-        return parts._straight
+        if G.jokers then
+            if G.jokers.cards then
+                if next(SMODS.find_card("j_btti_BlueBen8")) then
+                    return parts._straight
+                else
+                    return {}
+                end
+            end
+        end
     end
 }
 
