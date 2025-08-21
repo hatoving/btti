@@ -558,6 +558,8 @@ SMODS.Joker {
         return true, { allow_duplicates = true }
     end
 }
+
+-- JokeLinear
 SMODS.Atlas {
     key = "jokelinear",
     path = "bttiHatoving.png", -- placeholder
@@ -899,6 +901,41 @@ SMODS.Joker {
         end
     end
 }
+
+-- Earbud
+--[[SMODS.Atlas {
+    key = "earbud",
+    path = "placeholder",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = "earbud",
+    loc_txt = {
+        name = "Earbud",
+        text = {
+            "Does nothing??"
+        }
+    },
+
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity!" }}
+        return {
+            vars = {}
+        }
+    end,
+    rarity = 1,
+    atlas = 'earbud',
+    pos = {x = 0, y = 0},
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = true,
+    perishable_compat = true
+}]]
 
 -- DRAMATIZED JOKERS
 -- DRAMATIZED JOKERS
