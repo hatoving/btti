@@ -285,19 +285,19 @@ SMODS.Joker {
 		if context.final_scoring_step then
             local rand = math.random(0, 1)
             
-            local loserMoney = math.ceil(G.GAME.dollars * 0.75)
-            local winnerMoney = math.floor(G.GAME.dollars * 1.1)
+            local loserMoney = math.floor(G.GAME.dollars * 0.75)
+            local winnerMoney = math.ceil(G.GAME.dollars * 1.1)
 
             if rand == 1 then
                 return {
                     dollars = -loserMoney,
-                    message = "Whoops",
+                    message = "Meow",
                     colour = G.C.RED
                 }
             else
                 return {
                     dollars = winnerMoney,
-                    message = "YEAHHH GAMBLING!!!",
+                    message = "Meow",
                     colour = G.C.YELLOW
                 }
             end
@@ -306,6 +306,170 @@ SMODS.Joker {
     in_pool = function(self, args)
 		return true, { allow_duplicates = true }
 	end
+}
+
+-- Autism Creature
+SMODS.Atlas {
+    key = "AutismCreature",
+    path = "bttiAutismCreature.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'AutismCreature',
+    loc_txt = {
+        name = 'Autism Creature',
+        text = {
+            "{X:mult,C:white}x3{} Mult per card with {C:dark_edition}Autism Seal{} in hand",
+            "{C:green}1 in 10{} chance to add {C:dark_edition}Autism Seal{} to Random Card",
+            "{C:mult}+20{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}"
+        }
+    },
+
+    config = { extra = { odds = 10, cardAmount = 0, multAmount = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
+        }
+    end,
+    rarity = 2,
+    atlas = 'AutismCreature',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        local rets = {}
+        if context.joker_main then
+            card.ability.extra.cardAmount = 0
+            if context.scoring_hand then
+                for _, pc in ipairs(context.scoring_hand) do
+                    if pc.seal ~= nil then
+                        sendInfoMessage("context.scoring_hand " .. pc.seal .. "", "BTTI")
+                        if pc.seal == "btti_autismSeal" then
+                            card.ability.extra.cardAmount = (card.ability.extra.cardAmount or 0) + 1
+                            sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
+                        end
+                    else
+                        sendInfoMessage("context.scoring_hand NONE", "BTTI")
+                    end
+                end
+            end
+            if G.hand.cards then
+                for _, pc in ipairs(G.hand.cards) do
+                    if pc.seal ~= nil then
+                        sendInfoMessage("context.full_hand " .. pc.seal .. "", "BTTI")
+                        if pc.seal == "btti_autismSeal" then
+                            card.ability.extra.cardAmount = (card.ability.extra.cardAmount or 0) + 1
+                            sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
+                        end
+                    else
+                        sendInfoMessage("context.full_hand NONE", "BTTI")
+                    end
+                end
+            end
+            card.ability.extra.multAmount = 0
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_LightShine" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 20
+                    end
+                    if key == "j_btti_BentismCreature" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 20
+                    end
+                end
+            end
+
+            if card.ability.extra.multAmount > 0 then
+                table.insert(rets, {
+                    message = "Yippe! +" .. card.ability.extra.multAmount .. " Mult",
+                    colour = G.C.DARK_EDITION,
+                    mult_mod = card.ability.extra.multAmount
+                })
+            end
+            if card.ability.extra.cardAmount > 0 then
+                table.insert(rets, {
+                    message = "Yippe! X" .. card.ability.extra.cardAmount * 3 .. " Mult",
+                    colour = G.C.DARK_EDITION,
+                    Xmult_mod = card.ability.extra.cardAmount * 3
+                })
+            end
+            return SMODS.merge_effects(rets)
+        end
+
+        if (context.end_of_round == true and context.cardarea == G.jokers) then
+            card.ability.extra.cardAmount = 0
+            card.ability.extra.multAmount = 0
+            if pseudorandom('AutismCreature') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                local idx = math.random(1, #G.play.cards)
+                G.play.cards[idx]:set_seal("btti_autismSeal")
+
+                return {
+                    message = "Yay!",
+                    colour = G.C.DARK_EDITION,
+                }
+            else
+                return {
+                    message = "Nope!",
+                    colour = G.C.DARK_EDITION,
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- Bentism Creature
+SMODS.Atlas {
+    key = "BentismCreature",
+    path = "bttiBentismCreature.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'BentismCreature',
+    loc_txt = {
+        name = 'Bentism Creature',
+        text = {
+            "{C:chips}+143{} Chips per card with {C:dark_edition}Autism Seal{} in {C:attention}Full Deck{}",
+            "{C:green}1 in 40{} chance to add {C:dark_edition}Autism Seal{} to Random Card",
+            "{X:chips,C:white}x8{} Chips per other {C:dark_edition}Autism{} {C:attention}Jokers{}"
+        }
+    },
+
+    config = { extra = { odds = 10 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 2,
+    atlas = 'BentismCreature',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
 }
 
 -- ITTI JOKERS
