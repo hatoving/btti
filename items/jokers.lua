@@ -255,9 +255,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Gambler Cat',
 		text = {
-			"1 in 2 chance of losing 75%",
-            "of your money OR 1 in 2 chance",
-            "of gaining 110% of your money",
+			"Lose 75% of your money OR",
+            "win 110% of your money",
             "{C:inactive}He's all in{}"
 		}
 	},
@@ -500,11 +499,18 @@ SMODS.Joker {
                         }, ret, ret2
                     }
                 else
-                    return {
-                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
-                        chip_mod = context.scoring_hand[idx]:get_id(),
-                        colour = G.C.BTTIPINK,
-                    }
+                    if not context.scoring_hand[idx].debuff then
+                        return {
+                            message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
+                            chip_mod = context.scoring_hand[idx]:get_id(),
+                            colour = G.C.BTTIPINK,
+                        }
+                    else
+                        return {
+                            message = 'Aw...',
+                            colour = G.C.BTTIPINK,
+                        }
+                    end
                 end
             end
         end
@@ -906,7 +912,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 20, odds = 30 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP & Beyond..." } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.odds },
         }

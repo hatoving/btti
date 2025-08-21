@@ -1,0 +1,110 @@
+SMODS.Atlas {
+    key = "autismSeal",
+    path = "bttiAutismSeal.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Seal {
+    name = "autismSeal",
+    key = "autismSeal",
+    badge_colour = HEX("0A192A"),
+    config = { },
+    loc_txt = {
+        -- Badge name (displayed on card description when seal is applied)
+        label = '{C:dark_edition}Autism Seal',
+        -- Tooltip description
+        name = '{C:dark_edition}Autism Seal',
+        text = {
+            "If a card with this Seal gets played",
+            "it'll copy any Seal in left in Hand",
+            "regardless of it's condition.",
+            "Will halve Chips of Cards without",
+            "Seals played alongside it"
+        }
+    },
+
+    loc_vars = function(self, info_queue)
+        return { vars = { } }
+    end,
+    atlas = "autismSeal",
+    pos = { x = 0, y = 0 },
+
+
+    calculate = function(self, card, context)
+        if context.other_card and context.other_card.seal ~= nil then
+        elseif context.other_card and context.other_card.seal == nil then
+        end
+
+        if context.main_scoring and context.cardarea == G.play then
+            local rets = {
+            }
+            for i, pc in ipairs(G.play.cards) do
+                if pc.seal ~= nil then         
+                    sendInfoMessage("lol: " .. pc.seal .. "", "BTTI")
+                    table.insert(rets, {
+                        message = "Autism!",
+                        colour = G.C.BLUE,
+                        func = function()
+                            pc:juice_up(0.3, 0.5)
+                        end
+                    })
+                    if pc.seal == "Red" then
+                        local ch = card:get_chip_bonus()
+                        local mult = card:get_chip_mult()
+                        local xMult = card:get_chip_x_mult()
+                        if ch > 0 then
+                            table.insert(rets, {
+                                chips = ch,
+                                colour = G.C.CHIPS
+                            })
+                        end
+                        if mult > 0 then
+                            table.insert(rets, {
+                                mult = mult,
+                                colour = G.C.MULT
+                            })
+                        end
+                        if xMult > 0 then
+                            table.insert(rets, {
+                                x_mult = xMult,
+                                colour = G.C.MULT
+                            })
+                        end
+                    elseif pc.seal == "Gold" then
+                        table.insert(rets, {
+                            dollars = 3,
+                            colour = G.C.MONEY
+                        })
+                    elseif pc.seal == "Blue" then
+                        table.insert(rets, {
+                            func = function ()
+                                SMODS.add_card {
+                                    set = "Planet",
+                                    key_append = "autismSeal"
+                                }
+                            end
+                        })
+                    elseif pc.seal == "Purple" then
+                        table.insert(rets, {
+                            func = function()
+                                SMODS.add_card {
+                                    set = "Tarot",
+                                    key_append = "autismSeal"
+                                }
+                            end
+                        })
+                    end
+                else
+                    table.insert(rets, {
+                        chips = math.ceil((pc:get_chip_bonus() / 2) * -1),
+                        func = function()
+                            pc:juice_up(0.3, 0.5)
+                        end
+                    })
+                end
+            end
+            return SMODS.merge_effects(rets)
+        end
+    end,
+}

@@ -13,7 +13,7 @@ for _, file in ipairs(files) do
 	print("[BTTI] Loading lua file " .. file)
 	local f, err = SMODS.load_file("items/" .. file)
 	if err then
-		error(err) 
+		error(err)
 	end
 	f()
 end
