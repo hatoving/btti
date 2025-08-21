@@ -6,6 +6,9 @@ SMODS.PokerHand {
             "Straight but {C:bisexual}better{}"
         }
     },
+    prefix_config = {
+        key = { mod = false }
+    },
     above_hand = "Straight",
     visible = false,
     mult = 12,
@@ -31,6 +34,9 @@ SMODS.PokerHand {
         description = {
             "Straight Flush but {C:bisexual}better{}"
         }
+    },
+    prefix_config = {
+        key = { mod = false }
     },
     above_hand = "Straight Flush",
     visible = false,

@@ -384,6 +384,9 @@ SMODS.Joker {
                     if key == "j_btti_BentismCreature" then
                         card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 20
                     end
+                    if key == "j_btti_BlueBen8" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 20
+                    end
                 end
             end
 
@@ -494,6 +497,9 @@ SMODS.Joker {
                         card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 1
                     end
                     if key == "j_btti_AutismCreature" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 1
+                    end
+                    if key == "j_btti_BlueBen8" then
                         card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 1
                     end
                 end
@@ -995,7 +1001,7 @@ SMODS.Joker {
             for _, jk in ipairs(G.jokers.cards) do
                 local key = jk and jk.config and jk.config.center and jk.config.center.key
                 if key then
-                    if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" then
+                    if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" or key == "j_btti_Candle" then
                         table.insert(rets, {
                             chip_mod = math.random(100, 1000),
                             Xmult_mod = math.random(2, 10),
@@ -1579,7 +1585,7 @@ SMODS.Joker {
         for _, jk in ipairs(G.jokers.cards) do
             local key = jk and jk.config and jk.config.center and jk.config.center.key
             if key then
-                if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" then
+                if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_BlueBen8" then
                     table.insert(rets, {
                         mult_mod = 10,
                         G.E_MANAGER:add_event(Event({
@@ -1596,7 +1602,7 @@ SMODS.Joker {
                     })
                 end
 
-                if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" or key == "j_btti_Cubey" then
+                if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" or key == "j_btti_Cubey" or key == "j_btti_Candle" then
                     itti = true
                 end
             end
@@ -1745,19 +1751,13 @@ SMODS.Joker {
 
         if context.joker_main then
             local rets = {}
+            card.ability.extra.odds = 4
             if pseudorandom('BlueBen8') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 table.insert(rets, {
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'immediate',
-                        blocking = false,
-                        delay = 0,
-                        func = function()
-                            SMODS.smart_level_up_hand(card, "Flush", nil, 1) -- Level up Flush by 1
-                            card_eval_status_text(card, 'extra', nil, nil, nil,
-                                { message = "Flush Upgrade!!", colour = G.C.BTTIGAY })
-                            return true
-                        end,
-                    }))
+                    message = "Flush Upgrade!!", colour = G.C.BTTIGAY,
+                    func = function()
+                        SMODS.smart_level_up_hand(card, "Flush", nil, 1) -- Level up Flush by 1
+                    end
                 })
             end
             for _, jk in ipairs(G.jokers.cards) do
@@ -1766,17 +1766,8 @@ SMODS.Joker {
                     if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_LightShine" then
                         table.insert(rets, {
                             chip_mod = 30,
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'immediate',
-                                blocking = false,
-                                delay = 0,
-                                func = function()
-                                    jk:juice_up()
-                                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                                        { message = "+30 Chips", colour = G.C.BTTIGAY })
-                                    return true
-                                end,
-                            }))
+                            message = "+30 Chips",
+                            colour = G.C.BTTIGAY
                         })
                         break -- only want to do it once
                     end
