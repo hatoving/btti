@@ -12,15 +12,13 @@ SMODS.Seal {
     config = { },
     loc_txt = {
         -- Badge name (displayed on card description when seal is applied)
-        label = '{C:dark_edition}Autism Seal',
+        label = 'Autism Seal',
         -- Tooltip description
         name = '{C:dark_edition}Autism Seal',
         text = {
-            "If a card with this Seal gets played",
-            "it'll copy any Seal in left in Hand",
-            "regardless of it's condition.",
-            "Will halve Chips of Cards without",
-            "Seals played alongside it"
+            "Copy seals of other cards in played hand",
+            "Halve chips of cards without seals in",
+            "played hand"
         }
     },
 

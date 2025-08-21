@@ -30,7 +30,7 @@ SMODS.Joker {
 		name = 'Jonker',
 		text = {
 			"{C:mult}+#1#{} Mult",
-            "1 in 10 chance to steal {C:attention}$2-7{}"
+            "{C:green}1 in 10{} chance to steal {C:attention}$2-7{}"
 		}
 	},
 
@@ -100,17 +100,18 @@ SMODS.Joker {
     loc_txt = {
         name = 'Metal Pipe',
         text = {
-            "{X:mult,C:white}x2.75{} Mult per Steel Card in Deck",
-            "1 in 20 Chance to turn played",
-            "Cards into Steel Cards",
-            "{C:inactive}Soothens your ears"
+            "{X:mult,C:white}x2.75{} Mult per {C:attention}Steel Card{} in {C:attention}Full Deck",
+            "{C:green}1 in 20{} Chance to turn {C:attention}played",
+            "{C:attention}Cards{} into {C:attention}Steel Cards{}",
+            "{C:inactive}Soothens your ears",
+            "{C:inactive}Currently {X:inactive,C:white}X#3#{C:inactive} Mult"
         }
     },
 
-    config = { extra = { xmult = 2.75, odds = 20 } },
+    config = { extra = { xmult = 2.75, odds = 20, cur = 0 } },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.extra.xmult },
+            vars = { card.ability.extra.xmult, card.ability.extra.odds, card.ability.extra.cur },
         }
     end,
     rarity = 2,
@@ -133,6 +134,8 @@ SMODS.Joker {
                 end
             end
         end
+
+        card.abillity.extra.cur = card.ability.extra.xmult * cardAmount
 
         if context.before then
             if pseudorandom('MetalPipe') < G.GAME.probabilities.normal / card.ability.extra.odds then
@@ -181,9 +184,9 @@ SMODS.Joker {
         name = 'Good Morning, Good Morning!',
         text = {
             "{C:mult}+#1#{} Mult per round",
-            "Repeats itself for each Mult",
-            "Blesses your ears when triggered",
-            "{C:inactive]+#2# Mult"
+            "Repeats itself each round",
+            "{C:inactive}Blesses your ears when triggered",
+            "{C:inactive]Currently +#2# Mult"
         }
     },
 
@@ -255,8 +258,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Gambler Cat',
 		text = {
-			"Lose 75% of your money OR",
-            "win 110% of your money",
+			"{C:red}Lose{} 75% of your {C:attention}money{}",
+            "or {C:green}Win{} 110% of your {C:attention}money{}",
             "{C:inactive}He's all in{}"
 		}
 	},
@@ -322,9 +325,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-            "Shuffles all Jokers around before",
+            "Shuffles all {C:attention}Jokers{} around before",
             "a hand is played and copies the",
-			"Joker to the right",
+            "{C:attention}Joker to the right",
 		}
 	},
 
@@ -396,8 +399,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Strawberry Lemoande',
 		text = {
-			"Copies either a random Joker",
-            "or a random Card in Hand",
+            "Copies either a random {C:attention}Joker{}",
+            "or a random {C:attention}Card{} in Hand",
             "Triggers twice if {C:purple}God Taco{}",
             "is present"
 		}
@@ -532,10 +535,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mug',
         text = {
-            "{C:mult}+#2#{} Mult to this Joker if played", 
-            "hand has more Mult than Chips",
+            "{C:mult}+#2#{} Mult to this {C:attention}Joker{} if {C:attention}played",
+            "hand{} has more {C:mult}Mult{} than {C:chips}Chips{}",
             "{C:mult}-#2#{} Mult if played hand has more",
-            "Chips than Mult",
+            "{C:chips}Chips{} than {C:mult}Mult{}",
             "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
     },
@@ -607,7 +610,7 @@ SMODS.Joker {
 		name = 'Teeriffic!',
 		text = {
 			"{C:mult}+#1#{} Mult per card",
-            "Will debuff 1-2 played cards"
+            "Will debuff 1-2 {C:attention}played cards{}"
 		}
 	},
 
@@ -734,7 +737,7 @@ SMODS.Joker {
 		name = 'Reg!Ben',
 		text = {
 			"Saves you from death if scored chips",
-            "are 10% of required amount. 1 in 9",
+            "are 10% of required amount. {C:green}1 in 9{}",
             "chance of being destroyed at the end",
             "of each round."
 		}
@@ -803,9 +806,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Reg!Vince',
 		text = {
-			"{X:mult,C:white}x5{} Mult per Tarot Card sold",
-            "Removes {C:mult}-15{} Mult from played Hand",
-            "per Tarot Card used",
+            "{X:mult,C:white}x5{} Mult per {C:purple}Tarot Card{} sold",
+            "Removes {C:mult}-15{} Mult from {C:attention}played hand{}",
+            "per {C:purple}Tarot Card{} used",
             "{C:inactive}Currently {X:inactive,C:white}x#2#{C:inactive} Mult, #3# Mult{}"
 		}
 	},
@@ -901,12 +904,13 @@ SMODS.Joker {
     loc_txt = {
         name = '???????????',
         text = {
-            "+{C:mult}#1#{} Mult for each Non-Steel/",
-            "Non-Stone Card in current Deck",
-            "1 in 30 chance to turn a",
-            "random Card into a Stone Card",
-            "1 in 30 chance to turn",
-            "a random Card into a Steel Card"
+            "{C:mult}+#1#{} Mult for each Non-{C:attention}Stone{}/",
+            "Non-{C:attention}Steel Card{} in {C:attention}Full Deck{}",
+            "Debuffs {C:attention}Stone{} and {C:attention}Steel Cards{}",
+            "{C:green}1 in 30{} chance to turn a",
+            "random played {C:attention}Card{} into a {C:attention}Stone Card{}",
+            "{C:green}1 in 30{} chance to turn",
+            "a random {C:attention}Card{} into a {C:attention}Steel Card"
         }
     },
 
@@ -988,8 +992,8 @@ SMODS.Joker {
         name = 'Royal Regality',
         text = {
             "{C:mult}+#1#{} mult",
-            "Played Flushes count as Royal Flushes,",
-            "but retain Flush's current level"
+            "Played {C:attention}Flushes{} count as {C:attention}Royal Flushes{},",
+            "but retain {C:attention}Flush{}'s current level"
         }
     },
 
@@ -1073,11 +1077,11 @@ SMODS.Joker {
     loc_txt = {
         name = 'LightShine',
         text = {
-            "1 in 10 chance to sloppily",
-            "backread Jokers to the left",
-            "{C:mult}+10{} Mult per Autism Joker",
+            "{C:green}1 in 10{} chance to sloppily",
+            "backread {C:attention}Jokers{} to the left",
+            "{C:mult}+10{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}",
             "{X:mult,C:white}x69{} Mult if an",
-            "{C:purple}Inn-to the Insanity{} Joker",
+            "{C:purple}Inn-to the Insanity Joker{}",
             "is present"
         }
     },
@@ -1214,9 +1218,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'ca850',
 		text = {
-			"{C:mult}+100{} Mult if {C:pink}hatoving{},",
-            "{C:orange}Juicimated{}, or {C:chips}BlueBen8{} aren't present",
-            "Kills LightShine if she is present",
+			"{C:mult}+100{} Mult if {C:mult}hatoving{},",
+            "{C:attention}Juicimated{}, or {C:chips}BlueBen8{} aren't present",
+            "{C:mult}Kills{} LightShine if she is present",
             "{C:inactive}He carries you{}"
 		}
 	},
