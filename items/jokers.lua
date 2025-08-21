@@ -350,26 +350,26 @@ SMODS.Joker {
             if context.scoring_hand then
                 for _, pc in ipairs(context.scoring_hand) do
                     if pc.seal ~= nil then
-                        sendInfoMessage("context.scoring_hand " .. pc.seal .. "", "BTTI")
+                        --sendInfoMessage("context.scoring_hand " .. pc.seal .. "", "BTTI")
                         if pc.seal == "btti_autismSeal" then
                             card.ability.extra.cardAmount = (card.ability.extra.cardAmount or 0) + 1
-                            sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
+                            --sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
                         end
                     else
-                        sendInfoMessage("context.scoring_hand NONE", "BTTI")
+                        --sendInfoMessage("context.scoring_hand NONE", "BTTI")
                     end
                 end
             end
             if G.hand.cards then
                 for _, pc in ipairs(G.hand.cards) do
                     if pc.seal ~= nil then
-                        sendInfoMessage("context.full_hand " .. pc.seal .. "", "BTTI")
+                        --sendInfoMessage("context.full_hand " .. pc.seal .. "", "BTTI")
                         if pc.seal == "btti_autismSeal" then
                             card.ability.extra.cardAmount = (card.ability.extra.cardAmount or 0) + 1
-                            sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
+                            --sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
                         end
                     else
-                        sendInfoMessage("context.full_hand NONE", "BTTI")
+                        --sendInfoMessage("context.full_hand NONE", "BTTI")
                     end
                 end
             end
@@ -403,17 +403,29 @@ SMODS.Joker {
             return SMODS.merge_effects(rets)
         end
 
-        if (context.end_of_round == true and context.cardarea == G.jokers) then
+        if context.after then
             card.ability.extra.cardAmount = 0
             card.ability.extra.multAmount = 0
-            if pseudorandom('AutismCreature') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                local idx = math.random(1, #G.play.cards)
-                G.play.cards[idx]:set_seal("btti_autismSeal")
-
-                return {
-                    message = "Yay!",
-                    colour = G.C.DARK_EDITION,
-                }
+            local autistic = true
+            if autistic then
+                if G.play.cards then
+                    local idx = math.random(1, #G.play.cards)
+                    if G.play.cards[idx].seal ~= nil then
+                        if G.play.cards[idx].seal ~= "btti_autismSeal" then
+                            G.play.cards[idx]:set_seal("btti_autismSeal")
+                            return {
+                                message = "Yay!",
+                                colour = G.C.DARK_EDITION,
+                            }
+                        end
+                    else
+                        G.play.cards[idx]:set_seal("btti_autismSeal")
+                        return {
+                            message = "Yay!",
+                            colour = G.C.DARK_EDITION,
+                        }
+                    end
+                end
             else
                 return {
                     message = "Nope!",
@@ -445,10 +457,10 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { odds = 10 } },
+    config = { extra = { odds = 40, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
+            vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
     end,
     rarity = 2,
@@ -463,8 +475,82 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
+        local rets = {}
         if context.joker_main then
+            card.ability.extra.cardAmount = 0
+            if G.playing_cards then
+                for _, pc in ipairs(G.playing_cards) do
+                    if pc.seal ~= nil then
+                        --sendInfoMessage("context.scoring_hand " .. pc.seal .. "", "BTTI")
+                        if pc.seal == "btti_autismSeal" then
+                            card.ability.extra.cardAmount = (card.ability.extra.cardAmount or 0) + 1
+                            --sendInfoMessage("AUTISTIC CARD AMOUNT " .. card.ability.extra.cardAmount, "BTTI")
+                        end
+                    else
+                        --sendInfoMessage("context.scoring_hand NONE", "BTTI")
+                    end
+                end
+            end
+            card.ability.extra.multAmount = 0
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_LightShine" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 8
+                    end
+                    if key == "j_btti_AutismCreature" then
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 8
+                    end
+                end
+            end
+            
+            if card.ability.extra.cardAmount > 0 then
+                table.insert(rets, {
+                    message = "Yippe! +" .. card.ability.extra.cardAmount * 143 .. " Chips",
+                    colour = G.C.DARK_EDITION,
+                    chip_mod = card.ability.extra.cardAmount * 143
+                })
+            end
+            if card.ability.extra.multAmount > 0 then
+                table.insert(rets, {
+                    message = "Yippe! X" .. card.ability.extra.multAmount * 8 .. " Chips",
+                    colour = G.C.DARK_EDITION,
+                    func = function() 
+                        ease_chips(hand_chips * (card.ability.extra.multAmount * 8))
+                    end
+                })
+            end
+            return SMODS.merge_effects(rets)
+        end
 
+        if context.after then
+            card.ability.extra.cardAmount = 0
+            card.ability.extra.multAmount = 0
+
+            local autistic = true
+            if autistic then
+                local idx = math.random(1, #G.play.cards)
+
+                if G.play.cards then
+                    if G.play.cards[idx].edition ~= nil then
+                        if not G.play.cards[idx].edition.polychrome then
+                            G.play.cards[idx].set_edition("e_polychrome")
+                        end
+                    else
+                        G.play.cards[idx].set_edition("e_polychrome")
+                    end
+
+                    return {
+                        message = "Yay!",
+                        colour = G.C.DARK_EDITION,
+                    }
+                end
+            else
+                return {
+                    message = "Nope!",
+                    colour = G.C.DARK_EDITION,
+                }
+            end
         end
     end,
     in_pool = function(self, args)
