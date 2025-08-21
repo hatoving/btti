@@ -8,13 +8,13 @@ SMODS.Atlas {
 SMODS.Seal {
     name = "autismSeal",
     key = "autismSeal",
-    badge_colour = G.C.DARK_EDITION,
+    badge_colour = G.C.BTTIGAY,
     config = { },
     loc_txt = {
         -- Badge name (displayed on card description when seal is applied)
         label = 'Autism Seal',
         -- Tooltip description
-        name = '{C:dark_edition}Autism Seal',
+        name = '{C:gay}Autism Seal',
         text = {
             "Copy seals of other cards in played hand",
             "Halve chips of cards without seals in",
@@ -107,7 +107,7 @@ SMODS.Seal {
     end,
 }
 
--- Autism Seal
+-- Orange Seal
 SMODS.Atlas {
     key = "orangeSeal",
     path = "bttiOrangeSeal.png",

@@ -319,11 +319,11 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'AutismCreature',
     loc_txt = {
-        name = 'Autism Creature',
+        name = '{C:gay}Autism{} Creature',
         text = {
-            "{X:mult,C:white}x3{} Mult per card with {C:dark_edition}Autism Seal{} in hand",
-            "{C:green}1 in 10{} chance to add {C:dark_edition}Autism Seal{} to Random Card",
-            "{C:mult}+20{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}"
+            "{X:mult,C:white}x3{} Mult per card with {C:gay}Autism Seal{} in hand",
+            "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to Random Card",
+            "{C:mult}+20{} Mult per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
     },
 
@@ -444,11 +444,11 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'BentismCreature',
     loc_txt = {
-        name = 'Bentism Creature',
+        name = '{C:gay}Bentism{} Creature',
         text = {
-            "{C:chips}+143{} Chips per card with {C:dark_edition}Autism Seal{} in {C:attention}Full Deck{}",
-            "{C:green}1 in 40{} chance to add {C:dark_edition}Autism Seal{} to Random Card",
-            "{X:chips,C:white}x8{} Chips per other {C:dark_edition}Autism{} {C:attention}Jokers{}"
+            "{C:chips}+143{} Chips per card with {C:gay}Autism Seal{} in {C:attention}Full Deck{}",
+            "{C:green}1 in 40{} chance to add {C:dark_edition}Polychrome{} to Random Card",
+            "{X:chips,C:white}x8{} Chips per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
     },
 
@@ -607,8 +607,6 @@ function Card:get_id()
     end
     return original_id
 end
-
-
 
 -- ITTI JOKERS
 -- ITTI JOKERS
@@ -1639,10 +1637,10 @@ SMODS.Joker {
             vars = { card.ability.extra.mult },
         }
     end,
-    rarity = 1,
+    rarity = 4,
     atlas = 'Juicimated',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 10,
 
     unlocked = true,
     discovered = true,
@@ -1679,6 +1677,7 @@ SMODS.Joker {
                                     c:set_seal("btti_orangeSeal", false, true)
                                     card_eval_status_text(card, 'extra', nil, nil, nil,
                                         { message = "I joozed", colour = G.C.ORANGE })
+                                    delay(0.1)
                                 end
                                 return true
                             end,
@@ -1694,8 +1693,106 @@ SMODS.Joker {
     end
 }
 
+-- BlueBen8
+SMODS.Atlas {
+    key = "BlueBen8",
+    path = "bttiBlueBen8.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'BlueBen8',
+    loc_txt = {
+        name = 'BlueBen8',
+        text = {
+            "Any played {C:attention}Straight{} hand will",
+            "be played as a {C:bisexual}Bisexual{} hand",
+            "{C:green}1 in 4{} chance to upgrade {C:attention}Flush{} when played",
+            "{C:chips}+30{} Chips if an {C:gay}Autism{} {C:attention}Joker{} is present"
+        }
+    },
+
+    config = { extra = { odds = 4 } },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.odds },
+        }
+    end,
+    rarity = 4,
+    atlas = 'BlueBen8',
+    pos = { x = 0, y = 0 },
+    cost = 5,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.evaluate_poker_hand then
+            sendInfoMessage("wow... " .. context.scoring_name .. "!!", "BTTI")
+            if context.poker_hands and context.scoring_name == "Straight" then
+                return {
+                    replace_scoring_name = "Bisexual",
+                }
+            elseif context.poker_hands and context.scoring_name == "Straight Flush" then
+                return {
+                    replace_scoring_name = "BisexualFlush",
+                }
+            end
+        end
+
+        if context.joker_main then
+            local rets = {}
+            if pseudorandom('BlueBen8') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                table.insert(rets, {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            SMODS.smart_level_up_hand(card, "Flush", nil, 1) -- Level up Flush by 1
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "Flush Upgrade!!", colour = G.C.BTTIGAY })
+                            return true
+                        end,
+                    }))
+                })
+            end
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_LightShine" then
+                        table.insert(rets, {
+                            chip_mod = 30,
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'immediate',
+                                blocking = false,
+                                delay = 0,
+                                func = function()
+                                    jk:juice_up()
+                                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                                        { message = "+30 Chips", colour = G.C.BTTIGAY })
+                                    return true
+                                end,
+                            }))
+                        })
+                        break -- only want to do it once
+                    end
+                end
+            end
+            if #rets > 0 then
+                return SMODS.merge_effects(rets)
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 --ca850
--- Jonker
 SMODS.Atlas {
     key = "Ca850",
     path = "bttiCa850.png",
