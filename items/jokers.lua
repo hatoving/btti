@@ -554,7 +554,7 @@ SMODS.Joker {
 -- JokeLinear
 SMODS.Atlas {
     key = "jokelinear",
-    path = "bttiHatoving.png", -- placeholder
+    path = "bttiJokelinear.png", -- placeholder
     px = 71,
     py = 95
 
@@ -894,40 +894,64 @@ SMODS.Joker {
     end
 }
 
--- Earbud
---[[SMODS.Atlas {
-    key = "earbud",
-    path = "placeholder",
+-- Cubey
+SMODS.Atlas {
+    key = "Cubey",
+    path = "bttiCubey.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = "earbud",
+    key = 'Cubey',
     loc_txt = {
-        name = "Earbud",
+        name = 'Cubey',
         text = {
-            "Does nothing??"
+            "{C:chips}+100-1000{} Chips and {X:mult,C:white}x2-10{} Mult",
+            "for each {C:purple}Inn-to the Insanity{} {C:attention}Joker{}",
+            "in hand"
         }
     },
 
-    config = {extra = {}},
+    config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity!" }}
         return {
-            vars = {}
+            vars = { card.ability.extra.mult, card.ability.extra.money },
         }
     end,
-    rarity = 1,
-    atlas = 'earbud',
-    pos = {x = 0, y = 0},
-    cost = 4,
+    rarity = 4,
+    atlas = 'Cubey',
+    pos = { x = 0, y = 0 },
+    cost = 40,
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = false,
-    eternal_compat = true,
-    perishable_compat = true
-}]]
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+           local rets = {}
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" then
+                        table.insert(rets, {
+                            chip_mod = math.random(100, 1000),
+                            Xmult_mod = math.random(2, 10),
+                            message = "...",
+                            colour = G.C.BLUE
+                        })
+                    end
+                end
+            end
+            return SMODS.merge_effects(rets)
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
 
 -- DRAMATIZED JOKERS
 -- DRAMATIZED JOKERS
@@ -1417,7 +1441,7 @@ SMODS.Joker {
             "backread {C:attention}Jokers{} to the left",
             "{C:mult}+10{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}",
             "{X:mult,C:white}x69{} Mult if an",
-            "{C:purple}Inn-to the Insanity Joker{}",
+            "{C:purple}Inn-to the Insanity {C:attention}Joker{}",
             "is present"
         }
     },
@@ -1452,14 +1476,7 @@ SMODS.Joker {
         if not context.joker_main then return end
 
         local rets = {}
-        local curmult = 0
         local itti = false
-        local backread = true
-
-        local extra = (card and card.ability and card.ability.extra) or {}
-        local odds = extra.odds or 1
-        local mult = extra.mult or 0
-        local prob_normal = (G.GAME and G.GAME.probabilities and G.GAME.probabilities.normal) or 0
 
         -- Backread
         if getJokerID(card) ~= 1 then
@@ -1516,10 +1533,23 @@ SMODS.Joker {
             local key = jk and jk.config and jk.config.center and jk.config.center.key
             if key then
                 if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" then
-                    curmult = curmult + mult
+                    table.insert(rets {
+                        mult_mod = 10,
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                jk:juice_up()
+                                card_eval_status_text(card, 'extra', nil, nil, nil,
+                                    { message = "Me = gender!!", colour = G.C.DARK_EDITION })
+                                return true
+                            end,
+                        }))
+                    })
                 end
 
-                if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" then
+                if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" or key == "j_btti_Cubey" then
                     itti = true
                 end
             end
@@ -1528,11 +1558,6 @@ SMODS.Joker {
         if itti then
             table.insert(rets, { message = "Bazinga!!", Xmult_mod = 69, colour = G.C.RED })
         end
-
-        if curmult ~= 0 then
-            table.insert(rets, { message = "Me = gender!!", mult_mod = curmult, colour = G.C.RED })
-        end
-
         --sendInfoMessage(rets, "BTTI")
         return SMODS.merge_effects(rets)
     end,
