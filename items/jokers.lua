@@ -346,7 +346,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         local rets = {}
-        if context.joker_main then
+        if context.final_scoring_step and context.cardarea == G.play then
             card.ability.extra.cardAmount = 0
             if context.scoring_hand then
                 for _, pc in ipairs(context.scoring_hand) do
@@ -401,30 +401,42 @@ SMODS.Joker {
                     Xmult_mod = card.ability.extra.cardAmount * 3
                 })
             end
-            return SMODS.merge_effects(rets)
-        end
-
-        if context.after then
-            card.ability.extra.cardAmount = 0
-            card.ability.extra.multAmount = 0
             local autistic = true
             if autistic then
                 if G.play.cards then
                     local idx = math.random(1, #G.play.cards)
                     if G.play.cards[idx].seal ~= nil then
                         if G.play.cards[idx].seal ~= "btti_autismSeal" then
-                            G.play.cards[idx]:set_seal("btti_autismSeal")
-                            return {
-                                message = "Yay!",
-                                colour = G.C.DARK_EDITION,
-                            }
+                            table.insert(rets {
+                                G.E_MANAGER:add_event(Event({
+                                    trigger = 'immediate',
+                                    blocking = false,
+                                    delay = 0,
+                                    func = function()
+                                        sendInfoMessage("Making that shity ass card autistic...", "BTTI")
+                                        G.play.cards[idx]:juice_up()
+                                        G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
+                                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                                            { message = "Yay!", colour = G.C.DARK_EDITION })
+                                    end,
+                                }))
+                            })
                         end
                     else
-                        G.play.cards[idx]:set_seal("btti_autismSeal")
-                        return {
-                            message = "Yay!",
-                            colour = G.C.DARK_EDITION,
-                        }
+                        table.insert(rets {
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'immediate',
+                                blocking = false,
+                                delay = 0,
+                                func = function()
+                                    sendInfoMessage("Making that shity ass card autistic...", "BTTI")
+                                    G.play.cards[idx]:juice_up()
+                                    G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
+                                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                                        { message = "Yay!", colour = G.C.DARK_EDITION })
+                                end,
+                            }))
+                        })
                     end
                 end
             else
@@ -433,6 +445,7 @@ SMODS.Joker {
                     colour = G.C.DARK_EDITION,
                 }
             end
+            return SMODS.merge_effects(rets)
         end
     end,
     in_pool = function(self, args)
@@ -497,10 +510,10 @@ SMODS.Joker {
                 local key = jk and jk.config and jk.config.center and jk.config.center.key
                 if key then
                     if key == "j_btti_LightShine" then
-                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 8
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 1
                     end
                     if key == "j_btti_AutismCreature" then
-                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 8
+                        card.ability.extra.multAmount = (card.ability.extra.multAmount or 0) + 1
                     end
                 end
             end
@@ -521,37 +534,36 @@ SMODS.Joker {
                     end
                 })
             end
-            return SMODS.merge_effects(rets)
-        end
-
-        if context.after then
-            card.ability.extra.cardAmount = 0
-            card.ability.extra.multAmount = 0
-
             local autistic = true
             if autistic then
-                local idx = math.random(1, #G.play.cards)
-
                 if G.play.cards then
-                    if G.play.cards[idx].edition ~= nil then
-                        if not G.play.cards[idx].edition.polychrome then
-                            G.play.cards[idx].set_edition("e_polychrome")
-                        end
-                    else
-                        G.play.cards[idx].set_edition("e_polychrome")
-                    end
-
-                    return {
-                        message = "Yay!",
-                        colour = G.C.DARK_EDITION,
-                    }
+                    table.insert(rets, {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                                    message = "Yay!",
+                                    colour = G.C.DARK_EDITION,
+                                })
+                                local idx = math.random(1, #G.play.cards)
+                                sendInfoMessage("Making that shitty ass card polychrome...", "BTTI")
+                                G.play.cards[idx]:juice_up()
+                                G.play.cards[idx]:set_edition('e_polychrome', false, true)
+                                play_sound('polychrome1', 1.2, 0.7)
+                                return true
+                            end
+                        }))
+                    })
                 end
             else
-                return {
+                table.insert(rets, {
                     message = "Nope!",
                     colour = G.C.DARK_EDITION,
-                }
+                })
             end
+            return SMODS.merge_effects(rets)
         end
     end,
     in_pool = function(self, args)
@@ -570,9 +582,9 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'jokelinear',
     loc_txt = {
-        name = 'JokeLinear',
+        name = 'Jokelinear',
         text = {
-            "All cards count as {C:attention}Aces{}"
+            "All cards act as {C:attention}Aces{}"
         }
     },
 
