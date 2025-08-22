@@ -767,11 +767,11 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { xmult = 0, odds = 20 } },
+    config = { extra = { xmult = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         return {
-            vars = { card.ability.extra.xmult, card.ability.extra.odds },
+            vars = { card.ability.extra.xmult },
         }
     end,
     rarity = 3,
@@ -796,7 +796,7 @@ SMODS.Joker {
                     end
                 end
             end
-            if pseudorandom('Whorse') < G.GAME.probabilities.normal / card.ability.extra.odds then                
+            if pseudorandom('Whorse') < G.GAME.probabilities.normal / 20 then                
                 return {
                     message = "Whorse",
                     colour = G.C.WHITE,
