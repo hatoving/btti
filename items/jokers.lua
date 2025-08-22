@@ -667,11 +667,11 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { } },
+    config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Lakers" } }
         return {
-            vars = { },
+            vars = {},
         }
     end,
     rarity = 1,
@@ -698,6 +698,87 @@ SMODS.Joker {
     end,
     in_pool = function(self, args)
         return true, { allow_duplicates = true }
+    end
+}
+
+-- Mimic
+SMODS.Atlas {
+    key = "Mimic",
+    path = "bttiMimic.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Mimic',
+    loc_txt = {
+        name = 'Mimic Joker',
+        text = {
+            "Debuffs any {C:attention}Flushes{}, {C:attention}Pairs{},",
+            "{C:attention}Two Pairs{} and {C:deets}Two Horses{}",
+            "{C:green}1 in 40{} chance to {C:red}self-destruct{}",
+            "at the end of round",
+        }
+    },
+
+    config = { extra = { cards = {} } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 1,
+    atlas = 'Mimic',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function (self, card, dt)
+       card.ability.eternal = true 
+    end,
+
+    calculate = function(self, card, context)
+        if context.initial_scoring_step then
+            if pseudorandom('Mimic') < G.GAME.probabilities.normal / 40 then
+                sendInfoMessage("Destroying", "BTTI")
+                SMODS.destroy_cards(card, true)
+            end
+            if context.scoring_name == "Flush" or context.scoring_name == "Straight Flush" or
+                context.scoring_name == "Pair" or context.scoring_name == 'Two Pair' or
+                    context.scoring_name == "TwoHorse" then
+                return {
+                    message = "Nuh-uh!",
+                    colour = G.C.GREEN,
+                    func = function ()
+                        for i, c in ipairs(context.scoring_hand) do
+                            table.insert(card.ability.extra.cards, c)
+                            SMODS.debuff_card(c, true, 'Mimic')
+                            c:juice_up()
+                        end
+                    end
+                }
+            end
+        end
+
+
+        if context.final_scoring_step then
+            if #card.ability.extra.cards > 0 then
+                for i, c in ipairs(card.ability.extra.cards) do
+                    SMODS.debuff_card(c, false, 'Mimic')
+                    c:juice_up()
+                end
+                card.ability.extra.cards = {}
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = true }
     end
 }
 
