@@ -66,6 +66,7 @@ SMODS.Joker {
 	atlas = 'Jonker',
 	pos = { x = 0, y = 0 },
 	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -141,6 +142,7 @@ SMODS.Joker {
     atlas = 'MetalPipe',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -224,6 +226,7 @@ SMODS.Joker {
     atlas = 'GoodMorning',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -300,6 +303,7 @@ SMODS.Joker {
 	atlas = 'GamblerCat',
 	pos = { x = 0, y = 0 },
 	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -363,6 +367,7 @@ SMODS.Joker {
     atlas = 'AutismCreature',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -492,6 +497,7 @@ SMODS.Joker {
     atlas = 'BentismCreature',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -612,6 +618,7 @@ SMODS.Joker {
     atlas = 'jokelinear',
     pos = {x = 0, y = 0},
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true, 
@@ -641,6 +648,58 @@ function Card:get_id()
     end
     return original_id
 end
+
+-- LeBron James
+SMODS.Atlas {
+    key = "LeBron",
+    path = "bttiLeBron.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'LeBron',
+    loc_txt = {
+        name = 'LeBron James',
+        text = {
+            "When {C:attention}Blind{} is selected, self-destruct",
+            "and create a random {C:purple}Balantrinsanity{} {C:attention}Joker{}",
+            "{C:inactive}(Must have room)"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Lakers" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 1,
+    atlas = 'LeBron',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            if #G.jokers.cards < G.jokers.config.card_limit then
+                local c = create_card("BTTImodaddition", G.Jokers, nil, nil, nil, nil, nil, 'LeBron')
+                c:add_to_deck()
+                G.jokers:emplace(c)
+                SMODS.destroy_cards(card)
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
 
 -- DEETS JOKERS
 -- DEETS JOKERS
@@ -677,6 +736,7 @@ SMODS.Joker {
     atlas = 'Honse',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -779,6 +839,7 @@ SMODS.Joker {
     atlas = 'Horse',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -867,6 +928,7 @@ SMODS.Joker {
     atlas = 'Haykeeper',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -974,6 +1036,7 @@ SMODS.Joker {
     atlas = 'Chicken',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1074,6 +1137,7 @@ SMODS.Joker {
     atlas = 'Whorse',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1150,6 +1214,7 @@ SMODS.Joker {
     atlas = 'Emma',
     pos = { x = 0, y = 0 },
     cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1232,6 +1297,7 @@ SMODS.Joker {
 	atlas = 'GT',
 	pos = { x = 0, y = 0 },
 	cost = 6,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1307,6 +1373,7 @@ SMODS.Joker {
 	atlas = 'SL',
 	pos = { x = 0, y = 0 },
 	cost = 6,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1444,6 +1511,7 @@ SMODS.Joker {
     atlas = 'Mug',
     pos = {x = 0, y = 0},
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1510,6 +1578,7 @@ SMODS.Joker {
     atlas = 'Candle',
     pos = { x = 0, y = 0 },
     cost = 6,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1572,6 +1641,7 @@ SMODS.Joker {
     atlas = 'Cubey',
     pos = { x = 0, y = 0 },
     cost = 40,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1636,6 +1706,7 @@ SMODS.Joker {
 	atlas = 'Teeriffic',
 	pos = { x = 0, y = 0 },
 	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1702,6 +1773,7 @@ SMODS.Joker {
 	atlas = 'Joozie',
 	pos = { x = 0, y = 0 },
 	cost = 6,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1764,6 +1836,7 @@ SMODS.Joker {
 	atlas = 'RegBen',
 	pos = { x = 0, y = 0 },
 	cost = 10,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1832,6 +1905,7 @@ SMODS.Joker {
 	atlas = 'RegVince',
 	pos = { x = 0, y = 0 },
 	cost = 6,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1935,6 +2009,7 @@ SMODS.Joker {
     atlas = 'Myst',
     pos = { x = 0, y = 0 },
     cost = 12,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1962,7 +2037,7 @@ SMODS.Joker {
             if not done then
                 if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
                     local idx = math.random(1, #context.scoring_hand)
-                    context.scoring_hand[idx]:set_ability("m_stone")
+                    context.scoring_hand[idx]:set_ability("m_steel")
                 end
             end
         end
@@ -2020,6 +2095,7 @@ SMODS.Joker {
     atlas = 'RoyalRegality',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2095,6 +2171,7 @@ SMODS.Joker {
     atlas = 'LightShine',
     pos = { x = 0, y = 0 },
     cost = 20,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2221,6 +2298,7 @@ SMODS.Joker {
     atlas = 'Juicimated',
     pos = { x = 0, y = 0 },
     cost = 10,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2303,6 +2381,7 @@ SMODS.Joker {
     atlas = 'BlueBen8',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2387,6 +2466,7 @@ SMODS.Joker {
     atlas = 'Hatoving',
     pos = { x = 0, y = 0 },
     cost = 5,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2481,6 +2561,7 @@ SMODS.Joker {
     atlas = 'Ca850',
 	pos = { x = 0, y = 0 },
 	cost = 20,
+    pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
     discovered = true,

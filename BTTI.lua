@@ -48,6 +48,16 @@ SMODS.current_mod.optional_features = {
 	post_trigger = true
 }
 
+SMODS.ObjectType({
+	key = "BTTImodaddition",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+
 -- Load items
 local files = NFS.getDirectoryItems(mod_path .. "items")
 for _, file in ipairs(files) do
