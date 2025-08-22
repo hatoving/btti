@@ -1,3 +1,5 @@
+require("nativefs")
+
 function percentOf(value, percent)
     return value * (percent / 100)
 end
@@ -17,18 +19,32 @@ function lerp(a, b, t)
     return result
 end
 
+function loadImage(fn)
+    local full_path = SMODS.current_mod.path .. 'assets/images/' .. fn
+    full_path = full_path:gsub('%\\', '/')
+    local file_data = assert(NFS.newFileData(full_path), ("Epic fail"))
+    local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))
+    return (assert(love.graphics.newImage(tempimagedata), ("Epic fail 3")))
+end
+
 local whorseFlashbang = 0.0
+local rockImage = loadImage('rock.png')
+local rockAlpha = 0.0
 
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
     whorseFlashbang = lerp(whorseFlashbang, 0.0, dt / 4.0)
+    rockAlpha = lerp(rockAlpha, 0.0, dt)
 end
 
 local drawReal = love.draw
 function love.draw()
     drawReal()
 
+    love.graphics.setColor(1, 1, 1, rockAlpha)
+    love.graphics.draw(rockImage, 0, 0, 0, (love.graphics.getWidth() / rockImage:getWidth()),
+        (love.graphics.getHeight() / rockImage:getHeight()))
     love.graphics.setColor(1, 1, 1, whorseFlashbang)
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 end
@@ -688,12 +704,10 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.setting_blind then
-            if #G.jokers.cards < G.jokers.config.card_limit then
-                local c = create_card("BTTImodaddition", G.Jokers, nil, nil, nil, nil, nil, 'LeBron')
-                c:add_to_deck()
-                G.jokers:emplace(c)
-                SMODS.destroy_cards(card)
-            end
+            local c = create_card("BTTImodaddition", G.Jokers, nil, nil, nil, nil, nil, 'LeBron')
+            c:add_to_deck()
+            G.jokers:emplace(c)
+            SMODS.destroy_cards(card)
         end
     end,
     in_pool = function(self, args)
@@ -779,6 +793,83 @@ SMODS.Joker {
     end,
     in_pool = function(self, args)
         return false, { allow_duplicates = true }
+    end
+}
+
+SMODS.Atlas {
+    key = "Rock",
+    path = "bttiRock.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Rock',
+    loc_txt = {
+        name = 'Dwayne "The Rock" Johnson',
+        text = {
+           "{X:mult,C:white}x4{} Mult per {C:attention}Stone Card{} in Hand",
+           "He will briefly appear when this card is",
+           "triggered",
+           "{C:inactive}Currently {X:mult,C:white}x#2#{} Mult"
+        }
+    },
+
+    config = { extra = { xmult = 4.0, cur = 0 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Rock',
+    pos = { x = 0, y = 0 },
+    cost = 5,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        
+        if context.joker_main then
+            local cardAmount = 0
+
+            for _, pc in ipairs(G.hand.cards) do
+                if pc.config.center.key == "m_stone" then
+                    cardAmount = cardAmount + 1
+                end
+            end
+            for _, pc in ipairs(G.play.cards) do
+                if pc.config.center.key == "m_stone" then
+                    cardAmount = cardAmount + 1
+                end
+            end
+            
+            card.ability.extra.cur = card.ability.extra.xmult * cardAmount
+            sendInfoMessage("Found " .. cardAmount .. " cards = x" .. card.ability.extra.xmult * cardAmount .. " Mult", "BTTI")
+            if card.ability.extra.xmult * cardAmount > 0 then
+                rockAlpha = 1.0
+                local rets = {
+                    {
+                        message = "It's about drive,",
+                        colour = G.C.GREY
+                    },
+                    {
+                        Xmult_mod = card.ability.extra.xmult * cardAmount,
+                        message = "it's about POWER!",
+                        colour = G.C.GREY
+                    }
+                }
+                return SMODS.merge_effects(rets)
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
     end
 }
 
