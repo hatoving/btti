@@ -12,6 +12,27 @@ function getJokerID(card)
     end
 end
 
+function lerp(a, b, t)
+    local result = a + t * (b - a)
+    return result
+end
+
+local whorseFlashbang = 0.0
+
+local updateReal = love.update
+function love.update(dt)
+    updateReal(dt)
+    whorseFlashbang = lerp(whorseFlashbang, 0.0, dt / 4.0)
+end
+
+local drawReal = love.draw
+function love.draw()
+    drawReal()
+
+    love.graphics.setColor(1, 1, 1, whorseFlashbang)
+    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+end
+
 -- MISC JOKERS
 -- MISC JOKERS
 -- MISC JOKERS
@@ -640,7 +661,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Chicken',
         text = {
-            "Temporarily kicks a {C:attention}Joker{} out of the round",
+            "Temporarily kicks a {C:attention}Joker{} out of a played Hand",
             "and adds four its {C:attention}sell value{} to {C:mult}Mult{}",
             "Resets once the hand has ended"
         }
@@ -674,12 +695,17 @@ SMODS.Joker {
                 if idx ~= getJokerID(card) then
                     card.ability.extra.kickedJoker = G.jokers.cards[idx].config.center.key
                     card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 4
-                    SMODS.debuff_card(G.jokers.cards[idx], true, "Chicken")
-                    G.jokers.cards[idx]:juice_up()
-                    return {
-                        message = "CHICKEN!!",
-                        colour = G.C.BTTIDEETS,
-                        sound = 'btti_chickenKick'
+                    return SMODS.merge_effects { {
+                            message = "CHICKEN!!",
+                            colour = G.C.BTTIDEETS,
+                            sound = 'btti_chickenKick',
+                        },
+                        {
+                            func = function()
+                                SMODS.debuff_card(G.jokers.cards[idx], true, "Chicken")
+                                G.jokers.cards[idx]:juice_up()
+                            end
+                        }
                     }
                 end
             end
@@ -713,6 +739,82 @@ SMODS.Joker {
                             end,
                         }))
                     }
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- Whorse
+SMODS.Sound({ key = "whorseFlashbang", path = "bttiWhorseFlashbang.ogg" })
+SMODS.Atlas {
+    key = "Whorse",
+    path = "bttiWhorse.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Whorse',
+    loc_txt = {
+        name = 'Whorse',
+        text = {
+            "{X:mult,C:white}x2{} Mult for each",
+            "{C:attention}non-Enhanced{} Card in {C:attention}played hand",
+            "{C:green}1 in 20{} chance to flashbang you"
+        }
+    },
+
+    config = { extra = { xmult = 0, odds = 20 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = { card.ability.extra.xmult, card.ability.extra.odds },
+        }
+    end,
+    rarity = 3,
+    atlas = 'Whorse',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.before then
+            card.ability.extra.xmult = 0
+            if G.play.cards then
+                for i, pc in ipairs(G.play.cards) do
+                    if next(SMODS.get_enhancements(pc)) == nil then
+                        card.ability.extra.xmult = card.ability.extra.xmult + 2
+                        sendInfoMessage("AHHH " .. card.ability.extra.xmult .. "!!", "BTTI")
+                    end
+                end
+            end
+            if pseudorandom('Whorse') < G.GAME.probabilities.normal / card.ability.extra.odds then                
+                return {
+                    message = "Whorse",
+                    colour = G.C.WHITE,
+                    func = function ()
+                        whorseFlashbang = 1.0
+                        play_sound("btti_whorseFlashbang")
+                        return true
+                    end
+                }
+            end
+        end
+        if context.joker_main then
+            if card.ability.extra.xmult > 0 then
+                sendInfoMessage("AHHH " .. card.ability.extra.xmult .. "!!", "BTTI")
+                return {
+                    Xmult_mod = card.ability.extra.xmult,
+                    message = "Whorse. X" .. card.ability.extra.xmult .. "",
+                    colour = G.C.MULT
                 }
             end
         end
@@ -853,7 +955,7 @@ SMODS.Joker {
         if context.joker_main then
             if G.jokers.cards[getJokerID(card) + 1] then
                 sendInfoMessage("supposed to retrigger: " .. getJokerID(card)+1, "BTTI")
-                local ret = SMODS.blueprint_effect(card, G.jokers.cards[idx], context)
+                local ret = SMODS.blueprint_effect(card, G.jokers.cards[getJokerID(card)+1], context)
                 return SMODS.merge_effects {
                     {
                         message = "AGAIN, AGAIN!!",
@@ -1818,7 +1920,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Juicimated',
         text = {
-            "{C:green}1 in 17{} chance for {C:mult}+117",
+            "{C:green}1 in 17{} chance for {C:mult}+117{} Mult",
             "{C:green}1 in 17{} chance to turn",
             "{C:attention}played hand orange{}"
         }
