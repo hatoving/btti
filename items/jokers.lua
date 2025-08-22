@@ -834,6 +834,115 @@ SMODS.Joker {
     end
 }
 
+-- Haykeeper
+SMODS.Atlas {
+    key = "Haykeeper",
+    path = "bttiHaykeeper.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Haykeeper',
+    loc_txt = {
+        name = 'The Haykeeper',
+        text = {
+            "Adds half of {C:attention}${} to {C:mult}Mult{}",
+            "Once triggered, it will start a cooldown-- if this",
+            "{C:attention}Joker{} gets played again during",
+            "this cooldown, it will instead add 1/8th of",
+            "owned {C:attention}${} to {C:mult}Mult{} until the",
+            "cooldown is over.",
+            "{C:inactive}Cooldown: #2#s"
+        }
+    },
+
+    config = { extra = { cooldown = 0.0, angry = false } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = { card.ability.extra.cooldown, card.ability.extra.cooldownFloored },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Haykeeper',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    update = function (self, card, dt)
+        if card.ability.extra.cooldown > 0.0 then
+            card.ability.extra.cooldownFloored = math.floor(card.ability.extra.cooldown)
+            --sendInfoMessage("timer : " .. card.ability.extra.cooldown, "BTTI")
+            card.ability.extra.cooldown = card.ability.extra.cooldown - (dt / G.SETTINGS.GAMESPEED)
+        end
+    end,
+
+    calculate = function(self, card, context)
+        if card.ability.extra.cooldown == nil then
+            card.ability.extra.cooldown = 0.0
+        end
+        if card.ability.extra.angry == nil then
+            card.ability.extra.angry = false
+        end
+        if context.joker_main then
+            local rets = {}
+            if card.ability.extra.cooldown > 0.0 then
+                card.ability.extra.angry = true
+                table.insert(rets, {
+                    message = "Dude...",
+                    colour = G.C.BTTIDEETS
+                })
+            elseif card.ability.extra.cooldown <= 0.0 then
+                table.insert(rets, {
+                    message = "Open!",
+                    colour = G.C.BTTIDEETS
+                })
+                if card.ability.extra.angry then
+                    card.ability.extra.angry = false
+                end
+            end
+            if not card.ability.extra.angry then
+                table.insert(rets, {
+                    mult_mod = math.floor(G.GAME.dollars / 2),
+                    message = "+" .. math.floor(G.GAME.dollars / 2) .. "",
+                    colour = G.C.BTTIDEETS
+                })
+                table.insert(rets, {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            card.ability.extra.cooldown = math.random(5, 10)
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "Closed! Don't come!!", colour = G.C.DEETS })
+                            return true
+                        end,
+                    }))
+                    }
+                )
+            else
+                table.insert(rets, {
+                    mult_mod = math.floor(G.GAME.dollars / 8),
+                    message = "+" .. math.floor(G.GAME.dollars / 8) .. "",
+                    colour = G.C.BTTIDEETS
+                })
+            end
+
+            return SMODS.merge_effects(rets)
+        end
+
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Chicken
 SMODS.Sound({ key = "chicken", path = "bttiChicken.ogg" })
 SMODS.Sound({ key = "chickenKick", path = "bttiChickenKick.ogg" })
@@ -1898,11 +2007,11 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 17 } },
+    config = { extra = { mult = 17, lastLevel = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
         return {
-            vars = { card.ability.extra.mult },
+            vars = { card.ability.extra.mult, card.ability.extra.lastLevel },
         }
     end,
     rarity = 2,
@@ -1927,7 +2036,7 @@ SMODS.Joker {
 
                 return {
                     replace_scoring_name = "Flush",
-                    replace_display_name = "Regality Flush",
+                    replace_display_name = "Royal Flush",
                 }
             end
         end
@@ -1937,7 +2046,7 @@ SMODS.Joker {
                 -- I don't actually know how to change the hand,
                 -- but we can pretend. :D
                 return {
-                    func = function ()
+                    func = function()
                         hand_chips = G.GAME.hands['Straight Flush'].s_chips +
                             (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
                         mult = G.GAME.hands['Straight Flush'].s_mult +
@@ -2071,7 +2180,7 @@ SMODS.Joker {
                             func = function()
                                 jk:juice_up()
                                 card_eval_status_text(card, 'extra', nil, nil, nil,
-                                    { message = "Me = gender!!", colour = G.C.DARK_EDITION })
+                                    { message = "Me = gender!!", colour = G.C.GAY })
                                 return true
                             end,
                         }))
