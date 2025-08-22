@@ -36,6 +36,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -110,6 +111,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 2.75, odds = 20, cur = 0 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = { card.ability.extra.xmult, card.ability.extra.odds, card.ability.extra.cur },
         }
@@ -192,6 +194,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 1, rep = 0 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Family Guy" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.rep },
         }
@@ -267,6 +270,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -329,6 +333,7 @@ SMODS.Joker {
 
     config = { extra = { odds = 10, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
         return {
             vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
@@ -457,6 +462,7 @@ SMODS.Joker {
 
     config = { extra = { odds = 40, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
         return {
             vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
@@ -576,6 +582,7 @@ SMODS.Joker {
 
     config = { extra= {}},
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Charlinear's Beautiful Mind" } }
         return {
             vars = {}
         }
@@ -613,6 +620,185 @@ function Card:get_id()
     end
     return original_id
 end
+
+-- DEETS JOKERS
+-- DEETS JOKERS
+-- DEETS JOKERS
+-- DEETS JOKERS
+
+-- Chicken
+SMODS.Sound({ key = "chicken", path = "bttiChicken.ogg" })
+SMODS.Sound({ key = "chickenKick", path = "bttiChickenKick.ogg" })
+SMODS.Atlas {
+    key = "Chicken",
+    path = "bttiChicken.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Chicken',
+    loc_txt = {
+        name = 'Chicken',
+        text = {
+            "Temporarily kicks a {C:attention}Joker{} out of the round",
+            "and adds four its {C:attention}sell value{} to {C:mult}Mult{}",
+            "Resets once the hand has ended"
+        }
+    },
+
+    config = { extra = { mult = 0, kickedJoker = '' } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = { card.ability.extra.mult },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Chicken',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.before then
+            if #G.jokers.cards ~= 1 then
+                local idx
+                repeat
+                    idx = math.random(1, #G.jokers.cards)
+                until idx ~= getJokerID(card)
+                if idx ~= getJokerID(card) then
+                    card.ability.extra.kickedJoker = G.jokers.cards[idx].config.center.key
+                    card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 4
+                    SMODS.debuff_card(G.jokers.cards[idx], true, "Chicken")
+                    G.jokers.cards[idx]:juice_up()
+                    return {
+                        message = "CHICKEN!!",
+                        colour = G.C.BTTIDEETS,
+                        sound = 'btti_chickenKick'
+                    }
+                end
+            end
+        end
+        if context.joker_main then
+            if card.ability.extra.mult > 0 then
+                return SMODS.merge_effects { {
+                        message = "+" .. card.ability.extra.mult .. " Mult",
+                        colour = G.C.BTTIDEETS,
+                        mult_mod = card.ability.extra.mult,
+                    sound = 'btti_chicken'
+                    },
+                    {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                card.ability.extra.mult = 0
+                                if card.ability.extra.kickedJoker ~= nil or card.ability.extra.kickedJoker ~= '' then
+                                    for i = 1, #G.jokers.cards, 1 do
+                                        if G.jokers.cards[i].config.center.key == card.ability.extra.kickedJoker then
+                                            delay(0.1)
+                                            SMODS.debuff_card(G.jokers.cards[i], false, "Chicken")
+                                            G.jokers.cards[i]:juice_up()
+                                        end
+                                    end
+                                    card.ability.extra.kickedJoker = ''
+                                end
+                                return true
+                            end,
+                        }))
+                    }
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- Emma
+SMODS.Atlas {
+    key = "Emma",
+    path = "bttiEmma.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Emma',
+    loc_txt = {
+        name = 'Emma',
+        text = {
+            "{C:mult}+0-100{} Mult",
+            "{C:chips}+0-50{} Chips",
+            "{C:mult}+5{} Mult for every",
+            "{C:deets}DEETS{} {C:attention}Joker{}"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Emma',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+            local m = math.random(0, 100)
+            local ch = math.random(0, 50)
+
+            table.insert(rets, {
+                message = "+" .. ch .. " Chips",
+                colour = G.C.PURPLE,
+                chip_mod = ch
+            })
+            table.insert(rets, {
+                message = "+" .. m .. " Mult",
+                colour = G.C.PURPLE,
+                mult_mod = m
+            })
+
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_Horse" or key == "j_btti_Whorse" or key == "j_btti_Honse" or key == "j_btti_Chicken" or key == "j_btti_Haykeeper" then
+                        table.insert(rets, {
+                            mult_mod = 10,
+                            message = "Horse!!",
+                            colour = G.C.PURPLE,
+                            func = function ()
+                                jk:juice_up()
+                            end
+                        })
+                    end
+                end
+            end
+
+            return SMODS.merge_effects(rets)
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
 
 -- ITTI JOKERS
 -- ITTI JOKERS
@@ -1514,6 +1700,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 10 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = { card.ability.extra.mult },
         }
@@ -1639,6 +1826,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 117, odds = 17 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = { card.ability.extra.mult },
         }
@@ -1720,6 +1908,7 @@ SMODS.Joker {
 
     config = { extra = { odds = 4 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = { card.ability.extra.odds },
         }
@@ -1803,6 +1992,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0, roundsLeft = 0 } },
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips, card.ability.extra.roundsLeft },
         }
@@ -1896,6 +2086,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 100 } },
 	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
 		return {
             vars = { card.ability.extra.mult },
         }

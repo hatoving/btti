@@ -24,6 +24,7 @@ SMODS.Gradient {
 }
 
 G.C.BTTIPINK = HEX('FFA5A5')
+G.C.BTTIDEETS = HEX('9e5c00')
 G.C.BTTIBI = SMODS.Gradients.btti_BISEXUAL_TITLE
 G.C.BTTIGAY = SMODS.Gradients.btti_GAY
 
@@ -35,6 +36,7 @@ function loc_colour(_c, _default)
 
 	G.ARGS.LOC_COLOURS.bisexual = G.C.BTTIBI
 	G.ARGS.LOC_COLOURS.gay = G.C.BTTIGAY
+	G.ARGS.LOC_COLOURS.deets = G.C.BTTIDEETS
 
 	return loc_colour_ref(_c, _default)
 end
