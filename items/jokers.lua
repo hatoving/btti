@@ -647,6 +647,108 @@ end
 -- DEETS JOKERS
 -- DEETS JOKERS
 
+-- Honse
+SMODS.Atlas {
+    key = "Honse",
+    path = "bttiHonse.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Honse',
+    loc_txt = {
+        name = 'Mystical Honse',
+        text = {
+            "Gives you {C:attention}$1{} at the end of the round",
+            "{C:mult}+5{} Mult per {C:deets}DEETS{} {C:attention}Joker{}",
+            "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}Full Deck",
+            "Selling this card may result in consequnces"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'Honse',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.selling_card then
+            G.GAME.horseCondemn = true
+            for _, c in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(c, "m_btti_horseCard") then
+                    SMODS.destroy_cards(c)
+                end
+            end
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_Horse" or key == "j_btti_Whorse" or key == "j_btti_Emma" or key == "j_btti_Chicken" or key == "j_btti_Haykeeper" then
+                        SMODS.destroy_cards(jk)
+                    end
+                end
+            end
+            return {
+                message = "I'll never forgive you.",
+                colour = G.C.BTTIDEETS
+            }
+        end
+
+        if context.joker_main then
+            local rets = {}
+
+            for _, c in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(c, "m_btti_horseCard") then
+                    table.insert(rets, {
+                        chip_mod = 20,
+                        message = "+20 Chips",
+                        colour = G.C.BTTIDEETS,
+                    })
+                end
+            end
+
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_Horse" or key == "j_btti_Whorse" or key == "j_btti_Emma" or key == "j_btti_Chicken" or key == "j_btti_Haykeeper" then
+                        table.insert(rets, {
+                            mult_mod = 10,
+                            message = "Mystical",
+                            colour = G.C.BTTIDEETS,
+                            func = function()
+                                jk:juice_up()
+                            end
+                        })
+                    end
+                end
+            end
+
+            return SMODS.merge_effects(rets)
+        end
+        if context.end_of_round and context.cardarea == G.jokers then
+            return {
+                dollars = 1,
+                colour = G.C.BTTIDEETS
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Horse
 SMODS.Atlas {
     key = "Horse",
@@ -715,9 +817,11 @@ SMODS.Joker {
                             message = "Horse",
                             colour = G.C.BTTIDEETS,
                             func = function()
-                                context.scoring_hand[idx]:set_ability("m_btti_horseCard")
-                                context.scoring_hand[idx]:juice_up()
-                                return true
+                                if not G.GAME.horseCondemn then
+                                    context.scoring_hand[idx]:set_ability("m_btti_horseCard")
+                                    context.scoring_hand[idx]:juice_up()
+                                    return true
+                                end
                             end
                         }
                     end
