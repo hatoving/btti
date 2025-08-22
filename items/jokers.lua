@@ -126,7 +126,7 @@ SMODS.Joker {
             "{C:green}1 in 20{} Chance to turn {C:attention}played",
             "{C:attention}Cards{} into {C:attention}Steel Cards{}",
             "{C:inactive}Soothens your ears",
-            "{C:inactive}Currently {X:inactive,C:white}X#3#{C:inactive} Mult"
+            "{C:inactive}Currently {X:Mult,C:white}X#3#{C:inactive} Mult"
         }
     },
 
@@ -209,7 +209,7 @@ SMODS.Joker {
             "{C:mult}+#1#{} Mult per round",
             "Repeats itself each round",
             "{C:inactive}Blesses your ears when triggered",
-            "{C:inactive]Currently +#2# Mult"
+            "{C:inactive]Currently {C:mult}+#2#{} Mult"
         }
     },
 
@@ -1819,7 +1819,7 @@ SMODS.Joker {
             "{X:mult,C:white}x5{} Mult per {C:purple}Tarot Card{} sold",
             "Removes {C:mult}-15{} Mult from {C:attention}played hand{}",
             "per {C:purple}Tarot Card{} used",
-            "{C:inactive}Currently {X:inactive,C:white}x#2#{C:inactive} Mult, #3# Mult{}"
+            "{C:inactive}Currently {X:mult,C:white}x#2#{C:inactive} Mult, {X:mult,C:white}#3#{} Mult"
 		}
 	},
 
@@ -2002,16 +2002,18 @@ SMODS.Joker {
         name = 'Royal Regality',
         text = {
             "{C:mult}+#1#{} mult",
-            "Played {C:attention}Flushes{} count as {C:attention}Royal Flushes{},",
-            "but retain {C:attention}Flush{}'s current level"
+            "If {C:attention}played hand{} is a {C:attention}Flush{}, this {C:attention}Joker{} will",
+            "add the base {C:chips}Chips{} and {C:mult}Mult{} of {C:attention}Royal Flush{}",
+            "(at the same level as {C:attention}Flush{}) to score",
+            "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#3#{} Mult"
         }
     },
 
-    config = { extra = { mult = 17, lastLevel = 0 } },
+    config = { extra = { mult = 17, addChip = 0, addMult = 0,} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.lastLevel },
+            vars = { card.ability.extra.mult, card.ability.extra.addChip, card.ability.extra.addMult },
         }
     end,
     rarity = 2,
@@ -2026,42 +2028,28 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.evaluate_poker_hand then
-            if context.poker_hands and next(context.poker_hands['Flush']) then
-                local c = G.GAME.hands['Straight Flush'].s_chips +
-                    (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
-                local m = G.GAME.hands['Straight Flush'].s_mult +
-                    (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
-                update_hand_text({ delay = 0 }, { chips = c, mult = m })
-
-                return {
-                    replace_scoring_name = "Flush",
-                    replace_display_name = "Royal Flush",
-                }
-            end
-        end
-
-        if context.initial_scoring_step and not context.blueprint then
-            if context.poker_hands and next(context.poker_hands['Flush']) then
-                -- I don't actually know how to change the hand,
-                -- but we can pretend. :D
-                return {
-                    func = function()
-                        hand_chips = G.GAME.hands['Straight Flush'].s_chips +
-                            (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
-                        mult = G.GAME.hands['Straight Flush'].s_mult +
-                            (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
-                        update_hand_text({ delay = 0 }, { chips = hand_chips, mult = mult })
-                    end
-                }
-            end
-        end
+        card.ability.extra.addChip = G.GAME.hands['Straight Flush'].s_chips +
+            (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
+        card.ability.extra.addMult = G.GAME.hands['Straight Flush'].s_mult +
+            (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
 
         if context.joker_main then
-            return {
-                mult_mod = card.ability.extra.mult,
-                colour = G.C.RED,
-                message = "+" .. card.ability.extra.mult .. " Mult",
+            return SMODS.merge_effects {
+                {
+                    mult_mod = card.ability.extra.mult,
+                    colour = G.C.MULT,
+                    message = "+" .. card.ability.extra.mult .. " Mult",
+                },
+                {
+                    mult_mod = card.ability.extra.addChip,
+                    colour = G.C.CHIPS,
+                    message = "+" .. card.ability.extra.addChip .. " Chips",
+                },
+                {
+                    mult_mod = card.ability.extra.addMult,
+                    colour = G.C.MULT,
+                    message = "+" .. card.ability.extra.addMult .. " Mult",
+                },
             }
         end
     end,
