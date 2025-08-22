@@ -619,7 +619,7 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = true,
 
-     calculate = function(self, card, context)
+    calculate = function(self, card, context)
     end,
 
     add_to_deck = function(self, card, from_debuff)
@@ -647,6 +647,89 @@ end
 -- DEETS JOKERS
 -- DEETS JOKERS
 
+-- Horse
+SMODS.Atlas {
+    key = "Horse",
+    path = "bttiHorse.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Horse',
+    loc_txt = {
+        name = 'Horse',
+        text = {
+            "{C:chips}+80{} Chips per {C:deets}Horse Card{} in {C:attention}Deck",
+            "{X:mult,C:white}x3{} Mult if {C:attention}Played Hand{} is a {C:deets}Horse Hand{}",
+            "{C:green}1 in 100{} chance to turn random card",
+            "in hand into {C:deets}Horse Card"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 1,
+    atlas = 'Horse',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+
+            for _, c in ipairs(G.deck.cards) do
+                if SMODS.has_enhancement(c,"m_btti_horseCard") then
+                    table.insert(rets, {
+                        chip_mod = 80,
+                        message = "+80 Chips",
+                        colour = G.C.BTTIDEETS,
+                    })
+                end
+            end
+            if string.find(string.lower(context.scoring_name), 'horse') ~= nil then
+                table.insert(rets, {
+                    Xmult_mod = 3,
+                    message = "x3 Mult",
+                    colour = G.C.BTTIDEETS,
+                })
+            end
+            return SMODS.merge_effects(rets)
+        end
+        if context.final_scoring_step then
+            if pseudorandom('Horse') < G.GAME.probabilities.normal / 100 then
+                if context.scoring_hand then
+                    local idx = math.random(0, #context.scoring_hand)
+                    if context.scoring_hand[idx] then
+                        return {
+                            message = "Horse",
+                            colour = G.C.BTTIDEETS,
+                            func = function()
+                                context.scoring_hand[idx]:set_ability("m_btti_horseCard")
+                                context.scoring_hand[idx]:juice_up()
+                                return true
+                            end
+                        }
+                    end
+                end
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
 -- Chicken
 SMODS.Sound({ key = "chicken", path = "bttiChicken.ogg" })
 SMODS.Sound({ key = "chickenKick", path = "bttiChickenKick.ogg" })
@@ -662,7 +745,7 @@ SMODS.Joker {
         name = 'Chicken',
         text = {
             "Temporarily kicks a {C:attention}Joker{} out of a played Hand",
-            "and adds four its {C:attention}sell value{} to {C:mult}Mult{}",
+            "and adds 10 times its {C:attention}sell value{} to {C:mult}Mult{}",
             "Resets once the hand has ended"
         }
     },
@@ -694,7 +777,7 @@ SMODS.Joker {
                 until idx ~= getJokerID(card)
                 if idx ~= getJokerID(card) then
                     card.ability.extra.kickedJoker = G.jokers.cards[idx].config.center.key
-                    card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 4
+                    card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 10
                     return SMODS.merge_effects { {
                             message = "CHICKEN!!",
                             colour = G.C.BTTIDEETS,
