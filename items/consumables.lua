@@ -20,6 +20,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips",
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'kepler',
     loc_vars = function(self, info_queue, card)
         return {
@@ -56,6 +57,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips",
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'pegasi',
     loc_vars = function(self, info_queue, card)
         return {
@@ -92,6 +94,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'mysticalia',
     loc_vars = function(self, info_queue, card)
         return {
@@ -128,6 +131,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'pedast',
     loc_vars = function(self, info_queue, card)
         return {
@@ -164,6 +168,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'trihooft',
     loc_vars = function(self, info_queue, card)
         return {
@@ -200,6 +205,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'apocalypt',
     loc_vars = function(self, info_queue, card)
         return {
@@ -236,6 +242,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodadditionplanets"] = true },
     atlas = 'deets',
     loc_vars = function(self, info_queue, card)
         return {
@@ -272,6 +279,7 @@ SMODS.Consumable {
             "a {C:deets}Horse Card{}"
         },
     },
+    pools = { ["BTTImodadditiontarots"] = true },
     atlas = 'maze',
     loc_vars = function(self, info_queue, card)
         return {
@@ -281,7 +289,7 @@ SMODS.Consumable {
     end
 }
 
--- The Maze
+-- The Purity
 SMODS.Atlas {
     key = "purity",
     path = "bttiPurity.png", -- placeholder
@@ -308,6 +316,185 @@ SMODS.Consumable {
             }
         }
     end,
+    pools = { ["BTTImodadditiontarots"] = true },
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card.seal = nil
+                conv_card:set_seal()
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+}
+
+-- Infinity
+SMODS.Atlas {
+    key = "infinity",
+    path = "bttiInfinity.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "infinity",
+    set = "Spectral",
+    cost = 10,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
+    loc_txt = {
+        name = "Infinity",
+        text = {
+            "Adds an {C:gay}Autism Seal{} to",
+            "1 selected card in {C:attention}hand"
+        },
+    },
+    pools = { ["BTTImodadditionspectrals"] = true },
+    atlas = 'infinity',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal('btti_autismSeal', nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+}
+
+-- Joozin' It
+SMODS.Atlas {
+    key = "joozin",
+    path = "bttiJoozin.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "joozin",
+    set = "Spectral",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
+    loc_txt = {
+        name = "Joozin' It",
+        text = {
+            "Adds an {C:attention}Orange Seal{} to",
+            "1 selected card in {C:attention}hand"
+        },
+    },
+    pools = { ["BTTImodadditionspectrals"] = true },
+    atlas = 'joozin',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal('btti_orangeSeal', nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+}
+
+-- Doubt
+SMODS.Atlas {
+    key = "doubt",
+    path = "bttiDoubt.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "doubt",
+    set = "Spectral",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 3 },
+    loc_txt = {
+        name = "Doubt",
+        text = {
+            "Destroys up to 3 selected",
+            "{C:deets}Horse Cards{}"
+        },
+    },
+    pools = { ["BTTImodadditionspectrals"] = true },
+    atlas = 'doubt',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -324,7 +511,6 @@ SMODS.Consumable {
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.highlighted[i]:flip()
                     play_sound('card1', percent)
                     G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
@@ -337,8 +523,7 @@ SMODS.Consumable {
                 trigger = 'after',
                 delay = 0.1,
                 func = function()
-                    G.hand.highlighted[i].seal = nil
-                    G.hand.highlighted[i]:set_seal()
+                    SMODS.destroy_cards(G.hand.highlighted[i])
                     return true
                 end
             }))
@@ -349,9 +534,7 @@ SMODS.Consumable {
                 trigger = 'after',
                 delay = 0.15,
                 func = function()
-                    G.hand.highlighted[i]:flip()
                     play_sound('tarot2', percent, 0.6)
-                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
@@ -366,7 +549,4 @@ SMODS.Consumable {
         }))
         delay(0.5)
     end,
-    can_use = function(self, card)
-        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
-    end
 }
