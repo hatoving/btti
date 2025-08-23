@@ -80,7 +80,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "mysticalia",
     set = "Planet",
-    cost = 3,
+    cost = 10,
     pos = { x = 0, y = 0 },
     config = { hand_type = 'HighHorse' },
     loc_txt = {
@@ -116,7 +116,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "pedast",
     set = "Planet",
-    cost = 3,
+    cost = 10,
     pos = { x = 0, y = 0 },
     config = { hand_type = 'TwoHorse' },
     loc_txt = {
@@ -188,7 +188,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "apocalypt",
     set = "Planet",
-    cost = 3,
+    cost = 20,
     pos = { x = 0, y = 0 },
     config = { hand_type = 'FourHorsemen' },
     loc_txt = {
@@ -224,7 +224,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "deets",
     set = "Planet",
-    cost = 3,
+    cost = 30,
     pos = { x = 0, y = 0 },
     config = { hand_type = 'FullHorse' },
     loc_txt = {
