@@ -139,7 +139,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Metal Pipe',
         text = {
-            "{X:mult,C:white}x2.75{} Mult per {C:attention}Steel Card{} in {C:attention}Full Deck",
+            "{X:mult,C:white}X2.75{} Mult per {C:attention}Steel Card{} in {C:attention}Full Deck",
             "{C:green}1 in 20{} Chance to turn {C:attention}played",
             "{C:attention}Cards{} into {C:attention}Steel Cards{}",
             "{C:inactive}Soothens your ears",
@@ -366,7 +366,7 @@ SMODS.Joker {
     loc_txt = {
         name = '{C:gay}Autism{} Creature',
         text = {
-            "{X:mult,C:white}x3{} Mult per card with {C:gay}Autism Seal{} in hand",
+            "{X:mult,C:white}X3{} Mult per card with {C:gay}Autism Seal{} in hand",
             "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to Random Card",
             "{C:mult}+20{} Mult per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
@@ -498,7 +498,7 @@ SMODS.Joker {
         text = {
             "{C:chips}+143{} Chips per card with {C:gay}Autism Seal{} in {C:attention}Full Deck{}",
             "{C:green}1 in 40{} chance to add {C:dark_edition}Polychrome{} to Random Card",
-            "{X:chips,C:white}x8{} Chips per other {C:gay}Autism{} {C:attention}Jokers{}"
+            "{X:chips,C:white}X8{} Chips per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
     },
 
@@ -807,10 +807,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'Dwayne "The Rock" Johnson',
         text = {
-           "{X:mult,C:white}x4{} Mult per {C:attention}Stone Card{} in Hand",
+           "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in Hand",
            "He will briefly appear when this card is",
            "triggered",
-           "{C:inactive}Currently {X:mult,C:white}x#2#{} Mult"
+           "{C:inactive}Currently {X:mult,C:white}X#2#{} Mult"
         }
     },
 
@@ -893,7 +893,7 @@ SMODS.Joker {
             "Gives you {C:attention}$1{} at the end of the round",
             "{C:mult}+5{} Mult per {C:deets}DEETS{} {C:attention}Joker{}",
             "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
-            "Selling this card may result in {C:mult}consequnces{}"
+            "Selling this card may result in {C:red}consequnces{}"
         }
     },
 
@@ -907,7 +907,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Honse',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 1,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -994,7 +994,7 @@ SMODS.Joker {
         name = 'Horse',
         text = {
             "{C:chips}+80{} Chips per {C:deets}Horse Card{} in {C:attention}Deck",
-            "{X:mult,C:white}x3{} Mult if {C:attention}Played Hand{} is a {C:deets}Horse Hand{}",
+            "{X:mult,C:white}X3{} Mult if {C:attention}Played Hand{} is a {C:deets}Horse Hand{}",
             "{C:green}1 in 100{} chance to turn random card",
             "in hand into {C:deets}Horse Card"
         }
@@ -1007,10 +1007,10 @@ SMODS.Joker {
             vars = {},
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'Horse',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -1080,10 +1080,10 @@ SMODS.Joker {
         name = 'The Haykeeper',
         text = {
             "Adds half of {C:attention}${} to {C:mult}Mult{}",
-            "Once triggered, it will start a cooldown-- if this",
-            "{C:attention}Joker{} gets played again during",
+            "Once triggered, it will start a cooldown; if this",
+            "{C:attention}Joker{} is played again during",
             "this cooldown, it will instead add 1/8th of",
-            "owned {C:attention}${} to {C:mult}Mult{} until the",
+            "{C:attention}${} to {C:mult}Mult{} until the",
             "cooldown is over.",
             "{C:inactive}Cooldown: #2#s"
         }
@@ -1099,7 +1099,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Haykeeper',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 8,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -1191,9 +1191,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Chicken',
         text = {
-            "Temporarily kicks a {C:attention}Joker{} out of a played Hand",
-            "and adds 10 times its {C:attention}sell value{} to {C:mult}Mult{}",
-            "Resets once the hand has ended"
+            "Temporarily kicks a {C:attention}Joker{} out of a played hand",
+            "and adds 10 times its {C:attention}sell value{} to {C:attention}score{}"
         }
     },
 
@@ -1207,7 +1206,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Chicken',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -1292,8 +1291,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Whorse',
         text = {
-            "{X:mult,C:white}x2{} Mult for each",
-            "{C:attention}non-Enhanced{} Card in {C:attention}played hand",
+            "{X:mult,C:white}X2{} Mult for each",
+            "{C:attention}non-enhanced{} card in {C:attention}played hand",
             "{C:green}1 in 20{} chance to flashbang you"
         }
     },
@@ -1308,7 +1307,7 @@ SMODS.Joker {
     rarity = 3,
     atlas = 'Whorse',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -1385,7 +1384,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Emma',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -1797,7 +1796,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Cubey',
         text = {
-            "{C:chips}+100-1000{} Chips and {X:mult,C:white}x2-10{} Mult",
+            "{C:chips}+100-1000{} Chips and {X:mult,C:white}X2-10{} Mult",
             "for each {C:purple}Inn-to the Insanity{} {C:attention}Joker{}",
             "in hand"
         }
@@ -2061,7 +2060,7 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Reg!Vince',
 		text = {
-            "{X:mult,C:white}x5{} Mult per {C:purple}Tarot Card{} sold",
+            "{X:mult,C:white}X5{} Mult per {C:purple}Tarot Card{} sold",
             "Removes {C:mult}-15{} Mult from {C:attention}played hand{}",
             "per {C:purple}Tarot Card{} used",
             "{C:inactive}Currently {X:mult,C:white}x#2#{C:inactive} Mult, {X:mult,C:white}#3#{} Mult"
@@ -2251,7 +2250,7 @@ SMODS.Joker {
             "{C:mult}+#1#{} mult",
             "If {C:attention}played hand{} is a {C:attention}Flush{}, this {C:attention}Joker{} will",
             "add the base {C:chips}Chips{} and {C:mult}Mult{} of {C:attention}Royal Flush{}",
-            "(at the same level as {C:attention}Flush{}) to score",
+            "(at the same level as {C:attention}Flush{}) to {C:attention}score{}",
             "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#3#{} Mult"
         }
     },
@@ -2438,10 +2437,9 @@ SMODS.Joker {
         name = 'The Universe',
         text = {
             "Levels up all {C:attention}Poker Hands",
-            "by 1 at the of each round",
+            "by 1 at the end of each round",
             "{C:green}1 in 40{} chance to",
-            "self-destuct at the",
-            "end of round"
+            "fade away at end of round"
         }
     },
 
@@ -2455,7 +2453,7 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'Universe',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -2504,7 +2502,7 @@ SMODS.Joker {
             "{C:green}1 in 10{} chance to sloppily",
             "backread {C:attention}Jokers{} to the left",
             "{C:mult}+10{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}",
-            "{X:mult,C:white}x69{} Mult if an",
+            "{X:mult,C:white}X69{} Mult if an",
             "{C:purple}Inn-to the Insanity {C:attention}Joker{}",
             "is present"
         }
