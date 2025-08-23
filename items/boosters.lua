@@ -16,7 +16,6 @@ SMODS.Booster {
     atlas = 'legendaryBP',
     config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
-    select_card = 'jokers',
     loc_txt = {
         name = "Legendary Buffoon Pack",
         text = {
@@ -53,7 +52,6 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
     rarity = 4,
-    select_card = 'jokers',
     loc_txt = {
         name = "Fortune Buffoon Pack",
         text = {
@@ -96,7 +94,6 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     group_key = "k_buffoon_pack",
     rarity = 4,
-    select_card = 'jokers',
     loc_txt = {
         name = "Jumbo Fortune Buffoon Pack",
         text = {
@@ -139,7 +136,6 @@ SMODS.Booster {
     atlas = 'fortuneBPMega',
     config = { extra = 6, choose = 1 },
     group_key = "k_buffoon_pack",
-    select_card = 'jokers',
     rarity = 4,
     loc_txt = {
         name = "Mega Fortune Buffoon Pack",
@@ -183,7 +179,6 @@ SMODS.Booster {
     atlas = 'ittiBP',
     config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
-    select_card = 'jokers',
     loc_txt = {
         name = "Insanity Buffoon Pack",
         text = {

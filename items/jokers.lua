@@ -704,27 +704,25 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.setting_blind then
-            local chance = math.random() * 100.0
-
-            local rarities = {
-                [1] = 69.0, -- 69%
-                [2] = 20.0, -- 20%
-                [3] = 10.0, -- 10%
-                [4] = 1.0 -- 1%
-            }
-
             local chosen = 0
-            local cumulative = 0.0
-
-            for i = 1, 4 do
-                cumulative = cumulative + rarities[i]
-                if chance < cumulative then
-                    chosen = i
-                    break
-                end
+            if pseudorandom('LeBron') < G.GAME.probabilities.normal / 2 then
+                chosen = 1
+            end
+            if pseudorandom('LeBron') < G.GAME.probabilities.normal / 6 then
+                chosen = 2
+            end
+            if pseudorandom('LeBron') < G.GAME.probabilities.normal / 10 then
+                chosen = 3
+            end
+            if pseudorandom('LeBron') < G.GAME.probabilities.normal / 100 then
+                chosen = 4
+            end
+            if chosen == 0 then
+                chosen = 1
             end
 
-            sendInfoMessage("Chance=" .. chance .. " -> Chosen rarity=" .. chosen, "BTTI")
+            sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
+
             local c = create_card("BTTImodaddition", G.Jokers, nil, chosen, nil, nil, nil, 'LeBron')
             c:add_to_deck()
             G.jokers:emplace(c)
