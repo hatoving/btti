@@ -73,7 +73,7 @@ SMODS.Consumable {
 -- Mysticalia
 SMODS.Atlas {
     key = "mysticalia",
-    path = "bttiPegasi.png", -- placeholder
+    path = "bttiMysticalia.png", -- placeholder
     px = 65,
     py = 95
 }
@@ -109,7 +109,7 @@ SMODS.Consumable {
 -- Pedast
 SMODS.Atlas {
     key = "pedast",
-    path = "bttiPegasi.png", -- placeholder
+    path = "bttiPedast.png", -- placeholder
     px = 65,
     py = 95
 }
@@ -145,7 +145,7 @@ SMODS.Consumable {
 -- Trihooft
 SMODS.Atlas {
     key = "trihooft",
-    path = "bttiPegasi.png", -- placeholder
+    path = "bttiTrihooft.png", -- placeholder
     px = 65,
     py = 95
 }
@@ -181,7 +181,7 @@ SMODS.Consumable {
 -- Apocalypt
 SMODS.Atlas {
     key = "apocalypt",
-    path = "bttiPegasi.png", -- placeholder
+    path = "bttiApocalypt.png", -- placeholder
     px = 65,
     py = 95
 }
@@ -217,7 +217,7 @@ SMODS.Consumable {
 -- DEETS hb.117ca
 SMODS.Atlas {
     key = "deets",
-    path = "bttiPegasi.png", -- placeholder
+    path = "bttiDEETS.png", -- placeholder
     px = 65,
     py = 95
 }
