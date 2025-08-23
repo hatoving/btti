@@ -698,7 +698,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
 
@@ -749,7 +749,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -1211,7 +1211,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
 
@@ -1472,7 +1472,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
 
@@ -1548,7 +1548,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
 
@@ -1754,7 +1754,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
 
@@ -2013,7 +2013,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = true,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
 
@@ -2786,7 +2786,7 @@ SMODS.Joker {
     end
 }
 
--- BlueBen8
+-- hatoving
 SMODS.Atlas {
     key = "Hatoving",
     path = "bttiHatoving.png",
