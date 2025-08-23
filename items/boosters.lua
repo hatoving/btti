@@ -16,7 +16,7 @@ SMODS.Booster {
     atlas = 'legendaryBP',
     config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
-    rarity = 4,
+    select_card = 'jokers',
     loc_txt = {
         name = "Legendary Buffoon Pack",
         text = {
@@ -53,6 +53,7 @@ SMODS.Booster {
     config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
     rarity = 4,
+    select_card = 'jokers',
     loc_txt = {
         name = "Fortune Buffoon Pack",
         text = {
@@ -71,7 +72,9 @@ SMODS.Booster {
     create_card = function(self, card, i)
         local randomEdition = poll_edition("btti", nil, false, true)
         local c = SMODS.create_card({ key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
-            pseudoseed('btti')).key })
+                pseudoseed('btti')).key,
+            area = G.pack_cards
+        })
         c:set_edition(randomEdition)
         return c
     end,
@@ -93,6 +96,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 1 },
     group_key = "k_buffoon_pack",
     rarity = 4,
+    select_card = 'jokers',
     loc_txt = {
         name = "Jumbo Fortune Buffoon Pack",
         text = {
@@ -112,7 +116,8 @@ SMODS.Booster {
         local randomEdition = poll_edition("btti", nil, false, true)
         local c = SMODS.create_card({
             key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
-            pseudoseed('btti')).key
+            pseudoseed('btti')).key,
+            area = G.pack_cards
         })
         c:set_edition(randomEdition)
         return c
@@ -134,6 +139,7 @@ SMODS.Booster {
     atlas = 'fortuneBPMega',
     config = { extra = 6, choose = 1 },
     group_key = "k_buffoon_pack",
+    select_card = 'jokers',
     rarity = 4,
     loc_txt = {
         name = "Mega Fortune Buffoon Pack",
@@ -154,7 +160,8 @@ SMODS.Booster {
         local randomEdition = poll_edition("btti", nil, false, true)
         local c = SMODS.create_card({
             key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
-                pseudoseed('btti')).key
+                pseudoseed('btti')).key,
+            area = G.pack_cards
         })
         c:set_edition(randomEdition)
         return c
@@ -174,9 +181,9 @@ SMODS.Booster {
     cost = 30,
     pos = { x = 0, y = 0 },
     atlas = 'ittiBP',
-    config = { extra = 6, choose = 1 },
+    config = { extra = 2, choose = 1 },
     group_key = "k_buffoon_pack",
-    rarity = 4,
+    select_card = 'jokers',
     loc_txt = {
         name = "Insanity Buffoon Pack",
         text = {
@@ -192,7 +199,11 @@ SMODS.Booster {
         ease_background_colour_blind(G.STATES.BUFFOON_PACK)
     end,
     create_card = function(self, card, i)
-        local c = create_card("BTTImodadditionITTI", G.Jokers, nil, nil, true, true, nil, 'btti')
-        return c
+        return SMODS.create_card({
+            set = "BTTImodadditionITTI",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+        })
     end,
 }

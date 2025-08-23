@@ -108,7 +108,7 @@ SMODS.Joker {
 		end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -205,7 +205,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -285,7 +285,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -350,7 +350,7 @@ SMODS.Joker {
         end 
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -480,7 +480,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -602,7 +602,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -728,7 +728,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -809,7 +809,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return false, { allow_duplicates = true }
+        return false, { allow_duplicates = false }
     end
 }
 
@@ -886,7 +886,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -994,7 +994,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1080,7 +1080,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1190,7 +1190,7 @@ SMODS.Joker {
 
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1291,7 +1291,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1368,7 +1368,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1447,7 +1447,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1527,7 +1527,7 @@ SMODS.Joker {
         end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -1664,7 +1664,7 @@ SMODS.Joker {
         end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -1798,7 +1798,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1859,7 +1859,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -1926,7 +1926,7 @@ SMODS.Joker {
 		end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -1986,7 +1986,7 @@ SMODS.Joker {
 		end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -2063,7 +2063,7 @@ SMODS.Joker {
         end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -2162,7 +2162,7 @@ SMODS.Joker {
 
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }
 
@@ -2260,7 +2260,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2330,7 +2330,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2444,7 +2444,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2507,7 +2507,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2642,7 +2642,7 @@ SMODS.Joker {
         return SMODS.merge_effects(rets)
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2724,7 +2724,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2809,7 +2809,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2904,7 +2904,7 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = true }
+        return true, { allow_duplicates = false }
     end
 }
 
@@ -2985,6 +2985,6 @@ SMODS.Joker {
 		end
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = true }
+		return true, { allow_duplicates = false }
 	end
 }

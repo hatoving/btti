@@ -57,6 +57,15 @@ SMODS.ObjectType({
 		-- insert base game food jokers
 	end,
 })
+SMODS.ObjectType({
+	key = "BTTImodadditionITTI",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
 
 -- Load items
 local files = NFS.getDirectoryItems(mod_path .. "items")
