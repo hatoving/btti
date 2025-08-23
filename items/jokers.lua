@@ -73,7 +73,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -310,7 +310,7 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -374,7 +374,7 @@ SMODS.Joker {
 
     config = { extra = { odds = 10, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
         return {
             vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
@@ -504,7 +504,7 @@ SMODS.Joker {
 
     config = { extra = { odds = 40, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "BlueHQ" } }
         return {
             vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
@@ -625,7 +625,7 @@ SMODS.Joker {
 
     config = { extra= {}},
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Charlinear's Beautiful Mind" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
             vars = {}
         }
@@ -736,7 +736,7 @@ SMODS.Joker {
 
     config = { extra = { cards = {} } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Evil of Humanity" } }
         return {
             vars = {},
         }
