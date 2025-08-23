@@ -1485,7 +1485,7 @@ SMODS.Joker {
 	atlas = 'GT',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1561,7 +1561,7 @@ SMODS.Joker {
 	atlas = 'SL',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1699,7 +1699,7 @@ SMODS.Joker {
     atlas = 'Mug',
     pos = {x = 0, y = 0},
     cost = 5,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1767,7 +1767,7 @@ SMODS.Joker {
     atlas = 'Candle',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1831,7 +1831,7 @@ SMODS.Joker {
     atlas = 'Cubey',
     pos = { x = 0, y = 0 },
     cost = 40,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2188,7 +2188,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 20, odds = 30 } },
+    config = { extra = { mult = 6, odds = 30, debuffed = {} } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP & Beyond..." } }
         return {
@@ -2234,7 +2234,9 @@ SMODS.Joker {
 
         if context.cardarea == G.play and context.individual and context.other_card then
             if context.other_card.config.center.key == "m_stone" or context.other_card.config.center.key == "m_steel" then
-                context.other_card:set_debuff(true)
+                SMODS.debuff_card(context.other_card, true, 'Myst')
+                context.other_card:juice_up()
+                table.insert(card.ability.extra.debuffed, context.other_card)
             end
         end
 
@@ -2247,6 +2249,14 @@ SMODS.Joker {
                     message = "+" .. card.ability.extra.mult * cardAmount .. " Mult",
                 }
             }
+        end
+
+        if context.final_scoring_step then
+            for i, c in ipairs(card.ability.extra.debuffed) do
+                SMODS.debuff_card(c, false, 'Myst')
+                c:juice_up()
+            end
+            card.ability.extra.debuffed = {}
         end
     end,
     in_pool = function(self, args)
