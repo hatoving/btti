@@ -2195,10 +2195,10 @@ SMODS.Joker {
             vars = { card.ability.extra.mult, card.ability.extra.odds },
         }
     end,
-    rarity = 3,
+    rarity = 4,
     atlas = 'Myst',
     pos = { x = 0, y = 0 },
-    cost = 12,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
