@@ -606,7 +606,7 @@ SMODS.Joker {
     end
 }
 
--- JokeLinear
+-- Jokelinear
 SMODS.Atlas {
     key = "jokelinear",
     path = "bttiJokelinear.png", -- placeholder
@@ -677,7 +677,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'LeBron James',
         text = {
-            "When {C:attention}Blind{} is selected, self-destruct",
+            "When {C:attention}Blind{} is selected, {C:attention}self-destruct{}",
             "and create a random {C:purple}Balantrinsanity{} {C:attention}Joker{}",
             "{C:inactive}(Must have room)"
         }
@@ -690,10 +690,10 @@ SMODS.Joker {
             vars = {},
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'LeBron',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -892,8 +892,8 @@ SMODS.Joker {
         text = {
             "Gives you {C:attention}$1{} at the end of the round",
             "{C:mult}+5{} Mult per {C:deets}DEETS{} {C:attention}Joker{}",
-            "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}Full Deck",
-            "Selling this card may result in consequnces"
+            "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
+            "Selling this card may result in {C:mult}consequnces{}"
         }
     },
 
