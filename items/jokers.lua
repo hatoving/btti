@@ -2188,7 +2188,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 6, odds = 30, debuffed = {} } },
+    config = { extra = { mult = 5, odds = 30, debuffed = {} } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP & Beyond..." } }
         return {
