@@ -21,7 +21,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'kepler',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -58,7 +57,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'pegasi',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -95,7 +93,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'mysticalia',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -132,7 +129,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'pedast',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -169,7 +165,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'trihooft',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -205,7 +200,6 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodaddition"] = true },
     atlas = 'apocalypt',
     loc_vars = function(self, info_queue, card)
         return {
@@ -243,7 +237,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'deets',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -280,7 +273,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'maze',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -310,7 +302,6 @@ SMODS.Consumable {
         },
     },
     atlas = 'purity',
-    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {

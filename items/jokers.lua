@@ -715,6 +715,7 @@ SMODS.Joker {
             local cumulative = 0
             for i = 1, 4, 1 do
                 cumulative = cumulative + rarities[i]
+                sendInfoMessage("LEBROOON .. " .. chance .. ", " .. cumulative, "BTTI")
                 if chance < cumulative then
                     chosen = i
                     break
