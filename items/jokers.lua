@@ -2311,23 +2311,28 @@ SMODS.Joker {
             (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
 
         if context.joker_main then
-            return SMODS.merge_effects {
+            local rets = {
                 {
                     mult_mod = card.ability.extra.mult,
                     colour = G.C.MULT,
                     message = "+" .. card.ability.extra.mult .. " Mult",
-                },
-                {
+                }
+            }
+
+            if next(context.poker_hands['Flush']) then
+                table.insert(rets, {
                     mult_mod = card.ability.extra.addChip,
                     colour = G.C.CHIPS,
                     message = "+" .. card.ability.extra.addChip .. " Chips",
-                },
-                {
+                })
+                table.insert(rets, {
                     mult_mod = card.ability.extra.addMult,
                     colour = G.C.MULT,
                     message = "+" .. card.ability.extra.addMult .. " Mult",
-                },
-            }
+                })
+            end
+
+            return SMODS.merge_effects(rets)
         end
     end,
     in_pool = function(self, args)
