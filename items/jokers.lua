@@ -704,7 +704,23 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.setting_blind then
-            local c = create_card("BTTImodaddition", G.Jokers, nil, nil, nil, nil, nil, 'LeBron')
+            local chance = math.random() * 100.0
+            local rarities = {
+                [1] = 69.0,
+                [2] = 20.0,
+                [3] = 10.0,
+                [4] = 1.0
+            }
+            local chosen = 0
+            local cumulative = 0
+            for i = 1, 4, 1 do
+                cumulative = cumulative + rarities[i]
+                if chance < cumulative then
+                    chosen = i
+                    break
+                end
+            end
+            local c = create_card("BTTImodaddition", G.Jokers, nil, chosen, nil, nil, nil, 'LeBron')
             c:add_to_deck()
             G.jokers:emplace(c)
             SMODS.destroy_cards(card)
@@ -1805,7 +1821,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }

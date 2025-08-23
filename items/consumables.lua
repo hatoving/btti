@@ -21,6 +21,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'kepler',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -57,6 +58,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'pegasi',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -93,6 +95,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'mysticalia',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -129,6 +132,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'pedast',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -165,6 +169,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'trihooft',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -200,6 +205,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
+    pools = { ["BTTImodaddition"] = true },
     atlas = 'apocalypt',
     loc_vars = function(self, info_queue, card)
         return {
@@ -237,6 +243,7 @@ SMODS.Consumable {
         },
     },
     atlas = 'deets',
+    pools = { ["BTTImodaddition"] = true },
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
@@ -247,5 +254,128 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end
+}
+
+-- Tarots
+
+-- The Maze
+SMODS.Atlas {
+    key = "maze",
+    path = "bttiMaze.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "maze",
+    set = "Tarot",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1, mod_conv = 'm_btti_horseCard' },
+    loc_txt = {
+        name = "The Maze",
+        text = {
+            "Enhances one selected {C:attention}Card{} to",
+            "a {C:deets}Horse Card{}"
+        },
+    },
+    atlas = 'maze',
+    pools = { ["BTTImodaddition"] = true },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end
+}
+
+-- The Maze
+SMODS.Atlas {
+    key = "purity",
+    path = "bttiPurity.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "purity",
+    set = "Tarot",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 2 },
+    loc_txt = {
+        name = "The Purity",
+        text = {
+            "Removes {C:attention}Orange Seals{}",
+            "from up to 2 selected {C:attention}Cards"
+        },
+    },
+    atlas = 'purity',
+    pools = { ["BTTImodaddition"] = true },
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i].seal = nil
+                    G.hand.highlighted[i]:set_seal()
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
