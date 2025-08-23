@@ -705,22 +705,26 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.setting_blind then
             local chance = math.random() * 100.0
+
             local rarities = {
-                [1] = 69.0,
-                [2] = 20.0,
-                [3] = 10.0,
-                [4] = 1.0
+                [1] = 69.0, -- 69%
+                [2] = 20.0, -- 20%
+                [3] = 10.0, -- 10%
+                [4] = 1.0 -- 1%
             }
+
             local chosen = 0
-            local cumulative = 0
-            for i = 1, 4, 1 do
+            local cumulative = 0.0
+
+            for i = 1, 4 do
                 cumulative = cumulative + rarities[i]
-                sendInfoMessage("LEBROOON .. " .. chance .. ", " .. cumulative, "BTTI")
                 if chance < cumulative then
                     chosen = i
                     break
                 end
             end
+
+            sendInfoMessage("Chance=" .. chance .. " -> Chosen rarity=" .. chosen, "BTTI")
             local c = create_card("BTTImodaddition", G.Jokers, nil, chosen, nil, nil, nil, 'LeBron')
             c:add_to_deck()
             G.jokers:emplace(c)
@@ -2026,7 +2030,7 @@ SMODS.Joker {
 	atlas = 'RegBen',
 	pos = { x = 0, y = 0 },
 	cost = 10,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2095,7 +2099,7 @@ SMODS.Joker {
 	atlas = 'RegVince',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2199,7 +2203,7 @@ SMODS.Joker {
     atlas = 'Myst',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
     discovered = true,
@@ -2295,7 +2299,7 @@ SMODS.Joker {
     atlas = 'RoyalRegality',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
     discovered = true,
