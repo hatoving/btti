@@ -349,6 +349,127 @@ SMODS.Consumable {
     end,
 }
 
+-- Jonker's Workshop
+SMODS.Atlas {
+    key = "jonkersWorkshop",
+    path = "bttiJonkersWorkshop.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "jonkersWorkshop",
+    set = "Tarot",
+    cost = 6,
+    pos = { x = 0, y = 0 },
+    config = { extra = { } },
+    loc_txt = {
+        name = "Jonker's Workshop",
+        text = {
+            "Combines {C:attention}Jokers{} if any",
+            "can be combined"
+        },
+    },
+    atlas = 'jonkersWorkshop',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    pools = { ["BTTImodadditiontarots"] = true },
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        local results = {}
+        for combo_key, combo_data in pairs(G.BTTI.JOKER_COMBOS) do
+            local needed = combo_data.jokers
+            local found = {}
+
+            for _, player_card in ipairs(G.jokers.cards) do
+                for _, required in ipairs(needed) do
+                    if player_card.config.center.key == required then
+                        found[required] = true
+                    end
+                end
+            end
+
+            local all_found = true
+            for _, required in ipairs(needed) do
+                if not found[required] then
+                    all_found = false
+                    break
+                end
+            end
+
+            if all_found then
+                table.insert(results, combo_key)
+                sendInfoMessage("found " .. combo_key .. "", "BTTI")
+            end
+        end
+
+        for i, jk in ipairs(results) do
+            for _, j in ipairs(G.jokers.cards) do
+                local needed = G.BTTI.JOKER_COMBOS[jk].jokers
+
+                if j.config.center.key == needed[1] then
+                    SMODS.destroy_cards(j)
+                elseif j.config.center.key == needed[2] then
+                    SMODS.destroy_cards(j)
+                end
+            end
+
+            SMODS.add_card { key = jk }
+        end
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.jokers:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end,
+    can_use = function (self, card)
+        for combo_key, combo_data in pairs(G.BTTI.JOKER_COMBOS) do
+            local needed = combo_data.jokers
+            local found = {}
+
+            for _, player_card in ipairs(G.jokers.cards) do
+                for _, required in ipairs(needed) do
+                    if player_card.config.center.key == required then
+                        found[required] = true
+                    end
+                end
+            end
+
+            local all_found = true
+            for _, required in ipairs(needed) do
+                if not found[required] then
+                    all_found = false
+                    break
+                end
+            end
+
+            if all_found then
+                return true
+            end
+        end
+
+        return false
+    end
+}
+
 -- Infinity
 SMODS.Atlas {
     key = "infinity",
@@ -523,7 +644,9 @@ SMODS.Consumable {
                 trigger = 'after',
                 delay = 0.1,
                 func = function()
-                    SMODS.destroy_cards(G.hand.highlighted[i])
+                    if G.hand.highlighted[i] == 'm_btti_horseCard' then
+                        SMODS.destroy_cards(G.hand.highlighted[i])
+                    end
                     return true
                 end
             }))

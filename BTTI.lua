@@ -1,3 +1,33 @@
+if G.BTTI == nil then
+	G.BTTI = {}
+end
+
+G.BTTI.JOKER_COMBOS = {
+	['j_btti_avariciousJoker'] = {
+		jokers = {
+			'j_lusty_joker',
+			'j_greedy_joker'
+		}
+	},
+	['j_btti_sullenJoker'] = {
+		jokers = {
+			'j_wrathful_joker',
+			'j_gluttenous_joker'
+		}
+	},
+	['j_btti_sinfulJoker'] = {
+		jokers = {
+			'j_btti_avariciousJoker',
+			'j_btti_sullenJoker'
+		}
+	},
+	['j_btti_bonkersJoker'] = {
+		jokers = {
+			'j_crazy_joker',
+			'j_devious_joker'
+		}
+	}
+}
 
 SMODS.Gradient {
 	key = "BISEXUAL_TITLE",
@@ -50,6 +80,15 @@ SMODS.current_mod.optional_features = {
 
 SMODS.ObjectType({
 	key = "BTTImodaddition",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditionCOMBO",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
