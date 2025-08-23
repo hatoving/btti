@@ -2236,35 +2236,53 @@ SMODS.Joker {
     end
 }
 
--- Royal Regality
+function Card:click()
+    if self.area and self.area:can_highlight(self) then
+        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
+        if self.highlighted ~= true then
+            self.area:add_to_highlighted(self)
+            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
+        else
+            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
+            self.area:remove_from_highlighted(self)
+            play_sound('cardSlide2', nil, 0.3)
+        end
+    end
+    if self.area and self.area == G.deck and self.area.cards[1] == self then
+        G.FUNCS.deck_info()
+    end
+    
+end
+
+-- Goop
 SMODS.Atlas {
-    key = "RoyalRegality",
-    path = "bttiRoyalRegality.png",
+    key = "Goop",
+    path = "bttiGoop.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'RoyalRegality',
+    key = 'Goop',
     loc_txt = {
-        name = 'Royal Regality',
+        name = 'Goop',
         text = {
-            "{C:mult}+#1#{} mult",
-            "If {C:attention}played hand{} is a {C:attention}Flush{}, this {C:attention}Joker{} will",
-            "add the base {C:chips}Chips{} and {C:mult}Mult{} of {C:attention}Royal Flush{}",
-            "(at the same level as {C:attention}Flush{}) to score",
-            "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#3#{} Mult"
+            "{C:chips}+70{} Chips, {C:chips}-5{} Chips per {C:attention}hand played",
+            "At {C:chips}0{} Chips, {C:mult}+30{} Mult. {C:mult}-1{} Chips per {C:attention}hand played",
+            "{C:inactive}\"Please don't sell me when I am out of",
+            "{C:mult}Mult{C:inactive}, I am just {C:green}Goop{C:inactive}\"",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult"
         }
     },
 
-    config = { extra = { mult = 17, addChip = 0, addMult = 0,} },
+    config = { extra = { chips = 70, mult = 30 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.addChip, card.ability.extra.addMult },
+            vars = { card.ability.extra.chips, card.ability.extra.mult },
         }
     end,
     rarity = 2,
-    atlas = 'RoyalRegality',
+    atlas = 'Goop',
     pos = { x = 0, y = 0 },
     cost = 5,
     pools = { ["BTTImodaddition"] = true },
@@ -2276,29 +2294,110 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        card.ability.extra.addChip = G.GAME.hands['Straight Flush'].s_chips +
-            (G.GAME.hands['Straight Flush'].l_chips * (G.GAME.hands['Flush'].level - 1))
-        card.ability.extra.addMult = G.GAME.hands['Straight Flush'].s_mult +
-            (G.GAME.hands['Straight Flush'].l_mult * (G.GAME.hands['Flush'].level - 1))
+        if context.clicked_card and context.clicked_card == card and context.card_highlighted == true then
+            if card.ability.extra.chips <= 0 and card.ability.extra.mult <= 0 then
+                local idx = math.random(1, #G.jokers.cards)
+                sendInfoMessage("GOOP CLICKED " .. idx .. "", "BTTI")
+                if idx ~= getJokerID(card) then
+                    card.area:remove_from_highlighted(card)
+                    G.jokers:shuffle('aajk')
+                    play_sound('cardSlide1', 0.85)
+                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                        { message = "NOOO PLEASE", colour = G.C.GREEN })
+                end
+            end
+        end
 
         if context.joker_main then
-            return SMODS.merge_effects {
-                {
-                    mult_mod = card.ability.extra.mult,
-                    colour = G.C.MULT,
-                    message = "+" .. card.ability.extra.mult .. " Mult",
-                },
-                {
-                    mult_mod = card.ability.extra.addChip,
+            if card.ability.extra.chips > 0 then
+                return {
+                    message = "+ " .. card.ability.extra.chips,
                     colour = G.C.CHIPS,
-                    message = "+" .. card.ability.extra.addChip .. " Chips",
-                },
-                {
-                    mult_mod = card.ability.extra.addMult,
+                    chip_mod = card.ability.extra.chips,
+                }
+            elseif card.ability.extra.chips <= 0 and card.ability.extra.mult > 0 then
+                return {
+                    message = "+ " .. card.ability.extra.mult,
                     colour = G.C.MULT,
-                    message = "+" .. card.ability.extra.addMult .. " Mult",
-                },
-            }
+                    mult_mod = card.ability.extra.mult,
+                }
+            end
+        end
+
+        if context.final_scoring_step and context.cardarea == G.jokers then
+            if card.ability.extra.chips > 0 then
+                card.ability.extra.chips = card.ability.extra.chips - 5
+                return {
+                    message = "-5 Chips",
+                    colour = G.C.CHIPS,
+                }
+            elseif card.ability.extra.chips <= 0 and card.ability.extra.mult > 0 then
+                card.ability.extra.mult = card.ability.extra.mult - 1
+                return {
+                    message = "-1 Mult",
+                    colour = G.C.MULT,
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = true }
+    end
+}
+
+-- SCOLOISIS MAN JOKERS
+
+-- Jonker
+SMODS.Atlas {
+    key = "Jonker",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Jonker',
+    loc_txt = {
+        name = 'Jonker',
+        text = {
+            "{C:mult}+#1#{} Mult",
+            "{C:green}1 in 10{} chance to steal {C:attention}$2-7{}"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Jonker',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            if pseudorandom('Jonker') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                local rand = math.random(-7, -2)
+                return {
+                    dollars = rand,
+                    mult_mod = card.ability.extra.mult,
+                    message = "i'm da jonker baybee!"
+                }
+            else
+                return {
+                    mult_mod = card.ability.extra.mult,
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+                }
+            end
         end
     end,
     in_pool = function(self, args)
