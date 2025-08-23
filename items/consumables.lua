@@ -20,7 +20,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips",
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true},
     atlas = 'kepler',
     loc_vars = function(self, info_queue, card)
         return {
@@ -94,7 +94,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true, ["BTTImodadditionDEETSPlanets"] = true },
     atlas = 'mysticalia',
     loc_vars = function(self, info_queue, card)
         return {
@@ -131,7 +131,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true, ["BTTImodadditionDEETSPlanets"] = true },
     atlas = 'pedast',
     loc_vars = function(self, info_queue, card)
         return {
@@ -168,7 +168,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true, ["BTTImodadditionDEETSPlanets"] = true },
     atlas = 'trihooft',
     loc_vars = function(self, info_queue, card)
         return {
@@ -205,7 +205,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true, ["BTTImodadditionDEETSPlanets"] = true },
     atlas = 'apocalypt',
     loc_vars = function(self, info_queue, card)
         return {
@@ -242,7 +242,7 @@ SMODS.Consumable {
             "{C:chips}+#4#{} chips", --idk how to change the values but it oughta be +2 mult and +20 chips
         },
     },
-    pools = { ["BTTImodadditionplanets"] = true },
+    pools = { ["BTTImodadditionplanets"] = true, ["BTTImodadditionDEETSPlanets"] = true },
     atlas = 'deets',
     loc_vars = function(self, info_queue, card)
         return {
@@ -279,7 +279,7 @@ SMODS.Consumable {
             "a {C:deets}Horse Card{}"
         },
     },
-    pools = { ["BTTImodadditiontarots"] = true },
+    pools = { ["BTTImodadditiontarots"] = true, ["BTTImodadditionDEETSTarots"] = true },
     atlas = 'maze',
     loc_vars = function(self, info_queue, card)
         return {

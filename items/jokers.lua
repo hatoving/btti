@@ -678,8 +678,7 @@ SMODS.Joker {
         name = 'LeBron James',
         text = {
             "When {C:attention}Blind{} is selected, {C:attention}self-destruct{}",
-            "and create a random {C:purple}Balantrinsanity{} {C:attention}Joker{}",
-            "{C:inactive}(Must have room)"
+            "and create a random {C:purple}Balantrinsanity{} {C:attention}Joker{}"
         }
     },
 
@@ -927,7 +926,7 @@ SMODS.Joker {
     atlas = 'Honse',
     pos = { x = 0, y = 0 },
     cost = 1,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1030,7 +1029,7 @@ SMODS.Joker {
     atlas = 'Horse',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1119,7 +1118,7 @@ SMODS.Joker {
     atlas = 'Haykeeper',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1226,7 +1225,7 @@ SMODS.Joker {
     atlas = 'Chicken',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1327,7 +1326,7 @@ SMODS.Joker {
     atlas = 'Whorse',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,
@@ -1404,7 +1403,7 @@ SMODS.Joker {
     atlas = 'Emma',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
     discovered = true,

@@ -58,7 +58,61 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
+	key = "BTTImodadditionplanets",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditiontarots",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditionspectrals",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
 	key = "BTTImodadditionITTI",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditionSMP",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditionDEETS",
+	default = "j_reserved_parking",
+	cards = {},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game food jokers
+	end,
+})
+SMODS.ObjectType({
+	key = "BTTImodadditionDEETSPlanets",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)

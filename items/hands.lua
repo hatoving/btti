@@ -84,7 +84,7 @@ SMODS.PokerHand {
     prefix_config = {
         key = { mod = false }
     },
-    visible = false,
+    visible = true,
     mult = 3,
     chips = 30,
     l_mult = 2,
@@ -110,7 +110,7 @@ SMODS.PokerHand {
     prefix_config = {
         key = { mod = false }
     },
-    visible = false,
+    visible = true,
     mult = 4,
     chips = 45,
     l_mult = 2,
@@ -137,7 +137,7 @@ SMODS.PokerHand {
     prefix_config = {
         key = { mod = false }
     },
-    visible = false,
+    visible = true,
     mult = 8,
     chips = 60,
     l_mult = 2,
@@ -165,7 +165,7 @@ SMODS.PokerHand {
     prefix_config = {
         key = { mod = false }
     },
-    visible = false,
+    visible = true,
     mult = 14,
     chips = 130,
     l_mult = 2,
@@ -194,7 +194,7 @@ SMODS.PokerHand {
     prefix_config = {
         key = { mod = false }
     },
-    visible = false,
+    visible = true,
     mult = 20,
     chips = 300,
     l_mult = 2,
