@@ -2374,7 +2374,7 @@ SMODS.Joker {
         name = 'Goop',
         text = {
             "{C:chips}+70{} Chips, {C:chips}-5{} Chips per {C:attention}hand played",
-            "At {C:chips}0{} Chips, {C:mult}+30{} Mult. {C:mult}-1{} Chips per {C:attention}hand played",
+            "At {C:chips}0{} Chips, {C:mult}+30{} Mult. {C:mult}-1{} Mult per {C:attention}hand played",
             "{C:inactive}\"Please don't sell me when I am out of",
             "{C:mult}Mult{C:inactive}, I am just {C:green}Goop{C:inactive}\"",
             "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult"
