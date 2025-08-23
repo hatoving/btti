@@ -18,6 +18,7 @@ SMODS.Enhancement {
     pos = { x = 0, y = 0 },
     config = { bonus = 75 },
     replace_base_card = true,
+    pools = { ["BTTImodaddition"] = true },
     no_rank = true,
     no_suit = true,
     loc_vars = function(self, info_queue, card)
