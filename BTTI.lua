@@ -171,6 +171,20 @@ G.BTTI.JOKER_COMBOS = {
 			'j_hologram'
 		}
 	},
+	['j_btti_lunatic'] = {
+		rarity = 3,
+		jokers = {
+			'j_cartomancer',
+			'j_fortune_teller'
+		}
+	},
+	['j_btti_wineJuggler'] = {
+		rarity = 3,
+		jokers = {
+			'j_juggler',
+			'j_drunkard'
+		}
+	},
 }
 
 SMODS.Gradient {

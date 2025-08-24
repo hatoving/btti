@@ -1484,9 +1484,137 @@ SMODS.Joker {
         end
         if context.joker_main then
             return {
-                Xmult = card.ability.extra.Xmult
+                Xmult = card.ability.extra.xmult
             }
         end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "lunatic",
+    path = "bttiLunatic.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'lunatic',
+    loc_txt = {
+        name = 'Lunatic',
+        text = {
+            "Create a {C:purple}Tarot Card{} when {C:attention}Blind",
+            "is selected",
+            "{X:mult,C:white}X0.5{} Mult per {C:purple}Tarot Card{} used",
+            "{C:inactive}Currectly {X:mult,C:white}X#1#{} Mult",
+            "{C:inactive}(Cartomancer + Fortune Teller)"
+        }
+    },
+
+    config = { extra = { xmult = 1 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = { card.ability.extra.xmult + (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0)) },
+        }
+    end,
+    rarity = 3,
+    atlas = 'lunatic',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                func = (function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Tarot',
+                                key_append = 'vremade_cartomancer' -- Optional, useful for manipulating the random seed and checking the source of the creation in `in_pool`.
+                            }
+                            G.GAME.consumeable_buffer = 0
+                            return true
+                        end
+                    }))
+                    SMODS.calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
+                        context.blueprint_card or card)
+                    return true
+                end)
+            }))
+            return nil, true -- This is for Joker retrigger purposes
+        end
+        if context.using_consumeable and not context.blueprint and context.consumeable.ability.set == "Tarot" then
+            return {
+                message = localize { type = 'variable', key = 'a_mult', vars = { G.GAME.consumeable_usage_total.tarot } },
+            }
+        end
+        if context.joker_main then
+            return {
+                mult = card.ability.extra.xmult +
+                    (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0))
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "wineJuggler",
+    path = "bttiWineJuggler.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'wineJuggler',
+    loc_txt = {
+        name = 'Wine Juggler',
+        text = {
+            "{C:blue}+2{} hand size",
+            "{C:red}+2{} discards",
+            "{C:inactive}(Juggler + Drunkard)"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = {  },
+        }
+    end,
+    rarity = 3,
+    atlas = 'wineJuggler',
+    pos = { x = 0, y = 0 },
+    cost = 2,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    add_to_deck = function(self, card, from_debuff)
+        G.hand:change_size(2)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + 2
+        ease_discard(2)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.hand:change_size(-2)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - 2
+        ease_discard(-2)
     end,
     in_pool = function(self, args)
         return false, { allow_duplicates = false }
