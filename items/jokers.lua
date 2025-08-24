@@ -1975,8 +1975,8 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual and context.other_card then
             local _trigger = false
-            if context.other_card:get_id() == 12 then _trigger = true end --Kings
-            if context.other_card:get_id() == 13 then _trigger = true end --Queens
+            if context.other_card:get_id() == 12 then _trigger = true end --Queens
+            if context.other_card:get_id() == 13 then _trigger = true end --Kings
             if _trigger then
                 context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + 117
                 context.other_card:juice_up()

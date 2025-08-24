@@ -391,12 +391,24 @@ SMODS.Consumable {
         local results = {}
         for combo_key, combo_data in pairs(G.BTTI.JOKER_COMBOS) do
             local needed = combo_data.jokers
+            local allowed = combo_data.allowed or {}
             local found = {}
+
+            local matched_needed = {}
+            local matched_allowed = {}
 
             for _, player_card in ipairs(G.jokers.cards) do
                 for _, required in ipairs(needed) do
                     if player_card.config.center.key == required then
                         found[required] = true
+                        table.insert(matched_needed, player_card)
+                    end
+                end
+                for _, allowed_jk in ipairs(allowed) do
+                    if player_card.config.center.key == allowed_jk then
+                        found[allowed_jk] = true
+                        table.insert(matched_allowed, player_card)
+                        break
                     end
                 end
             end
@@ -409,24 +421,45 @@ SMODS.Consumable {
                 end
             end
 
+            if all_found and #needed < 2 and #allowed > 0 then
+                local any_allowed = false
+                for _, allowed_jk in ipairs(allowed) do
+                    if found[allowed_jk] then
+                        any_allowed = true
+                        break
+                    end
+                end
+                all_found = any_allowed
+            end
+
             if all_found then
-                table.insert(results, combo_key)
-                sendInfoMessage("found " .. combo_key .. "", "BTTI")
+                table.insert(results, {
+                    key = combo_key,
+                    neededToDiscard = matched_needed,
+                    allowedToDiscard = matched_allowed,
+                    rarity = combo_data.rarity or 1
+                })
+                sendInfoMessage("found " .. combo_key, "BTTI")
             end
         end
 
-        for i, jk in ipairs(results) do
-            for _, j in ipairs(G.jokers.cards) do
-                local needed = G.BTTI.JOKER_COMBOS[jk].jokers
+        table.sort(results, function(a, b)
+            return a.rarity < b.rarity
+        end)
 
-                if j.config.center.key == needed[1] then
-                    SMODS.destroy_cards(j)
-                elseif j.config.center.key == needed[2] then
-                    SMODS.destroy_cards(j)
-                end
+        if #results > 0 then
+            local result = results[1]
+
+            for _, card in ipairs(result.neededToDiscard) do
+                SMODS.destroy_cards(card)
             end
 
-            SMODS.add_card { key = jk }
+            if #result.allowedToDiscard > 0 then
+                local idx = math.random(1, #result.allowedToDiscard)
+                SMODS.destroy_cards(result.allowedToDiscard[idx])
+            end
+
+            SMODS.add_card { key = result.key }
         end
 
         delay(0.5)
