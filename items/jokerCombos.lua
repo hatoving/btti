@@ -987,7 +987,7 @@ SMODS.Joker {
                     chips = 100
                 })
             end
-            if not context.other_card.is_face(nil) and not context.blueprint then
+            if not context.other_card.is_face(context.other_card) and not context.blueprint then
                 card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
 
                 table.insert(rets, {
@@ -1032,19 +1032,20 @@ SMODS.Joker {
 }
 
 SMODS.Atlas {
-    key = "zeroTheo",
-    path = "bttiZeroTheo.png",
+    key = "mineralJoker",
+    path = "bttiMineralJoker.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'zeroTheo',
+    key = 'mineralJoker',
     loc_txt = {
-        name = 'Zero Theo',
+        name = 'Mineral Joker',
         text = {
-            "Played cards give {C:mult}+4{} Mult",
-            "and {C:chips}+31{} Chips",
-            "{C:inactive}(Even Steven + Odd Todd)"
+            "Gives {X:mult,C:chips} Mult for each {C:attention}Steel Card",
+            "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
+            "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
+            "{C:inactive}(Steel Joker + Stone Joker)"
         }
     },
 
