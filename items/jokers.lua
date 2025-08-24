@@ -3046,8 +3046,8 @@ SMODS.Joker {
 
         if context.joker_main and G.GAME.current_round.hands_left == 0 then
             return {
-                mult = card.ability.extra.smult,
-                chips = card.ability.extra.schips
+                chips = card.ability.extra.schips,
+                mult = card.ability.extra.smult
             }
         end
 
