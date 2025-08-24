@@ -580,9 +580,7 @@ SMODS.Joker {
                 table.insert(rets, {
                     message = "Yippe! X" .. card.ability.extra.multAmount * 8 .. " Chips",
                     colour = G.C.DARK_EDITION,
-                    func = function() 
-                        ease_chips(hand_chips * (card.ability.extra.multAmount * 8))
-                    end
+                    Xchip_mod = (card.ability.extra.multAmount * 8),
                 })
             end
             if pseudorandom('BentismCreature') < G.GAME.probabilities.normal / card.ability.extra.odds then
@@ -1119,46 +1117,35 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-         if context.joker_main  then
-                return {
-                    G.E_MANAGER:add_event(Event({
-                            trigger = 'immediate',
-                            blocking = false,
-                            delay = 0,
-                            func = function()
-                                ease_chips(hand_chips * (card.ability.extra.mult))
-                                card_eval_status_text(card, 'extra', nil, nil, nil, {
-                                    message = "X" .. card.ability.extra.mult .. " Chips",
-                                    colour = G.C.CHIPS,
-                                })
-                                return true
-                            end,
-                        }))
-                    }
+         if context.joker_main then
+            return {
+                message = "X" .. card.ability.extra.mult .. " Chips",
+                colour = G.C.CHIPS,
+                Xchip_mod = card.ability.extra.mult
+            }
         end
         if context.final_scoring_step then
             card.ability.extra.mult = card.ability.extra.mult - 1
             if card.ability.extra.mult <= 1 then
                 G.E_MANAGER:add_event(Event({
-                            trigger = 'immediate',
-                            blocking = false,
-                            delay = 0,
-                            func = function()
-                                SMODS.destroy_cards(card)
-                                card_eval_status_text(card, 'extra', nil, nil, nil, {
-                                    message = "Exploded with mind",
-                                    colour = G.C.RED,
-                                })
-                                return true
-                            end,
-                        }))
-        else
-            return {
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        SMODS.destroy_cards(card)
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {
+                            message = "Exploded with mind",
+                            colour = G.C.RED,
+                        })
+                        return true
+                    end,
+                }))
+            else
+                return {
                     message = "-X1 Chips",
                     colour = G.C.CHIPS,
-            }
-        end
-            
+                }
+            end
         end
     end,
     in_pool = function(self, args)
