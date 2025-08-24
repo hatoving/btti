@@ -62,7 +62,7 @@ SMODS.Joker {
         name = 'Sullen Joker',
         text = {
             "Played cards with {C:spades}Spade",
-            "or {C:clubs}Clubs{} suits give {C:mult}+3{} Mult",
+            "or {C:clubs}Club{} suits give {C:mult}+3{} Mult",
             "when scored",
             "{C:inactive}(Wrathful Joker + Gluttonous Joker)"
         }
@@ -111,8 +111,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Sinful Joker',
         text = {
-            "Played cards with give",
-            "{C:mult}+5{} when scored",
+            "Played cards give {C:mult}+5{}",
+            "Mult when scored",
             "{C:inactive}(Avaricious Joker + Sullen Joker)"
         }
     },
@@ -411,7 +411,7 @@ SMODS.Joker {
         name = 'Ultimate Joker',
         text = {
             "{C:mult}+16{} Mult and {C:chips}+120{} Chips",
-            "for each {C:attention}Poker Hand{} contained in {C:attention}Hand",
+            "for each {C:attention}Poker Hand{} contained in {C:attention}played hand",
             "{C:inactive}(Jovial Joker, Confused Joker, Genius Joker,",
             "{C:inactive}Bonkers Joker OR Deliberate Joker + ",
             "{C:inactive}The Universe)"
@@ -629,7 +629,8 @@ SMODS.Joker {
         name = 'True Banana',
         text = {
             "{X:mult,C:white}X15{} Mult",
-            "{C:green}1 in 500{}",
+            "{C:green}1 in 500{} chance to be",
+            "destroyed at the end of round",
             "{C:inactive}(Gros Michel + Cavendish)"
         }
     },
@@ -848,7 +849,7 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 4{} chance for each played",
             "{C:attention}8{} to create a {C:purple}Tarot Card{} when scored",
-            "Earn {C:attention}$1{} for each {C:attention}9{} in your {C:attention}Full Deck",
+            "Earn {C:attention}$1{} for each {C:attention}9{} in your full deck",
             "{C:inactive}(8 Ball + Cloud 9)"
         }
     },
@@ -1036,8 +1037,8 @@ SMODS.Joker {
         text = {
             "Start at {X:mult,C:white}X1{} Mult,",
             "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
-            "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
-            "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
+            "in your full deck and {C:chips}+75{} Chips for",
+            "each {C:attention}Stone Card{} in your full deck",
             "{C:inactive}(Steel Joker + Stone Joker)"
         }
     },
