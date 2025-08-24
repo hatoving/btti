@@ -129,6 +129,20 @@ G.BTTI.JOKER_COMBOS = {
 			'j_btti_chanceOfClouds'
 		}
 	},
+	['j_btti_mineralJoker'] = {
+		rarity = 3,
+		jokers = {
+			'j_steel_joker',
+			'j_stone_joker'
+		}
+	},
+	['j_btti_abtractbuckler'] = {
+		rarity = 2,
+		jokers = {
+			'j_abstract',
+			'j_swashbuckler'
+		}
+	},
 }
 
 SMODS.Gradient {

@@ -1032,7 +1032,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mineral Joker',
         text = {
-            "Gives {X:mult,C:chips} Mult for each {C:attention}Steel Card",
+            "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
             "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
             "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
             "{C:inactive}(Steel Joker + Stone Joker)"
@@ -1059,10 +1059,89 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play then
+        if context.joker_main then
+            local rets = {}
+            local stone_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_stone') then stone_tally = stone_tally + 1 end
+            end
+            table.insert(rets, {
+                chips = 75 * stone_tally
+            })
+
+            local steel_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_steel') then steel_tally = steel_tally + 1 end
+            end
+            table.insert(rets, {
+                Xmult = 1 + 0.5 * steel_tally,
+            })
+        end
+    end,
+    in_pool = function(self, args)
+        for _, playing_card in ipairs(G.playing_cards or {}) do
+            if SMODS.has_enhancement(playing_card, 'm_steel') or SMODS.has_enhancement(playing_card, 'm_stone') then
+                return true, { allow_duplicates = false }
+            end
+        end
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "abtractbuckler",
+    path = "bttiAbtractbuckler.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'abtractbuckler',
+    loc_txt = {
+        name = 'Abtractbuckler',
+        text = {
+            "{C:mult}+3{} Mult for each {C:attention}Joker{} card",
+            "Adds the {C:attention}sell value{} of all",
+            "{C:attention}Jokers{} to {C:mult}Mult",
+            "{C:inactive}Currently {C:mult}+#1#{} Mult",
+            "{C:inactive}(Abstract Joker + Swashbuckler)"
+        }
+    },
+
+    config = { extra = { mult = 1 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        local sell_cost = 0
+        for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
+            if joker ~= card then
+                sell_cost = sell_cost + joker.sell_cost + 3
+            end
+        end
+        return {
+            vars = { card.ability.extra.mult * sell_cost },
+        }
+    end,
+    rarity = 2,
+    atlas = 'zeroTheo',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local sell_cost = 0
+            for _, joker in ipairs(G.jokers.cards) do
+                if joker ~= card then
+                    sell_cost = sell_cost + joker.sell_cost + 3
+                end
+            end
             return {
-                mult = 4,
-                chips = 31
+                mult = card.ability.extra.mult * sell_cost
             }
         end
     end,
