@@ -937,7 +937,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
+            vars = { card.ability.extra.chips },
         }
     end,
     rarity = 4,
@@ -993,6 +993,7 @@ SMODS.Joker {
                 table.insert(rets, {
                     message = localize('k_upgrade_ex'),
                     colour = G.C.CHIPS,
+                    chips = card.ability.extra.chips,
                     message_card = card
                 })
             end
@@ -1056,8 +1057,8 @@ SMODS.Joker {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
     end,
-    rarity = 2,
-    atlas = 'zeroTheo',
+    rarity = 3,
+    atlas = 'mineralJoker',
     pos = { x = 0, y = 0 },
     cost = 6,
     pools = { ["BTTImodadditionCOMBO"] = true },
