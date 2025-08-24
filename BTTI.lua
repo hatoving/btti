@@ -185,6 +185,13 @@ G.BTTI.JOKER_COMBOS = {
 			'j_drunkard'
 		}
 	},
+	['j_btti_photoChad'] = {
+		rarity = 3,
+		jokers = {
+			'j_photograph',
+			'j_hanging_chad'
+		}
+	},
 }
 
 SMODS.Gradient {

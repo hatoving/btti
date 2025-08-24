@@ -1600,3 +1600,62 @@ SMODS.Joker {
         return false, { allow_duplicates = false }
     end
 }
+
+SMODS.Atlas {
+    key = "photoChad",
+    path = "bttiPhotoChad.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'photoChad',
+    loc_txt = {
+        name = 'PhotoChad',
+        text = {
+            "First played {C:attention}face{} card gives",
+            "{X:mult,C:white}x3{} Mult when scored and is",
+            "retriggered {C:attention}2{} additional times",
+            "{C:inactive}(Photogrpah + Hanging Chad)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'photoChad',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if (context.individual or context.repetition) and context.cardarea == G.play and context.other_card:is_face() then
+            local is_first_face = false
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i]:is_face() then
+                    is_first_face = context.scoring_hand[i] == context.other_card
+                    break
+                end
+            end
+            if is_first_face then
+                return {
+                    repetitions = 2,
+                    Xmult = 3,
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
