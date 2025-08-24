@@ -7,6 +7,12 @@ return {
                     "{C:purple}#1#{}"
                 },
             },
+            bttiPossibleCombo = {
+                name = "Possible Combination",
+                text = {
+                    "{C:green}#1#{}"
+                },
+            },
         },
     },
     misc = {

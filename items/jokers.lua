@@ -1864,6 +1864,118 @@ SMODS.Joker {
     end
 }
 
+-- BFDI JOKERS
+-- BFDI JOKERS
+-- BFDI JOKERS
+-- BFIDI JOKERS
+-- Teeriffic!
+SMODS.Atlas {
+    key = "One",
+    path = "bttiOne.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'One',
+	loc_txt = {
+        name = 'One',
+		text = {
+			"{C:green}1 in 4{} chance to drain {C:dark_edition}editions{} of",
+            "other {C:attention}Jokers",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:mult,C:white}X#2#{C:inactive} Mult, {C:mult}+#3#{} Mult"
+		}
+	},
+
+	config = { extra = { chips = 0, mult = 0, Xmult = 0.0 } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island: The Power of Two" }}
+		return {
+            vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.Xmult },
+        }
+	end,
+	rarity = 3,
+    atlas = 'One',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+        if context.setting_blind or context.before or (context.end_of_round and context.cardarea == G.jokers) or context.final_scoring_step then
+            if pseudorandom('One') < G.GAME.probabilities.normal / 4 then
+                local idx = math.random(1, #G.jokers.cards)
+                local ed = G.jokers.cards[idx].edition or nil
+
+                sendInfoMessage("one chose " .. idx .. "", "BTTI")
+
+                -- only drain powers if the selected card ain't herself + if the selected card has an edition to drain
+                if ed ~= nil and idx ~= getJokerID(card) then
+                    return {
+                        message = "Ahahaha!!",
+                        colour = G.C.BLUE,
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                G.jokers.cards[idx]:set_edition()
+                                G.jokers.cards[idx]:juice_up()
+
+                                sendInfoMessage("one chose " .. ed.key .. "", "BTTI")
+
+                                if ed.key == 'e_foil' then
+                                    card.ability.extra.chips = card.ability.extra.chips + 50
+                                elseif ed.key == 'e_polychrome' then
+                                    card.ability.extra.Xmult = card.ability.extra.Xmult + 1.5
+                                elseif ed.key == 'e_holo' then
+                                    card.ability.extra.mult = card.ability.extra.mult + 10
+                                elseif ed.key == 'e_negative' then
+                                    card:set_edition('e_negative')
+                                end
+
+                                card:juice_up()
+                                return true
+                            end,
+                        }))
+                    }
+                end
+            else
+                return {
+                    message = "Nope...",
+                    colour = G.C.BLUE,
+                }
+            end
+        end
+        if context.joker_main then
+            local rets = {}
+            if card.ability.extra.chips > 0 then
+                table.insert(rets, {
+                    chips = card.ability.extra.chips
+                })
+            end
+            if card.ability.extra.mult > 0 then
+                table.insert(rets, {
+                    mult = card.ability.extra.mult
+                })
+            end
+            if card.ability.extra.Xmult > 0 then
+                table.insert(rets, {
+                    Xmult = card.ability.extra.Xmult
+                })
+            end
+            return SMODS.merge_effects(rets)
+        end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
 -- DRAMATIZED JOKERS
 -- DRAMATIZED JOKERS
 -- DRAMATIZED JOKERS
@@ -1936,6 +2048,10 @@ SMODS.Joker {
 -- DELTARUNE JOKERS
 -- DELTARUNE JOKERS
 
+SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
+SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
+SMODS.Sound({ key = "tennaTime", path = "bttiTennaTime.ogg" })
+
 -- Tenna
 SMODS.Atlas {
     key = "Tenna",
@@ -1978,16 +2094,23 @@ SMODS.Joker {
             local rets = {}
             if card.ability.extra.mult > 0 then
                 table.insert(rets, {
-                    message = "T.V... +" .. card.ability.extra.mult .. "",
+                    message = "T...",
                     colour = G.C.MULT,
-                    mult_mod = card.ability.extra.mult
+                    sound = 'btti_tennaT',
+                })
+                table.insert(rets, {
+                    message = "V... +" .. card.ability.extra.mult .. "",
+                    colour = G.C.MULT,
+                    mult_mod = card.ability.extra.mult,
+                    sound = 'btti_tennaV',
                 })
             end
             if card.ability.extra.chips > 0 then
                 table.insert(rets, {
                     message = "TIME!! +" .. card.ability.extra.chips .. "",
                     colour = G.C.CHIPS,
-                    chip_mod = card.ability.extra.chips
+                    chip_mod = card.ability.extra.chips,
+                    sound = 'btti_tennaTime',
                 })
             end
             return SMODS.merge_effects(rets)

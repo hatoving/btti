@@ -366,11 +366,104 @@ SMODS.Consumable {
         name = "Jonker's Workshop",
         text = {
             "Combines {C:attention}Jokers{} if any",
-            "can be combined"
+            "can be combined into one",
+            "{C:purple}Combination{} {C:attention}Joker{}",
+            "Will prioritize {C:green}Common Jokers{} than",
+            "{C:attention}Legendary Jokers{}"
         },
     },
     atlas = 'jonkersWorkshop',
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+
+        -- I'm doing this check three times but idc leave me along ;-;
+        if G.jokers ~= nil then
+            local results = {}
+            for combo_key, combo_data in pairs(G.BTTI.JOKER_COMBOS) do
+                local needed = combo_data.jokers
+                local allowed = combo_data.allowed or {}
+                local found = {}
+
+                local matched_needed = {}
+                local matched_allowed = {}
+
+                for _, player_card in ipairs(G.jokers.cards) do
+                    for _, required in ipairs(needed) do
+                        if player_card.config.center.key == required then
+                            found[required] = true
+                            table.insert(matched_needed, player_card)
+                        end
+                    end
+                    for _, allowed_jk in ipairs(allowed) do
+                        if player_card.config.center.key == allowed_jk then
+                            found[allowed_jk] = true
+                            table.insert(matched_allowed, player_card)
+                            break
+                        end
+                    end
+                end
+
+                local all_found = true
+                for _, required in ipairs(needed) do
+                    if not found[required] then
+                        all_found = false
+                        break
+                    end
+                end
+
+                if all_found and #needed < 2 and #allowed > 0 then
+                    local any_allowed = false
+                    for _, allowed_jk in ipairs(allowed) do
+                        if found[allowed_jk] then
+                            any_allowed = true
+                            break
+                        end
+                    end
+                    all_found = any_allowed
+                end
+
+                if all_found then
+                    table.insert(results, {
+                        key = combo_key,
+                        neededToDiscard = matched_needed,
+                        allowedToDiscard = matched_allowed,
+                        rarity = combo_data.rarity or 1
+                    })
+                    sendInfoMessage("found " .. combo_key, "BTTI")
+                end
+            end
+
+            table.sort(results, function(a, b)
+                return a.rarity < b.rarity
+            end)
+
+            if #results > 0 then
+                local combo = results[1]
+                local str_parts = {}
+
+                for _, card in ipairs(combo.neededToDiscard) do
+                    table.insert(str_parts,
+                        localize { type = "name_text", set = "Joker", key = card.config.center.key })
+                end
+
+                for _, card in ipairs(combo.allowedToDiscard) do
+                    table.insert(str_parts,
+                        localize { type = "name_text", set = "Joker", key = card.config.center.key })
+                end
+
+                local str = table.concat(str_parts, " + ")
+                str = str .. " = " ..
+                    localize { type = "name_text", set = "Joker", key = combo.key }
+
+                sendInfoMessage(str, "BTTI")
+                info_queue[#info_queue + 1] = { key = 'bttiPossibleCombo', set = 'Other', vars = { str } }
+            else
+                info_queue[#info_queue + 1] = { key = 'bttiPossibleCombo', set = 'Other', vars = { 'Nothing yet!' } }
+            end
+        else
+            info_queue[#info_queue + 1] = { key = 'bttiPossibleCombo', set = 'Other', vars = { 'Nothing yet!' } }
+        end
+
         return {
             vars = {
             }
