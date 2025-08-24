@@ -1010,6 +1010,73 @@ SMODS.Joker {
     end
 }
 
+-- hatoving country
+SMODS.Atlas {
+    key = "hatovingCountry",
+    path = "bttiHatovingCountry.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'hatovingCountry',
+    loc_txt = {
+        name = 'hatoving country',
+        text = {
+            "{C:green}1 in 40{} chance to disable upcoming",
+            "{C:attention}Boss Blind{}"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "hatoving" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 1,
+    atlas = 'hatovingCountry',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            if G.GAME.blind and not G.GAME.blind.disabled and G.GAME.blind.boss then
+                if pseudorandom('hatovingCountry') < G.GAME.probabilities.normal / 40 then
+                    return {
+                        message = "hatoving country",
+                        colour = G.C.BTTIPINK,
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                G.GAME.blind:disable()
+                                return true
+                            end,
+                        }))
+                    }
+                else
+                    return {
+                        message = "Nope...",
+                        colour = G.C.BTTIPINK
+                    }
+                end
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- DEETS JOKERS
 -- DEETS JOKERS
 -- DEETS JOKERS
