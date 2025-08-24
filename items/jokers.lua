@@ -1077,6 +1077,95 @@ SMODS.Joker {
     end
 }
 
+-- Pancakes
+SMODS.Atlas {
+    key="pancakes",
+    path="bttiJonker.png", --placeholder
+    px = 71,
+    py = 95
+
+}
+SMODS.Joker {
+    key = 'pancakes',
+    loc_txt = {
+        name= 'Pancakes',
+        text = {
+            "{X:chips,C:white}X20{} Chips",
+            "{X:chips,C:white}-X1{} Chips per hand played",
+            "Gets blown up with mind when",
+            "at {X:chips,C:white}X1{} Chips",
+            "{C:inactive}Good with syrup{}",
+            "{C:inactive}Currently{} {X:chips,C:white}X#1#{} {C:inactive}Chips{}"
+        }
+    },
+
+    config = {extra = { mult = 20 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        return {
+            vars = {card.ability.extra.mult},
+        }
+    end,
+    rarity = 1,
+    atlas = 'pancakes',
+    pos = { x = 0, y = 0},
+    cost = 6,
+    pools = {["BTTImodaddition"] = true},
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+         if context.joker_main  then
+                return {
+                    G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                ease_chips(hand_chips * (card.ability.extra.mult))
+                                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                                    message = "X" .. card.ability.extra.mult .. " Chips",
+                                    colour = G.C.CHIPS,
+                                })
+                                return true
+                            end,
+                        }))
+                    }
+        end
+        if context.final_scoring_step then
+            card.ability.extra.mult = card.ability.extra.mult - 1
+            if card.ability.extra.mult <= 1 then
+                G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                SMODS.destroy_cards(card)
+                                card_eval_status_text(card, 'extra', nil, nil, nil, {
+                                    message = "Exploded with mind",
+                                    colour = G.C.RED,
+                                })
+                                return true
+                            end,
+                        }))
+        else
+            return {
+                    message = "-X1 Chips",
+                    colour = G.C.CHIPS,
+            }
+        end
+            
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- DEETS JOKERS
 -- DEETS JOKERS
 -- DEETS JOKERS
