@@ -49,6 +49,15 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 end
 
+local startDissolveHook = Card.start_dissolve
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    if self.ability.set == "Joker" and (self.destroyed and self.destroyed == true) then
+        sendInfoMessage("destroyed joker :(", "BTTI")
+        G.GAME.jokersDestroyedCount = G.GAME.jokersDestroyedCount + 1
+    end
+    startDissolveHook(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+end
+
 -- MISC JOKERS
 -- MISC JOKERS
 -- MISC JOKERS
@@ -2656,6 +2665,54 @@ SMODS.Joker {
 -- AOTA JOKERS
 -- AOTA JOKERS
 -- AOTA JOKERS
+
+-- Jonker
+SMODS.Atlas {
+    key = "Abyss",
+    path = "bttiTheAbyss.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Abyss',
+    loc_txt = {
+        name = 'The Abyss',
+        text = {
+            "{X:mult,C:white}X0.75{} Mult for each {C:attention}Joker{} destroyed",
+            "{C:inactive}Currently {X:mult,C:white}X1{C:inactive} Mult"
+        }
+    },
+
+    config = { extra = { Xmult = 10 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        return {
+            vars = { card.ability.extra.Xmult + (G.GAME.jokersDestroyedCount * 0.75) },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Abyss',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                Xmult = card.ability.extra.Xmult + (G.GAME.jokersDestroyedCount * 0.75),
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
 
 -- The Universe
 SMODS.Atlas {
