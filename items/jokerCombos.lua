@@ -1157,9 +1157,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'Resume',
         text = {
-            "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
-            "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
-            "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
+            "When round begins, add a {C:attention}Stone Card",
+            "with a random {C:attention}Seal{} and a random",
+            "{C:attention}playing card{} with a random {C:attention}seal{}",
+            "to your hand",
             "{C:inactive}(Marble Joker + Certificate)"
         }
     },
@@ -1349,6 +1350,141 @@ SMODS.Joker {
         if context.joker_main then
             return {
                 mult = 20
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "holoResume",
+    path = "bttiHoloResume.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "holoResumeFace",
+    path = "bttiHoloResumeFace.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'holoResume',
+    loc_txt = {
+        name = 'Holo Resume',
+        text = {
+            "When round begins, add a {C:attention}Stone Card",
+            "with a random {C:attention}Seal{} and a random",
+            "{C:attention}playing card{} with a random {C:attention}seal{}",
+            "to your hand",
+            "This {C:attention}Joker{} gains {X:mult,C:white}X0.5{} Mult every time",
+            "a {C:attention}playing card{} is added to your deck",
+            "{C:inactive}Currectly {X:mult,C:white}X#1#{} Mult",
+            "{C:inactive}(Resume + Hologram)"
+        }
+    },
+
+    config = { extra = { xmult = 1 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = { card.ability.extra.xmult },
+        }
+    end,
+    rarity = 3,
+    atlas = 'holoResume',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    soul_atlas = 'holoResume',
+    soul_pos = {
+        x = 0, y = 0,
+        draw = function(card, scale_mod, rotate_mod)
+            card.hover_tilt = card.hover_tilt * 1.5
+            card.children.floating_sprite:draw_shader('hologram', nil, card.ARGS.send_to_shader, nil,
+            card.children.center, 2 * scale_mod, 2 * rotate_mod)
+            card.hover_tilt = card.hover_tilt / 1.5
+        end
+    },
+    set_sprites = function (self, card, front)
+        card.children.center.atlas = G.ASSET_ATLAS['btti_holoResume']
+        card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        card.children.floating_sprite.atlas = G.ASSET_ATLAS['btti_holoResumeFace']
+        card.children.floating_sprite:set_sprite_pos({x = 0, y = 0})
+    end,
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            stone_card.playing_card = G.playing_card
+            table.insert(G.playing_cards, stone_card)
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    stone_card:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                    G.play:emplace(stone_card)
+                    return true
+                end
+            }))
+            return {
+                message = localize('k_plus_stone'),
+                colour = G.C.SECONDARY_SET.Enhanced,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.deck.config.card_limit = G.deck.config.card_limit + 1
+                            return true
+                        end
+                    }))
+                    draw_card(G.play, G.deck, 90, 'up')
+                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+                end
+            }
+        end
+        if context.first_hand_drawn then
+            local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'btti' }), area = G.discard }
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            _card.playing_card = G.playing_card
+            table.insert(G.playing_cards, _card)
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.hand:emplace(_card)
+                    _card:start_materialize()
+                    G.GAME.blind:debuff_card(_card)
+                    G.hand:sort()
+                    if context.blueprint_card then
+                        context.blueprint_card:juice_up()
+                    else
+                        card:juice_up()
+                    end
+                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    save_run()
+                    return true
+                end
+            }))
+
+            return nil, true
+        end
+        if context.playing_card_added and not context.blueprint then
+            card.ability.extra.Xmult = card.ability.extra.Xmult + #context.cards * card.ability.extra.Xmult_gain
+            return {
+                message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.Xmult } },
+            }
+        end
+        if context.joker_main then
+            return {
+                Xmult = card.ability.extra.Xmult
             }
         end
     end,

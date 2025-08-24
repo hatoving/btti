@@ -164,6 +164,13 @@ G.BTTI.JOKER_COMBOS = {
 			'j_burglar'
 		}
 	},
+	['j_btti_holoResume'] = {
+		rarity = 3,
+		jokers = {
+			'j_btti_resume',
+			'j_hologram'
+		}
+	},
 }
 
 SMODS.Gradient {
