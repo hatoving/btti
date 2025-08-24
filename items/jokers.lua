@@ -3037,6 +3037,10 @@ SMODS.Joker {
                 card.ability.extra.schips = G.GAME.hands[context.scoring_hand].chips
                 card.ability.extra.smult = G.GAME.hands[context.scoring_hand].mult
                 card.ability.extra.firstHand = true
+                return {
+                    message = "Saved!",
+                    colour = G.C.GREEN
+                }
             end
 		end
 
