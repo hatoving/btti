@@ -763,7 +763,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "shortScholar",
-    path = "bttishortScholar.png",
+    path = "bttiShortScholar.png",
     px = 71,
     py = 95
 }
@@ -1025,6 +1025,55 @@ SMODS.Joker {
     end,
     calc_dollar_bonus = function(self, card)
         return 9
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "zeroTheo",
+    path = "bttiZeroTheo.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'zeroTheo',
+    loc_txt = {
+        name = 'Zero Theo',
+        text = {
+            "Played cards give {C:mult}+4{} Mult",
+            "and {C:chips}+31{} Chips",
+            "{C:inactive}(Even Steven + Odd Todd)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 2,
+    atlas = 'zeroTheo',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            return {
+                mult = 4,
+                chips = 31
+            }
+        end
     end,
     in_pool = function(self, args)
         return false, { allow_duplicates = false }
