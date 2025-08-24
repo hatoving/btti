@@ -299,7 +299,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "purity",
     set = "Tarot",
-    cost = 5,
+    cost = 3,
     pos = { x = 0, y = 0 },
     config = { max_highlighted = 2 },
     loc_txt = {
