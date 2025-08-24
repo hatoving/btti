@@ -32,6 +32,14 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end,
+    in_pool = function (self, args)
+        if G.jokers then
+            if next (SMODS.find_card("j_btti_BlueBen8")) then
+                return true
+            end
+            return false
+        end
     end
 }
 
@@ -69,7 +77,8 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
-    end
+    end,
+    
 }
 
 -- Mysticalia

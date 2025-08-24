@@ -1152,6 +1152,74 @@ SMODS.Joker {
     end
 }
 
+-- HANAKO JOKERS
+-- HANAKO JOKERS
+-- HANAKO JOKERS
+-- HANAKO JOKERS
+
+SMODS.Atlas {
+    key = "Hanako",
+    path = "bttiHanako.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Hanako',
+    loc_txt = {
+        name = 'Hanako Takeuchi',
+        text = {
+            "Adds the sell value and price",
+            "Jokers sold to Chips and Mult",
+            "respectively",
+            "Does not count previously",
+            "sold Jokers",
+            "{C:inactive}Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips"
+        }
+    },
+
+    config = { extra = { smult = 0, schips = 0} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
+        return {
+            vars = { card.ability.extra.smult, card.ability.extra.schips },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Hanako',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                chips = card.ability.extra.schips,
+                mult = card.ability.extra.smult
+            }
+        end
+
+        if context.selling_card then
+            if context.card ~= card then
+                card.ability.extra.schips = card.ability.extra.schips + context.card.cost
+                card.ability.extra.smult = card.ability.extra.smult + context.card.sell_cost
+                return {
+                    message = "... oh ._.",
+                    colour = G.C.YELLOW
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- DEETS JOKERS
 -- DEETS JOKERS
 -- DEETS JOKERS
