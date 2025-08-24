@@ -969,7 +969,6 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        
         if context.joker_main then
             local cardAmount = 0
 
@@ -1078,7 +1077,7 @@ SMODS.Joker {
 -- Pancakes
 SMODS.Atlas {
     key="pancakes",
-    path="bttiJonker.png", --placeholder
+    path="bttiPancakes.png", --placeholder
     px = 71,
     py = 95
 
@@ -2625,6 +2624,85 @@ SMODS.Joker {
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
 	end
+}
+
+-- Jonker
+SMODS.Atlas {
+    key = "RegMoszy",
+    path = "bttiRegMoszy.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'RegMoszy',
+    loc_txt = {
+        name = 'Reg!Moszy',
+        text = {
+            "{C:mult}+13{} Mult",
+            "OR",
+            "Apply {C:dark_edition}Negative{} to a random {C:attention}Joker",
+            "{C:green}1 in 4{} chance of not triggering"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 1,
+    atlas = 'RegMoszy',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            if pseudorandom('RegMoszy') < G.GAME.probabilities.normal / 4 then
+                return {}
+            end
+            if math.random(0, 1) == 1 then
+                --+13 mult
+                return {
+                    mult = 13
+                }
+            else
+                local idx = math.random(1, #G.jokers.cards)
+                local ed = G.jokers.cards[idx].edition or nil
+
+                if ed == nil then
+                    return {
+                        message = "Ahahaha!!",
+                        colour = G.C.BLUE,
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                G.jokers.cards[idx]:set_edition('e_negative')
+                                G.jokers.cards[idx]:juice_up()
+
+                                sendInfoMessage("setting negative", "BTTI")
+                                card:juice_up()
+                                return true
+                            end,
+                        }))
+                    }
+                end
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
 }
 
 -- ???
