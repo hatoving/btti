@@ -2667,7 +2667,10 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main then
             if pseudorandom('RegMoszy') < G.GAME.probabilities.normal / 4 then
-                return {}
+                return {
+                    message = "Nothin'...",
+                    colour = G.C.GREEN
+                }
             end
             if math.random(0, 1) == 1 then
                 --+13 mult
@@ -2680,8 +2683,8 @@ SMODS.Joker {
 
                 if ed == nil then
                     return {
-                        message = "Ahahaha!!",
-                        colour = G.C.BLUE,
+                        message = "Moss!!",
+                        colour = G.C.DARK_EDITION,
                         G.E_MANAGER:add_event(Event({
                             trigger = 'immediate',
                             blocking = false,
@@ -2990,6 +2993,67 @@ SMODS.Joker {
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
     end
+}
+
+SMODS.Atlas {
+    key = "Checkpoint",
+    path = "bttiCheckpoint.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Checkpoint',
+	loc_txt = {
+		name = 'Checkpoint',
+		text = {
+			"Saves the first played hand of round",
+            "and adds triple its score to final hand",
+            "{C:inactive}Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips"
+		}
+	},
+
+	config = { extra = { smult = 0, schips = 0, firstHand = false } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
+		return {
+            vars = { card.ability.extra.smult, card.ability.extra.schips },
+        }
+	end,
+	rarity = 1,
+    atlas = 'Checkpoint',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.before then
+            if not card.ability.extra.firstHand then
+                card.ability.extra.schips = hand_chips
+                card.ability.extra.smult = mult
+                card.ability.extra.firstHand = true
+            end
+		end
+
+        if context.joker_main and G.GAME.current_round.hands_left == 0 then
+            return {
+                mult = card.ability.extra.smult,
+                chips = card.ability.extra.schips
+            }
+        end
+
+        if context.end_of_round then
+             card.ability.extra.firstHand = false
+        end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
 }
 
 -- AOTA JOKERS
