@@ -954,7 +954,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
-            if context.other_card:get_id() == 13 then
+            if context.other_card.is_face(context.other_card) then
                 if context.other_card.debuff then
                     return {
                         message = localize('k_debuffed'),
@@ -962,18 +962,7 @@ SMODS.Joker {
                     }
                 else
                     return {
-                        x_mult = 1.5
-                    }
-                end
-            elseif context.other_card:get_id() == 12 then
-                if context.other_card.debuff then
-                    return {
-                        message = localize('k_debuffed'),
-                        colour = G.C.RED
-                    }
-                else
-                    return {
-                        mult = 13
+                        x_mult = 13.5
                     }
                 end
             end
