@@ -107,7 +107,7 @@ G.BTTI.JOKER_COMBOS = {
 			'j_shoot_the_moon',
 		}
 	},
-	['j_btti_smallScholar'] = {
+	['j_btti_shortScholar'] = {
 		rarity = 2,
 		jokers = {
 			'j_scholar',
@@ -119,6 +119,14 @@ G.BTTI.JOKER_COMBOS = {
 		jokers = {
 			'j_8_ball',
 			'j_cloud_9',
+		}
+	},
+	['j_btti_celestius'] = {
+		rarity = 4,
+		jokers = {
+			'j_btti_royalMoon',
+			'j_btti_shortScholar',
+			'j_btti_chanceOfClouds'
 		}
 	},
 }

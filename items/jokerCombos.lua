@@ -762,15 +762,15 @@ SMODS.Joker {
 }
 
 SMODS.Atlas {
-    key = "smallScholar",
-    path = "bttiSmallScholar.png",
+    key = "shortScholar",
+    path = "bttishortScholar.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'smallScholar',
+    key = 'shortScholar',
     loc_txt = {
-        name = 'Small Scholar',
+        name = 'Short Scholar',
         text = {
             "Played {C:aces}Aces{} give {C:chips}+20{} Chips",
             "and {C:mult}+4{} Mult when scored",
@@ -781,7 +781,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { chips = 0 } },
+    config = { extra = { chips = 0, chip_mod = 8 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
@@ -789,7 +789,7 @@ SMODS.Joker {
         }
     end,
     rarity = 2,
-    atlas = 'smallScholar',
+    atlas = 'shortScholar',
     pos = { x = 0, y = 0 },
     cost = 6,
     pools = { ["BTTImodadditionCOMBO"] = true },
@@ -846,7 +846,7 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 4{} chance for each played",
             "{C:attention}8{} to create a {C:purple}Tarot Card{} when scored",
-            "Earn {C:attention}$+1{} for each {C:attention}9{} in your {C:attention}Full Deck",
+            "Earn {C:attention}$1{} for each {C:attention}9{} in your {C:attention}Full Deck",
             "{C:inactive}(8 Ball + Cloud 9)"
         }
     },
@@ -902,6 +902,129 @@ SMODS.Joker {
             if playing_card:get_id() == 9 then nine_tally = nine_tally + 1 end
         end
         return nine_tally > 0 and 1 * nine_tally or nil
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "celestius",
+    path = "bttiCelestius.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'celestius',
+    loc_txt = {
+        name = 'Celestius',
+        text = {
+            'Each {C:attention}Face Card{} held in hand',
+            'gives {X:mult,C:white}X13.5{} Mult',
+            'Played {C:aces}Aces{} give {C:chips}+100{} Chips',
+            'and {C:mult}+20{} Mult when scored',
+            'This {C:attention}Joker{} gains {C:chips}+10{} Chips',
+            'for each {C:attention}non-face card{} that is scored',
+            '{C:green}1 in 4{} chance for each played {C:attention}8{}',
+            'to create a {C:purple}Tarot Card{} when scored',
+            'Earn an extra {C:attention}$9{} at end of round',
+            '{C:inactive}Currently {C:chips}+#1#{} Chips',
+            '{C:inactive}(Royal Moon + Short Scholar + Chance of Clouds)'
+        }
+    },
+
+    config = { extra = { chips = 0, chip_mod = 10 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 4,
+    atlas = 'celestius',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.hand and not context.end_of_round then
+            if context.other_card:get_id() == 13 then
+                if context.other_card.debuff then
+                    return {
+                        message = localize('k_debuffed'),
+                        colour = G.C.RED
+                    }
+                else
+                    return {
+                        x_mult = 1.5
+                    }
+                end
+            elseif context.other_card:get_id() == 12 then
+                if context.other_card.debuff then
+                    return {
+                        message = localize('k_debuffed'),
+                        colour = G.C.RED
+                    }
+                else
+                    return {
+                        mult = 13
+                    }
+                end
+            end
+        end
+        if context.individual and context.cardarea == G.play then
+            local rets = {}
+
+            if context.other_card:get_id() == 14 then
+                table.insert(rets, {
+                    mult = 20,
+                    chips = 100
+                })
+            end
+            if !context.other_card.is_face(nil) and not context.blueprint then
+                card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+
+                table.insert(rets, {
+                    message = localize('k_upgrade_ex'),
+                    colour = G.C.CHIPS,
+                    message_card = card
+                })
+            end
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                if (context.other_card:get_id() == 8) and SMODS.pseudorandom_probability(card, 'btti', 1, 4) then
+                    G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                    table.insert(rets, {
+                        extra = {
+                            message = localize('k_plus_tarot'),
+                            message_card = card,
+                            func = function()
+                                G.E_MANAGER:add_event(Event({
+                                    func = (function()
+                                        SMODS.add_card {
+                                            set = 'Tarot',
+                                            key_append = 'btti'
+                                        }
+                                        G.GAME.consumeable_buffer = 0
+                                        return true
+                                    end)
+                                }))
+                            end
+                        },
+                    })
+                end
+            end
+
+            return SMODS.merge_effects(rets)
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        return 9
     end,
     in_pool = function(self, args)
         return false, { allow_duplicates = false }
