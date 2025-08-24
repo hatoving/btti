@@ -150,6 +150,20 @@ G.BTTI.JOKER_COMBOS = {
 			'j_certificate'
 		}
 	},
+	['j_btti_bat'] = {
+		rarity = 3,
+		jokers = {
+			'j_dusk',
+			'j_acrobat'
+		}
+	},
+	['j_btti_mountainBurglar'] = {
+		rarity = 2,
+		jokers = {
+			'j_mystic_summit',
+			'j_burglar'
+		}
+	},
 }
 
 SMODS.Gradient {

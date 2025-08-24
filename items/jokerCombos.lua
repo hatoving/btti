@@ -1032,6 +1032,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mineral Joker',
         text = {
+            "Start at {X:mult,C:white}X1{} Mult,",
             "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
             "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
             "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
@@ -1118,7 +1119,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'abstractbuckler',
     pos = { x = 0, y = 0 },
-    cost = 6,
+    cost = 4,
     pools = { ["BTTImodadditionCOMBO"] = true },
 
     unlocked = true,
@@ -1235,6 +1236,120 @@ SMODS.Joker {
             }))
 
             return nil, true
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "bat",
+    path = "bttiBat.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'bat',
+    loc_txt = {
+        name = 'Bat',
+        text = {
+            "Retrigger all played cards in",
+            "{C:attention}final hand{} of round",
+            "{X:mult,C:white}X3{} Mult per card in {C:attention}final hand",
+            "of round",
+            "{C:inactive}(Dusk + Acrobat)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'bat',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play and G.GAME.current_round.hands_left == 0 then
+            return {
+                repetitions = 1,
+                xmult = 3,
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "mountainBurglar",
+    path = "bttiMountainBurglar.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'mountainBurglar',
+    loc_txt = {
+        name = 'Mountain Burglar',
+        text = {
+            "When {C:attention}Blind{} is selected,",
+            "gain {C:blue}+3{} Hands and {C:red}lose all discards",
+            "{C:mult}+20{} Mult",
+            "{C:inactive}(Mystic Summit + Burglar)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'mountainBurglar',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    ease_discard(-G.GAME.current_round.discards_left, nil, true)
+                    ease_hands_played(card.ability.extra.hands)
+                    SMODS.calculate_effect(
+                        { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } } },
+                        context.blueprint_card or card)
+                    return true
+                end
+            }))
+            return nil, true -- This is for Joker retrigger purposes
+        end
+
+        if context.joker_main then
+            return {
+                mult = 20
+            }
         end
     end,
     in_pool = function(self, args)
