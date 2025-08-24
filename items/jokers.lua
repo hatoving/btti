@@ -3034,8 +3034,8 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.before then
             if not card.ability.extra.firstHand then
-                card.ability.extra.schips = hand_chips
-                card.ability.extra.smult = mult
+                card.ability.extra.schips = G.GAME.hands[context.scoring_hand].chips
+                card.ability.extra.smult = G.GAME.hands[context.scoring_hand].mult
                 card.ability.extra.firstHand = true
             end
 		end
