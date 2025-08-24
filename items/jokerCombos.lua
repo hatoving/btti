@@ -1079,11 +1079,6 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        for _, playing_card in ipairs(G.playing_cards or {}) do
-            if SMODS.has_enhancement(playing_card, 'm_steel') or SMODS.has_enhancement(playing_card, 'm_stone') then
-                return true, { allow_duplicates = false }
-            end
-        end
         return false, { allow_duplicates = false }
     end
 }
@@ -1164,7 +1159,7 @@ SMODS.Joker {
             "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
             "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
             "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
-            "{C:inactive}(Steel Joker + Stone Joker)"
+            "{C:inactive}(Marble Joker + Certificate)"
         }
     },
 
@@ -1208,11 +1203,6 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        for _, playing_card in ipairs(G.playing_cards or {}) do
-            if SMODS.has_enhancement(playing_card, 'm_steel') or SMODS.has_enhancement(playing_card, 'm_stone') then
-                return true, { allow_duplicates = false }
-            end
-        end
         return false, { allow_duplicates = false }
     end
 }
