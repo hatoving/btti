@@ -1956,7 +1956,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DELTARUNE" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }
@@ -1978,14 +1978,14 @@ SMODS.Joker {
             local rets = {}
             if card.ability.extra.mult > 0 then
                 table.insert(rets, {
-                    message = "T.V...",
+                    message = "T.V... +" .. card.ability.extra.mult .. "",
                     colour = G.C.MULT,
                     mult_mod = card.ability.extra.mult
                 })
             end
             if card.ability.extra.chips > 0 then
                 table.insert(rets, {
-                    message = "TIME!!",
+                    message = "TIME!! +" .. card.ability.extra.chips .. "",
                     colour = G.C.CHIPS,
                     chip_mod = card.ability.extra.chips
                 })
