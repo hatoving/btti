@@ -1615,7 +1615,7 @@ SMODS.Joker {
             "First played {C:attention}face{} card gives",
             "{X:mult,C:white}x3{} Mult when scored and is",
             "retriggered {C:attention}2{} additional times",
-            "{C:inactive}(Photogrpah + Hanging Chad)"
+            "{C:inactive}(Photograph + Hanging Chad)"
         }
     },
 

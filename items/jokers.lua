@@ -762,9 +762,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Kendrick Lamar',
         text = {
-            "Will create a random {C:green}Common{} or {C:red}Rare",
+            "Will create a random {C:blue}Common{} or {C:red}Rare",
             "{C:purple}Balinsanity{} {C:attention}Joker{}",
-            "when a {C:attention}Blind{} is selected",
+            "when {C:attention}Blind{} is selected",
             "{C:inactive}(Must have room)"
         }
     },
@@ -942,7 +942,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Dwayne "The Rock" Johnson',
         text = {
-           "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in Hand",
+           "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in hand",
            "He will briefly appear when this card is",
            "triggered",
            "{C:inactive}Currently {X:mult,C:white}X#2#{} Mult"
@@ -1035,7 +1035,7 @@ SMODS.Joker {
     rarity = 1,
     atlas = 'hatovingCountry',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -2999,7 +2999,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Abyss',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,

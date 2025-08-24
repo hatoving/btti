@@ -275,7 +275,7 @@ SMODS.Consumable {
     loc_txt = {
         name = "The Maze",
         text = {
-            "Enhances one selected {C:attention}Card{} to",
+            "Enhances {C:attention}1{} selected card into",
             "a {C:deets}Horse Card{}"
         },
     },
@@ -306,7 +306,7 @@ SMODS.Consumable {
         name = "The Purity",
         text = {
             "Removes {C:attention}Orange Seals{}",
-            "from up to 2 selected {C:attention}Cards"
+            "from up to {C:attention}2{} selected cards"
         },
     },
     atlas = 'purity',
@@ -366,10 +366,9 @@ SMODS.Consumable {
         name = "Jonker's Workshop",
         text = {
             "Combines {C:attention}Jokers{} if any",
-            "can be combined into one",
-            "{C:purple}Combination{} {C:attention}Joker{}",
-            "Will prioritize {C:green}Common Jokers{} than",
-            "{C:attention}Legendary Jokers{}"
+            "potential {C:purple}combinations{} are present",
+            "Will prioritize {C:blue}Common Jokers{} over",
+            "{C:purple}Legendary{} {C:attention}Jokers{}"
         },
     },
     atlas = 'jonkersWorkshop',
@@ -614,7 +613,7 @@ SMODS.Consumable {
         name = "Infinity",
         text = {
             "Adds an {C:gay}Autism Seal{} to",
-            "1 selected card in {C:attention}hand"
+            "{C:attention}1{} selected card in hand"
         },
     },
     pools = { ["BTTImodadditionspectrals"] = true },
@@ -673,7 +672,7 @@ SMODS.Consumable {
         name = "Joozin' It",
         text = {
             "Adds an {C:attention}Orange Seal{} to",
-            "1 selected card in {C:attention}hand"
+            "{C:attention}1{} selected card in hand"
         },
     },
     pools = { ["BTTImodadditionspectrals"] = true },
@@ -731,7 +730,7 @@ SMODS.Consumable {
     loc_txt = {
         name = "Doubt",
         text = {
-            "Destroys up to 3 selected",
+            "Destroys up to {C:attention}3{} selected",
             "{C:deets}Horse Cards{}"
         },
     },
