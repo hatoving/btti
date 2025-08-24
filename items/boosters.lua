@@ -348,7 +348,7 @@ SMODS.Booster {
     key = "buffoon_fortune",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 30,
+    cost = 15,
     pos = { x = 0, y = 0 },
     atlas = 'fortuneBP',
     config = { extra = 2, choose = 1 },
@@ -390,7 +390,7 @@ SMODS.Booster {
     key = "buffoon_fortune_jumbo",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 30,
+    cost = 20,
     pos = { x = 0, y = 0 },
     atlas = 'fortuneBPJumbo',
     config = { extra = 4, choose = 1 },
