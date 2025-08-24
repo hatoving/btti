@@ -1931,6 +1931,81 @@ SMODS.Joker {
 	end
 }
 
+-- DELTARUNE JOKERS
+-- DELTARUNE JOKERS
+-- DELTARUNE JOKERS
+-- DELTARUNE JOKERS
+
+-- Tenna
+SMODS.Atlas {
+    key = "Tenna",
+    path = "bttiTenna.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Tenna',
+    loc_txt = {
+        name = 'Mr. (Ant) Tenna',
+        text = {
+            "Gains {C:mult}+10{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
+            "Gains {C:chips}+20{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
+            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} Chips"
+        }
+    },
+
+    config = { extra = { mult = 0, chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.chips },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Tenna',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+            if card.ability.extra.mult > 0 then
+                table.insert(rets, {
+                    message = "T.V...",
+                    colour = G.C.MULT,
+                    mult_mod = card.ability.extra.mult
+                })
+            end
+            if card.ability.extra.chips > 0 then
+                table.insert(rets, {
+                    message = "TIME!!",
+                    colour = G.C.CHIPS,
+                    chip_mod = card.ability.extra.chips
+                })
+            end
+            return SMODS.merge_effects(rets)
+        end
+        if context.combined_joker then
+            card.ability.extra.mult = card.ability.extra.mult + 10
+            card.ability.extra.chips = card.ability.extra.chips + 20
+            return {
+                message = "Glooby!",
+                colour = G.C.MULT
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- CREATICA JOKERS
 -- CREATICA JOKERS
 -- CREATICA JOKERS

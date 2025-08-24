@@ -459,7 +459,8 @@ SMODS.Consumable {
                 SMODS.destroy_cards(result.allowedToDiscard[idx])
             end
 
-            SMODS.add_card { key = result.key }
+            local c = SMODS.add_card { key = result.key }
+            SMODS.calculate_context { combined_joker = c }
         end
 
         delay(0.5)
