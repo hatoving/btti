@@ -718,28 +718,30 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.setting_blind then
-            local chosen = 0
+            local chosen = nil
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 2 then
-                chosen = 1
+                chosen = 'Common'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 6 then
-                chosen = 2
+                chosen = 'Uncommon'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 10 then
-                chosen = 3
+                chosen = 'Rare'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 100 then
-                chosen = 4
+                chosen = 'Legendary'
             end
-            if chosen == 0 then
-                chosen = 1
+            if chosen == nil then
+                chosen = 'Common'
             end
 
             sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
 
-            local c = create_card("BTTImodaddition", G.Jokers, nil, chosen, nil, nil, nil, 'LeBron')
-            c:add_to_deck()
-            G.jokers:emplace(c)
+            local c = SMODS.add_card {
+                set = 'Joker',
+                rarity = chosen,
+                key_append = 'LeBron'
+            }
             SMODS.destroy_cards(card)
         end
     end,
@@ -747,6 +749,108 @@ SMODS.Joker {
         return true, { allow_duplicates = false }
     end
 }
+
+-- Kendrick Lamar
+SMODS.Sound({ key = "Kendrick0", path = "bttiKendrick0.ogg" })
+SMODS.Sound({ key = "Kendrick1", path = "bttiKendrick1.ogg" })
+SMODS.Atlas {
+    key = "Kendrick",
+    path = "bttiKendrick.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Kendrick',
+    loc_txt = {
+        name = 'Kendrick Lamar',
+        text = {
+            "Will create a random {C:green}Common{} or {C:red}Rare",
+            "{C:purple}Balinsanity{} {C:attention}Joker{}",
+            "when a {C:attention}Blind{} is selected",
+            "{C:inactive}(Must have room)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Kendrick',
+    pos = { x = 0, y = 0 },
+    cost = 5,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            local chosen = nil
+            if pseudorandom('Kendrick') < G.GAME.probabilities.normal / 2 then
+                chosen = 'Common'
+            end
+            if pseudorandom('Kendrick') < G.GAME.probabilities.normal / 4 then
+                chosen = 'Rare'
+            end
+            if chosen == nil then
+                chosen = 'Common'
+            end
+
+            sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
+
+            if math.random(0, 1) == 1 then   
+                return {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Joker',
+                                rarity = chosen,
+                                key_append = 'Kendrick'
+                            }
+                            play_sound("btti_Kendrick0")
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "It's not enough", colour = G.C.WHITE })
+                            return true
+                        end
+                    }))
+                }
+            else
+                return {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            SMODS.add_card {
+                                set = 'Joker',
+                                rarity = chosen,
+                                key_append = 'Kendrick'
+                            }
+                            play_sound("btti_Kendrick1")
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "MUSTAAAAARRDDD!!", colour = G.C.YELLOW })
+                            return true
+                        end
+                    }))
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 
 -- Mimic
 SMODS.Atlas {
