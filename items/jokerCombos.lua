@@ -1089,15 +1089,15 @@ SMODS.Joker {
 }
 
 SMODS.Atlas {
-    key = "abtractbuckler",
-    path = "bttiAbtractbuckler.png",
+    key = "abstractbuckler",
+    path = "bttiAbstractbuckler.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'abtractbuckler',
+    key = 'abstractbuckler',
     loc_txt = {
-        name = 'Abtractbuckler',
+        name = 'Abstractbuckler',
         text = {
             "{C:mult}+3{} Mult for each {C:attention}Joker{} card",
             "Adds the {C:attention}sell value{} of all",
@@ -1146,6 +1146,73 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "resume",
+    path = "bttiResume.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'resume',
+    loc_txt = {
+        name = 'Resume',
+        text = {
+            "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
+            "in your {C:attention}Full Deck{} and {C:chips}+75{} Chips for",
+            "each {C:attention}Stone Card{} in your {C:attention}Full Deck{}",
+            "{C:inactive}(Steel Joker + Stone Joker)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 3,
+    atlas = 'resume',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodadditionCOMBO"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+            local stone_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_stone') then stone_tally = stone_tally + 1 end
+            end
+            table.insert(rets, {
+                chips = 75 * stone_tally
+            })
+
+            local steel_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_steel') then steel_tally = steel_tally + 1 end
+            end
+            table.insert(rets, {
+                Xmult = 1 + 0.5 * steel_tally,
+            })
+        end
+    end,
+    in_pool = function(self, args)
+        for _, playing_card in ipairs(G.playing_cards or {}) do
+            if SMODS.has_enhancement(playing_card, 'm_steel') or SMODS.has_enhancement(playing_card, 'm_stone') then
+                return true, { allow_duplicates = false }
+            end
+        end
         return false, { allow_duplicates = false }
     end
 }
