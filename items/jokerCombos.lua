@@ -412,7 +412,9 @@ SMODS.Joker {
         text = {
             "{C:mult}+16{} Mult and {C:chips}+120{} Chips",
             "for each {C:attention}Poker Hand{} contained in {C:attention}Hand",
-            "{C:inactive}(Droll Joker + Crafty Joker)"
+            "{C:inactive}(Jovial Joker, Confused Joker, Genius Joker,",
+            "{C:inactive}Bonkers Joker OR Deliberate Joker + ",
+            "{C:inactive}The Universe)"
         }
     },
 
@@ -776,7 +778,7 @@ SMODS.Joker {
             "and {C:mult}+4{} Mult when scored",
             "This {C:attention}Joker{} gains {C:chips}+8{} Chips",
             "when each played {C:attention}2{} is scored",
-            "{C:inactive}Currently {C:chips}+#1#{} Chips",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips",
             "{C:inactive}(Scholar + Wee Joker)"
         }
     },

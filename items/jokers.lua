@@ -678,7 +678,7 @@ SMODS.Joker {
         name = 'LeBron James',
         text = {
             "When {C:attention}Blind{} is selected, {C:attention}self-destruct{}",
-            "and create a random {C:purple}Balantrinsanity{} {C:attention}Joker{}"
+            "and create a random {C:purple}Balinsanity{} {C:attention}Joker{}"
         }
     },
 
