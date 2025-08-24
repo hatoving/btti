@@ -987,7 +987,7 @@ SMODS.Joker {
                     chips = 100
                 })
             end
-            if !context.other_card.is_face(nil) and not context.blueprint then
+            if not context.other_card.is_face(nil) and not context.blueprint then
                 card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
 
                 table.insert(rets, {
