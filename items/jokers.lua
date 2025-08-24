@@ -19,6 +19,21 @@ function lerp(a, b, t)
     return result
 end
 
+function tableToString(tbl, indent)
+    indent = indent or 0
+    local str = string.rep(" ", indent) .. "{\n"
+    for k, v in pairs(tbl) do
+        str = str .. string.rep(" ", indent + 2) .. tostring(k) .. " = "
+        if type(v) == "table" then
+            str = str .. tableToString(v, indent + 2) .. "\n"
+        else
+            str = str .. tostring(v) .. "\n"
+        end
+    end
+    return str .. string.rep(" ", indent) .. "}"
+end
+
+
 function loadImage(fn)
     local full_path = SMODS.current_mod.path .. 'assets/images/' .. fn
     full_path = full_path:gsub('%\\', '/')
@@ -47,15 +62,6 @@ function love.draw()
         (love.graphics.getHeight() / rockImage:getHeight()))
     love.graphics.setColor(1, 1, 1, whorseFlashbang)
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-end
-
-local startDissolveHook = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    if self.ability.set == "Joker" and (self.destroyed and self.destroyed == true) then
-        sendInfoMessage("destroyed joker :(", "BTTI")
-        G.GAME.jokersDestroyedCount = G.GAME.jokersDestroyedCount + 1
-    end
-    startDissolveHook(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
 end
 
 -- MISC JOKERS
@@ -2666,32 +2672,32 @@ SMODS.Joker {
 -- AOTA JOKERS
 -- AOTA JOKERS
 
--- Jonker
+-- Great Archbird
 SMODS.Atlas {
-    key = "Abyss",
-    path = "bttiTheAbyss.png",
+    key = "GreatArchbird",
+    path = "bttiGreatArchbird.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'Abyss',
+    key = 'GreatArchbird',
     loc_txt = {
-        name = 'The Abyss',
+        name = ' Great Archbird',
         text = {
-            "{X:mult,C:white}X0.75{} Mult for each {C:attention}Joker{} destroyed",
-            "{C:inactive}Currently {X:mult,C:white}X1{C:inactive} Mult"
+            "{C:green}1 in 10{} chance to bring back",
+            "a {C:attention}Joker{} that was just {C:red}destroyed{}"
         }
     },
 
-    config = { extra = { Xmult = 10 } },
+    config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
         return {
-            vars = { card.ability.extra.Xmult + (G.GAME.jokersDestroyedCount * 0.75) },
+            vars = { card.ability.extra.mult, card.ability.extra.money },
         }
     end,
-    rarity = 1,
-    atlas = 'Abyss',
+    rarity = 3,
+    atlas = 'GreatArchbird',
     pos = { x = 0, y = 0 },
     cost = 4,
     pools = { ["BTTImodaddition"] = true },
@@ -2704,8 +2710,69 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
+            if context.joker_type_destroyed and not context.blueprint and not context.selling_card and context.card ~= card then
+                if pseudorandom('GreatArchbird') < G.GAME.probabilities.normal / 10 then
+                    local key = context.card.config.center.key
+                    sendInfoMessage("bringing back joker :) ... " .. key .. "", "BTTI")
+                    SMODS.add_card { key }
+                end
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+-- Abyss
+SMODS.Atlas {
+    key = "Abyss",
+    path = "bttiTheAbyss.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Abyss',
+    loc_txt = {
+        name = 'The Abyss',
+        text = {
+            "{X:mult,C:white}X0.75{} Mult for each {C:attention}Joker{} destroyed",
+            "after this {C:attention}Joker{} is acquired",
+            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive} Mult"
+        }
+    },
+
+    config = { extra = { Xmult = 1, jokersDestroyed = 0 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        return {
+            vars = { card.ability.extra.Xmult + ((card.ability.extra.jokersDestroyed or 0) * 0.75) },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Abyss',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if not context.combined_joker then
+            if context.joker_type_destroyed and not context.blueprint and not context.selling_card and context.card ~= card then
+                -- Stupid way of doing this but assuming that the context gets calculated twice every time a joker gets destroyed,
+                -- this is the only idea i had
+                card.ability.extra.jokersDestroyed = card.ability.extra.jokersDestroyed + 1
+                sendInfoMessage("destroyed joker :( ... " .. card.ability.extra.jokersDestroyed .. "", "BTTI")
+            end
+        end
+        if context.joker_main then
             return {
-                Xmult = card.ability.extra.Xmult + (G.GAME.jokersDestroyedCount * 0.75),
+                Xmult = card.ability.extra.Xmult + ((card.ability.extra.jokersDestroyed or 0) * 0.75),
             }
         end
     end,

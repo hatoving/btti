@@ -543,13 +543,13 @@ SMODS.Consumable {
         if #results > 0 then
             local result = results[1]
 
-            for _, card in ipairs(result.neededToDiscard) do
-                SMODS.destroy_cards(card)
+            for _, c in ipairs(result.neededToDiscard) do
+                c:remove()
             end
 
             if #result.allowedToDiscard > 0 then
                 local idx = math.random(1, #result.allowedToDiscard)
-                SMODS.destroy_cards(result.allowedToDiscard[idx])
+                result.allowedToDiscard[idx]:remove()
             end
 
             local c = SMODS.add_card { key = result.key }
