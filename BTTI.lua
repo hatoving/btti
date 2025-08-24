@@ -133,14 +133,21 @@ G.BTTI.JOKER_COMBOS = {
 		rarity = 3,
 		jokers = {
 			'j_steel_joker',
-			'j_stone_joker'
+			'j_stone'
 		}
 	},
-	['j_btti_abtractbuckler'] = {
+	['j_btti_abstractbuckler'] = {
 		rarity = 2,
 		jokers = {
 			'j_abstract',
 			'j_swashbuckler'
+		}
+	},
+	['j_btti_resume'] = {
+		rarity = 3,
+		jokers = {
+			'j_marble',
+			'j_certificate'
 		}
 	},
 }
