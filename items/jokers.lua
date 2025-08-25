@@ -1180,7 +1180,7 @@ SMODS.Joker {
 
     config = { extra = { smult = 0, schips = 0} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Yours Truly, Hanako" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "YOURS TRULY, HANAKO" } }
         return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }
