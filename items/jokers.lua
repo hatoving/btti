@@ -736,7 +736,7 @@ SMODS.Joker {
             sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
 
             local c = SMODS.add_card {
-                set = 'Joker',
+                set = 'BTTImodaddition',
                 rarity = chosen,
                 key_append = 'LeBron'
             }
