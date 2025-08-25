@@ -1169,7 +1169,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Hanako Takeuchi',
         text = {
-            "Adds the sell value and price",
+            "Adds the sell value of",
             "Jokers sold to Chips and Mult",
             "respectively",
             "Does not count previously",
@@ -1180,7 +1180,7 @@ SMODS.Joker {
 
     config = { extra = { smult = 0, schips = 0} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Yours Truly, Hanako" } }
         return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }
