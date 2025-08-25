@@ -2220,7 +2220,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island: The Power of Two" }}
 		return {
-            vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.Xmult },
+            vars = { card.ability.extra.chips, card.ability.extra.Xmult, card.ability.extra.mult },
         }
 	end,
 	rarity = 3,
