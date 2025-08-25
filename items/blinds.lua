@@ -147,6 +147,21 @@ SMODS.Blind {
     end,
 }
 
+-- from https://github.com/blazingulag/Prism/blob/main/objects/funcs.lua#L192
+function is_numbered(card)
+    return card.base and card.base.value and not SMODS.Ranks[card.base.value].face and card:get_id() ~= 14
+end
+function is_odd(card)
+    if not card.base then return false end
+    return (is_numbered(card) and card.base.nominal % 2 == 1) or card:get_id() == 14
+        or (next(SMODS.find_card('j_mxms_perspective')) and card:get_id() == 6) --compat with maximus' prespective
+end
+function is_even(card)
+    if not card.base then return false end
+    return (is_numbered(card) and card.base.nominal % 2 == 0)
+        or (next(SMODS.find_card('j_mxms_perspective')) and card:get_id() == 6) --compat with maximus' prespective
+end
+
 SMODS.Atlas {
     key = "scoliosisBlind",
     path = "bttiScoliosisBlind.png",
@@ -155,7 +170,6 @@ SMODS.Atlas {
     frames = 21,
     atlas_table = 'ANIMATION_ATLAS'
 }
-local debuffedScoliosisCards = {}
 SMODS.Blind {
     key = "scoliosisBlind",
     atlas = "scoliosisBlind",
@@ -172,16 +186,48 @@ SMODS.Blind {
     boss = { min = 1 },
     boss_colour = HEX('ffffff'),
 
-    recalc_debuff = function(self)
-        for k, v in ipairs(G.playing_cards) do
-            if v:get_id() <= 10 and v:get_id() >= 0 and v:get_id() % 2 == 0 then
-                SMODS.juice_up_blind()
-                G.GAME.blind:debuff_card(v)
+    recalc_debuff = function(self, card, from_blind)
+        if card.area ~= G.jokers and not G.GAME.blind.disabled then
+            if is_even(card)
+            then
+                return true
             end
+            return false
         end
     end,
-    disable = function(self)
-    end,
-    defeat = function(self)
+}
+
+SMODS.Atlas {
+    key = "gooseBlind",
+    path = "bttiGooseBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "gooseBlind",
+    atlas = "gooseBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Honk',
+        text = {
+            'Cards with an ODD',
+            "rank are debuffed"
+        }
+    },
+    boss = { min = 1 },
+    boss_colour = HEX('ffffff'),
+
+    recalc_debuff = function(self, card, from_blind)
+        if card.area ~= G.jokers and not G.GAME.blind.disabled then
+            if is_odd(card)
+            then
+                return true
+            end
+            return false
+        end
     end,
 }
