@@ -2373,10 +2373,10 @@ SMODS.Joker {
 	end
 }
 
--- DELTARUNE JOKERS
--- DELTARUNE JOKERS
--- DELTARUNE JOKERS
--- DELTARUNE JOKERS
+-- UTDR JOKERS
+-- UTDR JOKERS
+-- UTDR JOKERS
+-- UTDR JOKERS
 
 SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
 SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
@@ -2402,7 +2402,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UT/DR" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }
@@ -2483,7 +2483,7 @@ SMODS.Joker {
 
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creatica" }}
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" }}
 		return {
             vars = { },
         }

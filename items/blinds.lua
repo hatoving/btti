@@ -113,7 +113,7 @@ SMODS.Blind {
     loc_txt = {
         name = 'The Salesman',
         text = {
-            'Steals [[Sweet MOOLAH!!]] equivalent',
+            'Steals [[Sweet Moolah!!]] equivalent',
 			'to the [[Value, Value]] of all',
 			'[[CLOWN]] each hand.'
         }

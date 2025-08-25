@@ -2,7 +2,7 @@ return {
     descriptions = {
         Other = {
             bttiFromWhere = {
-                name = "From where?!",
+                name = "From Where?!",
                 text = {
                     "{C:purple}#1#{}"
                 },
