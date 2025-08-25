@@ -125,17 +125,14 @@ SMODS.Blind {
         if not blind.disabled then
 			if G.jokers then
 				if context.before then
-					for i, jk in ipairs(G.jokers.cards) do
-						G.E_MANAGER:add_event(Event({
-							trigger = 'immediate',
-							blocking = false,
-							delay = 0,
-							func = function()
-								ease_dollars(-jk.sell_cost)
-								return true
-							end,
-						}))
+                    local ret = {}
+					for i = 1, #G.jokers.cards do
+                        table.insert(ret, {
+                            dollars = -G.jokers.cards[i].sell_cost,
+                            card = G.jokers.cards[i]
+                        })
 					end
+                    return SMODS.merge_effects(ret)
 				end
 			end
         end
