@@ -37,7 +37,7 @@ SMODS.Enhancement {
     loc_txt = {
         name = 'Stained Card',
         text = {
-            "{C:green}1 in 2{} to leak into the",
+            "{C:green}1 in 2{} chance to leak into the",
             "card to its right, triggering it",
             "once before that card is triggered"
         }
