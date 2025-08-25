@@ -3153,7 +3153,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
