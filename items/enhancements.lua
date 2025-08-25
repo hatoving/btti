@@ -57,7 +57,7 @@ SMODS.Enhancement {
                 local selfID = 0
                 local rets = {
                     {
-                        message = "Whoops...",
+                        message = "Leak!",
                         colour = G.C.DEETS
                     }
                 }
@@ -95,7 +95,7 @@ SMODS.Enhancement {
                     if pc.seal ~= nil then         
                         sendInfoMessage("stained: " .. pc.seal .. "", "BTTI")
                         table.insert(rets, {
-                            message = "Whoops!",
+                            message = "Leak!",
                             colour = G.C.DEETS,
                             func = function()
                                 pc:juice_up(0.3, 0.5)
@@ -123,10 +123,7 @@ SMODS.Enhancement {
                     return SMODS.merge_effects(rets)
                 end
             else
-                return {
-                    message = "Safe!",
-                    colour = G.C.DEETS
-                }
+                return {}
             end
         end
     end
