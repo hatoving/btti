@@ -154,11 +154,11 @@ SMODS.Joker {
     loc_txt = {
         name = 'Metal Pipe',
         text = {
-            "{X:mult,C:white}X2.75{} Mult per {C:attention}Steel Card{} in {C:attention}Full Deck",
+            "{X:mult,C:white}X2.75{} Mult per {C:attention}Steel Card{} in {C:attention}full deck",
             "{C:green}1 in 20{} Chance to turn {C:attention}played",
-            "{C:attention}Cards{} into {C:attention}Steel Cards{}",
+            "{C:attention}cards{} into {C:attention}Steel Cards{}",
             "{C:inactive}Soothens your ears",
-            "{C:inactive}Currently {X:Mult,C:white}X#3#{C:inactive} Mult"
+            "{C:inactive}Currently{} {X:Mult,C:white}X#3#{}{C:inactive} Mult"
         }
     },
 
@@ -382,7 +382,8 @@ SMODS.Joker {
         name = '{C:gay}Autism{} Creature',
         text = {
             "{X:mult,C:white}X3{} Mult per card with {C:gay}Autism Seal{} in hand",
-            "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to Random Card",
+            "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to random card",
+            "in {C:attention}hand{}",
             "{C:mult}+20{} Mult per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
     },
@@ -511,8 +512,9 @@ SMODS.Joker {
     loc_txt = {
         name = '{C:gay}Bentism{} Creature',
         text = {
-            "{C:chips}+143{} Chips per card with {C:gay}Autism Seal{} in {C:attention}Full Deck{}",
-            "{C:green}1 in 40{} chance to add {C:dark_edition}Polychrome{} to Random Card",
+            "{C:chips}+143{} Chips per card with {C:gay}Autism Seal{} in {C:attention}full deck{}",
+            "{C:green}1 in 40{} chance to add {C:dark_edition}Polychrome{} to random card",
+            "in {C:attention}hand{}",
             "{X:chips,C:white}X8{} Chips per other {C:gay}Autism{} {C:attention}Jokers{}"
         }
     },
@@ -690,7 +692,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'LeBron James',
         text = {
-            "When {C:attention}Blind{} is selected, {C:attention}self-destruct{}",
+            "When {C:attention}Blind{} is selected, {C:red}self-destruct{}",
             "and create a random {C:purple}Balinsanity{} {C:attention}Joker{}"
         }
     },
@@ -762,9 +764,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Kendrick Lamar',
         text = {
-            "Will create a random {C:blue}Common{} or {C:red}Rare",
+            "When {C:attention}Blind{} is selected, create a",
+            "random {C:blue}Common{} or {C:red}Rare",
             "{C:purple}Balinsanity{} {C:attention}Joker{}",
-            "when {C:attention}Blind{} is selected",
             "{C:inactive}(Must have room)"
         }
     },
@@ -866,6 +868,7 @@ SMODS.Joker {
             "{C:attention}Two Pairs{} and {C:deets}Two Horses{}",
             "{C:green}1 in 40{} chance to {C:red}self-destruct{}",
             "at the end of round",
+            "Cannot be sold or destroyed otherwise"
         }
     },
 
@@ -944,7 +947,7 @@ SMODS.Joker {
         name = 'Dwayne "The Rock" Johnson',
         text = {
            "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in hand",
-           "He will briefly appear when this card is",
+           "He will briefly {C:attention}appear{} when this card is",
            "triggered",
            "{C:inactive}Currently {X:mult,C:white}X#2#{} Mult"
         }
@@ -1090,7 +1093,7 @@ SMODS.Joker {
         text = {
             "{X:chips,C:white}X10{} Chips",
             "{X:chips,C:white}-X1{} Chips per hand played",
-            "Gets blown up with mind when",
+            "Gets {C:red}blown up with mind{} when",
             "at {X:chips,C:white}X1{} Chips",
             "{C:inactive}Good with syrup{}",
             "{C:inactive}Currently{} {X:chips,C:white}X#1#{} {C:inactive}Chips{}"
@@ -1169,11 +1172,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'Hanako Takeuchi',
         text = {
-            "Adds the sell value of",
-            "Jokers sold to Chips and Mult",
-            "respectively",
+            "Adds the {C:attention}sell value{} of",
+            "{C:attention}Jokers{} sold to {C:chipsChips{} and {C:mult}Mult{}",
             "Does not count previously",
-            "sold Jokers",
+            "sold {C:attention}Jokers{}",
             "{C:inactive}Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips"
         }
     },
@@ -1341,7 +1343,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Horse',
         text = {
-            "{C:chips}+80{} Chips per {C:deets}Horse Card{} in {C:attention}Deck",
+            "{C:chips}+80{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
             "{X:mult,C:white}X3{} Mult if {C:attention}Played Hand{} is a {C:deets}Horse Hand{}",
             "{C:green}1 in 100{} chance to turn random card",
             "in hand into {C:deets}Horse Card"
@@ -1801,7 +1803,7 @@ SMODS.Joker {
 		text = {
             "Shuffles all {C:attention}Jokers{} around before",
             "a hand is played and copies the",
-            "{C:attention}Joker to the right",
+            "{C:attention}Joker{} to the right",
 		}
 	},
 
@@ -1875,7 +1877,7 @@ SMODS.Joker {
 		name = 'Strawberry Lemoande',
 		text = {
             "Copies either a random {C:attention}Joker{}",
-            "or a random {C:attention}Card{} in hand",
+            "or a random {C:attention}card{} in hand",
             "Triggers twice if {C:purple}God Taco{}",
             "is present"
 		}
@@ -2011,11 +2013,11 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mug',
         text = {
-            "{C:mult}+#2#{} Mult to this {C:attention}Joker{} if {C:attention}played",
-            "hand{} has more {C:mult}Mult{} than {C:chips}Chips{}",
+            "{C:mult}+#2#{} Mult to this {C:attention}Joker{} if {C:attention}played{}",
+            "{C:attention}hand{} has more {C:mult}Mult{} than {C:chips}Chips{}",
             "{C:mult}-#2#{} Mult if played hand has more",
             "{C:chips}Chips{} than {C:mult}Mult{}",
-            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+            "{C:inactive}(Currently{} {C:mult}+#1#{}{C:inactive} Mult{})"
         }
     },
 
@@ -2146,8 +2148,8 @@ SMODS.Joker {
         name = 'Cubey',
         text = {
             "{C:chips}+100-1000{} Chips and {X:mult,C:white}X2-10{} Mult",
-            "for each {C:purple}Inn-to the Insanity{} {C:attention}Joker{}",
-            "in hand"
+            "per other {C:purple}Inn-to the Insanity{} {C:attention}Jokers{}",
+            "held"
         }
     },
 
@@ -2540,7 +2542,7 @@ SMODS.Joker {
 		text = {
 			"Saves you from death if scored chips",
             "are {C:attention}10%{} of required amount.",
-            "{C:green}1 in 9{} chance of being destroyed"
+            "{C:green}1 in 9{} chance of being {C:red}crystallized{}"
 		}
 	},
 
@@ -2790,7 +2792,7 @@ SMODS.Joker {
         name = '???????????',
         text = {
             "{C:mult}+#1#{} Mult for each Non-{C:attention}Stone{}/",
-            "Non-{C:attention}Steel Card{} in {C:attention}Full Deck{}",
+            "Non-{C:attention}Steel Card{} in {C:attention}full deck{}",
             "Debuffs {C:attention}Stone{} and {C:attention}Steel Cards{}",
             "{C:green}1 in 30{} chance to turn a",
             "random played {C:attention}Card{} into a {C:attention}Stone Card{}",
@@ -3075,8 +3077,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Checkpoint',
 		text = {
-			"Saves the first played hand of round",
-            "and adds triple its score to final hand",
+			"Saves the first {C:attention}played hand{} of round",
+            "and adds triple its {C:attention}score{} to {C:attention}final hand{}",
             "{C:inactive}Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips"
 		}
 	},
@@ -3255,7 +3257,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'The Universe',
         text = {
-            "Levels up all {C:attention}Poker Hands",
+            "Levels up all {C:attention}poker hands",
             "by 1 at the end of each round",
             "{C:green}1 in 40{} chance to",
             "fade away at end of round"

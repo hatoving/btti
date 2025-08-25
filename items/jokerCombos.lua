@@ -822,7 +822,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'chanceOfClouds',
     loc_txt = {
-        name = 'Chance of CLouds',
+        name = 'Chance of Clouds',
         text = {
             "{C:green}1 in 4{} chance for each played",
             "{C:attention}8{} to create a {C:purple}Tarot Card{} when scored",
@@ -1138,7 +1138,7 @@ SMODS.Joker {
         name = 'Resume',
         text = {
             "When round begins, add a {C:attention}Stone Card",
-            "with a random {C:attention}Seal{} and a random",
+            "with a random {C:attention}seal{} and a random",
             "{C:attention}playing card{} with a random {C:attention}seal{}",
             "to your hand",
             "{C:inactive}(Marble Joker + Certificate)"
@@ -1356,7 +1356,7 @@ SMODS.Joker {
         name = 'Holo Resume',
         text = {
             "When round begins, add a {C:attention}Stone Card",
-            "with a random {C:attention}Seal{} and a random",
+            "with a random {C:attention}seal{} and a random",
             "{C:attention}playing card{} with a random {C:attention}seal{}",
             "to your hand",
             "This {C:attention}Joker{} gains {X:mult,C:white}X0.5{} Mult every time",
