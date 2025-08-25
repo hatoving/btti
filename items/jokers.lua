@@ -789,7 +789,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.setting_blind then
+        if context.setting_blind and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
             local chosen = nil
             if pseudorandom('Kendrick') < G.GAME.probabilities.normal / 2 then
                 chosen = 'Common'
@@ -811,7 +811,7 @@ SMODS.Joker {
                         delay = 0,
                         func = function()
                             SMODS.add_card {
-                                set = 'Joker',
+                                set = 'BTTImodaddition',
                                 rarity = chosen,
                                 key_append = 'Kendrick'
                             }
