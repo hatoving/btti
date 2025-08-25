@@ -49,9 +49,9 @@ SMODS.Seal {
                         end
                     })
                     if pc.seal == "Red" then
-                        local ch = card:get_chip_bonus()
-                        local mult = card:get_chip_mult()
-                        local xMult = card:get_chip_x_mult()
+                        local ch = pc:get_chip_bonus()
+                        local mult = pc:get_chip_mult()
+                        local xMult = pc:get_chip_x_mult()
                         if ch > 0 then
                             table.insert(rets, {
                                 chips = ch,

@@ -20,6 +20,7 @@ SMODS.Enhancement {
     replace_base_card = true,
     no_rank = true,
     no_suit = true,
+    always_scores = true,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.bonus } }
     end,
@@ -45,9 +46,6 @@ SMODS.Enhancement {
     atlas = 'stainedCard',
     pos = { x = 0, y = 0 },
     config = { },
-    replace_base_card = false,
-    no_rank = true,
-    no_suit = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         return { vars = { } }
@@ -55,7 +53,79 @@ SMODS.Enhancement {
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             if pseudorandom('MsBreward') < G.GAME.probabilities.normal / 2 then
-                
+                local selfID = 0
+                local rets = {
+                    {
+                        message = "Whoops...",
+                        colour = G.C.DEETS
+                    }
+                }
+                for i = 1, #context.scoring_hand do
+                    if context.scoring_hand[i] == card then
+                        selfID = i
+                        break
+                    end
+                end
+                sendInfoMessage("checking... (" .. selfID .. ", " .. selfID + 1 .. ")", "BTTI")
+                if context.scoring_hand[selfID + 1] ~= nil then
+                    local pc = context.scoring_hand[selfID + 1]
+                    local ch = pc:get_chip_bonus()
+                    local mult = pc:get_chip_mult()
+                    local xMult = pc:get_chip_x_mult()
+                    if ch > 0 then
+                        table.insert(rets, {
+                            chips = ch,
+                            colour = G.C.CHIPS
+                        })
+                    end
+                    if mult > 0 then
+                        table.insert(rets, {
+                            mult = mult,
+                            colour = G.C.MULT
+                        })
+                    end
+                    if xMult > 0 then
+                        table.insert(rets, {
+                            x_mult = xMult,
+                            colour = G.C.MULT
+                        })
+                    end
+                    sendInfoMessage("found card!", "BTTI")
+                    if pc.seal ~= nil then         
+                        sendInfoMessage("stained: " .. pc.seal .. "", "BTTI")
+                        table.insert(rets, {
+                            message = "Whoops!",
+                            colour = G.C.DEETS,
+                            func = function()
+                                pc:juice_up(0.3, 0.5)
+                            end
+                        })
+                        if pc.seal == "Gold" then
+                            table.insert(rets, {
+                                dollars = 3,
+                                colour = G.C.MONEY
+                            })
+                        end
+                    end
+                    if SMODS.has_enhancement(pc, 'm_lucky') then
+                        local ret = {}
+                        if pseudorandom('MsBreward') < G.GAME.probabilities.normal / 5 then
+                            pc.lucky_trigger = true
+                            ret.mult = pc.ability.extra.mult
+                        end
+                        if pseudorandom('MsBreward') < G.GAME.probabilities.normal / 15 then
+                            pc.lucky_trigger = true
+                            ret.dollars = pc.ability.extra.dollars
+                        end
+                        table.insert(rets, ret)
+                    end
+                    return SMODS.merge_effects(rets)
+                end
+            else
+                return {
+                    message = "Safe!",
+                    colour = G.C.DEETS
+                }
             end
         end
     end
