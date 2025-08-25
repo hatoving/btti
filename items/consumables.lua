@@ -1,93 +1,3 @@
--- Kepler
-SMODS.Atlas {
-    key = "kepler",
-    path = "bttiKepler.png", -- placeholder
-    px = 65,
-    py = 95
-}
-SMODS.Consumable {
-    key = "kepler",
-    set = "Planet",
-    cost = 3,
-    pos = { x = 0, y = 0 },
-    config = { hand_type = 'Bisexual' },
-    loc_txt = {
-        name = "Kepler",
-        text = {
-            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-            "{C:attention}#2#",
-            "{C:mult}+#3#{} Mult and",
-            "{C:chips}+#4#{} chips",
-        },
-    },
-    pools = { ["BTTImodadditionplanets"] = true},
-    atlas = 'kepler',
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                G.GAME.hands[card.ability.hand_type].level,
-                localize(card.ability.hand_type, 'poker_hands'),
-                G.GAME.hands[card.ability.hand_type].l_mult,
-                G.GAME.hands[card.ability.hand_type].l_chips,
-                colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
-            }
-        }
-    end,
-    in_pool = function (self, args)
-        if G.jokers then
-            if next (SMODS.find_card("j_btti_BlueBen8")) then
-                return true
-            end
-            return false
-        end
-    end
-}
-
--- Pegasi
-SMODS.Atlas {
-    key = "pegasi",
-    path = "bttiPegasi.png", -- placeholder
-    px = 65,
-    py = 95
-}
-SMODS.Consumable {
-    key = "pegasi",
-    set = "Planet",
-    cost = 3,
-    pos = { x = 0, y = 0 },
-    config = { hand_type = 'BisexualFlush' },
-    loc_txt = {
-        name = "Pegasi",
-        text = {
-            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-            "{C:attention}#2#",
-            "{C:mult}+#3#{} Mult and",
-            "{C:chips}+#4#{} chips",
-        },
-    },
-    pools = { ["BTTImodadditionplanets"] = true },
-    atlas = 'pegasi',
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-                G.GAME.hands[card.ability.hand_type].level,
-                localize(card.ability.hand_type, 'poker_hands'),
-                G.GAME.hands[card.ability.hand_type].l_mult,
-                G.GAME.hands[card.ability.hand_type].l_chips,
-                colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
-            }
-        }
-    end,
-    in_pool = function(self, args)
-        if G.jokers then
-            if next(SMODS.find_card("j_btti_BlueBen8")) then
-                return true
-            end
-            return false
-        end
-    end
-}
-
 -- Mysticalia
 SMODS.Atlas {
     key = "mysticalia",
@@ -270,6 +180,96 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end
+}
+
+-- Kepler
+SMODS.Atlas {
+    key = "kepler",
+    path = "bttiKepler.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "kepler",
+    set = "Planet",
+    cost = 3,
+    pos = { x = 0, y = 0 },
+    config = { hand_type = 'Bisexual' },
+    loc_txt = {
+        name = "Kepler",
+        text = {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+            "{C:mult}+#3#{} Mult and",
+            "{C:chips}+#4#{} chips",
+        },
+    },
+    pools = { ["BTTImodadditionplanets"] = true},
+    atlas = 'kepler',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                G.GAME.hands[card.ability.hand_type].level,
+                localize(card.ability.hand_type, 'poker_hands'),
+                G.GAME.hands[card.ability.hand_type].l_mult,
+                G.GAME.hands[card.ability.hand_type].l_chips,
+                colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
+            }
+        }
+    end,
+    in_pool = function (self, args)
+        if G.jokers then
+            if next (SMODS.find_card("j_btti_BlueBen8")) then
+                return true
+            end
+            return false
+        end
+    end
+}
+
+-- Pegasi
+SMODS.Atlas {
+    key = "pegasi",
+    path = "bttiPegasi.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "pegasi",
+    set = "Planet",
+    cost = 3,
+    pos = { x = 0, y = 0 },
+    config = { hand_type = 'BisexualFlush' },
+    loc_txt = {
+        name = "Pegasi",
+        text = {
+            "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+            "{C:attention}#2#",
+            "{C:mult}+#3#{} Mult and",
+            "{C:chips}+#4#{} chips",
+        },
+    },
+    pools = { ["BTTImodadditionplanets"] = true },
+    atlas = 'pegasi',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                G.GAME.hands[card.ability.hand_type].level,
+                localize(card.ability.hand_type, 'poker_hands'),
+                G.GAME.hands[card.ability.hand_type].l_mult,
+                G.GAME.hands[card.ability.hand_type].l_chips,
+                colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
+            }
+        }
+    end,
+    in_pool = function(self, args)
+        if G.jokers then
+            if next(SMODS.find_card("j_btti_BlueBen8")) then
+                return true
+            end
+            return false
+        end
     end
 }
 
@@ -612,124 +612,6 @@ SMODS.Consumable {
     end
 }
 
--- Infinity
-SMODS.Atlas {
-    key = "infinity",
-    path = "bttiInfinity.png", -- placeholder
-    px = 65,
-    py = 95
-}
-SMODS.Consumable {
-    key = "infinity",
-    set = "Spectral",
-    cost = 10,
-    pos = { x = 0, y = 0 },
-    config = { max_highlighted = 1 },
-    loc_txt = {
-        name = "Infinity",
-        text = {
-            "Adds an {C:gay}Autism Seal{} to",
-            "{C:attention}1{} selected card in hand"
-        },
-    },
-    pools = { ["BTTImodadditionspectrals"] = true },
-    atlas = 'infinity',
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-            }
-        }
-    end,
-    use = function(self, card, area, copier)
-        local conv_card = G.hand.highlighted[1]
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
-
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.1,
-            func = function()
-                conv_card:set_seal('btti_autismSeal', nil, true)
-                return true
-            end
-        }))
-
-        delay(0.5)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
-    end,
-}
-
--- Joozin' It
-SMODS.Atlas {
-    key = "joozin",
-    path = "bttiJoozin.png", -- placeholder
-    px = 65,
-    py = 95
-}
-SMODS.Consumable {
-    key = "joozin",
-    set = "Spectral",
-    cost = 5,
-    pos = { x = 0, y = 0 },
-    config = { max_highlighted = 1 },
-    loc_txt = {
-        name = "Joozin' It",
-        text = {
-            "Adds an {C:attention}Orange Seal{} to",
-            "{C:attention}1{} selected card in hand"
-        },
-    },
-    pools = { ["BTTImodadditionspectrals"] = true },
-    atlas = 'joozin',
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-            }
-        }
-    end,
-    use = function(self, card, area, copier)
-        local conv_card = G.hand.highlighted[1]
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                play_sound('tarot1')
-                card:juice_up(0.3, 0.5)
-                return true
-            end
-        }))
-
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.1,
-            func = function()
-                conv_card:set_seal('btti_orangeSeal', nil, true)
-                return true
-            end
-        }))
-
-        delay(0.5)
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function()
-                G.hand:unhighlight_all()
-                return true
-            end
-        }))
-    end,
-}
-
 -- Doubt
 SMODS.Atlas {
     key = "doubt",
@@ -813,5 +695,123 @@ SMODS.Consumable {
             end
         }))
         delay(0.5)
+    end,
+}
+
+-- Joozin' It
+SMODS.Atlas {
+    key = "joozin",
+    path = "bttiJoozin.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "joozin",
+    set = "Spectral",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
+    loc_txt = {
+        name = "Joozin' It",
+        text = {
+            "Adds an {C:attention}Orange Seal{} to",
+            "{C:attention}1{} selected card in hand"
+        },
+    },
+    pools = { ["BTTImodadditionspectrals"] = true },
+    atlas = 'joozin',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal('btti_orangeSeal', nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+}
+
+-- Infinity
+SMODS.Atlas {
+    key = "infinity",
+    path = "bttiInfinity.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "infinity",
+    set = "Spectral",
+    cost = 10,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
+    loc_txt = {
+        name = "Infinity",
+        text = {
+            "Adds an {C:gay}Autism Seal{} to",
+            "{C:attention}1{} selected card in hand"
+        },
+    },
+    pools = { ["BTTImodadditionspectrals"] = true },
+    atlas = 'infinity',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal('btti_autismSeal', nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
     end,
 }
