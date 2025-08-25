@@ -240,6 +240,26 @@ SMODS.Atlas {
     frames = 21,
     atlas_table = 'ANIMATION_ATLAS'
 }
+
+local smodsCalcRef = SMODS.calculate_individual_effect
+function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
+    if G.GAME.blind.config.blind.key == 'bl_btti_captainBlind' then
+        if (
+            key == "x_mult"
+            or key == "xmult"
+            or key == "Xmult"
+            or key == "x_mult_mod"
+            or key == "xmult_mod"
+            or key == "Xmult_mod"
+        ) then
+            amount = 1
+        end
+    else
+        sendInfoMessage("stupid: " .. G.GAME.blind.config.blind.key .. "", "BTTI")
+    end
+    return smodsCalcRef(effect, scored_card, key, amount, from_edition)
+end
+
 SMODS.Blind {
     key = "captainBlind",
     atlas = "captainBlind",
@@ -255,4 +275,6 @@ SMODS.Blind {
     },
     boss = { min = 1 },
     boss_colour = HEX('ffc78d'),
+    calculate = function(self, blind, context)
+    end
 }

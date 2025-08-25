@@ -635,7 +635,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = {} },
+    config = { extra = { xmult = 15 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
@@ -662,7 +662,7 @@ SMODS.Joker {
         end
         if context.joker_main then
             return {
-                xmult = 15
+                xmult = card.ability.extra.xmult
             }
         end
     end,
@@ -1020,11 +1020,11 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = {} },
+    config = { extra = { xmult = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
+            vars = { },
         }
     end,
     rarity = 3,
@@ -1050,13 +1050,15 @@ SMODS.Joker {
                 chips = 75 * stone_tally
             })
 
+            table.insert(rets, {
+                Xmult = card.ability.extra.xmult,
+            })
+        else
             local steel_tally = 0
             for _, playing_card in ipairs(G.playing_cards) do
                 if SMODS.has_enhancement(playing_card, 'm_steel') then steel_tally = steel_tally + 1 end
             end
-            table.insert(rets, {
-                Xmult = 1 + 0.5 * steel_tally,
-            })
+            card.ability.extra.xmult = 1 + 0.5 * steel_tally
         end
     end,
     in_pool = function(self, args)
@@ -1243,7 +1245,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = {} },
+    config = { extra = { xmult = 3 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
@@ -1266,7 +1268,7 @@ SMODS.Joker {
         if context.repetition and context.cardarea == G.play and G.GAME.current_round.hands_left == 0 then
             return {
                 repetitions = 1,
-                xmult = 3,
+                xmult = card.ability.extra.xmult,
             }
         end
     end,
@@ -1540,9 +1542,11 @@ SMODS.Joker {
         end
         if context.joker_main then
             return {
-                mult = card.ability.extra.xmult +
-                    (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0))
+                xmult = card.ability.extra.xmult
             }
+        else
+            card.ability.extra.xmult = 1 +
+                    (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0))
         end
     end,
     in_pool = function(self, args)
@@ -1619,7 +1623,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = {} },
+    config = { extra = { xmult = 3 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
@@ -1650,7 +1654,7 @@ SMODS.Joker {
             if is_first_face then
                 return {
                     repetitions = 2,
-                    Xmult = 3,
+                    Xmult = card.ability.extra.xmult,
                 }
             end
         end
