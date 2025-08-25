@@ -1088,7 +1088,7 @@ SMODS.Joker {
     loc_txt = {
         name= 'Pancakes',
         text = {
-            "{X:chips,C:white}X20{} Chips",
+            "{X:chips,C:white}X10{} Chips",
             "{X:chips,C:white}-X1{} Chips per hand played",
             "Gets blown up with mind when",
             "at {X:chips,C:white}X1{} Chips",
@@ -1097,7 +1097,7 @@ SMODS.Joker {
         }
     },
 
-    config = {extra = { mult = 20 } },
+    config = {extra = { mult = 10 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         return {
