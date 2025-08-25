@@ -47,8 +47,8 @@ SMODS.PokerHand {
     },
     above_hand = "Straight Flush",
     visible = false,
-    mult = 300,
-    chips = 16,
+    mult = 16,
+    chips = 300,
     l_mult = 3,
     l_chips = 35,
     example = {

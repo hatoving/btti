@@ -2404,7 +2404,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UT/DR" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }
