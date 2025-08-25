@@ -1241,7 +1241,7 @@ SMODS.Joker {
             "Gives you {C:attention}$1{} at the end of the round",
             "{C:mult}+5{} Mult per {C:deets}DEETS{} {C:attention}Joker{}",
             "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
-            "Selling this card may result in {C:red}consequnces{}"
+            "Selling this card may result in {C:red}consequences{}"
         }
     },
 
