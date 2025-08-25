@@ -231,3 +231,28 @@ SMODS.Blind {
         end
     end,
 }
+
+SMODS.Atlas {
+    key = "captainBlind",
+    path = "bttiCaptainBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "captainBlind",
+    atlas = "captainBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Captain',
+        text = {
+            'Disables all',
+            'xMult effects'
+        }
+    },
+    boss = { min = 1 },
+    boss_colour = HEX('ffc78d'),
+}
