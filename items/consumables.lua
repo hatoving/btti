@@ -78,7 +78,14 @@ SMODS.Consumable {
             }
         }
     end,
-    
+    in_pool = function(self, args)
+        if G.jokers then
+            if next(SMODS.find_card("j_btti_BlueBen8")) then
+                return true
+            end
+            return false
+        end
+    end
 }
 
 -- Mysticalia

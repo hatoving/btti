@@ -371,11 +371,14 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         local randomEdition = poll_edition("btti", nil, false, true)
-        local c = SMODS.create_card({ key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
+        local c = SMODS.create_card({
+            key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
                 pseudoseed('btti')).key,
             area = G.pack_cards
         })
-        c:set_edition(randomEdition)
+        if c.edition == nil then
+            c:set_edition(randomEdition)
+        end
         return c
     end,
 }
@@ -415,10 +418,12 @@ SMODS.Booster {
         local randomEdition = poll_edition("btti", nil, false, true)
         local c = SMODS.create_card({
             key = pseudorandom_element(G.P_JOKER_RARITY_POOLS[math.random(1, 2)],
-            pseudoseed('btti')).key,
+                pseudoseed('btti')).key,
             area = G.pack_cards
         })
-        c:set_edition(randomEdition)
+        if c.edition == nil then
+            c:set_edition(randomEdition)
+        end
         return c
     end,
 }
@@ -461,7 +466,9 @@ SMODS.Booster {
                 pseudoseed('btti')).key,
             area = G.pack_cards
         })
-        c:set_edition(randomEdition)
+        if c.edition == nil then
+            c:set_edition(randomEdition)
+        end
         return c
     end,
 }
