@@ -1,5 +1,7 @@
 require("nativefs")
 
+--#region FUNCTIONS
+
 function percentOf(value, percent)
     return value * (percent / 100)
 end
@@ -19,20 +21,22 @@ function lerp(a, b, t)
     return result
 end
 
-function tableToString(tbl, indent)
-    indent = indent or 0
-    local str = string.rep(" ", indent) .. "{\n"
-    for k, v in pairs(tbl) do
-        str = str .. string.rep(" ", indent + 2) .. tostring(k) .. " = "
-        if type(v) == "table" then
-            str = str .. tableToString(v, indent + 2) .. "\n"
+function Card:click()
+    if self.area and self.area:can_highlight(self) then
+        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
+        if self.highlighted ~= true then
+            self.area:add_to_highlighted(self)
+            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
         else
-            str = str .. tostring(v) .. "\n"
+            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
+            self.area:remove_from_highlighted(self)
+            play_sound('cardSlide2', nil, 0.3)
         end
     end
-    return str .. string.rep(" ", indent) .. "}"
+    if self.area and self.area == G.deck and self.area.cards[1] == self then
+        G.FUNCS.deck_info()
+    end
 end
-
 
 function loadImage(fn)
     local full_path = SMODS.current_mod.path .. 'assets/images/' .. fn
@@ -64,10 +68,10 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 end
 
+--#endregion
+
 -- MISC JOKERS
--- MISC JOKERS
--- MISC JOKERS
--- MISC JOKERS
+--#region MISC JOKERS
 
 -- Jonker
 SMODS.Atlas {
@@ -1156,10 +1160,10 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- HANAKO JOKERS
--- HANAKO JOKERS
--- HANAKO JOKERS
--- HANAKO JOKERS
+--#region HANAKO JOKERS
 
 SMODS.Atlas {
     key = "Hanako",
@@ -1223,10 +1227,10 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- DEETS JOKERS
--- DEETS JOKERS
--- DEETS JOKERS
--- DEETS JOKERS
+--#region DEETS JOKERS
 
 -- Honse
 SMODS.Atlas {
@@ -1784,10 +1788,10 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- ITTI JOKERS
--- ITTI JOKERS
--- ITTI JOKERS
--- ITTI JOKERS
+--#region ITTI JOKERS
 
 -- God Taco
 SMODS.Atlas {
@@ -2196,11 +2200,12 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- BFDI JOKERS
--- BFDI JOKERS
--- BFDI JOKERS
--- BFIDI JOKERS
--- Teeriffic!
+--#region BFDI JOKERS
+
+-- One
 SMODS.Atlas {
     key = "One",
     path = "bttiOne.png",
@@ -2308,10 +2313,10 @@ SMODS.Joker {
 	end
 }
 
+--#endregion
+
 -- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
--- DRAMATIZED JOKERS
+--#region DRAMATIZED JOKERS
 
 -- Teeriffic!
 SMODS.Atlas {
@@ -2375,10 +2380,10 @@ SMODS.Joker {
 	end
 }
 
+--#endregion
+
 -- UTDR JOKERS
--- UTDR JOKERS
--- UTDR JOKERS
--- UTDR JOKERS
+--#region UTDR JOKERS
 
 SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
 SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
@@ -2461,10 +2466,10 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- CREATICA JOKERS
--- CREATICA JOKERS
--- CREATICA JOKERS
--- CREATICA JOKERS
+--#region CREATICA JOKERS
 
 -- Joozie
 SMODS.Atlas {
@@ -2521,12 +2526,10 @@ SMODS.Joker {
 	end
 }
 
--- REGALITY JOKERS
--- REGALITY JOKERS
--- REGALITY JOKERS
--- REGALITY JOKERS
+--#endregion
 
--- G.GAME.consumeable_usage_total.tarot
+-- REGALITY JOKERS
+--#region REGALITY JOKRES
 
 -- Reg!Ben
 SMODS.Atlas {
@@ -2952,28 +2955,10 @@ SMODS.Joker {
     end
 }
 
-function Card:click()
-    if self.area and self.area:can_highlight(self) then
-        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
-        if self.highlighted ~= true then
-            self.area:add_to_highlighted(self)
-            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
-        else
-            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
-            self.area:remove_from_highlighted(self)
-            play_sound('cardSlide2', nil, 0.3)
-        end
-    end
-    if self.area and self.area == G.deck and self.area.cards[1] == self then
-        G.FUNCS.deck_info()
-    end
-    
-end
+--#endregion
 
 -- SCOLOISIS MAN JOKERS
--- SCOLOISIS MAN JOKERS
--- SCOLOISIS MAN JOKERS
--- SCOLOISIS MAN JOKERS
+--#region SCOLOISIS MAN JOKERS
 
 -- Goop
 SMODS.Atlas {
@@ -3131,10 +3116,10 @@ SMODS.Joker {
 	end
 }
 
+--#endregion
+
 -- AOTA JOKERS
--- AOTA JOKERS
--- AOTA JOKERS
--- AOTA JOKERS
+--#region AOTA JOKERS
 
 -- Great Archbird
 SMODS.Atlas {
@@ -3303,10 +3288,10 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
 -- DIRECTOR JOKERS
--- DIRECTOR JOKERS
--- DIRECTOR JOKERS
--- DIRECTOR JOKERS
+--#region DIRECTOR JOKERS
 
 -- LightShine
 SMODS.Atlas {
@@ -3780,3 +3765,5 @@ SMODS.Joker {
 		return true, { allow_duplicates = false }
 	end
 }
+
+--#endregion
