@@ -643,7 +643,7 @@ SMODS.Joker {
             vars = {}
         }
     end,
-    rarity = 2,
+    rarity = 3,
     atlas = 'jokelinear',
     pos = {x = 0, y = 0},
     cost = 6,
