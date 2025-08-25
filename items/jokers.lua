@@ -100,7 +100,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -176,7 +176,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -260,7 +260,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -333,11 +333,11 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'GamblerCat',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 5,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -397,11 +397,11 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'AutismCreature',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 7,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -527,11 +527,11 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'BentismCreature',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 8,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -646,11 +646,11 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'jokelinear',
     pos = {x = 0, y = 0},
-    cost = 5,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true, 
+    discovered = false, 
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
@@ -709,7 +709,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -779,11 +779,11 @@ SMODS.Joker {
     rarity = 3,
     atlas = 'Kendrick',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -879,11 +879,11 @@ SMODS.Joker {
     rarity = 1,
     atlas = 'Mimic',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 2,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
@@ -931,6 +931,7 @@ SMODS.Joker {
     end
 }
 
+-- The Rock
 SMODS.Atlas {
     key = "Rock",
     path = "bttiRock.png",
@@ -963,7 +964,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1034,11 +1035,11 @@ SMODS.Joker {
     rarity = 1,
     atlas = 'hatovingCountry',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 4,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1110,7 +1111,7 @@ SMODS.Joker {
     pools = {["BTTImodaddition"] = true},
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1191,7 +1192,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1258,7 +1259,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1361,7 +1362,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1450,7 +1451,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1557,7 +1558,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -1658,7 +1659,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1735,7 +1736,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionDEETS"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -1814,11 +1815,11 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'GT',
 	pos = { x = 0, y = 0 },
-	cost = 6,
+	cost = 8,
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = true,
@@ -1894,7 +1895,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -2028,11 +2029,11 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Mug',
     pos = {x = 0, y = 0},
-    cost = 5,
+    cost = 7,
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2100,7 +2101,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -2160,11 +2161,11 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'Cubey',
     pos = { x = 0, y = 0 },
-    cost = 40,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionITTI"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2225,11 +2226,11 @@ SMODS.Joker {
 	rarity = 3,
     atlas = 'One',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2341,7 +2342,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2409,11 +2410,11 @@ SMODS.Joker {
     rarity = 1,
     atlas = 'Tenna',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2494,7 +2495,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2557,7 +2558,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = false,
     eternal_compat = false,
     perishable_compat = false,
@@ -2626,7 +2627,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2694,7 +2695,7 @@ SMODS.Joker {
 	end
 }
 
--- Jonker
+-- Moszy
 SMODS.Atlas {
     key = "RegMoszy",
     path = "bttiRegMoszy.png",
@@ -2720,14 +2721,14 @@ SMODS.Joker {
             vars = { },
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'RegMoszy',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2812,7 +2813,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -2908,7 +2909,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true, ["BTTImodadditionSMP"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3006,7 +3007,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3090,11 +3091,11 @@ SMODS.Joker {
 	rarity = 1,
     atlas = 'Checkpoint',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3160,11 +3161,11 @@ SMODS.Joker {
     rarity = 3,
     atlas = 'GreatArchbird',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 8,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3217,7 +3218,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3275,7 +3276,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3340,7 +3341,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3463,11 +3464,11 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'Juicimated',
     pos = { x = 0, y = 0 },
-    cost = 10,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3546,11 +3547,11 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'BlueBen8',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3631,11 +3632,11 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'Hatoving',
     pos = { x = 0, y = 0 },
-    cost = 5,
+    cost = 20,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
@@ -3730,7 +3731,7 @@ SMODS.Joker {
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
