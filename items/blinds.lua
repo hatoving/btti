@@ -70,7 +70,7 @@ SMODS.Blind {
 			'destroy a joker'
         }
     },
-    boss = { min = 1 },
+    boss = { min = 3 },
     boss_colour = HEX('0082cd'),
 
     calculate = function(self, blind, context)
@@ -118,20 +118,20 @@ SMODS.Blind {
 			'[[CLOWN]] each hand.'
         }
     },
-    boss = { min = 1 },
+    boss = { min = 4 },
     boss_colour = HEX('4f4f4f'),
 
     calculate = function(self, blind, context)
         if not blind.disabled then
 			if G.jokers then
-				if context.before and context.cardarea == G.jokers then
+				if context.before then
 					for i, jk in ipairs(G.jokers.cards) do
 						G.E_MANAGER:add_event(Event({
 							trigger = 'immediate',
 							blocking = false,
 							delay = 0,
 							func = function()
-								ease_dollars(-G.jokers.cards[i].sell_cost)
+								ease_dollars(-jk.sell_cost)
 								return true
 							end,
 						}))
@@ -273,7 +273,7 @@ SMODS.Blind {
             'xMult effects'
         }
     },
-    boss = { min = 1 },
+    boss = { min = 3 },
     boss_colour = HEX('ffc78d'),
     calculate = function(self, blind, context)
     end
