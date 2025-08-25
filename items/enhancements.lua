@@ -25,24 +25,24 @@ SMODS.Enhancement {
     end,
 }
 
--- Spilled Card
+-- stained Card
 SMODS.Atlas {
-    key = "spilledCard",
-    path = "bttiSpilledCard.png",
+    key = "stainedCard",
+    path = "bttistainedCard.png",
     px = 71,
     py = 95
 }
 SMODS.Enhancement {
-    key = 'spilledCard',
+    key = 'stainedCard',
     loc_txt = {
-        name = 'Spilled Card',
+        name = 'Stained Card',
         text = {
             "{C:green}1 in 2{} to leak into the",
             "card to its right, triggering it",
             "once before that card is triggered"
         }
     },
-    atlas = 'spilledCard',
+    atlas = 'stainedCard',
     pos = { x = 0, y = 0 },
     config = { },
     replace_base_card = false,
@@ -52,4 +52,11 @@ SMODS.Enhancement {
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         return { vars = { } }
     end,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if pseudorandom('MsBreward') < G.GAME.probabilities.normal / 2 then
+                
+            end
+        end
+    end
 }
