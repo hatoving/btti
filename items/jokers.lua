@@ -2,6 +2,7 @@ require("nativefs")
 
 --#region MUSIC
 
+--#region Tenna
 SMODS.Sound {
     key = "music_TennaNormal",
     path = "music_bttiTenna.ogg",
@@ -10,7 +11,7 @@ SMODS.Sound {
     select_music_track = function(self)
         return jokerExists("j_btti_Tenna")
             and G.GAME and G.GAME.blind and #G.GAME.blind.name > 0 and (G.GAME.blind:get_type() ~= 'Boss')
-            and G.GAME.btti_selectedMusicIdx == 0 -- look in hooks.lua
+            and G.GAME.btti_selectedMusicIdx == self.key -- look in hooks.lua
     end
 }
 SMODS.Sound {
@@ -21,9 +22,10 @@ SMODS.Sound {
     select_music_track = function(self)
         return jokerExists("j_btti_Tenna")
             and G.GAME and G.GAME.blind and #G.GAME.blind.name > 0 and (G.GAME.blind:get_type() == 'Boss')
-            and G.GAME.btti_selectedMusicIdx == 0 -- look in hooks.lua
+            and G.GAME.btti_selectedMusicIdx == self.key -- look in hooks.lua
     end
 }
+--#endregion
 
 --#endregion
 

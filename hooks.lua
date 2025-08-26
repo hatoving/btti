@@ -73,20 +73,22 @@ SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     end
     return ret
 end
+
+-- both musicIdx and musicIdxBoss MUST have the same jokers. one can't have more or less than the other
 btti_musicIdx = {
     ['j_btti_Tenna'] = {
-        normal = {
-            0
-        },
-        boss = {
-            0
-        }
+        'music_TennaNormal'
+    }
+}
+btti_musicIdxBoss = {
+    ['j_btti_Tenna'] = {
+        'music_TennaBoss'
     }
 }
 local calcJokerRef = Card.calculate_joker
 function Card:calculate_joker(context)
     if G.GAME.btti_selectedMusicIdx == nil then
-        G.GAME.btti_selectedMusicIdx = 0
+        G.GAME.btti_selectedMusicIdx = 'NOTHING'
     end
     if context.setting_blind then
         local jokers = {}
@@ -97,23 +99,23 @@ function Card:calculate_joker(context)
         end
 
         if #jokers == 0 then
-            G.GAME.btti_selectedMusicIdx = 0
+            G.GAME.btti_selectedMusicIdx = 'NOTHING'
         elseif #jokers == 1 then
-            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdx[jokers[1]].boss or
-                btti_musicIdx[jokers[1]].normal
+            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdxBoss[jokers[1]] or
+                btti_musicIdx[jokers[1]]
             if list and #list > 0 then
-                G.GAME.btti_selectedMusicIdx = list[math.random(1, #list)]
+                G.GAME.btti_selectedMusicIdx = "btti_" .. list[math.random(1, #list)]
             else
-                G.GAME.btti_selectedMusicIdx = list[1]
+                G.GAME.btti_selectedMusicIdx = "btti_" .. list[1]
             end
         else
             local chosenJoker = jokers[math.random(1, #jokers)]
-            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdx[chosenJoker].boss or
-                btti_musicIdx[chosenJoker].normal
+            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdxBoss[chosenJoker] or
+                btti_musicIdx[chosenJoker]
             if list and #list > 0 then
-                G.GAME.btti_selectedMusicIdx = list[math.random(1, #list)]
+                G.GAME.btti_selectedMusicIdx = "btti_" .. list[math.random(1, #list)]
             else
-                G.GAME.btti_selectedMusicIdx = list[1]
+                G.GAME.btti_selectedMusicIdx = "btti_" .. list[1]
             end
         end
 
