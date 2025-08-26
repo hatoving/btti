@@ -135,6 +135,14 @@ btti_dwayneTheRockAlpha = 0.0
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
+
+    if G.GAME.blind then
+        if G.GAME.blind.config.blind.key == 'bl_btti_truckBlind' then
+            --G.GAME.blind.loc_debuff_lines = { math.random(1, 69), math.random(1, 69), G.GAME.blind.debuffedHand or 'Nothing mistah white...' }
+            G.GAME.blind:set_text()
+        end
+    end
+
     btti_whorseFlashbangAlpha = lerp(btti_whorseFlashbangAlpha, 0.0, dt / 4.0)
     btti_dwayneTheRockAlpha = lerp(btti_dwayneTheRockAlpha, 0.0, dt)
 end

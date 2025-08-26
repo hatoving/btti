@@ -10,7 +10,16 @@ SMODS.Sound {
     pitch = 1,
     volume = 1.0,
     select_music_track = function(self)
-        return jokerExists("j_btti_LeBron") and not G.GAME.blind.in_blind
+        return (not jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and not G.GAME.blind.in_blind
+    end
+}
+SMODS.Sound {
+    key = "music_LeBronCA",
+    path = "music_bttiLebronCA.ogg",
+    pitch = 1,
+    volume = 1.0,
+    select_music_track = function(self)
+        return (jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and not G.GAME.blind.in_blind
     end
 }
 
