@@ -822,7 +822,7 @@ SMODS.Joker {
                         delay = 0,
                         func = function()
                             SMODS.add_card {
-                                set = 'Joker',
+                                set = 'BTTImodaddition',
                                 rarity = chosen,
                                 key_append = 'Kendrick'
                             }
@@ -865,6 +865,7 @@ SMODS.Joker {
     config = { extra = { cards = {} } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Evil of Humanity" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = {},
         }
@@ -939,7 +940,7 @@ SMODS.Joker {
            "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in hand",
            "He will briefly {C:attention}appear{} when this card is",
            "triggered",
-           "{C:inactive}Currently {X:mult,C:white}X#2#{} Mult"
+           "{C:inactive}Currently {X:mult,C:white}X#1#{} Mult"
         }
     },
 
@@ -2489,8 +2490,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Joozie',
 		text = {
-			"Upgrades played {C:attention}Kings{} and {C:attention}Queens{}",
-            "({C:chips}+117{} chips)"
+			"Upgrades played {C:attention}Kings{}",
+            "and {C:attention}Queens{} by",
+            "{C:chips}+0-117{} chips"
 		}
 	},
 

@@ -1,3 +1,6 @@
+to_big = to_big or function(x) return x end -- for talisman
+to_number = to_number or function(x) return x end -- for talisman
+
 function jokerExists(name)
     local _check = false
     if G.jokers and G.jokers.cards then
