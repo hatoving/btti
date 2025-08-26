@@ -549,10 +549,14 @@ SMODS.Blind {
                 blind.chosenHand = randomHand
             end
             if context.debuff_hand then
-                if context.scoring_name ~= blind.chosenHand then
-                    blind.triggered = true
-                elseif context.scoring_name == blind.chosenHand then
-                    blind.triggered = false
+                blind.triggered = true
+                if context.scoring_name == blind.chosenHand then
+                    return {
+                        debuff = true,
+                        debuff_text = 'However, blind WILL be disabled if played',
+                        chips = 0,
+                        mult = 0
+                    }
                 end
                 return {
                     debuff = true,
@@ -560,10 +564,28 @@ SMODS.Blind {
                     mult = 0
                 }
             end
-            if context.before then
-                if context.scoring_name == blind.chosenHand then
-                    blind.chosenHand = 'DISABLED'
-                    blind:disable()
+            if context.debuffed_hand then
+                if context.scoring_name ~= blind.chosenHand then
+                    blind.DISABLE_THAT_FUCKER = false
+                elseif context.scoring_name == blind.chosenHand then
+                    sendInfoMessage("DISABLE THIS PIECE OF SHIT RAHHHH (before)", "BTTI")
+                    blind.DISABLE_THAT_FUCKER = true
+                end
+            end
+            if context.after then
+                if blind.DISABLE_THAT_FUCKER then
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            blind.chosenHand = 'DISABLED'
+                            sendInfoMessage("DISABLE THIS PIECE OF SHIT RAHHHH (NOW)", "BTTI")
+                            blind:disable()
+                            return true
+                        end,
+                    }))
+                    return {}
                 end
             end
         end
