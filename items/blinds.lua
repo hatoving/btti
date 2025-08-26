@@ -514,7 +514,8 @@ SMODS.Blind {
         name = 'The Ticket',
         text = {
             'Must play this',
-            'random hand type:',
+            'random hand type',
+            'to disable blind:',
             '#1#'
         }
     },
@@ -532,11 +533,7 @@ SMODS.Blind {
     boss_colour = HEX('dd4eb3'),
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if blind.resetHand == nil then
-                blind.resetHand = true
-            end
-            if ((context.setting_blind or context.final_scoring_step) and blind.resetHand == true) or blind.chosenHand == nil then
-                G.GAME.blind.resetHand = false
+            if (context.setting_blind or context.final_scoring_step) or blind.chosenHand == nil then
                 blind.chosenHand = nil
 
                 local hands = {}
@@ -554,7 +551,6 @@ SMODS.Blind {
             if context.debuff_hand then
                 if context.scoring_name ~= blind.chosenHand then
                     blind.triggered = true
-                    blind.resetHand = false
                     return {
                         debuff = true,
                         chips = 0,
@@ -562,10 +558,17 @@ SMODS.Blind {
                     }
                 elseif context.scoring_name == blind.chosenHand then
                     blind.triggered = false
-                    blind.resetHand = true
                     return {
-                        debuff = false
+                        debuff = false,
+                        chips = 0,
+                        mult = 0
                     }
+                end
+            end
+            if context.before then
+                if context.scoring_name == blind.chosenHand then
+                    blind.chosenHand = 'DISABLED'
+                    blind:disable()
                 end
             end
         end

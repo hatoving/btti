@@ -116,19 +116,6 @@ SMODS.Joker {
 -- Metal Pipe
 SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg" })
 
-local ORIGINAL_play_sound = play_sound
-function play_sound(sound_code, per, vol)
-    if string.find(sound_code, 'multhit') ~= nil then
-        for i, jk in ipairs(G.jokers.cards) do
-            if jk.config.center.key == "j_btti_MetalPipe" then
-                sendInfoMessage("playing metal pipe instead", "BTTI")
-                return ORIGINAL_play_sound('btti_metalPipeMult', per, vol)
-            end
-        end
-    end
-    return ORIGINAL_play_sound(sound_code, per, vol)
-end
-
 SMODS.Atlas {
     key = "MetalPipe",
     path = "bttiMetalPipe.png",
