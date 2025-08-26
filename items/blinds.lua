@@ -437,3 +437,59 @@ SMODS.Blind {
 }
 
 --#endregion
+
+--#region BFDI BLINDS
+
+SMODS.Atlas {
+    key = "twoBlind",
+    path = "bttiTwoBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "twoBlind",
+    atlas = "twoBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Two',
+        text = {
+            'Cards with rank of',
+            '2 are debuffed'
+        }
+    },
+    boss = { min = 1 },
+    boss_colour = HEX('00a358'),
+    debuff = { value = '2' }
+}
+
+SMODS.Atlas {
+    key = "fourBlind",
+    path = "bttiFourBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "fourBlind",
+    atlas = "fourBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Four',
+        text = {
+            'Cards with rank of',
+            '4 are debuffed'
+        }
+    },
+    boss = { min = 1 },
+    boss_colour = HEX('00a358'),
+    debuff = { value = '4' }
+}
+
+--#endregion
