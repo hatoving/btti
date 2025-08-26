@@ -551,19 +551,14 @@ SMODS.Blind {
             if context.debuff_hand then
                 if context.scoring_name ~= blind.chosenHand then
                     blind.triggered = true
-                    return {
-                        debuff = true,
-                        chips = 0,
-                        mult = 0
-                    }
                 elseif context.scoring_name == blind.chosenHand then
                     blind.triggered = false
-                    return {
-                        debuff = false,
-                        chips = 0,
-                        mult = 0
-                    }
                 end
+                return {
+                    debuff = true,
+                    chips = 0,
+                    mult = 0
+                }
             end
             if context.before then
                 if context.scoring_name == blind.chosenHand then
