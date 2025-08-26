@@ -1,2 +1,7 @@
 .vscode/
 *.code-workspace
+.lovelyignore
+assets/.lovelyignore
+items/.lovelyignore
+localization/.lovelyignore
+lovely/.lovelyignore
