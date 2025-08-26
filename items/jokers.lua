@@ -2,6 +2,20 @@ require("nativefs")
 
 --#region MUSIC
 
+--#region LeBron
+
+SMODS.Sound {
+    key = "music_LeBron",
+    path = "music_bttiLebron.ogg",
+    pitch = 1,
+    volume = 1.0,
+    select_music_track = function(self)
+        return jokerExists("j_btti_LeBron") and not G.GAME.blind.in_blind
+    end
+}
+
+--#endregion
+
 --#region Tenna
 SMODS.Sound {
     key = "music_TennaNormal",
