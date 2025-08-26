@@ -1854,7 +1854,7 @@ SMODS.Joker {
 		name = 'Strawberry Lemoande',
 		text = {
             "Copies either a random {C:attention}Joker{}",
-            "or a random {C:attention}card{} in hand",
+            "or adds a random {C:attention}card's{} {C:chips}chips{} in hand",
             "Triggers twice if {C:purple}God Taco{}",
             "is present"
 		}
@@ -1934,22 +1934,25 @@ SMODS.Joker {
                 sendInfoMessage("SL idx: " .. idx, "BTTI")
 
                 if next(SMODS.find_card("j_btti_GT")) then
-                    local ret = {
-                        message = 'Again! +' .. context.scoring_hand[idx]:get_id(),
-                        chip_mod = context.scoring_hand[idx]:get_id(),
-                        colour = G.C.BTTIPINK,
-                        func = function()
-                            context.scoring_hand[idx]:juice_up()
-                        end
-                    }
-                    local ret2 = {
-                        message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
-                        chip_mod = context.scoring_hand[idx]:get_id(),
-                        colour = G.C.BTTIPINK,
-                        func = function()
-                            context.scoring_hand[idx]:juice_up()
-                        end
-                    }
+                    local ret, ret2 = {}, {}
+                    if not context.scoring_hand[idx].debuff then
+                        ret = {
+                            message = 'Again! +' .. context.scoring_hand[idx]:get_chip_bonus(),
+                            chip_mod = context.scoring_hand[idx]:get_chip_bonus(),
+                            colour = G.C.BTTIPINK,
+                            func = function()
+                                context.scoring_hand[idx]:juice_up()
+                            end
+                        }
+                        ret2 = {
+                            message = 'Hooray! +' .. context.scoring_hand[idx]:get_chip_bonus(),
+                            chip_mod = context.scoring_hand[idx]:get_chip_bonus(),
+                            colour = G.C.BTTIPINK,
+                            func = function()
+                                context.scoring_hand[idx]:juice_up()
+                            end
+                        }
+                    end
                     return SMODS.merge_effects {
                         {
                             message = "Go, GT!!",
@@ -1959,8 +1962,8 @@ SMODS.Joker {
                 else
                     if not context.scoring_hand[idx].debuff then
                         return {
-                            message = 'Hooray! +' .. context.scoring_hand[idx]:get_id(),
-                            chip_mod = context.scoring_hand[idx]:get_id(),
+                            message = 'Hooray! +' .. context.scoring_hand[idx]:get_chip_bonus(),
+                            chip_mod = context.scoring_hand[idx]:get_chip_bonus(),
                             colour = G.C.BTTIPINK,
                         }
                     else
