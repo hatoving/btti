@@ -532,7 +532,11 @@ SMODS.Blind {
     boss_colour = HEX('dd4eb3'),
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if context.setting_blind or context.final_scoring_step or blind.chosenHand == nil then
+            if blind.resetHand == nil then
+                blind.resetHand = true
+            end
+            if ((context.setting_blind or context.final_scoring_step) and blind.resetHand == true) or blind.chosenHand == nil then
+                G.GAME.blind.resetHand = false
                 blind.chosenHand = nil
 
                 local hands = {}
@@ -550,11 +554,15 @@ SMODS.Blind {
             if context.debuff_hand then
                 if context.scoring_name ~= blind.chosenHand then
                     blind.triggered = true
+                    blind.resetHand = false
                     return {
-                        debuff = true
+                        debuff = true,
+                        chips = 0,
+                        mult = 0
                     }
                 elseif context.scoring_name == blind.chosenHand then
                     blind.triggered = false
+                    blind.resetHand = true
                     return {
                         debuff = false
                     }
