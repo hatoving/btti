@@ -73,44 +73,57 @@ SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     end
     return ret
 end
-
-btti_selectedMusicIdx = 0
 btti_musicIdx = {
     ['j_btti_Tenna'] = {
-        0
+        normal = {
+            0
+        },
+        boss = {
+            0
+        }
     }
 }
-
-local blindSetRef = Blind.set_blind
-function Blind:set_blind(blind, reset, silent)
-    local jokers = {}
-    for key, indexes in pairs(btti_musicIdx) do
-        if jokerExists(key) then
-            table.insert(jokers, key)
-        end
+local calcJokerRef = Card.calculate_joker
+function Card:calculate_joker(context)
+    if G.GAME.btti_selectedMusicIdx == nil then
+        G.GAME.btti_selectedMusicIdx = 0
     end
+    if context.setting_blind then
+        local jokers = {}
+        for key, indexes in pairs(btti_musicIdx) do
+            if jokerExists(key) then
+                table.insert(jokers, key)
+            end
+        end
 
-    if #jokers == 0 then
-        btti_selectedMusicIdx = 0
-    elseif #jokers == 1 then
-        local list = btti_musicIdx[jokers[1]]
-        if list and #list > 0 then
-            btti_selectedMusicIdx = list[math.random(1, #list)]
+        if #jokers == 0 then
+            G.GAME.btti_selectedMusicIdx = 0
+        elseif #jokers == 1 then
+            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdx[jokers[1]].boss or
+                btti_musicIdx[jokers[1]].normal
+            if list and #list > 0 then
+                G.GAME.btti_selectedMusicIdx = list[math.random(1, #list)]
+            else
+                G.GAME.btti_selectedMusicIdx = list[1]
+            end
         else
-            btti_selectedMusicIdx = 0
+            local chosenJoker = jokers[math.random(1, #jokers)]
+            local list = (G.GAME.blind:get_type() == 'Boss') and btti_musicIdx[chosenJoker].boss or
+                btti_musicIdx[chosenJoker].normal
+            if list and #list > 0 then
+                G.GAME.btti_selectedMusicIdx = list[math.random(1, #list)]
+            else
+                G.GAME.btti_selectedMusicIdx = list[1]
+            end
         end
-    else
-        local chosenJoker = jokers[math.random(1, #jokers)]
-        local list = btti_musicIdx[chosenJoker]
-        if list and #list > 0 then
-            btti_selectedMusicIdx = list[math.random(1, #list)]
-        else
-            btti_selectedMusicIdx = 0
-        end
+
+        sendInfoMessage(
+            "selecting music: " .. tostring(G.GAME.btti_selectedMusicIdx) ..
+            ", is boss = " .. tostring((G.GAME.blind:get_type() == 'Boss')),
+            "BTTI"
+        )
     end
-
-    sendInfoMessage("selecting music: " .. btti_selectedMusicIdx, "BTTI")
-    return blindSetRef(self, blind, reset, silent)
+    return calcJokerRef(self, context)
 end
 
 btti_whorseFlashbangAlpha = 0.0

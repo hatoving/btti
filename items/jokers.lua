@@ -3,16 +3,28 @@ require("nativefs")
 --#region MUSIC
 
 SMODS.Sound {
-    key = "music_Tenna0",
+    key = "music_TennaNormal",
     path = "music_bttiTenna.ogg",
     pitch = 1,
     volume = 1.0,
     select_music_track = function(self)
         return jokerExists("j_btti_Tenna")
-            and G.GAME and G.GAME.blind and #G.GAME.blind.name > 0
-            and btti_selectedMusicIdx == 0 -- look in hooks.lua
+            and G.GAME and G.GAME.blind and #G.GAME.blind.name > 0 and (G.GAME.blind:get_type() ~= 'Boss')
+            and G.GAME.btti_selectedMusicIdx == 0 -- look in hooks.lua
     end
 }
+SMODS.Sound {
+    key = "music_TennaBoss",
+    path = "music_bttiTennaBoss.ogg",
+    pitch = 1,
+    volume = 1.0,
+    select_music_track = function(self)
+        return jokerExists("j_btti_Tenna")
+            and G.GAME and G.GAME.blind and #G.GAME.blind.name > 0 and (G.GAME.blind:get_type() == 'Boss')
+            and G.GAME.btti_selectedMusicIdx == 0 -- look in hooks.lua
+    end
+}
+
 --#endregion
 
 -- MISC JOKERS
