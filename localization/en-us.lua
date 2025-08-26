@@ -4,13 +4,19 @@ return {
             bttiFromWhere = {
                 name = "From Where?!",
                 text = {
-                    "{C:purple}#1#{}"
+                    "{X:dark_edition,C:white}#1#{}"
+                },
+            },
+            bttiFromWho = {
+                name = "By Who?!",
+                text = {
+                    "{C:dark_edition}#1#{}"
                 },
             },
             bttiPossibleCombo = {
                 name = "Possible Combination",
                 text = {
-                    "{C:green}#1#{}"
+                    "{X:green,C:white}#1#{}"
                 },
             },
         },

@@ -19,7 +19,7 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -36,6 +36,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and
             (context.other_card:is_suit('Diamonds') or context.other_card:is_suit('Hearts')) then
@@ -70,7 +73,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -87,6 +90,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and
             (context.other_card:is_suit('Spades') or context.other_card:is_suit('Clubs')) then
@@ -119,7 +125,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -136,6 +142,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             return {
@@ -168,7 +177,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -185,6 +194,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Pair']) then
             return {
@@ -218,7 +230,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -235,6 +247,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Three of a Kind']) then
             return {
@@ -268,7 +283,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -285,6 +300,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Two Pair']) then
             return {
@@ -318,7 +336,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -335,6 +353,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Straight']) then
             return {
@@ -368,7 +389,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -385,6 +406,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Flush']) then
             return {
@@ -420,7 +444,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -437,6 +461,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         
         if context.joker_main then
@@ -488,7 +515,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -505,6 +532,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Pair']) then
             return {
@@ -538,7 +568,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -555,6 +585,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands['Three of a Kind']) then
             return {
@@ -587,7 +620,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -604,6 +637,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             return {
@@ -637,7 +673,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 15 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { },
         }
@@ -654,6 +690,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
             if pseudorandom('TrueBanana') < G.GAME.probabilities.normal / 500 then
@@ -692,7 +731,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -709,6 +748,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             if context.other_card:get_id() == 13 then
@@ -763,7 +805,7 @@ SMODS.Joker {
 
     config = { extra = { chips = 0, chip_mod = 8 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -780,6 +822,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             local rets = {}
@@ -833,7 +878,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -850,6 +895,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and
             #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
@@ -915,7 +963,7 @@ SMODS.Joker {
 
     config = { extra = { chips = 0, chip_mod = 10 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.chips },
         }
@@ -932,6 +980,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.hand and not context.end_of_round then
             if context.other_card.is_face(context.other_card) then
@@ -1022,7 +1073,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 0 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { },
         }
@@ -1039,6 +1090,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             local rets = {}
@@ -1087,7 +1141,7 @@ SMODS.Joker {
 
     config = { extra = { mult = 1 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         local sell_cost = 0
         for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
             if joker ~= card then
@@ -1110,6 +1164,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             local sell_cost = 0
@@ -1149,7 +1206,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -1166,6 +1223,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.setting_blind then
             local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
@@ -1191,7 +1251,10 @@ SMODS.Joker {
                         end
                     }))
                     draw_card(G.play, G.deck, 90, 'up')
-                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_context({ playing_card_added = true, cards = { stone_card } })
                 end
             }
         end
@@ -1212,7 +1275,10 @@ SMODS.Joker {
                     else
                         card:juice_up()
                     end
-                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_context({ playing_card_added = true, cards = { _card } })
                     save_run()
                     return true
                 end
@@ -1247,7 +1313,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 3 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }
@@ -1264,6 +1330,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play and G.GAME.current_round.hands_left == 0 then
             return {
@@ -1297,7 +1366,7 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }
@@ -1314,13 +1383,19 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.setting_blind then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     ease_discard(-G.GAME.current_round.discards_left, nil, true)
                     ease_hands_played(card.ability.extra.hands)
-                    SMODS.calculate_effect(
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_effect(
                         { message = localize { type = 'variable', key = 'a_hands', vars = { card.ability.extra.hands } } },
                         context.blueprint_card or card)
                     return true
@@ -1370,7 +1445,7 @@ SMODS.Joker {
 
     config = { extra = { Xmult = 1 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.Xmult },
         }
@@ -1404,6 +1479,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.setting_blind then
             local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
@@ -1429,7 +1507,10 @@ SMODS.Joker {
                         end
                     }))
                     draw_card(G.play, G.deck, 90, 'up')
-                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_context({ playing_card_added = true, cards = { stone_card } })
                 end
             }
         end
@@ -1450,7 +1531,10 @@ SMODS.Joker {
                     else
                         card:juice_up()
                     end
-                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_context({ playing_card_added = true, cards = { _card } })
                     save_run()
                     return true
                 end
@@ -1496,7 +1580,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 1 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.xmult + (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0)) },
         }
@@ -1513,6 +1597,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -1528,7 +1615,10 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    SMODS.calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
+                    SMODS.set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
                         context.blueprint_card or card)
                     return true
                 end)
@@ -1573,7 +1663,7 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {  },
         }
@@ -1625,7 +1715,7 @@ SMODS.Joker {
 
     config = { extra = { xmult = 3 } },
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
+        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }
@@ -1642,6 +1732,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if (context.individual or context.repetition) and context.cardarea == G.play and context.other_card:is_face() then
             local is_first_face = false

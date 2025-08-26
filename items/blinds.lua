@@ -204,7 +204,7 @@ SMODS.Blind {
 
 SMODS.Atlas {
     key = "emeraldBlind",
-    path = "bttiPlaceholderBlind.png",
+    path = "bttiEmeraldBlind.png",
     px = 34,
     py = 34,
     frames = 21,
@@ -224,7 +224,7 @@ SMODS.Blind {
         }
     },
     boss = { min = 5 },
-    boss_colour = HEX('170081'),
+    boss_colour = HEX('00a358'),
 
     recalc_debuff = function(self, card, from_blind)
         if card.area ~= G.jokers and not G.GAME.blind.disabled then
@@ -239,7 +239,7 @@ SMODS.Blind {
 
 SMODS.Atlas {
     key = "pillarBlind",
-    path = "bttiPlaceholderBlind.png",
+    path = "bttiPillarBlind.png",
     px = 34,
     py = 34,
     frames = 21,
@@ -259,7 +259,7 @@ SMODS.Blind {
         }
     },
     boss = { min = 5 },
-    boss_colour = HEX('170081'),
+    boss_colour = HEX('4b0051'),
 
     recalc_debuff = function(self, card, from_blind)
         if card.area ~= G.jokers and not G.GAME.blind.disabled then
@@ -274,7 +274,7 @@ SMODS.Blind {
 
 SMODS.Atlas {
     key = "singularityBlind",
-    path = "bttiPlaceholderBlind.png",
+    path = "bttiSingularityBlind.png",
     px = 34,
     py = 34,
     frames = 21,
@@ -293,7 +293,7 @@ SMODS.Blind {
         }
     },
     boss = { min = 6 },
-    boss_colour = HEX('170081'),
+    boss_colour = HEX('00032e'),
     debuff = {h_size_le = 1}
 }
 

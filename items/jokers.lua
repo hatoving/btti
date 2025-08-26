@@ -151,6 +151,7 @@ SMODS.Joker {
     config = { extra = { xmult = 2.75, odds = 20, cur = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "William Murdock" } }
         return {
             vars = { card.ability.extra.xmult, card.ability.extra.odds, card.ability.extra.cur },
         }
@@ -235,6 +236,7 @@ SMODS.Joker {
     config = { extra = { mult = 1, rep = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Family Guy" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "Seth McFarlane" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.rep },
         }
@@ -508,6 +510,7 @@ SMODS.Joker {
     config = { extra = { odds = 40, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "BlueHQ" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { card.ability.extra.odds, card.ability.extra.cardAmount, card.ability.extra.multAmount },
         }
@@ -626,7 +629,8 @@ SMODS.Joker {
 
     config = { extra= {}},
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Charlinear's Beautiful Mind" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "charlinear's Beautiful Mind" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "charlinear" } }
         return {
             vars = {}
         }
@@ -690,7 +694,7 @@ SMODS.Joker {
             vars = {},
         }
     end,
-    rarity = 2,
+    rarity = 1,
     atlas = 'LeBron',
     pos = { x = 0, y = 0 },
     cost = 5,
@@ -764,7 +768,7 @@ SMODS.Joker {
             vars = {},
         }
     end,
-    rarity = 3,
+    rarity = 2,
     atlas = 'Kendrick',
     pos = { x = 0, y = 0 },
     cost = 6,
@@ -1146,7 +1150,6 @@ SMODS.Joker {
 
 -- HANAKO JOKERS
 --#region HANAKO JOKERS
-
 SMODS.Atlas {
     key = "Hanako",
     path = "bttiHanako.png",
@@ -1169,6 +1172,7 @@ SMODS.Joker {
     config = { extra = { smult = 0, schips = 0} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "YOURS TRULY, HANAKO" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }
@@ -1185,6 +1189,9 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('hatoving', G.C.BTTIPINK, G.C.WHITE, 1.2)
+    end,
     calculate = function(self, card, context)
         if context.joker_main then
             return {
@@ -1236,6 +1243,7 @@ SMODS.Joker {
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = {},
         }
@@ -1339,6 +1347,7 @@ SMODS.Joker {
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = {},
         }
@@ -1428,6 +1437,7 @@ SMODS.Joker {
     config = { extra = { cooldown = 0.0, angry = false } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = { card.ability.extra.cooldown, card.ability.extra.cooldownFloored },
         }
@@ -1535,6 +1545,7 @@ SMODS.Joker {
     config = { extra = { mult = 0, kickedJoker = '' } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = { card.ability.extra.mult },
         }
@@ -1636,6 +1647,7 @@ SMODS.Joker {
     config = { extra = { xmult = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = { card.ability.extra.xmult },
         }
@@ -1713,6 +1725,7 @@ SMODS.Joker {
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "Juicimated" } }
         return {
             vars = { },
         }
@@ -1796,6 +1809,7 @@ SMODS.Joker {
 	config = { extra = { gtTarget = 0 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "LightShine, Juicimated" } }
 		return {
             vars = { },
         }
@@ -1872,6 +1886,7 @@ SMODS.Joker {
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "LightShine, Juicimated" } }
 		return {
             vars = { },
         }
@@ -2013,6 +2028,7 @@ SMODS.Joker {
     config = {extra = {mult = 0, mult_gain = 1}},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
         }
@@ -2081,6 +2097,7 @@ SMODS.Joker {
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -2145,6 +2162,7 @@ SMODS.Joker {
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -2211,6 +2229,7 @@ SMODS.Joker {
 	config = { extra = { chips = 0, mult = 0, Xmult = 0.0 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island: The Power of Two" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "jacknjellify" } }
 		return {
             vars = { card.ability.extra.chips, card.ability.extra.Xmult, card.ability.extra.mult },
         }
@@ -2323,6 +2342,7 @@ SMODS.Joker {
 	config = { extra = { mult = 8, howMuch = 0 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "DRAMATIZED" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "Juicimated" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.howMuch },
         }
@@ -2395,6 +2415,7 @@ SMODS.Joker {
     config = { extra = { mult = 0, chips = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "Toby Fox" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }
@@ -2476,6 +2497,7 @@ SMODS.Joker {
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" }}
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "Juicimated" } }
 		return {
             vars = { },
         }
@@ -2968,6 +2990,7 @@ SMODS.Joker {
     config = { extra = { chips = 70, mult = 30 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.mult },
         }
@@ -3056,6 +3079,7 @@ SMODS.Joker {
 	config = { extra = { smult = 0, schips = 0, firstHand = false } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }
@@ -3126,6 +3150,7 @@ SMODS.Joker {
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -3179,6 +3204,7 @@ SMODS.Joker {
     config = { extra = { Xmult = 1, jokersDestroyed = 0 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { card.ability.extra.Xmult + ((card.ability.extra.jokersDestroyed or 0) * 0.75) },
         }
@@ -3237,6 +3263,7 @@ SMODS.Joker {
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { },
         }
