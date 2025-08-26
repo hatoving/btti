@@ -1,75 +1,5 @@
 require("nativefs")
 
---#region FUNCTIONS
-
-function percentOf(value, percent)
-    return value * (percent / 100)
-end
-
-function getJokerID(card)
-    if G.jokers then
-        local _selfid = 0
-        for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i] == card then _selfid = i end
-        end
-        return _selfid
-    end
-end
-
-function lerp(a, b, t)
-    local result = a + t * (b - a)
-    return result
-end
-
-function Card:click()
-    if self.area and self.area:can_highlight(self) then
-        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
-        if self.highlighted ~= true then
-            self.area:add_to_highlighted(self)
-            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
-        else
-            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
-            self.area:remove_from_highlighted(self)
-            play_sound('cardSlide2', nil, 0.3)
-        end
-    end
-    if self.area and self.area == G.deck and self.area.cards[1] == self then
-        G.FUNCS.deck_info()
-    end
-end
-
-function loadImage(fn)
-    local full_path = SMODS.current_mod.path .. 'assets/images/' .. fn
-    full_path = full_path:gsub('%\\', '/')
-    local file_data = assert(NFS.newFileData(full_path), ("Epic fail"))
-    local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))
-    return (assert(love.graphics.newImage(tempimagedata), ("Epic fail 3")))
-end
-
-local whorseFlashbang = 0.0
-local rockImage = loadImage('rock.png')
-local rockAlpha = 0.0
-
-local updateReal = love.update
-function love.update(dt)
-    updateReal(dt)
-    whorseFlashbang = lerp(whorseFlashbang, 0.0, dt / 4.0)
-    rockAlpha = lerp(rockAlpha, 0.0, dt)
-end
-
-local drawReal = love.draw
-function love.draw()
-    drawReal()
-
-    love.graphics.setColor(1, 1, 1, rockAlpha)
-    love.graphics.draw(rockImage, 0, 0, 0, (love.graphics.getWidth() / rockImage:getWidth()),
-        (love.graphics.getHeight() / rockImage:getHeight()))
-    love.graphics.setColor(1, 1, 1, whorseFlashbang)
-    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-end
-
---#endregion
-
 -- MISC JOKERS
 --#region MISC JOKERS
 
@@ -994,7 +924,7 @@ SMODS.Joker {
             card.ability.extra.cur = card.ability.extra.xmult * cardAmount
             sendInfoMessage("Found " .. cardAmount .. " cards = x" .. card.ability.extra.xmult * cardAmount .. " Mult", "BTTI")
             if card.ability.extra.xmult * cardAmount > 0 then
-                rockAlpha = 1.0
+                btti_dwayneTheRockAlpha = 1.0
                 local rets = {
                     {
                         message = "It's about drive,",
@@ -1686,7 +1616,7 @@ SMODS.Joker {
                     message = "Whorse",
                     colour = G.C.WHITE,
                     func = function ()
-                        whorseFlashbang = 1.0
+                        btti_whorseFlashbangAlpha = 1.0
                         play_sound("btti_whorseFlashbang")
                         return true
                     end

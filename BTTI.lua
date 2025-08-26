@@ -243,6 +243,8 @@ SMODS.current_mod.optional_features = {
 	post_trigger = true
 }
 
+--#region Pool creation
+
 SMODS.ObjectType({
 	key = "BTTImodaddition",
 	default = "j_reserved_parking",
@@ -325,11 +327,24 @@ SMODS.ObjectType({
 	end,
 })
 
+--#endregion
+
+local f, err = SMODS.load_file('utils.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('hooks.lua')
+if err then
+	error(err)
+end
+f()
+
 -- Load items
 local files = NFS.getDirectoryItems(mod_path .. "items")
 for _, file in ipairs(files) do
 	print("[BTTI] Loading lua file " .. file)
-	local f, err = SMODS.load_file("items/" .. file)
+	f, err = SMODS.load_file("items/" .. file)
 	if err then
 		error(err)
 	end
