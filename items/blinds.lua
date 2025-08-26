@@ -346,8 +346,8 @@ SMODS.Blind {
     boss_colour = HEX('c90000'),
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if context.setting_blind or context.final_scoring_step then
-                blind.debuffedHand = {}
+            if context.setting_blind or context.final_scoring_step or blind.debuffedHand == nil then
+                blind.debuffedHand = nil
 
                 local hands = {}
                 for k, _ in pairs(G.GAME.hands) do
@@ -488,8 +488,83 @@ SMODS.Blind {
         }
     },
     boss = { min = 1 },
-    boss_colour = HEX('00a358'),
+    boss_colour = HEX('132aff'),
     debuff = { value = '4' }
+}
+
+--#endregion
+
+--#region DRAMATIZED BLINDS
+
+SMODS.Atlas {
+    key = "ticketBlind",
+    path = "bttiTicketBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "ticketBlind",
+    atlas = "ticketBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Ticket',
+        text = {
+            'Must play this',
+            'random hand type:',
+            '#1#'
+        }
+    },
+    loc_vars = function(self)
+        if G.GAME.blind.chosenHand then
+            return {
+                vars = { localize(G.GAME.blind.chosenHand, 'poker_hands') },
+            }
+        end
+        return {
+            vars = { 'None' },
+        }
+    end,
+    boss = { min = 4 },
+    boss_colour = HEX('dd4eb3'),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind or context.final_scoring_step or blind.chosenHand == nil then
+                blind.chosenHand = nil
+
+                local hands = {}
+                for k, _ in pairs(G.GAME.hands) do
+                    if _.visible then
+                        table.insert(hands, k)
+                    end
+                end
+
+                local randomHand = hands[math.random(#hands)]
+                sendInfoMessage("blind chose " .. randomHand .. "", "BTTI")
+
+                blind.chosenHand = randomHand
+            end
+            if context.debuff_hand then
+                if context.scoring_name ~= blind.chosenHand then
+                    blind.triggered = true
+                    return {
+                        debuff = true
+                    }
+                elseif context.scoring_name == blind.chosenHand then
+                    blind.triggered = false
+                    return {
+                        debuff = false
+                    }
+                end
+            end
+        end
+        if context.hand_drawn then
+            blind.prepped = nil
+        end
+    end,
 }
 
 --#endregion
