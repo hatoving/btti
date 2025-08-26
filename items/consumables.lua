@@ -1,3 +1,7 @@
+--#region Planet Cards
+
+--#region DEETS Planets
+
 -- Mysticalia
 SMODS.Atlas {
     key = "mysticalia",
@@ -183,6 +187,10 @@ SMODS.Consumable {
     end
 }
 
+--#endregion
+
+--#region Bisexual Planets
+
 -- Kepler
 SMODS.Atlas {
     key = "kepler",
@@ -272,6 +280,12 @@ SMODS.Consumable {
         end
     end
 }
+
+--#endregion
+
+--#endregion
+
+--#region Tarot Cards
 
 -- Tarots
 
@@ -611,6 +625,8 @@ SMODS.Consumable {
         return false
     end
 }
+
+--#endregion
 
 -- Doubt
 SMODS.Atlas {

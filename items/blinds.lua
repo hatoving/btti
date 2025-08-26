@@ -256,3 +256,67 @@ SMODS.Blind {
     calculate = function(self, blind, context)
     end
 }
+
+
+SMODS.Atlas {
+    key = "truckBlind",
+    path = "bttiTruckBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+
+SMODS.Blind {
+    key = "truckBlind",
+    atlas = "truckBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Truck',
+        text = {
+            'Debuffs a random poker',
+            'hand before every hand'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('c90000'),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind or context.final_scoring_step then
+                blind.debuffedHand = {}
+
+                local hands = {}
+                for k, _ in pairs(G.GAME.hands) do
+                    if _.visible then
+                        table.insert(hands, k)
+                    end
+                end
+                local randomHand = hands[math.random(#hands)]
+                sendInfoMessage("blind chose " .. randomHand .. "", "BTTI")
+
+                blind.debuffedHand = randomHand
+
+                return {
+                    message = localize(randomHand, 'poker_hands') .. "!"
+                }
+            end
+            if context.debuff_hand then
+                if context.scoring_name == blind.debuffedHand then
+                    blind.triggered = true
+                    return {
+                        debuff = true
+                    }
+                end
+            end
+        end
+        if context.hand_drawn then
+            blind.prepped = nil
+        end
+    end,
+    disable = function(self)
+    end,
+    defeat = function(self)
+    end
+}
