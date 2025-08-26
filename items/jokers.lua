@@ -1620,7 +1620,7 @@ SMODS.Joker {
         text = {
             "{X:mult,C:white}X2{} Mult for each",
             "{C:attention}non-enhanced{} card in {C:attention}played hand",
-            "{C:green}1 in 20{} chance to flashbang you"
+            "{C:green}1 in 5{} chance to flashbang you"
         }
     },
 
@@ -1654,7 +1654,7 @@ SMODS.Joker {
                     end
                 end
             end
-            if pseudorandom('Whorse') < G.GAME.probabilities.normal / 20 then                
+            if pseudorandom('Whorse') < G.GAME.probabilities.normal / 5 then                
                 return {
                     message = "Whorse",
                     colour = G.C.WHITE,
