@@ -68,9 +68,9 @@ function createPlayer(x,y)
         )
     end
     function player:update(dt)
-        if love.keyboard.isDown("down") then
+        if love.keyboard.isDown("down") or love.keyboard.isDown("s") then
             self.vy = lerp(self.vy, self.vel, dt * self.speed)
-        elseif love.keyboard.isDown("up") then
+        elseif love.keyboard.isDown("up") or love.keyboard.isDown("w") then
             self.vy = lerp(self.vy, -self.vel, dt * self.speed)
         else
             self.vy = lerp(self.vy, 0, dt * self.speed)
