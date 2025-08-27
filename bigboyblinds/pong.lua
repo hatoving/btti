@@ -14,25 +14,7 @@ local STARTING_GRAVITY = -5
 local TOP_LIMIT = 200
 local BOTTOM_LIMIT = 370
 
-function drawRotatedRectangle(mode, x, y, width, height, angle)
-    -- We cannot rotate the rectangle directly, but we
-    -- can move and rotate the coordinate system.
-    love.graphics.push()
-    love.graphics.translate(x, y)
-    love.graphics.rotate(angle)
-    love.graphics.rectangle(mode, 0, 0, width, height) -- origin in the top left corner
-    --	love.graphics.rectangle(mode, -width/2, -height/2, width, height) -- origin in the middle
-    love.graphics.pop()
-end
-
-function checkCollision(ax, ay, aw, ah, bx, by, bw, bh)
-    return ax < bx + bw and
-        ax + aw > bx and
-        ay < by + bh and
-        ay + ah > by
-end
-
-function createPlayer(x,xoff,y)
+local createPlayer = function(x,xoff,y)
     local player = {
         x = x - xoff,
         xog = x,
@@ -121,7 +103,7 @@ function createPlayer(x,xoff,y)
     return player
 end
 
-function createBall(x,y)
+local createBall = function (x,y)
     local ball = {
         x = x,
         sx = -4,

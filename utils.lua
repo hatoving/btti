@@ -13,6 +13,31 @@ function jokerExists(name)
     return _check
 end
 
+function checkCollision(ax, ay, aw, ah, bx, by, bw, bh)
+    return ax < bx + bw and
+        ax + aw > bx and
+        ay < by + bh and
+        ay + ah > by
+end
+
+function checkCollisionRect(a, b)
+    return a.x < b.x + b.w and
+        a.x + a.w > b.x and
+        a.y < b.y + b.h and
+        a.y + a.h > b.y
+end
+
+function drawRotatedRectangle(mode, x, y, width, height, angle)
+    -- We cannot rotate the rectangle directly, but we
+    -- can move and rotate the coordinate system.
+    love.graphics.push()
+    love.graphics.translate(x, y)
+    love.graphics.rotate(angle)
+    love.graphics.rectangle(mode, 0, 0, width, height) -- origin in the top left corner
+    --	love.graphics.rectangle(mode, -width/2, -height/2, width, height) -- origin in the middle
+    love.graphics.pop()
+end
+
 -- from https://github.com/blazingulag/Prism/blob/main/objects/funcs.lua#L192
 function is_numbered(card)
     return card.base and card.base.value and not SMODS.Ranks[card.base.value].face and card:get_id() ~= 14
@@ -47,6 +72,23 @@ end
 function lerp(a, b, t)
     local result = a + t * (b - a)
     return result
+end
+
+function lerpAngle(a, b, t)
+    local diff = (b - a + math.pi) % (2 * math.pi) - math.pi
+    return a + diff * t
+end
+
+function angleDifference(a, b)
+    local diff = (b - a) % (2 * math.pi)
+    if diff > math.pi then
+        diff = diff - 2 * math.pi
+    end
+    return diff
+end
+
+function math.clamp(x, min, max)
+    return math.max(min, math.min(max, x))
 end
 
 -- stolen from yahimod, thank you yaha mouse
