@@ -156,15 +156,19 @@ btti_dwayneTheRockAlpha = 0.0
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
-
     
     if G and G.GAME then
         if G.GAME.btti_levelBlindCountdown == nil then  
             G.GAME.btti_levelBlindCountdown = 5.0
         end
-        btti_PONG_update(dt)
+        if G.STATE == G.STATES.MENU then
+            if btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
+                btti_PONG_kill()
+            end
+        end
     end
-
+    btti_PONG_update(dt)
+    
     if G.GAME.blind then
         if G.GAME.blind.config.blind.key == 'bl_btti_truckBlind' or G.GAME.blind.config.blind.key == 'bl_btti_ticketBlind' then
             --G.GAME.blind.loc_debuff_lines = { math.random(1, 69), math.random(1, 69), G.GAME.blind.debuffedHand or 'Nothing mistah white...' }
@@ -192,6 +196,10 @@ function love.update(dt)
                 else
                     sendInfoMessage("All cards already have editions!", "BTTI")
                 end
+            end
+        elseif G.GAME.blind.config.blind.key == 'bl_btti_pongBlind' then
+            if not btti_PONG_initialized and (G.STATE ~= G.STATES.GAME_OVER and G.STATE ~= G.STATES.MENU or G.STATE ~= G.STATES.BLIND_SELECT) then
+                btti_PONG_init()
             end
         else
             G.GAME.btti_levelBlindCountdown = 5.0
@@ -415,9 +423,7 @@ function Game:draw()
     love.graphics.setColor(1, 1, 1, btti_whorseFlashbangAlpha)
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 
-    if btti_PONG_initialized then
-        btti_PONG_draw()
-    end
+    btti_PONG_draw()
 
         love.graphics.pop()
 

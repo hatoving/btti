@@ -223,6 +223,7 @@ btti_PONG_initialized = false
 btti_PONG_state = btti_PONG_STATES.START
 btti_PONG_timer = 0
 btti_PONG_timerTarget = 2
+btti_PONG_dontDraw = false
 
 function btti_PONG_score()
     btti_PONG_timer = 0
@@ -233,7 +234,9 @@ end
 
 function btti_PONG_init()
     if not btti_PONG_initialized then
+        sendInfoMessage("pong is init NOW", "BTTI")
         btti_PONG_initialized = true
+        btti_PONG_dontDraw = false
 
         player1 = createPlayer(1280 / 2 - 150, 720 / 2 - 65)
         player2 = createPlayer(1280 / 2 + 320, 720 / 2 - 65)
@@ -255,7 +258,7 @@ function btti_PONG_update(dt)
     scaleX = screenWidth / 1280
     scaleY = screenHeight / 720
 
-    if btti_PONG_initialized == true then
+    if btti_PONG_initialized == true and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
         if btti_PONG_state == btti_PONG_STATES.START then
             btti_PONG_timer = btti_PONG_timer + dt
             if btti_PONG_timer > btti_PONG_timerTarget then
@@ -286,6 +289,7 @@ function btti_PONG_update(dt)
                 btti_PONG_timer = 0
                 btti_PONG_initialized = false
 
+                btti_PONG_dontDraw = true
                 sendInfoMessage("pong is dead NOW", "BTTI")
 
                 player1 = {}
@@ -297,11 +301,30 @@ function btti_PONG_update(dt)
 end
 
 function btti_PONG_draw()
-    if btti_PONG_initialized then
-        player1:draw()
-        player2:draw()
+    if btti_PONG_initialized and not btti_PONG_dontDraw then
+        if G.STATE ~= G.STATES.GAME_OVER and G.STATE ~= G.STATES.MENU and not G.SETTINGS.paused then
+            love.graphics.setColor(0, 0, 0, 0.65)
 
-        ball:draw()
+            local rectX = (1280 / 2 - 172) * scaleX
+            local rectY = (TOP_LIMIT - 10) * scaleY
+            local rectW = 520 * scaleX
+            local rectH = ((BOTTOM_LIMIT - TOP_LIMIT) + 40) * scaleY
+            love.graphics.rectangle('fill', rectX, rectY, rectW, rectH)
+
+            local middleX = rectX + rectW / 2
+            local middleY = rectY + rectH / 2
+
+            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.setLineWidth(3)
+            love.graphics.line(middleX, middleY - 100, middleX, middleY + 100)
+            love.graphics.setLineWidth(1)
+        end
+
+        if not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER then
+            player1:draw()
+            player2:draw()
+            ball:draw()
+        end
     end
 end
 
