@@ -164,10 +164,10 @@ function createBall(x,y)
             self.x = self.x + (self.vx * stepDT) * self.speed
             self.y = self.y + (self.vy * stepDT) * self.speed
 
-            local extraWidth = 2
-            local extraHeight = 2
-            local hbX = player.x - extraWidth / 2
-            local hbY = player.y - extraHeight / 2
+            local extraWidth = 1
+            local extraHeight = 1
+            local hbX = player.x - extraWidth
+            local hbY = player.y - extraHeight
             local hbW = player.w + extraWidth
             local hbH = player.h + extraHeight
 
