@@ -141,7 +141,6 @@ SMODS.Atlas {
     frames = 21,
     atlas_table = 'ANIMATION_ATLAS'
 }
-
 SMODS.Blind {
     key = "captainBlind",
     atlas = "captainBlind",
@@ -596,3 +595,4 @@ SMODS.Blind {
 }
 
 --#endregion
+
