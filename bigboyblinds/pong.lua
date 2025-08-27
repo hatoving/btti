@@ -57,7 +57,7 @@ function createPlayer(x,y)
             self.r
         )
 
-        love.graphics.setColor(1, 0, 0, 1)
+        love.graphics.setColor(1, 1, 1, 1)
         drawRotatedRectangle(
             'fill',
             (self.x - self.w / 2) * scaleX,
