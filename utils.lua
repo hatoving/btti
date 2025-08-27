@@ -51,7 +51,7 @@ end
 
 -- stolen from yahimod, thank you yaha mouse
 function loadImage(fn)
-    local full_path = SMODS.current_mod.path .. 'assets/images/' .. fn
+    local full_path = G.bttiModPath .. 'assets/images/' .. fn
     full_path = full_path:gsub('%\\', '/')
     local file_data = assert(NFS.newFileData(full_path), ("Epic fail"))
     local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))

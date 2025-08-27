@@ -236,7 +236,7 @@ function loc_colour(_c, _default)
 	return loc_colour_ref(_c, _default)
 end
 
-local mod_path = "" .. SMODS.current_mod.path
+G.bttiModPath = "" .. SMODS.current_mod.path
 
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
@@ -341,7 +341,7 @@ end
 f()
 
 -- Load items
-local files = NFS.getDirectoryItems(mod_path .. "items")
+local files = NFS.getDirectoryItems(G.bttiModPath .. "items")
 for _, file in ipairs(files) do
 	print("[BTTI] Loading lua file " .. file)
 	f, err = SMODS.load_file("items/" .. file)
@@ -350,9 +350,18 @@ for _, file in ipairs(files) do
 	end
 	f()
 end
+files = NFS.getDirectoryItems(G.bttiModPath .. "bigboyblinds")
+for _, file in ipairs(files) do
+	print("[BTTI] Loading lua file " .. file)
+	f, err = SMODS.load_file("bigboyblinds/" .. file)
+	if err then
+		error(err)
+	end
+	f()
+end
 
 --Load Localization file
-local files = NFS.getDirectoryItems(mod_path .. "localization")
+local files = NFS.getDirectoryItems(G.bttiModPath .. "localization")
 for _, file in ipairs(files) do
 	print("[BTTI] Loading localization file " .. file)
 	local f, err = SMODS.load_file("localization/" .. file)

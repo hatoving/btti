@@ -1,6 +1,41 @@
 --#region MISC. BLINDS
 
 SMODS.Atlas {
+    key = "pongBlind",
+    path = "bttiPongBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "pongBlind",
+    atlas = "pongBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Pong',
+        text = {
+            'Have some fun with Pong!',
+            'Use Arrow Keys to Move'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('272727'),
+    debuff = {},
+    set_blind = function (self)
+        btti_PONG_init()
+    end,
+    disable = function(self)
+        btti_PONG_kill()
+    end,
+    defeat = function(self)
+        btti_PONG_kill()
+    end
+}
+
+SMODS.Atlas {
     key = "tunaBlind",
     path = "bttiTunaBlind.png",
     px = 34,
