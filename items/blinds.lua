@@ -528,6 +528,11 @@ SMODS.Blind {
             vars = { 'None' },
         }
     end,
+    collection_loc_vars = function(self)
+        return {
+            vars = { 'None' },
+        }
+    end,
     boss = { min = 4 },
     boss_colour = HEX('dd4eb3'),
     calculate = function(self, blind, context)
@@ -596,3 +601,33 @@ SMODS.Blind {
 
 --#endregion
 
+--#region YMFP BLINDS
+
+SMODS.Atlas {
+    key = "levelBlind",
+    path = "bttiLevelBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "levelBlind",
+    atlas = "levelBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Level',
+        text = {
+            'Turns a random held',
+            'card Digital every',
+            'every 5 seconds'
+        }
+    },
+    boss = { min = 5 },
+    boss_colour = HEX('272727'),
+    debuff = {}
+}
+
+--#endregion

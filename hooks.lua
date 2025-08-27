@@ -150,10 +150,41 @@ local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
 
+    if G and G.GAME then
+        if G.GAME.btti_levelBlindCountdown == nil then  
+            G.GAME.btti_levelBlindCountdown = 5.0
+        end
+    end
+
     if G.GAME.blind then
         if G.GAME.blind.config.blind.key == 'bl_btti_truckBlind' or G.GAME.blind.config.blind.key == 'bl_btti_ticketBlind' then
             --G.GAME.blind.loc_debuff_lines = { math.random(1, 69), math.random(1, 69), G.GAME.blind.debuffedHand or 'Nothing mistah white...' }
             G.GAME.blind:set_text()
+        end
+        if G.GAME.blind.config.blind.key == 'bl_btti_levelBlind' then
+            G.GAME.btti_levelBlindCountdown = G.GAME.btti_levelBlindCountdown - dt
+            if G.GAME.btti_levelBlindCountdown <= 0.0 then
+                G.GAME.btti_levelBlindCountdown = 5.0
+                local emptyEditionIndices = {}
+                for i, card in ipairs(G.hand.cards) do
+                    if card.edition == nil then
+                        table.insert(emptyEditionIndices, i)
+                    end
+                end
+
+                if #emptyEditionIndices > 0 then
+                    local randomIndex = emptyEditionIndices[math.random(1, #emptyEditionIndices)]
+                    local card = G.hand.cards[randomIndex]
+
+                    card:set_edition()
+                    card:set_edition('e_btti_digital')
+                    card:juice_up()
+                else
+                    sendInfoMessage("All cards already have editions!", "BTTI")
+                end
+            end
+        else
+            G.GAME.btti_levelBlindCountdown = 5.0
         end
     end
 
