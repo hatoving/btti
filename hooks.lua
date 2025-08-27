@@ -91,6 +91,8 @@ function Card:calculate_joker(context)
         G.GAME.btti_selectedMusicIdx = 'NOTHING'
     end
     if context.setting_blind then
+        btti_PONG_initByItself = true
+
         local jokers = {}
         for key, indexes in pairs(btti_musicIdx) do
             if jokerExists(key) then
@@ -163,6 +165,7 @@ function love.update(dt)
         end
         if G.STATE == G.STATES.MENU then
             if btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
+                btti_PONG_initByItself = true
                 btti_PONG_kill()
             end
         end
@@ -198,10 +201,15 @@ function love.update(dt)
                 end
             end
         elseif G.GAME.blind.config.blind.key == 'bl_btti_pongBlind' then
-            if not btti_PONG_initialized and (G.STATE ~= G.STATES.GAME_OVER and G.STATE ~= G.STATES.MENU or G.STATE ~= G.STATES.BLIND_SELECT) then
+            if not btti_PONG_initialized and btti_PONG_initByItself then
                 btti_PONG_init()
+                btti_PONG_initByItself = false
             end
         else
+            if btti_PONG_initialized and btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
+                btti_PONG_kill()
+                btti_PONG_initByItself = true
+            end
             G.GAME.btti_levelBlindCountdown = 5.0
         end
     end

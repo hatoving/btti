@@ -32,9 +32,10 @@ function checkCollision(ax, ay, aw, ah, bx, by, bw, bh)
         ay + ah > by
 end
 
-function createPlayer(x,y)
+function createPlayer(x,xoff,y)
     local player = {
-        x = x,
+        x = x - xoff,
+        xog = x,
         sx = -4,
         y = y,
         vx = 0, -- velocity X
@@ -42,12 +43,13 @@ function createPlayer(x,y)
         w = 12,
         h = 94,
         r = 0,
+        a = 0,
         vel = 6.0,
         gravity = STARTING_GRAVITY,
         speed = 6.0
     }
     function player:draw()
-        love.graphics.setColor(0, 0, 0, 1)
+        love.graphics.setColor(0, 0, 0, self.a)
         drawRotatedRectangle(
             'fill',
             (self.x - self.sx - self.w / 2) * scaleX,
@@ -57,7 +59,7 @@ function createPlayer(x,y)
             self.r
         )
 
-        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.setColor(1, 1, 1, self.a)
         drawRotatedRectangle(
             'fill',
             (self.x - self.w / 2) * scaleX,
@@ -70,10 +72,13 @@ function createPlayer(x,y)
     function player:update(dt)
         if love.keyboard.isDown("down") or love.keyboard.isDown("s") then
             self.vy = lerp(self.vy, self.vel, dt * self.speed)
+            self.r = lerp(self.r, 0.05, 6.0 * dt)
         elseif love.keyboard.isDown("up") or love.keyboard.isDown("w") then
             self.vy = lerp(self.vy, -self.vel, dt * self.speed)
+            self.r = lerp(self.r, -0.05, 6.0 * dt)
         else
             self.vy = lerp(self.vy, 0, dt * self.speed)
+             self.r = lerp(self.r, 0.0, 6.0 * dt)
         end
         self.y = self.y + self.vy
         if self.y >= BOTTOM_LIMIT then
@@ -101,6 +106,8 @@ function createPlayer(x,y)
 
         local diff = (self.targetY or ball.y) - paddleCenter
         local lerpStrength = dt * (2 + difficulty * 8)
+
+        self.r = lerp(self.r, (0.05 * diff) / 120, 6.0 * dt)
         self.vy = lerp(self.vy, diff, lerpStrength)
 
         self.y = self.y + self.vy * dt
@@ -123,6 +130,7 @@ function createBall(x,y)
         vx = 0,
         vy = 0,
         r = 0,
+        a = 0,
         gravity = STARTING_GRAVITY,
         speed = .75
     }
@@ -219,27 +227,39 @@ btti_PONG_STATES = {
     GAME_OVER = 2,
 }
 
+btti_PONG_initByItself = true
 btti_PONG_initialized = false
+
 btti_PONG_state = btti_PONG_STATES.START
 btti_PONG_timer = 0
 btti_PONG_timerTarget = 2
 btti_PONG_dontDraw = false
+btti_PONG_backgroundA = 0
+btti_PONG_plyrScore = 0
 
 function btti_PONG_score()
     btti_PONG_timer = 0
     btti_PONG_timerTarget = 3
     btti_PONG_state = btti_PONG_STATES.START
+    btti_PONG_plyrScore = btti_PONG_plyrScore + 1
     play_sound('btti_pongScore', (math.random() * 0.2 + 1))
 end
 
 function btti_PONG_init()
+    if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
+        btti_PONG_kill()
+        return
+    end
     if not btti_PONG_initialized then
         sendInfoMessage("pong is init NOW", "BTTI")
         btti_PONG_initialized = true
         btti_PONG_dontDraw = false
 
-        player1 = createPlayer(1280 / 2 - 150, 720 / 2 - 65)
-        player2 = createPlayer(1280 / 2 + 320, 720 / 2 - 65)
+        btti_PONG_plyrScore = 0
+        btti_PONG_backgroundA = 0
+
+        player1 = createPlayer(1280 / 2 - 150, 150, 720 / 2 - 65)
+        player2 = createPlayer(1280 / 2 + 320, -150, 720 / 2 - 65)
         player2.sx = 4
 
         local midX = (player1.x + player2.x) / 2
@@ -259,8 +279,13 @@ function btti_PONG_update(dt)
     scaleY = screenHeight / 720
 
     if btti_PONG_initialized == true and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
+        player1.a = lerp(player1.a, 1.0, 6.0 * dt)
+        player2.a = lerp(player2.a, 1.0, 6.0 * dt)
         if btti_PONG_state == btti_PONG_STATES.START then
+            btti_PONG_backgroundA = lerp(btti_PONG_backgroundA, 1, 6.0 * dt)
             btti_PONG_timer = btti_PONG_timer + dt
+            player1.x = lerp(player1.x, player1.xog, 6.0 * dt)
+            player2.x = lerp(player2.x, player2.xog, 6.0 * dt)
             if btti_PONG_timer > btti_PONG_timerTarget then
                 btti_PONG_timer = 0
                 local midX = (player1.x + player2.x) / 2
@@ -285,6 +310,7 @@ function btti_PONG_update(dt)
             player1.gravity = player1.gravity + dt * 12
             player2.gravity = player2.gravity + dt * 12
             ball.gravity = ball.gravity + dt * 12
+            btti_PONG_backgroundA = lerp(btti_PONG_backgroundA, 0.0, 6.0 * dt)
             if btti_PONG_timer > btti_PONG_timerTarget then
                 btti_PONG_timer = 0
                 btti_PONG_initialized = false
@@ -303,7 +329,7 @@ end
 function btti_PONG_draw()
     if btti_PONG_initialized and not btti_PONG_dontDraw then
         if G.STATE ~= G.STATES.GAME_OVER and G.STATE ~= G.STATES.MENU and not G.SETTINGS.paused then
-            love.graphics.setColor(0, 0, 0, 0.65)
+            love.graphics.setColor(0, 0, 0, .65 * btti_PONG_backgroundA)
 
             local rectX = (1280 / 2 - 172) * scaleX
             local rectY = (TOP_LIMIT - 10) * scaleY
@@ -314,10 +340,17 @@ function btti_PONG_draw()
             local middleX = rectX + rectW / 2
             local middleY = rectY + rectH / 2
 
-            love.graphics.setColor(1, 1, 1, 1)
+            love.graphics.setColor(1, 1, 1, btti_PONG_backgroundA)
             love.graphics.setLineWidth(3)
             love.graphics.line(middleX, middleY - 100, middleX, middleY + 100)
             love.graphics.setLineWidth(1)
+
+            love.graphics.setColor(0, 0, 0, btti_PONG_backgroundA)
+            love.graphics.printf("s: " .. btti_PONG_plyrScore, middleX - 4, middleY + 104, 0, "center")
+            love.graphics.setColor(1, 1, 1, btti_PONG_backgroundA)
+            love.graphics.printf("s: " .. btti_PONG_plyrScore, middleX, middleY + 100, 0, "center")
+
+            love.graphics.setColor(1, 1, 1, 1)
         end
 
         if not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER then

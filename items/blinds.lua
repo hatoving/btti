@@ -17,8 +17,9 @@ SMODS.Blind {
     loc_txt = {
         name = 'The Pong',
         text = {
-            'Have some fun with Pong!',
-            'Use Arrow Keys to Move'
+            'Have some fun with janky Pong!',
+            'Use Arrow Keys and/or W/S',
+            'move the paddle'
         }
     },
     boss = { min = 3 },
@@ -26,12 +27,15 @@ SMODS.Blind {
     debuff = {},
     set_blind = function (self)
         btti_PONG_init()
+        btti_PONG_initByItself = false
     end,
     disable = function(self)
         btti_PONG_kill()
+        btti_PONG_initByItself = false
     end,
     defeat = function(self)
         btti_PONG_kill()
+        btti_PONG_initByItself = false
     end
 }
 
