@@ -194,6 +194,14 @@ G.BTTI.JOKER_COMBOS = {
 			'j_hanging_chad'
 		}
 	},
+	['j_btti_TripleBaka'] = {
+		rarity = 4,
+		jokers = {
+			'j_btti_Miku',
+			'j_btti_Teto',
+			'j_btti_Neru'
+		}
+	},
 }
 
 SMODS.Gradient {

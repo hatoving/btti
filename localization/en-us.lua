@@ -7,7 +7,7 @@ return {
                     "{X:dark_edition,C:white}#1#{}"
                 },
             },
-            bttiFromWho = {
+            bttiByWho = {
                 name = "By Who?!",
                 text = {
                     "{C:dark_edition}#1#{}"

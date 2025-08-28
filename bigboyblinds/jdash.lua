@@ -1,5 +1,15 @@
 SMODS.Sound({ key = "JDASHLose", path = "bttiJDashLose.ogg" })
 
+SMODS.Sound {
+    key = "music_JDash",
+    path = "music_bttiJDash.ogg",
+    pitch = 1,
+    volume = 1.0,
+    select_music_track = function(self)
+        return G.GAME and G.GAME.blind and G.GAME.blind.config.blind.key == 'bl_btti_gdBlind'
+    end
+}
+
 local screenWidth = love.graphics.getWidth()
 local screenHeight = love.graphics.getHeight()
 local scaleX = screenWidth / 1280

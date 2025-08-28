@@ -582,6 +582,7 @@ SMODS.Consumable {
             end
 
             local c = SMODS.add_card { key = result.key }
+            c:juice_up()
             SMODS.calculate_context { combined_joker = c }
         end
 

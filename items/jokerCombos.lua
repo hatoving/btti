@@ -1,3 +1,5 @@
+--#region VANILLA COMBO JOKERS
+
 -- Avariocious
 SMODS.Atlas {
     key = "avariciousJoker",
@@ -1756,3 +1758,97 @@ SMODS.Joker {
         return false, { allow_duplicates = false }
     end
 }
+
+--#endregion
+
+--#region MOD COMBO JOKERS
+
+SMODS.Atlas {
+    key = "TripleBaka",
+    path = "bttiTripleBaka.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'TripleBaka',
+    loc_txt = {
+        name = 'Triple-Baka!!',
+        text = {
+            "{C:chips}+10{} Chips, {C:mult}+4{} Mult and",
+            "{C:attention}$2{} for each {C:clubs}Club{}, {C:hearts}Heart{},",
+            "and {C:diamonds}Diamond{} respectively in",
+            "your {C:attention}deck{} excluding {C:spades}Spades{}",
+            "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}"
+        }
+    },
+
+    config = { extra = { chips = 10, mult = 4, dollars = 2 } },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LamazeP" } }
+        local cardCountM = 0
+        local cardCountT = 0
+        local cardCountN = 0
+        if G.deck and G.deck.cards then
+            for i, pc in ipairs(G.deck.cards) do
+                if pc:is_suit('Clubs') then
+                    cardCountM = cardCountM + 1
+                end
+                if pc:is_suit('Hearts') then
+                    cardCountT = cardCountT + 1
+                end
+                if pc:is_suit('Diamonds') then
+                    cardCountN = cardCountN + 1
+                end
+            end
+        end
+        return {
+            vars = { card.ability.extra.chips * cardCountM, card.ability.extra.mult * cardCountT, card.ability.extra.dollars * cardCountN },
+        }
+    end,
+    rarity = 4,
+    atlas = 'TripleBaka',
+    pos = { x = 0, y = 0 },
+    cost = 12,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local cardCountM = 0
+            local cardCountT = 0
+            local cardCountN = 0
+            if G.deck and G.deck.cards then
+                for i, pc in ipairs(G.deck.cards) do
+                    if pc:is_suit('Clubs') then
+                        cardCountM = cardCountM + 1
+                    end
+                    if pc:is_suit('Hearts') then
+                        cardCountT = cardCountT + 1
+                    end
+                    if pc:is_suit('Diamonds') then
+                        cardCountN = cardCountN + 1
+                    end
+                end
+            end
+            return {
+                dollars = cardCountN * card.ability.extra.dollars,
+                mult = cardCountT * card.ability.extra.mult,
+                chips = cardCountM * card.ability.extra.chips
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+--#endregion
