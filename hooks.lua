@@ -136,6 +136,20 @@ function Card:calculate_joker(context)
             btti_JDASH_kill()
         end
     end
+    if context.ante_change and context.ante_end then
+        sendInfoMessage("Ante change!", "BTTI")
+        local digitalCards = 0
+        for i, pc in ipairs(G.deck.cards) do
+            if pc.edition then
+                if pc.edition.key == 'e_btti_digital' then
+                    digitalCards = digitalCards + 1
+                    pc:start_dissolve()
+                end
+            end
+        end
+        sendInfoMessage("glitchus deletus : " .. digitalCards, "BTTI")
+        G.GAME.btti_isBlindBoss = false
+    end
     return calcJokerRef(self, context)
 end
 
@@ -164,9 +178,6 @@ function love.update(dt)
     updateReal(dt)
     
     if G and G.GAME then
-        if G.GAME.btti_levelBlindCountdown == nil then  
-            G.GAME.btti_levelBlindCountdown = 5.0
-        end
         if G.STATE == G.STATES.MENU then
             if btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
                 btti_PONG_initByItself = true
@@ -224,7 +235,6 @@ function love.update(dt)
                     local randomIndex = emptyEditionIndices[math.random(1, #emptyEditionIndices)]
                     local card = G.hand.cards[randomIndex]
 
-                    card:set_edition()
                     card:set_edition('e_btti_digital')
                     card:juice_up()
                 else
@@ -242,7 +252,6 @@ function love.update(dt)
                 btti_PONG_kill()
                 btti_PONG_initByItself = true
             end
-            G.GAME.btti_levelBlindCountdown = 5.0
         end
         if G.GAME.blind.config.blind.key == 'bl_btti_gdBlind' then
             if not btti_JDASH_initialized and btti_JDASH_initByItself then
@@ -254,7 +263,6 @@ function love.update(dt)
                 btti_JDASH_kill()
                 btti_JDASH_initByItself = true
             end
-            G.GAME.btti_levelBlindCountdown = 5.0
         end
         --btti_JDASH_init()
     end

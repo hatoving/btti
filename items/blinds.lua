@@ -704,7 +704,10 @@ SMODS.Blind {
     },
     boss = { min = 5 },
     boss_colour = HEX('272727'),
-    debuff = {}
+    debuff = {},
+    set_blind = function (self)
+        G.GAME.btti_levelBlindCountdown = 5.0
+    end
 }
 
 --#endregion

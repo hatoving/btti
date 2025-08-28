@@ -2732,20 +2732,20 @@ SMODS.Atlas {
     py = 95
 }
 SMODS.Joker {
-	key = 'Donor',
-	loc_txt = {
-		name = 'Friend...?',
-		text = {
-			"Gains +{C:chips}21{} Chips when triggered",
+    key = 'Donor',
+    loc_txt = {
+        name = 'Friend...?',
+        text = {
+            "Gains +{C:chips}21{} Chips when triggered",
             "{C:green}1 in 5{} chance to glitch, resetting",
             "{C:chips}Chips{} and turning 2-4 cards in",
             "{C:attention}played hand{} {C:blue}Digital{}",
             "{C:inactive}Currently +{C:chips}#1#{C:inactive}"
-		}
-	},
+        }
+    },
 
-	config = { extra = { chips = 0, keyState = 0 } },
-	loc_vars = function(self, info_queue, card)
+    config = { extra = { chips = 0, keyState = 0 } },
+    loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         if card.ability.extra.keyState == 1 then
@@ -2767,11 +2767,11 @@ SMODS.Joker {
                 vars = { card.ability.extra.chips },
             }
         end
-	end,
-	rarity = 1,
+    end,
+    rarity = 1,
     atlas = 'Donor',
-	pos = { x = 0, y = 0 },
-	cost = 4,
+    pos = { x = 0, y = 0 },
+    cost = 4,
     pools = { ["BTTImodaddition"] = true },
 
     unlocked = true,
@@ -2780,7 +2780,7 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
-    set_sprites = function (self, card, front)
+    set_sprites = function(self, card, front)
         if card.ability and card.ability.extra then
             if card.ability.extra.keyState == 1 then
                 card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
@@ -2792,8 +2792,8 @@ SMODS.Joker {
         end
     end,
 
-	calculate = function(self, card, context)
-		if context.joker_main then
+    calculate = function(self, card, context)
+        if context.joker_main then
             if pseudorandom('Donor') < G.GAME.probabilities.normal / 5 then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
@@ -2827,7 +2827,7 @@ SMODS.Joker {
                         card.ability.extra.chips = 0
                         card:juice_up()
                         card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
-                        card.children.center:set_sprite_pos({x = 0, y = 0})
+                        card.children.center:set_sprite_pos({ x = 0, y = 0 })
                         return true
                     end,
                 }))
@@ -2852,11 +2852,68 @@ SMODS.Joker {
                     }))
                 }
             end
-		end
-	end,
+        end
+    end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
-	end
+        return true, { allow_duplicates = false }
+    end
+}
+
+SMODS.Atlas {
+    key = "MissBreward",
+    path = "bttiMsBreward.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'MissBreward',
+    loc_txt = {
+        name = 'Miss Breward',
+        text = {
+            "Gains {X:mult,C:white}X0.25{} Mult",
+            "per {C:deets}Stained Card{} leak",
+            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive}"
+        }
+    },
+
+    config = { extra = { xmult = 1} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        return {
+            vars = { card.ability.extra.xmult },
+        }
+    end,
+    rarity = 2,
+    atlas = 'MissBreward',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            card.ability.extra.xmult = card.ability.extra.xmult + 0.25
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+        if context.card_leaked then
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.BTTIDEETS,
+                message_card = context.card_leaked
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
 }
 
 --#endregion

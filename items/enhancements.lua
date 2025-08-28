@@ -63,6 +63,7 @@ SMODS.Enhancement {
                         })
                     end
                     sendInfoMessage("found card!", "BTTI")
+                    SMODS.calculate_context { card_leaked = pc }
                     if pc.seal ~= nil then         
                         sendInfoMessage("stained: " .. pc.seal .. "", "BTTI")
                         table.insert(rets, {
