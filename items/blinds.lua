@@ -25,7 +25,7 @@ SMODS.Blind {
     boss = { min = 3 },
     boss_colour = HEX('272727'),
     debuff = {},
-    set_blind = function (self)
+    set_blind = function(self)
         btti_PONG_init()
         btti_PONG_initByItself = false
     end,
@@ -36,6 +36,44 @@ SMODS.Blind {
     defeat = function(self)
         btti_PONG_kill()
         btti_PONG_initByItself = false
+    end
+}
+
+SMODS.Atlas {
+    key = "gdBlind",
+    path = "bttiGDBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "gdBlind",
+    atlas = "gdBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Spike',
+        text = {
+            'Play hit game',
+            'Jimbo Dash'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('ffb213'),
+    debuff = {},
+    set_blind = function(self)
+        btti_JDASH_init()
+        btti_JDASH_initByItself = false
+    end,
+    disable = function(self)
+        btti_JDASH_kill()
+        btti_JDASH_initByItself = false
+    end,
+    defeat = function(self)
+        btti_JDASH_kill()
+        btti_JDASH_initByItself = false
     end
 }
 

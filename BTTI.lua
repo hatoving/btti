@@ -2,6 +2,8 @@ if G.BTTI == nil then
 	G.BTTI = {}
 end
 
+G.effectmanager = {}
+
 G.BTTI.JOKER_COMBOS = {
 	['j_btti_avariciousJoker'] = {
 		rarity = 2,

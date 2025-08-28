@@ -175,13 +175,7 @@ local createBall = function (x,y)
             end
 
             if self.x < player.x - 20 and player == player1 then
-                G.STATE = G.STATES.GAME_OVER
-                if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
-                    G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
-                end
-                G:save_settings()
-                G.FILE_HANDLER.force = true
-                G.STATE_COMPLETE = false
+                LOSE_GAME_NOW()
                 btti_PONG_kill()
                 return
             elseif self.x > player.x + 20 and player == player2 then

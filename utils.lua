@@ -91,11 +91,61 @@ function math.clamp(x, min, max)
     return math.max(min, math.min(max, x))
 end
 
+function LOSE_GAME_NOW()
+    G.STATE = G.STATES.GAME_OVER
+    if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then
+        G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+    end
+    G:save_settings()
+    G.FILE_HANDLER.force = true
+    G.STATE_COMPLETE = false
+end
+
 -- stolen from yahimod, thank you yaha mouse
+function bttiEffectManagerPlay(effect,x,y)
+    if effect == "explosion" then
+        bttiEffectManagerNewEffect =
+        {
+            name = "explosion",
+            duration = 45,
+
+            frame = 1,
+            maxframe = 17,
+            fps = 45,
+            tfps = 0, -- ticks per frame per second
+
+
+            xpos = x,
+            ypos = y,
+            xvel = 0,
+            yvel = 0,
+        }
+    end
+    table.insert(G.effectmanager, { bttiEffectManagerNewEffect })
+end
 function loadImage(fn)
     local full_path = G.bttiModPath .. 'assets/images/' .. fn
     full_path = full_path:gsub('%\\', '/')
     local file_data = assert(NFS.newFileData(full_path), ("Epic fail"))
     local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))
     return (assert(love.graphics.newImage(tempimagedata), ("Epic fail 3")))
+end
+function loadImageSpriteSheet(fn, px, py, subimg, orientation)
+    local full_path = G.bttiModPath .. 'assets/images/' .. fn
+    full_path = full_path:gsub('%\\', '/')
+    local file_data = assert(NFS.newFileData(full_path), ("Epic fail"))
+    local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))
+    local tempimg = assert(love.graphics.newImage(tempimagedata), ("Epic fail 3"))
+
+    local spritesheet = {}
+    for i = 1, subimg do
+        if orientation == 0 then     -- 0 = downwards spritesheet
+            table.insert(spritesheet, love.graphics.newQuad(0, (i - 1) * py, px, py, tempimg))
+        end
+        if orientation == 1 then     -- 1 = rightwards spritesheet
+            table.insert(spritesheet, love.graphics.newQuad((i - 1) * px, 0, px, py, tempimg))
+        end
+    end
+
+    return spritesheet
 end

@@ -1,4 +1,4 @@
---SMODS.Sound({ key = "JDASHScore", path = "bttiJDASHScore.ogg" })
+SMODS.Sound({ key = "JDASHLose", path = "bttiJDashLose.ogg" })
 
 local screenWidth = love.graphics.getWidth()
 local screenHeight = love.graphics.getHeight()
@@ -53,8 +53,9 @@ local levelData = {
 local level = {}
 createLevel = function ()
     local level = {
-        x = 1500,
+        x = 1200,
         y = GROUND_LIMIT - 120,
+        a = 1.0,
         data = {}
     }
 
@@ -110,7 +111,7 @@ createLevel = function ()
             local dy = self.data[i].x - player.x
 
             local alpha = 1 - math.clamp(dy / FADE_DISTANCE, 0, 1)
-            self.data[i].a = alpha
+            self.data[i].a = alpha * self.a
 
             if self.data[i].type == BLOCK_TYPE.SPIKE or self.data[i].type == BLOCK_TYPE.SMALL_SPIKE then
                 local tileRect = {
@@ -121,7 +122,8 @@ createLevel = function ()
                     r = 0
                 }
                 if checkCollisionRect(playerRect, tileRect) then
-                    love.event.quit()
+                    LOSE_GAME_NOW()
+                    btti_JDASH_kill()
                 end
             elseif self.data[i].type == BLOCK_TYPE.WALL then
                 local tileRect = {
@@ -143,7 +145,8 @@ createLevel = function ()
                             collided = true
                         end
                     else
-                        love.event.quit()
+                        LOSE_GAME_NOW()
+                        btti_JDASH_kill()
                     end
                 end
             end
@@ -171,7 +174,7 @@ createLevel = function ()
             if self.data[i].img then
                 local iw, ih = self.data[i].img:getWidth(), self.data[i].img:getHeight()
 
-                love.graphics.setColor(0, 0, 0, self.data[i].a)
+                love.graphics.setColor(0, 0, 0, self.data[i].a * self.a)
                 love.graphics.draw(
                     self.data[i].img,
                     (self.data[i].x + 4) * scaleX,
@@ -182,7 +185,7 @@ createLevel = function ()
                 )
 
                 -- main image
-                love.graphics.setColor(1, 1, 1, self.data[i].a)
+                love.graphics.setColor(1, 1, 1, self.data[i].a * self.a)
                 love.graphics.draw(
                     self.data[i].img,
                     self.data[i].x * scaleX,
@@ -205,12 +208,12 @@ local createPlayer = function(x, y)
         prevY = y,
         vy = 0,
         sx = 4,
-        a = 1,
         r = 0,
         dontr = false,
         onfloor = false,
         jumping = false,
         wasonwall = false,
+        a = 1.0,
         img = loadImage('jimboDashCube.png'),
     }
 
@@ -262,57 +265,55 @@ local createPlayer = function(x, y)
     end
 
     function player:draw()
-        function player:draw()
-            local iw, ih = self.img:getWidth(), self.img:getHeight()
-
-            love.graphics.setColor(0, 0, 0, self.a * 0.6)
-            love.graphics.draw(
-                self.img,
-                (self.x + 4) * scaleX,
-                (self.y + 4) * scaleY,
-                self.r,
-                scaleX * 1.05, scaleY * 1.05,
-                iw / 2, ih / 2
-            )
-
-            -- main image
-            love.graphics.setColor(1, 1, 1, self.a)
-            love.graphics.draw(
-                self.img,
-                self.x * scaleX,
-                self.y * scaleY,
-                self.r,
-                scaleX, scaleY,
-                iw / 2, ih / 2
-            )
-        end
+        local iw, ih = self.img:getWidth(), self.img:getHeight()
+        --local cx, cy = self.x * scaleX, self.y * scaleY -- sprite center
+        love.graphics.setColor(0, 0, 0, 0.6 * self.a)
+        love.graphics.draw(
+            self.img,
+            (self.x + 4) * scaleX,
+            (self.y + 4) * scaleY,
+            self.r,
+            scaleX * 1.05, scaleY * 1.05,
+            iw / 2, ih / 2
+        )
+        
+        -- main image
+        love.graphics.setColor(1, 1, 1, self.a)
+        love.graphics.draw(
+            self.img,
+            self.x * scaleX,
+            self.y * scaleY,
+            self.r,
+            scaleX, scaleY,
+            iw / 2, ih / 2
+        )
     end
     return player
 end
 btti_JDASH_STATES = {
-    START = 0,
-    LOOP = 1,
-    GAME_OVER = 2,
+    LOOP = 0,
+    GAME_OVER = 1,
 }
 
 btti_JDASH_initByItself = true
 btti_JDASH_initialized = false
 
-btti_JDASH_state = btti_JDASH_STATES.START
+btti_JDASH_state = btti_JDASH_STATES.LOOP
 btti_JDASH_timer = 0
-btti_JDASH_timerTarget = 2
+btti_JDASH_timerTarget = 4
 btti_JDASH_dontDraw = false
 
 function btti_JDASH_init()
     if not btti_JDASH_initialized then
         sendInfoMessage("JDASH is init NOW", "BTTI")
+
         btti_JDASH_initialized = true
         btti_JDASH_dontDraw = false
 
+        player = createPlayer(1280 / 2 - 150, 720 / 2 - math.random(50, 100))
         level = createLevel()
-        player = createPlayer(1280 / 2 - 150, 720 / 2)
 
-        btti_JDASH_state = btti_JDASH_STATES.START
+        btti_JDASH_state = btti_JDASH_STATES.LOOP
         btti_JDASH_timer = 0
     end
 end
@@ -324,12 +325,28 @@ function btti_JDASH_update(dt)
     scaleY = screenHeight / 720
 
     if btti_JDASH_initialized and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
-        level.x = level.x - dt * LEVEL_SPEED
-        if level.x <= -4800 then
-            level.x = 1500
+        if btti_JDASH_state == btti_JDASH_STATES.LOOP then
+            level.x = level.x - dt * LEVEL_SPEED
+            if level.x <= -4800 then
+                level.x = 1200
+            end
+            level:update(dt)
+            player:update(dt)
+        elseif btti_JDASH_state == btti_JDASH_STATES.GAME_OVER then
+            btti_JDASH_timer = btti_JDASH_timer + dt
+            level.a = level.a - dt
+            level.a = math.clamp(level.a, 0, 1)
+            if btti_JDASH_timer > btti_JDASH_timerTarget then
+                btti_JDASH_timer = 0
+                btti_JDASH_initialized = false
+
+                btti_JDASH_dontDraw = true
+                sendInfoMessage("jdash is dead NOW", "BTTI")
+
+                player = {}
+                level = {}
+            end
         end
-        level:update(dt)
-        player:update(dt)
     end
 end
 
@@ -343,5 +360,17 @@ function btti_JDASH_draw()
 end
 
 function btti_JDASH_kill()
-    sendInfoMessage("gdash is dead :(", "BTTI")
+    if btti_JDASH_initialized then
+        sendInfoMessage("gdash is dead :(", "BTTI")
+        btti_JDASH_timer = 0
+        btti_JDASH_timerTarget = 2
+        btti_JDASH_dontDraw = false
+
+        player.a = 0.0
+        bttiEffectManagerPlay('explosion', player.x + 70, player.y + 65)
+        play_sound('btti_JDASHLose', math.random(1.0, 1.2))
+
+        btti_JDASH_state = btti_JDASH_STATES.GAME_OVER
+        G.ROOM.jiggle = G.ROOM.jiggle + 3
+    end
 end
