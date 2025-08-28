@@ -60,7 +60,7 @@ SMODS.Blind {
             'Jimbo Dash'
         }
     },
-    boss = { min = 3 },
+    boss = { min = 4 },
     boss_colour = HEX('ffb213'),
     debuff = {},
     set_blind = function(self)
