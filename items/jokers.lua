@@ -2610,6 +2610,7 @@ SMODS.Joker {
 	config = { extra = { allow = true, active = false, lastEnter = false, lastBlindChose = '', activeText = '' } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         main_start = {
             { n = G.UIT.T, config = { ref_table = card.ability.extra, ref_value = "activeText", colour = G.C.JOKER_GREY, scale = 0.35 } },
         }
@@ -2643,7 +2644,7 @@ SMODS.Joker {
                 if love.keyboard.isDown('return') then
                     local _element = G.CONTROLLER.hovering.target
                     if _element and _element.config and _element.config.blind then
-                        if G.GAME.round_resets.blind_choices.Boss ~= _element.config.blind.key and card.ability.extra.lastBlindChose ~= _element.config.blind.key then
+                        if G.GAME.round_resets.blind_choices.Boss ~= _element.config.blind.key and _element.config.blind.key ~= card.ability.extra.lastBlindChose then
                             card_eval_status_text(card, 'extra', nil, nil, nil,
                                 { message = "Done.", colour = G.C.JOKER_GREY })
 
