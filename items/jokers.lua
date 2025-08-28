@@ -2597,12 +2597,13 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Y/N',
 		text = {
-			"When ENTER is pressed, allows you to select",
-            "a new boss blind from your collection",
+			"When ENTER is pressed, and this card is",
+            "highlighted, allows you to select a new",
+            "boss blind from your collection",
             "Cannot select a blind twice in a row",
             "Becomes inactive until boss blind is defeated",
             "Press ENTER on a hovered blind from your",
-            "collection to select it"
+            "collection to select it once activated"
 		}
 	},
 
@@ -2631,7 +2632,7 @@ SMODS.Joker {
     update = function (self, card, dt)
         card.ability.extra.activeText = (card.ability.extra.active and 'Active') or 'Inactive'
         if card.ability.extra.allow then
-            if (card.highlighted and (love.keyboard.isDown('return') and not card.ability.extra.lastEnter)) and G.STATE == G.STATES.BLIND_SELECT then
+            if (card.highlighted and (love.keyboard.isDown('return') and not card.ability.extra.lastEnter)) and G.STATE == G.STATES.BLIND_SELECT and not G.SETTINGS.paused then
                 card.ability.extra.active = not card.ability.extra.active
                 card:juice_up()
                 local msg = (card.ability.extra.active and 'Active.') or 'Inactive'
@@ -2647,10 +2648,6 @@ SMODS.Joker {
                                 { message = "Done.", colour = G.C.JOKER_GREY })
 
                             local _blind = _element.config.blind
-
-                            card.ability.extra.lastBlindChose = _element.config.blind.key
-                            card.ability.extra.allow = false
-                            card.ability.extra.active = false
 
                             local par = G.blind_select_opts.boss.parent
                             G.GAME.round_resets.blind_choices.Boss = _blind.key
@@ -2689,6 +2686,10 @@ SMODS.Joker {
                                     break
                                 end
                             end
+
+                            card.ability.extra.lastBlindChose = _element.config.blind.key
+                            card.ability.extra.allow = false
+                            card.ability.extra.active = false
                         end
                     end
                 end
