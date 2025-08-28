@@ -2721,7 +2721,13 @@ SMODS.Joker {
 -- Donor
 SMODS.Atlas {
     key = "Donor",
-    path = "bttiDonor.png",
+    path = "bttiDonor1.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "DonorReal",
+    path = "bttiDonor2.png",
     px = 71,
     py = 95
 }
@@ -2738,13 +2744,29 @@ SMODS.Joker {
 		}
 	},
 
-	config = { extra = { chips = 0 } },
+	config = { extra = { chips = 0, keyState = 0 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
-		return {
-            vars = { card.ability.extra.chips },
-        }
+        if card.ability.extra.keyState == 1 then
+            return {
+                key = 'bttiJokerDonor_alt',
+                set = 'Jokers',
+                vars = { card.ability.extra.chips },
+            }
+        elseif card.ability.extra.keyState == 2 then
+            return {
+                key = 'bttiJokerDonor_keepName',
+                set = 'Jokers',
+                vars = { card.ability.extra.chips },
+            }
+        else
+            return {
+                key = 'bttiJokerDonor',
+                set = 'Jokers',
+                vars = { card.ability.extra.chips },
+            }
+        end
 	end,
 	rarity = 1,
     atlas = 'Donor',
@@ -2758,6 +2780,16 @@ SMODS.Joker {
     eternal_compat = false,
     perishable_compat = false,
 
+    set_sprites = function (self, card, front)
+        if card.ability.extra.keyState == 1 then
+            card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        else
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        end
+    end,
+
 	calculate = function(self, card, context)
 		if context.joker_main then
             if pseudorandom('Donor') < G.GAME.probabilities.normal / 5 then
@@ -2767,12 +2799,16 @@ SMODS.Joker {
                     delay = 0,
                     func = function()
                         sendInfoMessage("You're my favorite person.")
+                        card.ability.extra.keyState = 1
                         if G.play and G.play.cards then
                             if #G.play.cards >= 2 then
                                 local rand = math.random(2, math.clamp(#G.play.cards, 1, 4))
                                 local cards = {}
 
-                                local pool = { table.unpack(G.play.cards) }
+                                local pool = {}
+                                for i = 1, #G.play.cards do
+                                    pool[i] = G.play.cards[i]
+                                end
 
                                 for i = 1, rand do
                                     local idx = math.random(#pool)
@@ -2782,16 +2818,19 @@ SMODS.Joker {
 
                                 for i = 1, #cards do
                                     cards[i]:set_edition('e_btti_digital')
+                                    cards[i]:juice_up()
                                 end
                             end
                         end
                         card.ability.extra.chips = 0
                         card:juice_up()
-                        card.center:set_sprite_pos({x = 71, y = 0})
+                        card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
+                        card.children.center:set_sprite_pos({x = 0, y = 0})
                         return true
                     end,
                 }))
             else
+                card.ability.extra.chips = card.ability.extra.chips + 21
                 return {
                     chips = card.ability.extra.chips,
                     G.E_MANAGER:add_event(Event({
@@ -2799,8 +2838,13 @@ SMODS.Joker {
                         blocking = false,
                         delay = 0,
                         func = function()
-                            sendInfoMessage("Back!")
-                            card.center:set_sprite_pos({x = 0, y = 0})
+                            --sendInfoMessage("Back!")
+                            if card.ability.extra.keyState == 1 then
+                                card.ability.extra.keyState = 2
+                            end
+                            card:juice_up()
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
+                            card.children.center:set_sprite_pos({ x = 0, y = 0 })
                             return true
                         end,
                     }))
