@@ -2718,6 +2718,101 @@ SMODS.Joker {
 	end
 }
 
+-- Donor
+SMODS.Atlas {
+    key = "Donor",
+    path = "bttiDonor.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Donor',
+	loc_txt = {
+		name = 'Friend...?',
+		text = {
+			"Gains +{C:chips}21}{} Chips when triggered",
+            "{C:green}1 in 5{} chance to glitch, resetting",
+            "{C:chips}Chips{} and turning 2-4 cards in",
+            "{C:attention}played hand{} {C:blue}Digital{}",
+            "{C:inactive}Currently +{C:chips}#1#{C:inactive}"
+		}
+	},
+
+	config = { extra = { chips = 0 } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+		return {
+            vars = { card.ability.extra.chips },
+        }
+	end,
+	rarity = 1,
+    atlas = 'Donor',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.joker_main then
+            if pseudorandom('Donor') < G.GAME.probabilities.normal / 5 then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        sendInfoMessage("You're my favorite person.")
+                        if G.play and G.play.cards then
+                            if #G.play.cards >= 2 then
+                                local rand = math.random(2, math.clamp(#G.play.cards, 1, 4))
+                                local cards = {}
+
+                                local pool = { table.unpack(G.play.cards) }
+
+                                for i = 1, rand do
+                                    local idx = math.random(#pool)
+                                    table.insert(cards, pool[idx])
+                                    table.remove(pool, idx)
+                                end
+
+                                for i = 1, #cards do
+                                    cards[i]:set_edition('e_btti_digital')
+                                end
+                            end
+                        end
+                        card.ability.extra.chips = 0
+                        card:juice_up()
+                        card.center:set_sprite_pos({x = 71, y = 0})
+                        return true
+                    end,
+                }))
+            else
+                return {
+                    chips = card.ability.extra.chips,
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            sendInfoMessage("Back!")
+                            card.center:set_sprite_pos({x = 0, y = 0})
+                            return true
+                        end,
+                    }))
+                }
+            end
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
 --#endregion
 
 -- DRAMATIZED JOKERS
