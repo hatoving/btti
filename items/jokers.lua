@@ -1134,6 +1134,87 @@ SMODS.Joker {
     end
 }
 
+-- Jonker
+SMODS.Atlas {
+    key = "BananaFarm",
+    path = "bttiBananaFarm.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'BananaFarm',
+    loc_txt = {
+        name = 'Banana Farm',
+        text = {
+            "{C:green}1 in 8{} chance to spawn {C:attention}Gros Michel",
+            "{C:green}1 in 20{} chance to spawn {C:attention}Cavendish",
+            "{C:green}1 in 10{} chance this card is destroyed",
+            "at the end of round",
+            "{C:inactive}Cannot spawn if the joker already exists"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "aikoyori" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 1,
+    atlas = 'BananaFarm',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.end_of_round and context.cardarea == G.jokers then
+            sendInfoMessage("checkiing for banaba", "BTTI")
+            if pseudorandom('Banana') < G.GAME.probabilities.normal / 8 then
+                if not jokerExists('j_gros_michel') then
+                    SMODS.add_card { key = 'j_gros_michel' }
+                    return {
+                        message = "banabna",
+                        colour = G.C.YELLOW
+                    }
+                end
+            elseif pseudorandom('Banana') < G.GAME.probabilities.normal / 20 then
+                if not jokerExists('j_cavendish') then
+                    SMODS.add_card { key = 'j_cavendish' }
+                    return {
+                        message = "banaba",
+                        colour = G.C.YELLOW
+                    }
+                end
+            elseif pseudorandom('Banana') < G.GAME.probabilities.normal / 10 then
+                return {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "bye-bye", colour = G.C.YELLOW })
+                            SMODS.destroy_cards(card)
+                            return true
+                        end,
+                    }))
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 -- VOCALOID JOKERS
