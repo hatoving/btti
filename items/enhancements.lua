@@ -29,7 +29,7 @@ SMODS.Enhancement {
                 local rets = {
                     {
                         message = "Leak!",
-                        colour = G.C.DEETS
+                        colour = G.C.DEETS,
                     }
                 }
                 for i = 1, #context.scoring_hand do
@@ -63,15 +63,21 @@ SMODS.Enhancement {
                         })
                     end
                     sendInfoMessage("found card!", "BTTI")
-                    SMODS.calculate_context { card_leaked = pc }
                     if pc.seal ~= nil then         
                         sendInfoMessage("stained: " .. pc.seal .. "", "BTTI")
                         table.insert(rets, {
                             message = "Leak!",
                             colour = G.C.DEETS,
-                            func = function()
-                                pc:juice_up(0.3, 0.5)
-                            end
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'immediate',
+                                blocking = false,
+                                delay = 0,
+                                func = function()
+                                    pc:juice_up(0.3, 0.5)
+                                    SMODS.calculate_context { card_leaked = pc }
+                                    return true
+                                end,
+                            })),
                         })
                         if pc.seal == "Gold" then
                             table.insert(rets, {

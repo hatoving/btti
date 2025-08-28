@@ -2898,17 +2898,22 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            card.ability.extra.xmult = card.ability.extra.xmult + 0.25
             return {
                 xmult = card.ability.extra.xmult
             }
         end
         if context.card_leaked then
-            return {
-                message = localize('k_upgrade_ex'),
-                colour = G.C.BTTIDEETS,
-                message_card = context.card_leaked
-            }
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                blocking = false,
+                delay = 0,
+                func = function()
+                    card.ability.extra.xmult = card.ability.extra.xmult + 0.25
+                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                        { message = "Upgrade!", colour = G.C.ORANGE })
+                    return true
+                end,
+            }))
         end
     end,
     in_pool = function(self, args)
