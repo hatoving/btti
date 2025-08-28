@@ -2583,6 +2583,141 @@ SMODS.Joker {
 
 --#endregion
 
+-- YMFP JOKERS
+--#region YMFP JOKERS
+
+SMODS.Atlas {
+    key = "YIN",
+    path = "bttiYIN.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'YIN',
+	loc_txt = {
+		name = 'Y/N',
+		text = {
+			"When ENTER is pressed, allows you to select",
+            "a new boss blind from your collection",
+            "Cannot select a blind twice in a row",
+            "Becomes inactive until boss blind is defeated",
+            "Press ENTER on a hovered blind from your",
+            "collection to select it"
+		}
+	},
+
+	config = { extra = { allow = true, active = false, lastEnter = false, lastBlindChose = '', activeText = '' } },
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+        main_start = {
+            { n = G.UIT.T, config = { ref_table = card.ability.extra, ref_value = "activeText", colour = G.C.JOKER_GREY, scale = 0.35 } },
+        }
+        return {
+            main_start = main_start
+        }
+	end,
+	rarity = 3,
+	atlas = 'YIN',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    update = function (self, card, dt)
+        card.ability.extra.activeText = (card.ability.extra.active and 'Active') or 'Inactive'
+        if card.ability.extra.allow then
+            if (card.highlighted and (love.keyboard.isDown('return') and not card.ability.extra.lastEnter)) and G.STATE == G.STATES.BLIND_SELECT then
+                card.ability.extra.active = not card.ability.extra.active
+                card:juice_up()
+                local msg = (card.ability.extra.active and 'Active.') or 'Inactive'
+                card_eval_status_text(card, 'extra', nil, nil, nil,
+                    { message = msg, colour = G.C.JOKER_GREY })
+            end
+            if card.ability.extra.active then
+                if love.keyboard.isDown('return') then
+                    local _element = G.CONTROLLER.hovering.target
+                    if _element and _element.config and _element.config.blind then
+                        if G.GAME.round_resets.blind_choices.Boss ~= _element.config.blind.key and card.ability.extra.lastBlindChose ~= _element.config.blind.key then
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "Done.", colour = G.C.JOKER_GREY })
+
+                            local _blind = _element.config.blind
+
+                            card.ability.extra.lastBlindChose = _element.config.blind.key
+                            card.ability.extra.allow = false
+                            card.ability.extra.active = false
+
+                            local par = G.blind_select_opts.boss.parent
+                            G.GAME.round_resets.blind_choices.Boss = _blind.key
+
+                            G.blind_select_opts.boss:remove()
+                            G.blind_select_opts.boss = UIBox {
+                                T = { par.T.x, 0, 0, 0 },
+                                definition = {
+                                    n = G.UIT.ROOT,
+                                    config = {
+                                        align = "cm",
+                                        colour = G.C.CLEAR
+                                    },
+                                    nodes = { UIBox_dyn_container({ create_UIBox_blind_choice('Boss') }, false,
+                                        get_blind_main_colour('Boss'), mix_colours(G.C.BLACK, get_blind_main_colour('Boss'), 0.8)) }
+                                },
+                                config = {
+                                    align = "bmi",
+                                    offset = {
+                                        x = 0,
+                                        y = G.ROOM.T.y + 9
+                                    },
+                                    major = par,
+                                    xy_bond = 'Weak'
+                                }
+                            }
+                            par.config.object = G.blind_select_opts.boss
+                            par.config.object:recalculate()
+                            G.blind_select_opts.boss.parent = par
+                            G.blind_select_opts.boss.alignment.offset.y = 0
+
+                            for i = 1, #G.GAME.tags do
+                                if G.GAME.tags[i]:apply_to_run({
+                                        type = 'new_blind_choice'
+                                    }) then
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        if card.ability.extra.lastEnter ~= love.keyboard.isDown('return') then
+            card.ability.extra.lastEnter = love.keyboard.isDown('return')
+        end
+    end,
+	calculate = function(self, card, context)
+        if context.end_of_round and context.cardarea == G.jokers then
+            if G.GAME.blind.boss then
+                card.ability.extra.allow = true
+                card.ability.extra.active = false
+                return {
+                    message = "Back.",
+                    colour = G.C.JOKER_GREY
+                }
+            end
+        end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+--#endregion
+
 -- DRAMATIZED JOKERS
 --#region DRAMATIZED JOKERS
 

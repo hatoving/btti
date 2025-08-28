@@ -223,7 +223,9 @@ end
 
 function btti_PONG_init()
     if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
-        btti_PONG_kill()
+        if btti_PONG_initialized then
+            btti_PONG_kill()
+        end 
         return
     end
     if not btti_PONG_initialized then

@@ -314,6 +314,12 @@ btti_JDASH_timerTarget = 4
 btti_JDASH_dontDraw = false
 
 function btti_JDASH_init()
+    if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
+        if btti_JDASH_initialized then
+            btti_JDASH_kill()
+        end
+        return
+    end
     if not btti_JDASH_initialized then
         sendInfoMessage("JDASH is init NOW", "BTTI")
 
