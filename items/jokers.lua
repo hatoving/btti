@@ -2736,7 +2736,7 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Friend...?',
 		text = {
-			"Gains +{C:chips}21}{} Chips when triggered",
+			"Gains +{C:chips}21{} Chips when triggered",
             "{C:green}1 in 5{} chance to glitch, resetting",
             "{C:chips}Chips{} and turning 2-4 cards in",
             "{C:attention}played hand{} {C:blue}Digital{}",
@@ -2781,12 +2781,14 @@ SMODS.Joker {
     perishable_compat = false,
 
     set_sprites = function (self, card, front)
-        if card.ability.extra.keyState == 1 then
-            card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
-            card.children.center:set_sprite_pos({ x = 0, y = 0 })
-        else
-            card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
-            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        if card.ability and card.ability.extra then
+            if card.ability.extra.keyState == 1 then
+                card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
+                card.children.center:set_sprite_pos({ x = 0, y = 0 })
+            else
+                card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
+                card.children.center:set_sprite_pos({ x = 0, y = 0 })
+            end
         end
     end,
 
