@@ -30,7 +30,7 @@ SMODS.Joker {
     atlas = 'avariciousJoker',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -84,7 +84,7 @@ SMODS.Joker {
     atlas = 'sullenJoker',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -136,7 +136,7 @@ SMODS.Joker {
     atlas = 'sinfulJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -188,7 +188,7 @@ SMODS.Joker {
     atlas = 'jovialJoker',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -241,7 +241,7 @@ SMODS.Joker {
     atlas = 'confusedJoker',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -294,7 +294,7 @@ SMODS.Joker {
     atlas = 'geniusJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -347,7 +347,7 @@ SMODS.Joker {
     atlas = 'bonkersJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -400,7 +400,7 @@ SMODS.Joker {
     atlas = 'deliberateJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -455,7 +455,7 @@ SMODS.Joker {
     atlas = 'ultimateJoker',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -526,7 +526,7 @@ SMODS.Joker {
     atlas = 'splitJovialJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -579,7 +579,7 @@ SMODS.Joker {
     atlas = 'splitConfusedJoker',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -631,7 +631,7 @@ SMODS.Joker {
     atlas = 'zeroTheo',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -684,7 +684,7 @@ SMODS.Joker {
     atlas = 'trueBanana',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -742,7 +742,7 @@ SMODS.Joker {
     atlas = 'royalMoon',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -816,7 +816,7 @@ SMODS.Joker {
     atlas = 'shortScholar',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -889,7 +889,7 @@ SMODS.Joker {
     atlas = 'chanceOfClouds',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -974,7 +974,7 @@ SMODS.Joker {
     atlas = 'celestius',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1084,7 +1084,7 @@ SMODS.Joker {
     atlas = 'mineralJoker',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1158,7 +1158,7 @@ SMODS.Joker {
     atlas = 'abstractbuckler',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1217,7 +1217,7 @@ SMODS.Joker {
     atlas = 'resume',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1324,7 +1324,7 @@ SMODS.Joker {
     atlas = 'bat',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1377,7 +1377,7 @@ SMODS.Joker {
     atlas = 'mountainBurglar',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1456,7 +1456,7 @@ SMODS.Joker {
     atlas = 'holoResume',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     soul_atlas = 'holoResume',
     soul_pos = {
@@ -1591,7 +1591,7 @@ SMODS.Joker {
     atlas = 'lunatic',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1674,7 +1674,7 @@ SMODS.Joker {
     atlas = 'wineJuggler',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1726,7 +1726,7 @@ SMODS.Joker {
     atlas = 'photoChad',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTImodadditionCOMBO"] = true },
+    pools = { ["BTTI_modAddtion_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1813,7 +1813,7 @@ SMODS.Joker {
     atlas = 'TripleBaka',
     pos = { x = 0, y = 0 },
     cost = 12,
-    pools = { ["BTTImodaddition"] = true },
+    pools = { ["BTTI_modAddtion"] = true },
 
     unlocked = true,
     discovered = false,

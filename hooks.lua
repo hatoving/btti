@@ -169,6 +169,15 @@ function play_sound(sound_code, per, vol)
     return playSoundRef(sound_code, per, vol)
 end
 
+local canSellCardRef = Card.can_sell_card
+function Card:can_sell_card(context)
+    if (self.config.center.pools or {}).BTTI_modAddtion_CREATICA then
+        return true
+    else
+        return canSellCardRef(self, context)
+    end
+end
+
 btti_whorseFlashbangAlpha = 0.0
 btti_dwayneTheRockImage = loadImage('rock.png')
 btti_dwayneTheRockAlpha = 0.0

@@ -256,7 +256,7 @@ SMODS.current_mod.optional_features = {
 --#region Pool creation
 
 SMODS.ObjectType({
-	key = "BTTImodaddition",
+	key = "BTTI_modAddtion",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -265,7 +265,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionCOMBO",
+	key = "BTTI_modAddtion_COMBO",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -274,7 +274,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionplanets",
+	key = "BTTI_modAddtion_planets",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -283,7 +283,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditiontarots",
+	key = "BTTI_modAddtion_tarots",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -292,7 +292,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionspectrals",
+	key = "BTTI_modAddtion_spectrals",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -301,7 +301,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionITTI",
+	key = "BTTI_modAddtion_ITTI",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -310,7 +310,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionSMP",
+	key = "BTTI_modAddtion_SMP",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -319,7 +319,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionDEETS",
+	key = "BTTI_modAddtion_DEETS",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
@@ -328,7 +328,7 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.ObjectType({
-	key = "BTTImodadditionDEETSPlanets",
+	key = "BTTI_modAddtion_DEETSPlanets",
 	default = "j_reserved_parking",
 	cards = {},
 	inject = function(self)
