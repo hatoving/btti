@@ -2921,6 +2921,84 @@ SMODS.Joker {
     end
 }
 
+SMODS.Atlas {
+    key = "FrickinFunBand",
+    path = "bttiFrickinFunBand.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'FrickinFunBand',
+    loc_txt = {
+        name = 'Frickin\' Fun Band',
+        text = {
+            "Avoiding plaiyng with a {V:1}#1#",
+            "will grant you a card of that suit",
+            "Suit changes at the start of round",
+        }
+    },
+
+    config = { extra = { suit = "Spades", grant = true } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        return {
+            vars = { localize(card.ability.extra.suit, 'suits_singular'), colours = { G.C.SUITS[card.ability.extra.suit] } },
+        }
+    end,
+    rarity = 1,
+    atlas = 'FrickinFunBand',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.before then
+            for i = 1, #G.play.cards do
+                if G.play.cards[i]:is_suit(card.ability.extra.suit) then
+                    card.ability.extra.grant = false
+                end
+            end
+        end
+        if context.end_of_round and context.cardarea == G.jokers then
+            if card.ability.extra.grant then
+                return {
+                    message = "Hooray!",
+                    colour = G.C.RED,
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            SMODS.add_card({ set = 'Playing Card', suit = card.ability.extra.suit, area = G.deck })
+                            return true
+                        end,
+                    }))
+                }
+            else
+                card.ability.extra.grant = true
+            end
+        end
+        if context.setting_blind then
+            local suits = {}
+            for k, v in ipairs({ 'Spades', 'Hearts', 'Clubs', 'Diamonds' }) do
+                if v ~= card.ability.extra.suit then suits[#suits + 1] = v end
+            end
+            local c = pseudorandom_element(suits, 'Tanner' .. G.GAME.round_resets.ante)
+            card.ability.extra.suit = c
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 -- DRAMATIZED JOKERS
