@@ -1718,7 +1718,10 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            local steal = math.random(1, math.clamp(G.GAME.dollars, 1, 5))
+            local steal = math.random(1, math.clamp(G.GAME.dollars, 1, 10))
+            if steal > G.GAME.dollars then
+                steal = G.GAME.dollars
+            end
             card.ability.extra.chips = card.ability.extra.chips + steal * 2
             card.ability.extra.mult = card.ability.extra.mult + math.floor(steal / 2)
             return SMODS.merge_effects {
@@ -1735,6 +1738,10 @@ SMODS.Joker {
         end
         if context.end_of_round and context.cardarea == G.jokers then
             if pseudorandom('Cassidy') < G.GAME.probabilities.normal / 10 then
+                local steal = math.random(1, math.clamp(G.GAME.dollars, 1, 15))
+                if steal > G.GAME.dollars then
+                    steal = G.GAME.dollars
+                end
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound("tarot1")
@@ -1744,6 +1751,7 @@ SMODS.Joker {
                 }))
                 return {
                     message = "Gotta dip!",
+                    dollars = -steal,
                     colour = G.C.YELLOW,
                 }
             end
