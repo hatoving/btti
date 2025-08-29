@@ -3291,6 +3291,88 @@ SMODS.Joker {
 	end
 }
 
+-- Joozie
+SMODS.Atlas {
+    key = "Aubree",
+    path = "bttiAubree.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Aubree',
+    loc_txt = {
+        name = 'Aubree',
+        text = {
+            ""
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Aubree',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTImodaddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+    
+    calculate = function(self, card, context)
+        if context.buying_card then
+            if card.ability.name == "j_btti_Aubree" then
+                if not G.GAME.aubree then
+                    --we're gonna assume that if one already exists, we're a clone.
+                    --but otherwise, just add a joker slot like usual :P
+                    G.GAME.aubree = card
+                    G.jokers:change_size(1)
+                end
+            end
+        end
+        if context.ante_change and context.ante_end then
+            if card == G.GAME.aubree then
+                return {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "Fine...", colour = G.C.RED })
+                            card:juice_up()
+                            SMODS.add_card({set = 'Joker', key = 'j_btti_Aubree'})
+                            return true
+                        end,
+                    }))
+                }
+            end
+        end
+        if context.selling_card then
+            if card == G.GAME.aubree then
+                for i = 1, #G.jokers.cards, 1 do
+                    if G.jokers.cards[i] ~= card and G.jokers.cards[i].ability.name == 'j_btti_Aubree' then
+                        SMODS.destroy_cards(G.jokers.cards[i])
+                    end
+                end
+                G.jokers:change_size(-1)
+                G.GAME.aubree = nil
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 -- REGALITY JOKERS
