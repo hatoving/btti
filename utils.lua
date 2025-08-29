@@ -69,6 +69,19 @@ function getJokerID(card)
     end
 end
 
+function getJoker(name)
+    if G.jokers then
+        local _selfid = 0
+        if jokerExists(name) then
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i].ability.name == name then _selfid = i end
+            end
+        end
+        return _selfid
+    end
+    return 0
+end
+
 function lerp(a, b, t)
     local result = a + t * (b - a)
     return result

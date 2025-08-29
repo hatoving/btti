@@ -2903,17 +2903,11 @@ SMODS.Joker {
             }
         end
         if context.card_leaked then
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                blocking = false,
-                delay = 0,
-                func = function()
-                    card.ability.extra.xmult = card.ability.extra.xmult + 0.25
-                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                        { message = "Upgrade!", colour = G.C.ORANGE })
-                    return true
-                end,
-            }))
+            card.ability.extra.xmult = card.ability.extra.xmult + 0.25
+            return {
+                message = "Upgrade!",
+                colour = G.C.BTTIDEETS
+            }
         end
     end,
     in_pool = function(self, args)

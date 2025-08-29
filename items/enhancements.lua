@@ -27,10 +27,7 @@ SMODS.Enhancement {
             if pseudorandom('MsBreward') < G.GAME.probabilities.normal / 2 then
                 local selfID = 0
                 local rets = {
-                    {
-                        message = "Leak!",
-                        colour = G.C.DEETS,
-                    }
+                    
                 }
                 for i = 1, #context.scoring_hand do
                     if context.scoring_hand[i] == card then
@@ -41,6 +38,13 @@ SMODS.Enhancement {
                 sendInfoMessage("checking... (" .. selfID .. ", " .. selfID + 1 .. ")", "BTTI")
                 if context.scoring_hand[selfID + 1] ~= nil then
                     local pc = context.scoring_hand[selfID + 1]
+                    table.insert(rets, {
+                        message = "Leak!",
+                        colour = G.C.DEETS,
+                        func = function()
+                            SMODS.calculate_context { card_leaked = pc }
+                        end
+                    })
                     local ch = pc:get_chip_bonus()
                     local mult = pc:get_chip_mult()
                     local xMult = pc:get_chip_x_mult()
@@ -68,16 +72,10 @@ SMODS.Enhancement {
                         table.insert(rets, {
                             message = "Leak!",
                             colour = G.C.DEETS,
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'immediate',
-                                blocking = false,
-                                delay = 0,
-                                func = function()
-                                    pc:juice_up(0.3, 0.5)
-                                    SMODS.calculate_context { card_leaked = pc }
-                                    return true
-                                end,
-                            })),
+                            func = function()
+                                pc:juice_up(0.3, 0.5)
+                                SMODS.calculate_context { card_leaked = pc }
+                            end
                         })
                         if pc.seal == "Gold" then
                             table.insert(rets, {
