@@ -26,7 +26,7 @@ SMODS.Seal {
     end,
     atlas = "orangeSeal",
     pos = { x = 0, y = 0 },
-    pools = { ["BTTI_modAddtion_seals"] = true },
+    pools = { ["BTTI_modAddition_seals"] = true },
 
     calculate = function(self, card, context)
     end
@@ -55,7 +55,7 @@ SMODS.Seal {
             "played hand"
         }
     },
-    pools = { ["BTTI_modAddtion_seals"] = true },
+    pools = { ["BTTI_modAddition_seals"] = true },
 
     loc_vars = function(self, info_queue)
         return { vars = { } }

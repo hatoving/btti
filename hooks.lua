@@ -1,20 +1,3 @@
-function Card:click()
-    if self.area and self.area:can_highlight(self) then
-        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
-        if self.highlighted ~= true then
-            self.area:add_to_highlighted(self)
-            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
-        else
-            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
-            self.area:remove_from_highlighted(self)
-            play_sound('cardSlide2', nil, 0.3)
-        end
-    end
-    if self.area and self.area == G.deck and self.area.cards[1] == self then
-        G.FUNCS.deck_info()
-    end
-end
-
 local smodsCalcRef = SMODS.calculate_effect -- don't really need it but just in case
 SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     local ret = {}
@@ -85,6 +68,7 @@ btti_musicIdxBoss = {
         'music_TennaBoss'
     }
 }
+
 local calcJokerRef = Card.calculate_joker
 function Card:calculate_joker(context)
     if G.GAME.btti_selectedMusicIdx == nil then
@@ -169,9 +153,26 @@ function play_sound(sound_code, per, vol)
     return playSoundRef(sound_code, per, vol)
 end
 
+function Card:click()
+    if self.area and self.area:can_highlight(self) then
+        if (self.area == G.hand) and (G.STATE == G.STATES.HAND_PLAYED) then return end
+        if self.highlighted ~= true then
+            self.area:add_to_highlighted(self)
+            SMODS.calculate_context { clicked_card = self, card_highlighted = true }
+        else
+            SMODS.calculate_context { clicked_card = self, card_highlighted = false }
+            self.area:remove_from_highlighted(self)
+            play_sound('cardSlide2', nil, 0.3)
+        end
+    end
+    if self.area and self.area == G.deck and self.area.cards[1] == self then
+        G.FUNCS.deck_info()
+    end
+end
+
 local canSellCardRef = Card.can_sell_card
 function Card:can_sell_card(context)
-    if (self.config.center.pools or {}).BTTI_modAddtion_CREATICA then
+    if (self.config.center.pools or {}).BTTI_modAddition_CREATICA or (self.ability and self.ability.extra and self.ability.extra.huntrix) then
         return true
     else
         return canSellCardRef(self, context)
@@ -185,6 +186,15 @@ btti_dwayneTheRockAlpha = 0.0
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
+
+    if (G and G.jokers and G.jokers.cards) and (not jokerExists('j_btti_Huntrix')) then
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i].ability.extra and G.jokers.cards[i].ability.extra.huntrix then
+                G.jokers.cards[i].ability.extra.huntrix = false
+                G.jokers.cards[i].ability.eternal = false
+            end
+        end
+    end
     
     if G and G.GAME then
         if G.STATE == G.STATES.MENU then

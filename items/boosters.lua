@@ -504,7 +504,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddtion_ITTI",
+            set = "BTTI_modAddition_ITTI",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -542,7 +542,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddtion_DEETS",
+            set = "BTTI_modAddition_DEETS",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -581,7 +581,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddtion_SMP",
+            set = "BTTI_modAddition_SMP",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -654,7 +654,7 @@ SMODS.Booster {
                 end
             end
             _card = {
-                set = "BTTI_modAddtion_DEETSPlanets",
+                set = "BTTI_modAddition_DEETSPlanets",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
@@ -664,7 +664,7 @@ SMODS.Booster {
             }
         else
             _card = {
-                set = "BTTI_modAddtion_DEETSPlanets",
+                set = "BTTI_modAddition_DEETSPlanets",
                 area = G.pack_cards,
                 skip_materialize = true,
                 soulable = true,
