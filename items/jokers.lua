@@ -3411,6 +3411,7 @@ SMODS.Joker {
                             { message = "Fine...", colour = G.C.RED })
                         card:juice_up()
                         card.ability.card_limit = card.ability.card_limit + 1
+                        G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                         return true
                     end,
                 }))
