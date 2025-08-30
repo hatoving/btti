@@ -3410,7 +3410,7 @@ SMODS.Joker {
                         card_eval_status_text(card, 'extra', nil, nil, nil,
                             { message = "Fine...", colour = G.C.RED })
                         card:juice_up()
-                        card.ability.extra.card_limit = card.ability.extra.card_limit + 1
+                        card.ability.card_limit = card.ability.card_limit + 1
                         return true
                     end,
                 }))
