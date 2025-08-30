@@ -1133,7 +1133,7 @@ SMODS.Joker {
     end
 }
 
--- Jonker
+-- BananaFarm
 SMODS.Atlas {
     key = "BananaFarm",
     path = "bttiBananaFarm.png",
@@ -1161,7 +1161,7 @@ SMODS.Joker {
             vars = { },
         }
     end,
-    rarity = 1,
+    rarity = 2,
     atlas = 'BananaFarm',
     pos = { x = 0, y = 0 },
     cost = 4,
@@ -1207,6 +1207,69 @@ SMODS.Joker {
                     }))
                 }
             end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+-- PFP Bird
+SMODS.Atlas {
+    key = "PFPBird",
+    path = "bttiPFPBird.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'PFPBird',
+    loc_txt = {
+        name = 'PFP Bird',
+        text = {
+            "Reduces shop prices by {C:attenion}5%{}",
+            "for each {C:attention}Blind{} skipped",
+            "{C:inactive}Currently {C:attention}#1#%{}",
+            "{C:inactive}Fly high, little budgie"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        return {
+            vars = { G.GAME.btti_pfpBirdBudgie or 0 },
+        }
+    end,
+    rarity = 2,
+    atlas = 'PFPBird',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddtion"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.skip_blind then
+            if G.GAME.btti_pfpBirdBudgie == nil then
+                G.GAME.btti_pfpBirdBudgie = 0
+            end
+            G.GAME.btti_pfpBirdBudgie = G.GAME.btti_pfpBirdBudgie + 5
+            G.GAME.btti_pfpBirdBudgie = math.clamp(G.GAME.btti_pfpBirdBudgie, 0, 50)
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.GAME.discount_percent = G.GAME.btti_pfpBirdBudgie
+                    for _, v in pairs(G.I.CARD) do
+                        if v.set_cost then v:set_cost() end
+                    end
+                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                        { message = "*tweet*", colour = G.C.YELLOW })
+                    return true
+                end
+            }))
         end
     end,
     in_pool = function(self, args)
