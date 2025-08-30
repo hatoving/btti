@@ -92,6 +92,15 @@ function lerpAngle(a, b, t)
     return a + diff * t
 end
 
+function findInTable(tbl, value)
+    for i, v in ipairs(tbl) do
+        if v == value then
+            return i -- return index where found
+        end
+    end
+    return nil -- not found
+end
+
 function angleDifference(a, b)
     local diff = (b - a) % (2 * math.pi)
     if diff > math.pi then
