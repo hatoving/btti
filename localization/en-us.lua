@@ -4,7 +4,7 @@ return {
             bttiJokerDonor = {
                 name = 'Friend...?',
                 text = {
-                    "Gains +{C:chips}21}{} Chips when triggered",
+                    "Gains +{C:chips}21{} Chips when triggered",
                     "{C:green}1 in 5{} chance to glitch, resetting",
                     "{C:chips}Chips{} and turning 2-4 cards in",
                     "{C:attention}played hand{} {C:blue}Digital{}",
@@ -20,7 +20,7 @@ return {
             bttiJokerDonor_keepName = {
                 name = 'The Donor',
                 text = {
-                    "Gains +{C:chips}21}{} Chips when triggered",
+                    "Gains +{C:chips}21{} Chips when triggered",
                     "{C:green}1 in 5{} chance to glitch, resetting",
                     "{C:chips}Chips{} and turning 2-4 cards in",
                     "{C:attention}played hand{} {C:blue}Digital{}",
