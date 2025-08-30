@@ -3410,60 +3410,15 @@ SMODS.Joker {
                         card_eval_status_text(card, 'extra', nil, nil, nil,
                             { message = "Fine...", colour = G.C.RED })
                         card:juice_up()
-                        SMODS.add_card({ set = 'Joker', key = 'j_btti_AubreeClone', stickers = { 'eternal' } })
+                        card.ability.extra.card_limit = card.ability.extra.card_limit + 1
                         return true
                     end,
                 }))
             }
         end
-        if context.selling_self then
-            if not card.ability.eternal then
-                for i = 1, #G.jokers.cards, 1 do
-                    if G.jokers.cards[i].ability.name == 'j_btti_AubreeClone' then
-                        SMODS.destroy_cards(G.jokers.cards[i])
-                    end
-                end
-            end
-        end
-
     end,
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
-    end
-}
-SMODS.Joker {
-    key = 'AubreeClone',
-    loc_txt = {
-        name = 'Aubree (Clone)',
-        text = {
-            "Does nothing."
-        }
-    },
-
-    config = { extra = {} },
-    loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
-        return {
-            vars = {},
-        }
-    end,
-    rarity = 3,
-    atlas = 'Aubree',
-    pos = { x = 0, y = 0 },
-    cost = 6,
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-
-    end,
-    in_pool = function(self, args)
-        return false, { allow_duplicates = true }
     end
 }
 
