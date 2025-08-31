@@ -59,11 +59,6 @@ if err then
 	error(err)
 end
 f()
-f, err = SMODS.load_file('hooks.lua')
-if err then
-	error(err)
-end
-f()
 
 -- Load items
 local files = NFS.getDirectoryItems(G.bttiModPath .. "items")
