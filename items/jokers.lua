@@ -3572,7 +3572,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { effect = 0 } },
+    config = { extra = { effect = 1 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
 		info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
@@ -3593,12 +3593,10 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-		if context.setting_blind and context.cardarea == G.jokers then
+        if context.first_hand_drawn then
             if card.ability.extra.effect == nil then
-                card.ability.extra.effect = 0
+                card.ability.extra.effect = 1
             end
-            card.ability.extra.effect = math.random(1, 8)
-            sendInfoMessage("spoingus effect " .. card.ability.extra.effect .. "", "BTTI")
 			if card.ability.extra.effect == 1 then
                 local rarities  = {
                     [1] = 'Common',
