@@ -196,7 +196,7 @@ SMODS.Blind {
             "rank are debuffed"
         }
     },
-    boss = { min = 1 },
+    boss = { min = 5 },
     boss_colour = HEX('ffffff'),
 
     recalc_debuff = function(self, card, from_blind)
@@ -261,7 +261,7 @@ SMODS.Blind {
             "rank are debuffed"
         }
     },
-    boss = { min = 1 },
+    boss = { min = 5 },
     boss_colour = HEX('ffffff'),
 
     recalc_debuff = function(self, card, from_blind)

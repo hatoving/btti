@@ -3,7 +3,32 @@ btti_whorseFlashbangAlpha = 0.0
 btti_dwayneTheRockImage = loadImage('rock.png')
 btti_dwayneTheRockAlpha = 0.0
 
+btti_dvdLogoImage = loadImage('dvdLogo.png')
+btti_dvdLogoImageX = 0.0
+btti_dvdLogoImageY = 0.0
+btti_dvdLogoImageVX = 100 * (math.random(0, 1) == 0 and -1 or 1)
+btti_dvdLogoImageVY = 100 * (math.random(0, 1) == 0 and -1 or 1)
 
+local btti_dvdLogoColors = {
+    { 1,   0,   0 }, -- Red
+    { 0,   1,   0 }, -- Green
+    { 0,   0,   1 }, -- Blue
+    { 1,   1,   0 }, -- Yellow
+    { 1,   0,   1 }, -- Magenta
+    { 0,   1,   1 }, -- Cyan
+    { 1,   0.5, 0 }, -- Orange
+    { 0.5, 0,   1 }, -- Purple
+}
+btti_dvdLogoColor = btti_dvdLogoColors[love.math.random(1, #btti_dvdLogoColors)]
+local function btti_dvdLogoNextColor(current)
+    local newColor
+    repeat
+        newColor = btti_dvdLogoColors[love.math.random(1, #btti_dvdLogoColors)]
+    until newColor ~= current
+    return newColor
+end
+
+local screenWidth, screenHeight = love.graphics.getDimensions()
 
 local updateReal = love.update
 function love.update(dt)
@@ -36,6 +61,7 @@ function love.update(dt)
     btti_PONG_update(dt)
     btti_JDASH_update(dt)
 
+    -- shamlessly stolen from yahimod
     for i = 1, #G.effectmanager do
         if G.effectmanager[i] and G.effectmanager[i][1] then
             if G.effectmanager[i][1].duration ~= nil and G.effectmanager[i][1].duration >= -1 then
@@ -110,6 +136,28 @@ function love.update(dt)
         --btti_JDASH_init()
     end
 
+    btti_dvdLogoImageX = btti_dvdLogoImageX + btti_dvdLogoImageVX * dt
+    btti_dvdLogoImageY = btti_dvdLogoImageY + btti_dvdLogoImageVY * dt
+
+    if btti_dvdLogoImageX <= 0 then
+        btti_dvdLogoImageX = 0
+        btti_dvdLogoImageVX = -btti_dvdLogoImageVX
+        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    elseif btti_dvdLogoImageX + btti_dvdLogoImage:getWidth() >= screenWidth then
+        btti_dvdLogoImageX = screenWidth - btti_dvdLogoImage:getWidth()
+        btti_dvdLogoImageVX = -btti_dvdLogoImageVX
+        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    end
+    if btti_dvdLogoImageY <= 0 then
+        btti_dvdLogoImageY = 0
+        btti_dvdLogoImageVY = -btti_dvdLogoImageVY
+        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    elseif btti_dvdLogoImageY + btti_dvdLogoImage:getHeight() >= screenHeight then
+        btti_dvdLogoImageY = screenHeight - btti_dvdLogoImage:getHeight()
+        btti_dvdLogoImageVY = -btti_dvdLogoImageVY
+        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    end
+
     btti_whorseFlashbangAlpha = lerp(btti_whorseFlashbangAlpha, 0.0, dt / 4.0)
     btti_dwayneTheRockAlpha = lerp(btti_dwayneTheRockAlpha, 0.0, dt)
 end
@@ -117,6 +165,7 @@ end
 local explosion = loadImage("explosion.png")
 local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
     282, 17, 0)
+
 function btti_MODDRAW()
     love.graphics.push()
 
@@ -154,5 +203,14 @@ function btti_MODDRAW()
         end
     end
 
+    love.graphics.setColor(btti_dvdLogoColor[1], btti_dvdLogoColor[2], btti_dvdLogoColor[3], G.GAME.btti_dvdLogoAlpha or 0)
+    love.graphics.draw(btti_dvdLogoImage, btti_dvdLogoImageX, btti_dvdLogoImageY)
+
     love.graphics.pop()
+end
+
+local loveResize = love.resize
+function love.resize(w, h)
+    loveResize(w, h)
+    screenWidth, screenHeight = w, h
 end

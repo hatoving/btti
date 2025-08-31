@@ -3675,6 +3675,7 @@ SMODS.Joker {
                 }
                 SMODS.destroy_cards(randCard)
             elseif card.ability.extra.effect == 6 then
+                G.GAME.btti_dvdLogoAlpha = 1.0
             elseif card.ability.extra.effect == 7 then
             end
             return { message = "Spoingus" }
