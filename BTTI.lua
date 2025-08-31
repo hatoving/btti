@@ -82,7 +82,7 @@ end
 local files = NFS.getDirectoryItems(G.bttiModPath .. "hooks")
 for _, file in ipairs(files) do
 	print("[BTTI] Loading lua file " .. file)
-	f, err = SMODS.load_file("items/" .. file)
+	f, err = SMODS.load_file("hooks/" .. file)
 	if err then
 		error(err)
 	end
