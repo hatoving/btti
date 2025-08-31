@@ -3598,20 +3598,26 @@ SMODS.Joker {
                 card.ability.extra.effect = 1
             end
 			if card.ability.extra.effect == 1 then
-                local rarities  = {
-                    [1] = 'Common',
-                    [2] = 'Uncommon',
-                    [3] = 'Rare',
-                    [4] = 'Legendary'
-                }
-                local randJk = G.jokers.cards[math.random(1, #G.jokers.cards)]
-                SMODS.add_card {
-                    set = 'Joker',
-                    rarity = rarities[randJk.config.rarity],
-                    edition = (randJk.edition and randJk.edition.key) or nil,
-                    enhancement = nil
-                }
-                SMODS.destroy_cards(randJk)
+                if #G.jokers.cards > 1 then
+                    local rarities = {
+                        [1] = 'Common',
+                        [2] = 'Uncommon',
+                        [3] = 'Rare',
+                        [4] = 'Legendary'
+                    }
+                    local idx
+                    repeat
+                        idx = math.random(1, #G.jokers.cards)
+                    until idx ~= getJokerID(card)
+                    local randJk  = G.jokers.cards[idx]
+                    SMODS.add_card {
+                        set = 'Joker',
+                        rarity = rarities[math.random(1, 4)],
+                        edition = (randJk.edition and randJk.edition.key) or nil,
+                        enhancement = nil
+                    }
+                    SMODS.destroy_cards(randJk)
+                end
 			elseif card.ability.extra.effect == 2 then
 				for i = 1, #G.hand.cards do
 					G.E_MANAGER:add_event(Event({
@@ -3658,7 +3664,7 @@ SMODS.Joker {
 					}))
                 end
             elseif card.ability.extra.effect == 4 then
-                local randCard = G.jokers.cards[math.random(1, #G.deck.cards)]
+                local randCard = G.deck.cards[math.random(1, #G.deck.cards)]
                 SMODS.add_card {
                     set = 'Joker',
                     edition = (randCard.edition and randCard.edition.key) or nil,
@@ -3833,7 +3839,7 @@ SMODS.Joker {
     config = { card_limit = 1, extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine" } }
         return {
             vars = {},
         }
@@ -3898,7 +3904,7 @@ SMODS.Joker {
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "ca850" } }
         return {
             vars = {},
         }
@@ -3959,7 +3965,7 @@ SMODS.Joker {
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
             vars = {},
         }
@@ -4031,7 +4037,7 @@ SMODS.Joker {
     config = { extra = { mult = 1 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do

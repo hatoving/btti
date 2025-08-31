@@ -1,6 +1,9 @@
 btti_whorseFlashbangAlpha = 0.0
+
 btti_dwayneTheRockImage = loadImage('rock.png')
 btti_dwayneTheRockAlpha = 0.0
+
+
 
 local updateReal = love.update
 function love.update(dt)
