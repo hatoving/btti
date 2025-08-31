@@ -3556,6 +3556,130 @@ SMODS.Joker {
     end
 }
 
+-- PFP Bird
+SMODS.Atlas {
+    key = "Spoingus",
+    path = "bttiSpoingus.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Spoingus',
+    loc_txt = {
+        name = 'Spoingus',
+        text = {
+            "Spoingus"
+        }
+    },
+
+    config = { extra = { effect = 0 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
+		info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Spoingus',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+		if context.setting_blind and context.cardarea == G.jokers then
+            if card.ability.extra.effect == nil then
+                card.ability.extra.effect = 0
+            end
+            card.ability.extra.effect = math.random(1, 8)
+            sendInfoMessage("spoingus effect " .. card.ability.extra.effect .. "", "BTTI")
+			if card.ability.extra.effect == 1 then
+                local rarities  = {
+                    [1] = 'Common',
+                    [2] = 'Uncommon',
+                    [3] = 'Rare',
+                    [4] = 'Legendary'
+                }
+                local randJk = G.jokers.cards[math.random(1, #G.jokers.cards)]
+                SMODS.add_card {
+                    set = 'Joker',
+                    rarity = rarities[randJk.config.rarity],
+                    edition = (randJk.edition and randJk.edition.key) or nil,
+                    enhancement = nil
+                }
+                SMODS.destroy_cards(randJk)
+			elseif card.ability.extra.effect == 2 then
+				for i = 1, #G.hand.cards do
+					G.E_MANAGER:add_event(Event({
+						trigger = 'immediate',
+						blocking = false,
+						delay = 0,
+						func = function()
+							local randomEnhancement = SMODS.poll_enhancement {key = "spoingus", guaranteed = true}
+							G.hand.cards[i]:set_ability(randomEnhancement)
+							G.hand.cards[i]:juice_up()
+							return true
+						end,
+					}))
+				end
+			elseif card.ability.extra.effect == 3 then
+				for i = 1, #G.hand.cards do
+					G.E_MANAGER:add_event(Event({
+						trigger = 'immediate',
+						blocking = false,
+						delay = 0,
+						func = function()
+							local reversed = {
+								[2]  = 14, -- 2 -> Ace
+								[3]  = 13, -- 3 -> King
+								[4]  = 12, -- 4 -> Queen
+								[5]  = 11, -- 5 -> Jack
+								[6]  = 9,  -- 6 -> 9
+								[7]  = 8,  -- 7 -> 8
+								[8]  = 7,  -- 8 -> 7
+								[9]  = 6,  -- 9 -> 6
+								[10] = 10, -- 10 stays 10
+								[11] = 5,  -- Jack -> 5
+								[12] = 4,  -- Queen -> 4
+								[13] = 3,  -- King -> 3
+								[14] = 2,  -- Ace -> 2
+							}
+							local id = G.hand.cards[i]:get_id()
+							local reversedId = reversed[id]
+
+                            G.hand.cards[i]:set_rank(reversedId)
+							G.hand.cards[i]:juice_up()
+							return true
+						end,
+					}))
+                end
+            elseif card.ability.extra.effect == 4 then
+                local randCard = G.jokers.cards[math.random(1, #G.deck.cards)]
+                SMODS.add_card {
+                    set = 'Joker',
+                    edition = (randCard.edition and randCard.edition.key) or nil,
+                    enhancement = next(SMODS.get_enhancements(randCard)),
+                    seal = randCard.seal
+                }
+                SMODS.destroy_cards(randCard)
+            elseif card.ability.extra.effect == 6 then
+            elseif card.ability.extra.effect == 7 then
+            end
+            return { message = "Spoingus" }
+		end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+
 --#endregion
 
 -- DRAMATIZED JOKERS

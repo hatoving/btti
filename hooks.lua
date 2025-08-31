@@ -1,3 +1,11 @@
+local gFuncsSetBlindRef = G.FUNCS.select_blind
+function G.FUNCS.select_blind(e)
+    if jokerExists('j_btti_Spoingus') and G.jokers.cards[getJoker('j_btti_Spoingus')] then
+        e = G.blind_select_opts.boss:get_UIE_by_ID('select_blind_button')
+    end
+    return gFuncsSetBlindRef(e)
+end
+
 local smodsCalcRef = SMODS.calculate_effect -- don't really need it but just in case
 SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     local ret = {}

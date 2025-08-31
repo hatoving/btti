@@ -36,6 +36,7 @@ function drawRotatedRectangle(mode, x, y, width, height, angle)
     love.graphics.rectangle(mode, 0, 0, width, height) -- origin in the top left corner
     --	love.graphics.rectangle(mode, -width/2, -height/2, width, height) -- origin in the middle
     love.graphics.pop()
+
 end
 
 -- from https://github.com/blazingulag/Prism/blob/main/objects/funcs.lua#L192
@@ -107,6 +108,27 @@ function angleDifference(a, b)
         diff = diff - 2 * math.pi
     end
     return diff
+end
+
+function Card:set_rank(new_rank)
+    local suit_prefix = string.sub(self.base.suit, 1, 1) .. '_'
+    local rank_suffix = new_rank
+
+    if rank_suffix < 10 then
+        rank_suffix = tostring(rank_suffix)
+    elseif rank_suffix == 10 then
+        rank_suffix = 'T'
+    elseif rank_suffix == 11 then
+        rank_suffix = 'J'
+    elseif rank_suffix == 12 then
+        rank_suffix = 'Q'
+    elseif rank_suffix == 13 then
+        rank_suffix = 'K'
+    elseif rank_suffix == 14 then
+        rank_suffix = 'A'
+    end
+
+    self:set_base(G.P_CARDS[suit_prefix .. rank_suffix])
 end
 
 function math.clamp(x, min, max)
