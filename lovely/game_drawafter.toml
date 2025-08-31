@@ -6,14 +6,13 @@ priority = 0 # Priority for loading the file
 [patches.pattern]
 target = 'game.lua' # The file you want to patch.
 pattern = '''
-love.graphics.setCanvas(G.AA_CANVAS)
-love.graphics.push()
+end
+timer_checkpoint('debug', 'draw')
 ''' # The line(s) you want to patch. In pattern patches it should be the whole line(s). Make sure it's unique in that file.
 position = "at" # Where you want to patch it: 'before', 'after' or 'at' (this last one replaces the whole pattern)
 payload = '''
-G.BTTI.MODDRAW()
-love.graphics.setCanvas(G.AA_CANVAS)
-love.graphics.push()
+end
+timer_checkpoint('debug', 'draw')
+G.BTTI.MODDRAW_AFTER()
 ''' # What code you want to replace it with.
-
 match_indent = true

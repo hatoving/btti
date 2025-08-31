@@ -1,83 +1,6 @@
 --#region MISC. BLINDS
 
 SMODS.Atlas {
-    key = "pongBlind",
-    path = "bttiPongBlind.png",
-    px = 34,
-    py = 34,
-    frames = 21,
-    atlas_table = 'ANIMATION_ATLAS'
-}
-SMODS.Blind {
-    key = "pongBlind",
-    atlas = "pongBlind",
-    pos = { x = 0, y = 0 },
-    mult = 2,
-    dollars = 10,
-    loc_txt = {
-        name = 'The Pong',
-        text = {
-            'Have some fun with janky Pong!',
-            'Use Arrow Keys and/or W/S',
-            'move the paddle'
-        }
-    },
-    boss = { min = 3 },
-    boss_colour = HEX('272727'),
-    debuff = {},
-    set_blind = function(self)
-        btti_PONG_init()
-        btti_PONG_initByItself = false
-    end,
-    disable = function(self)
-        btti_PONG_kill()
-        btti_PONG_initByItself = false
-    end,
-    defeat = function(self)
-        btti_PONG_kill()
-        btti_PONG_initByItself = false
-    end
-}
-
-SMODS.Atlas {
-    key = "gdBlind",
-    path = "bttiGDBlind.png",
-    px = 34,
-    py = 34,
-    frames = 21,
-    atlas_table = 'ANIMATION_ATLAS'
-}
-SMODS.Blind {
-    key = "gdBlind",
-    atlas = "gdBlind",
-    pos = { x = 0, y = 0 },
-    mult = 2,
-    dollars = 10,
-    loc_txt = {
-        name = 'The Spike',
-        text = {
-            'Play hit game',
-            'Jimbo Dash'
-        }
-    },
-    boss = { min = 4 },
-    boss_colour = HEX('ffb213'),
-    debuff = {},
-    set_blind = function(self)
-        btti_JDASH_init()
-        btti_JDASH_initByItself = false
-    end,
-    disable = function(self)
-        btti_JDASH_kill()
-        btti_JDASH_initByItself = false
-    end,
-    defeat = function(self)
-        btti_JDASH_kill()
-        btti_JDASH_initByItself = false
-    end
-}
-
-SMODS.Atlas {
     key = "tunaBlind",
     path = "bttiTunaBlind.png",
     px = 34,
@@ -707,6 +630,87 @@ SMODS.Blind {
     debuff = {},
     set_blind = function (self)
         G.GAME.btti_levelBlindCountdown = 5.0
+    end
+}
+
+--#endregion
+
+--#region GAME BLINDS
+
+SMODS.Atlas {
+    key = "pongBlind",
+    path = "bttiPongBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "pongBlind",
+    atlas = "pongBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Pong',
+        text = {
+            'Have some fun with janky Pong!',
+            'Use Arrow Keys and/or W/S',
+            'move the paddle'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('272727'),
+    debuff = {},
+    set_blind = function(self)
+        G.BTTI.PONG_init()
+        G.BTTI.PONG_initByItself = false
+    end,
+    disable = function(self)
+        G.BTTI.PONG_kill()
+        G.BTTI.PONG_initByItself = false
+    end,
+    defeat = function(self)
+        G.BTTI.PONG_kill()
+        G.BTTI.PONG_initByItself = false
+    end
+}
+
+SMODS.Atlas {
+    key = "gdBlind",
+    path = "bttiGDBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "gdBlind",
+    atlas = "gdBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Spike',
+        text = {
+            'Play hit game',
+            'Jimbo Dash'
+        }
+    },
+    boss = { min = 4 },
+    boss_colour = HEX('ffb213'),
+    debuff = {},
+    set_blind = function(self)
+        G.BTTI.JDASH_init()
+        G.BTTI.JDASH_initByItself = false
+    end,
+    disable = function(self)
+        G.BTTI.JDASH_kill()
+        G.BTTI.JDASH_initByItself = false
+    end,
+    defeat = function(self)
+        G.BTTI.JDASH_kill()
+        G.BTTI.JDASH_initByItself = false
     end
 }
 

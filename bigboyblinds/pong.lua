@@ -176,10 +176,10 @@ local createBall = function (x,y)
 
             if self.x < player.x - 20 and player == player1 then
                 LOSE_GAME_NOW()
-                btti_PONG_kill()
+                G.BTTI.PONG_kill()
                 return
             elseif self.x > player.x + 20 and player == player2 then
-                btti_PONG_score()
+                G.BTTI.PONG_score()
             end
 
             -- top/bottom wall collision
@@ -197,44 +197,44 @@ local createBall = function (x,y)
     return ball
 end
 
-btti_PONG_STATES = {
+G.BTTI.PONG_STATES = {
     START = 0,
     LOOP = 1,
     GAME_OVER = 2,
 }
 
-btti_PONG_initByItself = true
-btti_PONG_initialized = false
+G.BTTI.PONG_initByItself = true
+G.BTTI.PONG_initialized = false
 
-btti_PONG_state = btti_PONG_STATES.START
-btti_PONG_timer = 0
-btti_PONG_timerTarget = 2
-btti_PONG_dontDraw = false
-btti_PONG_backgroundA = 0
-btti_PONG_plyrScore = 0
+G.BTTI.PONG_state = G.BTTI.PONG_STATES.START
+G.BTTI.PONG_timer = 0
+G.BTTI.PONG_timerTarget = 2
+G.BTTI.PONG_dontDraw = false
+G.BTTI.PONG_backgroundA = 0
+G.BTTI.PONG_plyrScore = 0
 
-function btti_PONG_score()
-    btti_PONG_timer = 0
-    btti_PONG_timerTarget = 3
-    btti_PONG_state = btti_PONG_STATES.START
-    btti_PONG_plyrScore = btti_PONG_plyrScore + 1
-    play_sound('btti_pongScore', (math.random() * 0.2 + 1))
+function G.BTTI.PONG_score()
+    G.BTTI.PONG_timer = 0
+    G.BTTI.PONG_timerTarget = 3
+    G.BTTI.PONG_state = G.BTTI.PONG_STATES.START
+    G.BTTI.PONG_plyrScore = G.BTTI.PONG_plyrScore + 1
+    play_sound('G.BTTI.pongScore', (math.random() * 0.2 + 1))
 end
 
-function btti_PONG_init()
+function G.BTTI.PONG_init()
     if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
-        if btti_PONG_initialized then
-            btti_PONG_kill()
+        if G.BTTI.PONG_initialized then
+            G.BTTI.PONG_kill()
         end 
         return
     end
-    if not btti_PONG_initialized then
+    if not G.BTTI.PONG_initialized then
         sendInfoMessage("pong is init NOW", "BTTI")
-        btti_PONG_initialized = true
-        btti_PONG_dontDraw = false
+        G.BTTI.PONG_initialized = true
+        G.BTTI.PONG_dontDraw = false
 
-        btti_PONG_plyrScore = 0
-        btti_PONG_backgroundA = 0
+        G.BTTI.PONG_plyrScore = 0
+        G.BTTI.PONG_backgroundA = 0
 
         player1 = createPlayer(1280 / 2 - 150, 150, 720 / 2 - 65)
         player2 = createPlayer(1280 / 2 + 320, -150, 720 / 2 - 65)
@@ -245,41 +245,41 @@ function btti_PONG_init()
 
         ball = createBall(midX, midY)
 
-        btti_PONG_state = btti_PONG_STATES.START
-        btti_PONG_timer = 0
+        G.BTTI.PONG_state = G.BTTI.PONG_STATES.START
+        G.BTTI.PONG_timer = 0
    end 
 end
 
-function btti_PONG_update(dt)
+function G.BTTI.PONG_update(dt)
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
     scaleX = screenWidth / 1280
     scaleY = screenHeight / 720
 
-    if btti_PONG_initialized == true and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
+    if G.BTTI.PONG_initialized == true and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
         player1.a = lerp(player1.a, 1.0, 6.0 * dt)
         player2.a = lerp(player2.a, 1.0, 6.0 * dt)
-        if btti_PONG_state == btti_PONG_STATES.START then
-            btti_PONG_backgroundA = lerp(btti_PONG_backgroundA, 1, 6.0 * dt)
-            btti_PONG_timer = btti_PONG_timer + dt
+        if G.BTTI.PONG_state == G.BTTI.PONG_STATES.START then
+            G.BTTI.PONG_backgroundA = lerp(G.BTTI.PONG_backgroundA, 1, 6.0 * dt)
+            G.BTTI.PONG_timer = G.BTTI.PONG_timer + dt
             player1.x = lerp(player1.x, player1.xog, 6.0 * dt)
             player2.x = lerp(player2.x, player2.xog, 6.0 * dt)
-            if btti_PONG_timer > btti_PONG_timerTarget then
-                btti_PONG_timer = 0
+            if G.BTTI.PONG_timer > G.BTTI.PONG_timerTarget then
+                G.BTTI.PONG_timer = 0
                 local midX = (player1.x + player2.x) / 2
                 local midY = (player1.y + player2.y) / 2
                 ball.x = midX
                 ball.y = midY
                 ball:launch()
-                btti_PONG_state = btti_PONG_STATES.LOOP
+                G.BTTI.PONG_state = G.BTTI.PONG_STATES.LOOP
             end
-        elseif btti_PONG_state == btti_PONG_STATES.LOOP then
+        elseif G.BTTI.PONG_state == G.BTTI.PONG_STATES.LOOP then
             player1:update(dt)
             player2:updateAI(ball, dt, math.random(0.2, 0.5))
             ball:update(player1, dt)
             ball:update(player2, dt)
-        elseif btti_PONG_state == btti_PONG_STATES.GAME_OVER then
-            btti_PONG_timer = btti_PONG_timer + dt
+        elseif G.BTTI.PONG_state == G.BTTI.PONG_STATES.GAME_OVER then
+            G.BTTI.PONG_timer = G.BTTI.PONG_timer + dt
             player1.r = player1.r + dt * 2
             player1.y = player1.y + player1.gravity
             player2.r = player2.r - dt * 2
@@ -288,12 +288,12 @@ function btti_PONG_update(dt)
             player1.gravity = player1.gravity + dt * 12
             player2.gravity = player2.gravity + dt * 12
             ball.gravity = ball.gravity + dt * 12
-            btti_PONG_backgroundA = lerp(btti_PONG_backgroundA, 0.0, 6.0 * dt)
-            if btti_PONG_timer > btti_PONG_timerTarget then
-                btti_PONG_timer = 0
-                btti_PONG_initialized = false
+            G.BTTI.PONG_backgroundA = lerp(G.BTTI.PONG_backgroundA, 0.0, 6.0 * dt)
+            if G.BTTI.PONG_timer > G.BTTI.PONG_timerTarget then
+                G.BTTI.PONG_timer = 0
+                G.BTTI.PONG_initialized = false
 
-                btti_PONG_dontDraw = true
+                G.BTTI.PONG_dontDraw = true
                 sendInfoMessage("pong is dead NOW", "BTTI")
 
                 player1 = {}
@@ -304,10 +304,10 @@ function btti_PONG_update(dt)
     end
 end
 
-function btti_PONG_draw()
-    if btti_PONG_initialized and not btti_PONG_dontDraw then
+function G.BTTI.PONG_draw()
+    if G.BTTI.PONG_initialized and not G.BTTI.PONG_dontDraw then
         if G.STATE ~= G.STATES.GAME_OVER and G.STATE ~= G.STATES.MENU and not G.SETTINGS.paused then
-            love.graphics.setColor(0, 0, 0, .65 * btti_PONG_backgroundA)
+            love.graphics.setColor(0, 0, 0, .65 * G.BTTI.PONG_backgroundA)
 
             local rectX = (1280 / 2 - 172) * scaleX
             local rectY = (TOP_LIMIT - 10) * scaleY
@@ -318,15 +318,15 @@ function btti_PONG_draw()
             local middleX = rectX + rectW / 2
             local middleY = rectY + rectH / 2
 
-            love.graphics.setColor(1, 1, 1, btti_PONG_backgroundA)
+            love.graphics.setColor(1, 1, 1, G.BTTI.PONG_backgroundA)
             love.graphics.setLineWidth(3)
             love.graphics.line(middleX, middleY - 100, middleX, middleY + 100)
             love.graphics.setLineWidth(1)
 
-            love.graphics.setColor(0, 0, 0, btti_PONG_backgroundA)
-            love.graphics.printf("s: " .. btti_PONG_plyrScore, middleX - 4, middleY + 104, 0, "center")
-            love.graphics.setColor(1, 1, 1, btti_PONG_backgroundA)
-            love.graphics.printf("s: " .. btti_PONG_plyrScore, middleX, middleY + 100, 0, "center")
+            love.graphics.setColor(0, 0, 0, G.BTTI.PONG_backgroundA)
+            love.graphics.printf("s: " .. G.BTTI.PONG_plyrScore, middleX - 4, middleY + 104, 0, "center")
+            love.graphics.setColor(1, 1, 1, G.BTTI.PONG_backgroundA)
+            love.graphics.printf("s: " .. G.BTTI.PONG_plyrScore, middleX, middleY + 100, 0, "center")
 
             love.graphics.setColor(1, 1, 1, 1)
         end
@@ -339,9 +339,9 @@ function btti_PONG_draw()
     end
 end
 
-function btti_PONG_kill()
+function G.BTTI.PONG_kill()
     sendInfoMessage("pong is dead :(", "BTTI")
-    btti_PONG_timerTarget = 5
-    btti_PONG_timer = 0
-    btti_PONG_state = btti_PONG_STATES.GAME_OVER
+    G.BTTI.PONG_timerTarget = 5
+    G.BTTI.PONG_timer = 0
+    G.BTTI.PONG_state = G.BTTI.PONG_STATES.GAME_OVER
 end

@@ -1,29 +1,32 @@
-btti_whorseFlashbangAlpha = 0.0
+G.BTTI.whorseFlashbangAlpha = 0.0
 
-btti_dwayneTheRockImage = loadImage('rock.png')
-btti_dwayneTheRockAlpha = 0.0
+G.BTTI.dwayneTheRockImage = loadImage('rock.png')
+G.BTTI.dwayneTheRockAlpha = 0.0
 
-btti_dvdLogoImage = loadImage('dvdLogo.png')
-btti_dvdLogoImageX = 0.0
-btti_dvdLogoImageY = 0.0
-btti_dvdLogoImageVX = 100 * (math.random(0, 1) == 0 and -1 or 1)
-btti_dvdLogoImageVY = 100 * (math.random(0, 1) == 0 and -1 or 1)
-
-local btti_dvdLogoColors = {
-    { 1,   0,   0 }, -- Red
-    { 0,   1,   0 }, -- Green
-    { 0,   0,   1 }, -- Blue
-    { 1,   1,   0 }, -- Yellow
-    { 1,   0,   1 }, -- Magenta
-    { 0,   1,   1 }, -- Cyan
-    { 1,   0.5, 0 }, -- Orange
-    { 0.5, 0,   1 }, -- Purple
+G.BTTI.dvdLogo = {
+    Image = loadImage('dvdLogo.png'),
+    X = 0.0,
+    Y = 0.0,
+    VX = 100 * (math.random(0, 1) == 0 and -1 or 1),
+    VY = 100 * (math.random(0, 1) == 0 and -1 or 1),
+    Alpha = 0.0,
+    Colors = {
+        { 1,   0,   0 }, -- Red
+        { 0,   1,   0 }, -- Green
+        { 0,   0,   1 }, -- Blue
+        { 1,   1,   0 }, -- Yellow
+        { 1,   0,   1 }, -- Magenta
+        { 0,   1,   1 }, -- Cyan
+        { 1,   0.5, 0 }, -- Orange
+        { 0.5, 0,   1 }, -- Purple
+    },
+    Color = nil,
 }
-btti_dvdLogoColor = btti_dvdLogoColors[love.math.random(1, #btti_dvdLogoColors)]
-local function btti_dvdLogoNextColor(current)
+G.BTTI.dvdLogo.Color = G.BTTI.dvdLogo.Colors[love.math.random(1, #G.BTTI.dvdLogo.Colors)]
+function G.BTTI.dvdLogoNextColor(current)
     local newColor
     repeat
-        newColor = btti_dvdLogoColors[love.math.random(1, #btti_dvdLogoColors)]
+        newColor = G.BTTI.dvdLogo.Colors[love.math.random(1, #G.BTTI.dvdLogo.Colors)]
     until newColor ~= current
     return newColor
 end
@@ -47,19 +50,19 @@ function love.update(dt)
 
     if G and G.GAME then
         if G.STATE == G.STATES.MENU then
-            if btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
-                btti_PONG_initByItself = true
-                btti_PONG_kill()
+            if G.BTTI.PONG_state ~= G.BTTI.PONG_STATES.GAME_OVER then
+                G.BTTI.PONG_initByItself = true
+                G.BTTI.PONG_kill()
             end
-            if btti_JDASH_state ~= btti_JDASH_STATES.GAME_OVER then
-                btti_JDASH_initByItself = true
-                btti_JDASH_kill()
+            if G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
+                G.BTTI.JDASH_initByItself = true
+                G.BTTI.JDASH_kill()
             end
         end
     end
 
-    btti_PONG_update(dt)
-    btti_JDASH_update(dt)
+    G.BTTI.PONG_update(dt)
+    G.BTTI.JDASH_update(dt)
 
     -- shamlessly stolen from yahimod
     for i = 1, #G.effectmanager do
@@ -90,9 +93,9 @@ function love.update(dt)
         end
 
         if G.GAME.blind.config.blind.key == 'bl_btti_levelBlind' then
-            G.GAME.btti_levelBlindCountdown = G.GAME.btti_levelBlindCountdown - dt
-            if G.GAME.btti_levelBlindCountdown <= 0.0 then
-                G.GAME.btti_levelBlindCountdown = 5.0
+            G.GAME.G.BTTI.levelBlindCountdown = G.GAME.G.BTTI.levelBlindCountdown - dt
+            if G.GAME.G.BTTI.levelBlindCountdown <= 0.0 then
+                G.GAME.G.BTTI.levelBlindCountdown = 5.0
                 local emptyEditionIndices = {}
                 for i, card in ipairs(G.hand.cards) do
                     if card.edition == nil then
@@ -112,71 +115,73 @@ function love.update(dt)
             end
         end
         if G.GAME.blind.config.blind.key == 'bl_btti_pongBlind' then
-            if not btti_PONG_initialized and btti_PONG_initByItself then
-                btti_PONG_init()
-                btti_PONG_initByItself = false
+            if not G.BTTI.PONG_initialized and G.BTTI.PONG_initByItself then
+                G.BTTI.PONG_init()
+                G.BTTI.PONG_initByItself = false
             end
         else
-            if btti_PONG_initialized and btti_PONG_state ~= btti_PONG_STATES.GAME_OVER then
-                btti_PONG_kill()
-                btti_PONG_initByItself = true
+            if G.BTTI.PONG_initialized and G.BTTI.PONG_state ~= G.BTTI.PONG_STATES.GAME_OVER then
+                G.BTTI.PONG_kill()
+                G.BTTI.PONG_initByItself = true
             end
         end
         if G.GAME.blind.config.blind.key == 'bl_btti_gdBlind' then
-            if not btti_JDASH_initialized and btti_JDASH_initByItself then
-                btti_JDASH_init()
-                btti_JDASH_initByItself = false
+            if not G.BTTI.JDASH_initialized and G.BTTI.JDASH_initByItself then
+                G.BTTI.JDASH_init()
+                G.BTTI.JDASH_initByItself = false
             end
         else
-            if btti_JDASH_initialized and btti_JDASH_state ~= btti_JDASH_STATES.GAME_OVER then
-                btti_JDASH_kill()
-                btti_JDASH_initByItself = true
+            if G.BTTI.JDASH_initialized and G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
+                G.BTTI.JDASH_kill()
+                G.BTTI.JDASH_initByItself = true
             end
         end
-        --btti_JDASH_init()
+        --G.BTTI.JDASH_init()
     end
 
-    btti_dvdLogoImageX = btti_dvdLogoImageX + btti_dvdLogoImageVX * dt
-    btti_dvdLogoImageY = btti_dvdLogoImageY + btti_dvdLogoImageVY * dt
+    G.BTTI.dvdLogo.X = G.BTTI.dvdLogo.X + G.BTTI.dvdLogo.VX * dt
+    G.BTTI.dvdLogo.Y = G.BTTI.dvdLogo.Y + G.BTTI.dvdLogo.VY * dt
 
-    if btti_dvdLogoImageX <= 0 then
-        btti_dvdLogoImageX = 0
-        btti_dvdLogoImageVX = -btti_dvdLogoImageVX
-        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
-    elseif btti_dvdLogoImageX + btti_dvdLogoImage:getWidth() >= screenWidth then
-        btti_dvdLogoImageX = screenWidth - btti_dvdLogoImage:getWidth()
-        btti_dvdLogoImageVX = -btti_dvdLogoImageVX
-        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    if G.BTTI.dvdLogo.X <= 0 then
+        G.BTTI.dvdLogo.X = 0
+        G.BTTI.dvdLogo.VX = -G.BTTI.dvdLogo.VX
+        G.BTTI.dvdLogo.Color = G.BTTI.dvdLogoNextColor(G.BTTI.dvdLogo.Color)
+    elseif G.BTTI.dvdLogo.X + G.BTTI.dvdLogo.Image:getWidth() >= screenWidth then
+        G.BTTI.dvdLogo.X = screenWidth - G.BTTI.dvdLogo.Image:getWidth()
+        G.BTTI.dvdLogo.VX = -G.BTTI.dvdLogo.VX
+        G.BTTI.dvdLogo.Color = G.BTTI.dvdLogoNextColor(G.BTTI.dvdLogo.Color)
     end
-    if btti_dvdLogoImageY <= 0 then
-        btti_dvdLogoImageY = 0
-        btti_dvdLogoImageVY = -btti_dvdLogoImageVY
-        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
-    elseif btti_dvdLogoImageY + btti_dvdLogoImage:getHeight() >= screenHeight then
-        btti_dvdLogoImageY = screenHeight - btti_dvdLogoImage:getHeight()
-        btti_dvdLogoImageVY = -btti_dvdLogoImageVY
-        btti_dvdLogoColor = btti_dvdLogoNextColor(btti_dvdLogoColor)
+    if G.BTTI.dvdLogo.Y <= 0 then
+        G.BTTI.dvdLogo.Y = 0
+        G.BTTI.dvdLogo.VY = -G.BTTI.dvdLogo.VY
+        G.BTTI.dvdLogo.Color = G.BTTI.dvdLogoNextColor(G.BTTI.dvdLogo.Color)
+    elseif G.BTTI.dvdLogo.Y + G.BTTI.dvdLogo.Image:getHeight() >= screenHeight then
+        G.BTTI.dvdLogo.Y = screenHeight - G.BTTI.dvdLogo.Image:getHeight()
+        G.BTTI.dvdLogo.VY = -G.BTTI.dvdLogo.VY
+        G.BTTI.dvdLogo.Color = G.BTTI.dvdLogoNextColor(G.BTTI.dvdLogo.Color)
     end
 
-    btti_whorseFlashbangAlpha = lerp(btti_whorseFlashbangAlpha, 0.0, dt / 4.0)
-    btti_dwayneTheRockAlpha = lerp(btti_dwayneTheRockAlpha, 0.0, dt)
+    G.BTTI.fakeCrash:update(dt)
+
+    G.BTTI.whorseFlashbangAlpha = lerp(G.BTTI.whorseFlashbangAlpha, 0.0, dt / 4.0)
+    G.BTTI.dwayneTheRockAlpha = lerp(G.BTTI.dwayneTheRockAlpha, 0.0, dt)
 end
 
 local explosion = loadImage("explosion.png")
 local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
     282, 17, 0)
 
-function btti_MODDRAW()
+function G.BTTI.MODDRAW()
     love.graphics.push()
 
-    love.graphics.setColor(1, 1, 1, btti_dwayneTheRockAlpha)
-    love.graphics.draw(btti_dwayneTheRockImage, 0, 0, 0, (love.graphics.getWidth() / btti_dwayneTheRockImage:getWidth()),
-        (love.graphics.getHeight() / btti_dwayneTheRockImage:getHeight()))
-    love.graphics.setColor(1, 1, 1, btti_whorseFlashbangAlpha)
+    love.graphics.setColor(1, 1, 1, G.BTTI.dwayneTheRockAlpha)
+    love.graphics.draw(G.BTTI.dwayneTheRockImage, 0, 0, 0, (love.graphics.getWidth() / G.BTTI.dwayneTheRockImage:getWidth()),
+        (love.graphics.getHeight() / G.BTTI.dwayneTheRockImage:getHeight()))
+    love.graphics.setColor(1, 1, 1, G.BTTI.whorseFlashbangAlpha)
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 
-    btti_PONG_draw()
-    btti_JDASH_draw()
+    G.BTTI.PONG_draw()
+    G.BTTI.JDASH_draw()
 
     if G.effectmanager then
         --print("Effect manager has "..#G.effectmanager)
@@ -203,9 +208,15 @@ function btti_MODDRAW()
         end
     end
 
-    love.graphics.setColor(btti_dvdLogoColor[1], btti_dvdLogoColor[2], btti_dvdLogoColor[3], G.GAME.btti_dvdLogoAlpha or 0)
-    love.graphics.draw(btti_dvdLogoImage, btti_dvdLogoImageX, btti_dvdLogoImageY)
+    love.graphics.setColor(G.BTTI.dvdLogo.Color[1], G.BTTI.dvdLogo.Color[2], G.BTTI.dvdLogo.Color[3], G.GAME.dvdLogoAlpha or 0)
+    love.graphics.draw(G.BTTI.dvdLogo.Image, G.BTTI.dvdLogo.X, G.BTTI.dvdLogo.Y)
 
+    love.graphics.pop()
+end
+
+function G.BTTI.MODDRAW_AFTER()
+    love.graphics.push()
+    G.BTTI.fakeCrash:draw()
     love.graphics.pop()
 end
 

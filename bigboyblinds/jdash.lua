@@ -133,7 +133,7 @@ createLevel = function ()
                 }
                 if checkCollisionRect(playerRect, tileRect) then
                     LOSE_GAME_NOW()
-                    btti_JDASH_kill()
+                    G.BTTI.JDASH_kill()
                 end
             elseif self.data[i].type == BLOCK_TYPE.WALL then
                 local tileRect = {
@@ -156,7 +156,7 @@ createLevel = function ()
                         end
                     else
                         LOSE_GAME_NOW()
-                        btti_JDASH_kill()
+                        G.BTTI.JDASH_kill()
                     end
                 end
             end
@@ -300,63 +300,63 @@ local createPlayer = function(x, y)
     end
     return player
 end
-btti_JDASH_STATES = {
+G.BTTI.JDASH_STATES = {
     LOOP = 0,
     GAME_OVER = 1,
 }
 
-btti_JDASH_initByItself = true
-btti_JDASH_initialized = false
+G.BTTI.JDASH_initByItself = true
+G.BTTI.JDASH_initialized = false
 
-btti_JDASH_state = btti_JDASH_STATES.LOOP
-btti_JDASH_timer = 0
-btti_JDASH_timerTarget = 4
-btti_JDASH_dontDraw = false
+G.BTTI.JDASH_state = G.BTTI.JDASH_STATES.LOOP
+G.BTTI.JDASH_timer = 0
+G.BTTI.JDASH_timerTarget = 4
+G.BTTI.JDASH_dontDraw = false
 
-function btti_JDASH_init()
+function G.BTTI.JDASH_init()
     if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
-        if btti_JDASH_initialized then
-            btti_JDASH_kill()
+        if G.BTTI.JDASH_initialized then
+            G.BTTI.JDASH_kill()
         end
         return
     end
-    if not btti_JDASH_initialized then
+    if not G.BTTI.JDASH_initialized then
         sendInfoMessage("JDASH is init NOW", "BTTI")
 
-        btti_JDASH_initialized = true
-        btti_JDASH_dontDraw = false
+        G.BTTI.JDASH_initialized = true
+        G.BTTI.JDASH_dontDraw = false
 
         player = createPlayer(1280 / 2 - 150, 720 / 2 - math.random(50, 100))
         level = createLevel()
 
-        btti_JDASH_state = btti_JDASH_STATES.LOOP
-        btti_JDASH_timer = 0
+        G.BTTI.JDASH_state = G.BTTI.JDASH_STATES.LOOP
+        G.BTTI.JDASH_timer = 0
     end
 end
 
-function btti_JDASH_update(dt)
+function G.BTTI.JDASH_update(dt)
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
     scaleX = screenWidth / 1280
     scaleY = screenHeight / 720
 
-    if btti_JDASH_initialized and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
-        if btti_JDASH_state == btti_JDASH_STATES.LOOP then
+    if G.BTTI.JDASH_initialized and (not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER) then
+        if G.BTTI.JDASH_state == G.BTTI.JDASH_STATES.LOOP then
             level.x = level.x - dt * LEVEL_SPEED
             if level.x <= -4800 then
                 level.x = 1200
             end
             level:update(dt)
             player:update(dt)
-        elseif btti_JDASH_state == btti_JDASH_STATES.GAME_OVER then
-            btti_JDASH_timer = btti_JDASH_timer + dt
+        elseif G.BTTI.JDASH_state == G.BTTI.JDASH_STATES.GAME_OVER then
+            G.BTTI.JDASH_timer = G.BTTI.JDASH_timer + dt
             level.a = level.a - dt
             level.a = math.clamp(level.a, 0, 1)
-            if btti_JDASH_timer > btti_JDASH_timerTarget then
-                btti_JDASH_timer = 0
-                btti_JDASH_initialized = false
+            if G.BTTI.JDASH_timer > G.BTTI.JDASH_timerTarget then
+                G.BTTI.JDASH_timer = 0
+                G.BTTI.JDASH_initialized = false
 
-                btti_JDASH_dontDraw = true
+                G.BTTI.JDASH_dontDraw = true
                 sendInfoMessage("jdash is dead NOW", "BTTI")
 
                 player = {}
@@ -366,8 +366,8 @@ function btti_JDASH_update(dt)
     end
 end
 
-function btti_JDASH_draw()
-    if btti_JDASH_initialized and not btti_JDASH_dontDraw then
+function G.BTTI.JDASH_draw()
+    if G.BTTI.JDASH_initialized and not G.BTTI.JDASH_dontDraw then
         if not G.SETTINGS.paused or G.STATE == G.STATES.GAME_OVER then
             level:draw()
             player:draw()
@@ -375,18 +375,18 @@ function btti_JDASH_draw()
     end
 end
 
-function btti_JDASH_kill()
-    if btti_JDASH_initialized then
+function G.BTTI.JDASH_kill()
+    if G.BTTI.JDASH_initialized then
         sendInfoMessage("gdash is dead :(", "BTTI")
-        btti_JDASH_timer = 0
-        btti_JDASH_timerTarget = 2
-        btti_JDASH_dontDraw = false
+        G.BTTI.JDASH_timer = 0
+        G.BTTI.JDASH_timerTarget = 2
+        G.BTTI.JDASH_dontDraw = false
 
         player.a = 0.0
         bttiEffectManagerPlay('explosion', player.x + 70, player.y + 65)
-        play_sound('btti_JDASHLose', math.random(1.0, 1.2))
+        play_sound('G.BTTI.JDASHLose', math.random(1.0, 1.2))
 
-        btti_JDASH_state = btti_JDASH_STATES.GAME_OVER
+        G.BTTI.JDASH_state = G.BTTI.JDASH_STATES.GAME_OVER
         G.ROOM.jiggle = G.ROOM.jiggle + 3
     end
 end
