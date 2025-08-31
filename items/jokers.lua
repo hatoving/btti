@@ -3105,7 +3105,7 @@ SMODS.Joker {
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "beanrollup" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -3558,7 +3558,7 @@ SMODS.Joker {
     end
 }
 
--- PFP Bird
+-- Spoingus
 SMODS.Atlas {
     key = "Spoingus",
     path = "bttiSpoingus.png",
@@ -3577,7 +3577,7 @@ SMODS.Joker {
     config = { extra = { effect = 1 } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
-		info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+		info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated, BlueBen8" } }
         return {
             vars = { },
         }
@@ -4143,6 +4143,7 @@ SMODS.Joker {
 	config = { extra = { odds = 9 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -4214,6 +4215,7 @@ SMODS.Joker {
 	config = { extra = { xmult = 0 } },
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "vincemarz" } }
 		return { vars = { card.ability.extra.xmult, card.ability.extra.xmultres, card.ability.extra.mult } }
 	end,
 	rarity = 2,
@@ -4313,6 +4315,7 @@ SMODS.Joker {
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "_moszy" } }
         return {
             vars = { },
         }
@@ -4398,6 +4401,7 @@ SMODS.Joker {
     config = { extra = { mult = 5, odds = 30, debuffed = {} } },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP & Beyond..." } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.odds },
         }
