@@ -185,8 +185,9 @@ local explosion = loadImage("explosion.png")
 local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
     282, 17, 0)
 
-function G.BTTI.MODDRAW()
-    love.graphics.push()
+local loveDrawRef = love.draw
+function love.draw()
+    loveDrawRef()
 
     G.BTTI.JDASH_draw()
     G.BTTI.PONG_draw()
@@ -225,11 +226,7 @@ function G.BTTI.MODDRAW()
 
     love.graphics.setColor(G.BTTI.dvdLogo.Color[1], G.BTTI.dvdLogo.Color[2], G.BTTI.dvdLogo.Color[3], G.GAME.dvdLogoAlpha or 0)
     love.graphics.draw(G.BTTI.dvdLogo.Image, G.BTTI.dvdLogo.X, G.BTTI.dvdLogo.Y)
-
-    love.graphics.pop()
-end
-
-function G.BTTI.MODDRAW_AFTER()
+    
     G.BTTI.fakeCrash:draw()
 end
 

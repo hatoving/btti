@@ -1,7 +1,7 @@
 local gFuncsSetBlindRef = G.FUNCS.select_blind
 function G.FUNCS.select_blind(e)
     if jokerExists('j_btti_Spoingus') and G.jokers.cards[getJoker('j_btti_Spoingus')] then
-        G.jokers.cards[getJoker('j_btti_Spoingus')].ability.extra.effect = 8
+        G.jokers.cards[getJoker('j_btti_Spoingus')].ability.extra.effect = math.random(1, 8)
         sendInfoMessage("spoingus effect " .. G.jokers.cards[getJoker('j_btti_Spoingus')].ability.extra.effect .. "",
             "BTTI")
         if G.jokers.cards[getJoker('j_btti_Spoingus')].ability.extra.effect == 7 then
