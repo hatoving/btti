@@ -351,6 +351,7 @@ function G.BTTI.JDASH_update(dt)
             end
             level:update(dt)
             player:update(dt)
+            G.BTTI.JDASH_dontDraw = false
         elseif G.BTTI.JDASH_state == G.BTTI.JDASH_STATES.GAME_OVER then
             G.BTTI.JDASH_timer = G.BTTI.JDASH_timer + dt
             level.a = level.a - dt
