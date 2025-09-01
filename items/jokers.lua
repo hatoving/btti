@@ -74,6 +74,14 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
@@ -138,6 +146,14 @@ SMODS.Joker {
 
     config = { extra = { xmult = 2.75, odds = 20, cur = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "William Murdock" } }
         return {
@@ -223,6 +239,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 1, rep = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Family Guy" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Seth McFarlane" } }
         return {
@@ -303,6 +327,14 @@ SMODS.Joker {
 
     config = { extra = { xchips = 1 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Family Guy" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Seth McFarlane" } }
         return {
@@ -370,6 +402,14 @@ SMODS.Joker {
 
 	config = { extra = { mult = 10, odds = 10 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
@@ -436,6 +476,14 @@ SMODS.Joker {
 
     config = { extra = { odds = 10, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "@acmeiku" } }
         return {
@@ -568,6 +616,14 @@ SMODS.Joker {
 
     config = { extra = { odds = 40, cardAmount = 0, multAmount = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "BlueHQ" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "lavendarbunny_creations, BlueBen8" } }
         return {
@@ -688,6 +744,14 @@ SMODS.Joker {
 
     config = { extra= {}},
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "charlinear's Beautiful Mind" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "charlinear" } }
         return {
@@ -748,6 +812,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Lakers" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -823,6 +895,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -925,6 +1005,14 @@ SMODS.Joker {
 
     config = { extra = { cards = {} } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Evil of Humanity" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -1006,6 +1094,14 @@ SMODS.Joker {
 
     config = { extra = { xmult = 4.0, cur = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -1082,6 +1178,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "hatoving" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -1155,6 +1259,14 @@ SMODS.Joker {
 
     config = {extra = { mult = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -1232,6 +1344,14 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "aikoyori" } }
         return {
@@ -1312,6 +1432,14 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -1380,6 +1508,14 @@ SMODS.Joker {
 
     config = { extra = { chips = 2 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Crypton Future Media, INC." } }
         local cardCount = 0
@@ -1443,6 +1579,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 1 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
         local cardCount = 0
@@ -1506,6 +1650,14 @@ SMODS.Joker {
 
     config = { extra = { dollars = .5 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
         local cardCount = 0
@@ -1579,6 +1731,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
         return {
@@ -1662,6 +1822,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 5 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
@@ -1732,6 +1900,14 @@ SMODS.Joker {
 
     config = { extra = { chips = 15, mult = 4 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
@@ -1800,6 +1976,14 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
@@ -1880,6 +2064,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "SpongeBob SquarePants" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Stephen Hillenburg" } }
         return {
@@ -1933,6 +2125,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "KPop Demon Hunters" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Netflix" } }
         return {
@@ -1995,6 +2195,14 @@ SMODS.Joker {
 
     config = { extra = { chips = 0, mult = 0, Xmult = 0.0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island: The Power of Two" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "jacknjellify" } }
         return {
@@ -2109,6 +2317,14 @@ SMODS.Joker {
 
     config = { extra = { smult = 0, schips = 0} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "YOURS TRULY, HANAKO" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -2171,6 +2387,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "YOURS TRULY, HANAKO" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -2261,6 +2485,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -2365,6 +2597,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -2455,6 +2695,14 @@ SMODS.Joker {
 
     config = { extra = { cooldown = 0.0, angry = false } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, BlueBen8" } }
         return {
@@ -2563,6 +2811,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, kickedJoker = '' } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -2665,6 +2921,14 @@ SMODS.Joker {
 
     config = { extra = { xmult = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8, ca" } }
         return {
@@ -2743,6 +3007,14 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         return {
@@ -2824,6 +3096,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, xmult = 1, chips = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         return {
@@ -2902,6 +3182,14 @@ SMODS.Joker {
 
 	config = { extra = { gtTarget = 0 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
 		return {
@@ -2979,6 +3267,14 @@ SMODS.Joker {
 
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
 		return {
@@ -3121,6 +3417,14 @@ SMODS.Joker {
 
     config = {extra = {mult = 0, mult_gain = 1}},
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
@@ -3190,6 +3494,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
@@ -3255,6 +3567,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Inn-to the Insanity" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "beanrollup" } }
         return {
@@ -3325,6 +3645,14 @@ SMODS.Joker {
 
 	config = { extra = { allow = true, active = false, lastEnter = false, lastBlindChose = '', activeText = '' } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         main_start = {
@@ -3462,6 +3790,14 @@ SMODS.Joker {
 
     config = { extra = { chips = 0, keyState = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         if card.ability.extra.keyState == 1 then
@@ -3594,6 +3930,14 @@ SMODS.Joker {
 
     config = { extra = { xmult = 1} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         return {
@@ -3650,6 +3994,14 @@ SMODS.Joker {
 
     config = { extra = { suit = "Spades", grant = true } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
         return {
@@ -3727,6 +4079,14 @@ SMODS.Joker {
 
     config = { extra = { effect = 1 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "You're My Favorite Person" } }
 		info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated, BlueBen8" } }
         return {
@@ -3864,6 +4224,14 @@ SMODS.Joker {
 
 	config = { extra = { mult = 8, howMuch = 0 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "DRAMATIZED" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
 		return {
@@ -3933,6 +4301,14 @@ SMODS.Joker {
 
 	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
 		return {
@@ -3994,6 +4370,14 @@ SMODS.Joker {
 
     config = { card_limit = 1, extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
         return {
@@ -4059,6 +4443,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "ca850, Juicimated" } }
         return {
@@ -4120,6 +4512,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, Juicimated" } }
         return {
@@ -4192,6 +4592,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 1 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8, Juicimated" } }
         local cardCount = 0
@@ -4295,6 +4703,14 @@ SMODS.Joker {
 
 	config = { extra = { odds = 9 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
@@ -4367,6 +4783,14 @@ SMODS.Joker {
 
 	config = { extra = { xmult = 0 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" }}
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "vincemarz" } }
 		return { vars = { card.ability.extra.xmult, card.ability.extra.xmultres, card.ability.extra.mult } }
@@ -4467,6 +4891,14 @@ SMODS.Joker {
 
     config = { extra = {} },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "_moszy13" } }
         return {
@@ -4553,6 +4985,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 5, odds = 30, debuffed = {} } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP & Beyond..." } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -4650,6 +5090,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 17, addChip = 0, addMult = 0, } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "RegalitySMP" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, BlueBen8" } }
         return {
@@ -4685,14 +5133,10 @@ SMODS.Joker {
 
             if next(context.poker_hands['Flush']) then
                 table.insert(rets, {
-                    mult_mod = card.ability.extra.addChip,
-                    colour = G.C.CHIPS,
-                    message = "+" .. card.ability.extra.addChip .. " Chips",
+                    chips = card.ability.extra.addChip,
                 })
                 table.insert(rets, {
-                    mult_mod = card.ability.extra.addMult,
-                    colour = G.C.MULT,
-                    message = "+" .. card.ability.extra.addMult .. " Mult",
+                    mult = card.ability.extra.addMult,
                 })
             end
 
@@ -4731,6 +5175,14 @@ SMODS.Joker {
 
     config = { extra = { chips = 70, mult = 30 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -4820,6 +5272,14 @@ SMODS.Joker {
 
 	config = { extra = { smult = 0, schips = 0, firstHand = false } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Scoliosis Man" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {
@@ -4891,6 +5351,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 10, odds = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -4945,6 +5413,14 @@ SMODS.Joker {
 
     config = { extra = { Xmult = 1, jokersDestroyed = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -5004,6 +5480,14 @@ SMODS.Joker {
 
     config = { extra = { } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "AOTA" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -5070,6 +5554,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 10 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, BlueBen8" } }
         return {
@@ -5198,6 +5690,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 117, odds = 17 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -5282,6 +5782,14 @@ SMODS.Joker {
 
     config = { extra = { odds = 4 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
         return {
@@ -5368,6 +5876,14 @@ SMODS.Joker {
 
     config = { extra = { mult = 0, chips = 0, roundsLeft = 0 } },
     loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving" } }
         return {
@@ -5464,6 +5980,14 @@ SMODS.Joker {
 
 	config = { extra = { mult = 100 } },
 	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
 		return {

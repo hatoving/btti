@@ -99,3 +99,5 @@ for _, file in ipairs(files) do
 	end
 	f()
 end
+
+G.BTTI.initJokerCombos()

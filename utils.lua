@@ -83,6 +83,13 @@ function getJoker(name)
     return 0
 end
 
+function table_contains(tbl, val)
+    for _, v in ipairs(tbl) do
+        if v == val then return true end
+    end
+    return false
+end
+
 function lerp(a, b, t)
     local result = a + t * (b - a)
     return result

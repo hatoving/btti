@@ -197,3 +197,78 @@ G.BTTI.JOKER_COMBOS = {
         }
     },
 }
+
+function G.BTTI.getCombinableJokers(joker_id)
+    local result = {}
+
+    for _, combo in pairs(G.BTTI.JOKER_COMBOS) do
+        if combo.jokers then
+            local in_jokers = table_contains(combo.jokers, joker_id)
+            local in_allowed = combo.allowed and table_contains(combo.allowed, joker_id)
+            local names = {}
+
+            if in_jokers then
+                if #combo.jokers > 1 and not combo.allowed then
+                    for _, j in ipairs(combo.jokers) do
+                        if j ~= joker_id then
+                            table.insert(names, localize { type = "name_text", set = "Joker", key = j })
+                        end
+                    end
+                    if #names > 0 then
+                        table.insert(result, table.concat(names, " + "))
+                    end
+                end
+                if combo.allowed then
+                    for _, j in ipairs(combo.allowed) do
+                        table.insert(result, localize { type = "name_text", set = "Joker", key = j })
+                    end
+                end
+            elseif in_allowed and #combo.jokers == 1 then
+                table.insert(result, localize { type = "name_text", set = "Joker", key = combo.jokers[1] })
+            end
+        end
+    end
+
+    return result
+end
+
+function G.BTTI.initJokerCombos()
+    local function processComboList(combo_name, list, list2, listType)
+        sendInfoMessage("COMBO:  " .. combo_name .. " ---", "BTTI")
+
+        for j = 1, #list do
+            local joker_id = list[j]
+
+            -- Skip jokers starting with "j_btti"
+            if not joker_id:find("^j_btti") then
+                local idx = j
+                SMODS.Joker:take_ownership(joker_id, {
+                    loc_vars = function(self, info_queue, card)
+                        for x = 1, #list2 do
+                            if x ~= idx and not list2[x]:find("^j_btti") then
+                                info_queue[#info_queue + 1] = {
+                                    key = 'bttiPossibleCombo',
+                                    set = 'Other',
+                                    vars = { localize {
+                                        type = "name_text",
+                                        set = "Joker",
+                                        key = list2[x]
+                                    } }
+                                }
+                            end
+                        end
+                    end
+                }, true)
+            end
+        end
+    end
+
+    for combo_name, combo in pairs(G.BTTI.JOKER_COMBOS) do
+        if combo.jokers then
+            processComboList(combo_name, combo.jokers, combo.jokers, "jokers")
+        end
+        if combo.allowed then
+            processComboList(combo_name, combo.jokers, combo.allowed, "allowed")
+        end
+    end
+end
