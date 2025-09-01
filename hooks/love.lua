@@ -69,6 +69,7 @@ function love.update(dt)
             if G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
                 G.BTTI.JDASH_initByItself = true
                 G.BTTI.JDASH_kill()
+sendInfoMessage("G.BTTI.JDASH_kill at 72", "BTTI")
             end
         end
     end
@@ -145,6 +146,7 @@ function love.update(dt)
         else
             if G.BTTI.JDASH_initialized and G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
                 G.BTTI.JDASH_kill()
+sendInfoMessage("G.BTTI.JDASH_kill at 147", "BTTI")
                 G.BTTI.JDASH_initByItself = true
             end
         end
@@ -187,7 +189,6 @@ function G.BTTI.MODDRAW()
     love.graphics.push()
 
     G.BTTI.PONG_draw()
-    G.BTTI.JDASH_draw()
 
     if G.effectmanager then
         --print("Effect manager has "..#G.effectmanager)
@@ -228,6 +229,7 @@ function G.BTTI.MODDRAW()
 end
 
 function G.BTTI.MODDRAW_AFTER()
+    G.BTTI.JDASH_draw()
     G.BTTI.fakeCrash:draw()
 end
 
