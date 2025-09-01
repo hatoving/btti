@@ -71,7 +71,7 @@ SMODS.Booster {
     key = "jumboEnhanced",
     weight = 0.6,
     kind = 'Standard', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 8,
+    cost = 10,
     pos = { x = 0, y = 0 },
     atlas = 'jumboEnhancedP',
     config = { extra = 6, choose = 1 },
@@ -131,7 +131,7 @@ SMODS.Booster {
     key = "megaEnhanced",
     weight = 0.6,
     kind = 'Standard', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 8,
+    cost = 12,
     pos = { x = 0, y = 0 },
     atlas = 'megaEnhancedP',
     config = { extra = 8, choose = 2 },
@@ -192,7 +192,7 @@ SMODS.Booster {
     key = "stonePack",
     weight = 0.6,
     kind = 'Standard', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 8,
+    cost = 5,
     pos = { x = 0, y = 0 },
     atlas = 'stoneP',
     config = { extra = 2, choose = 1 },
@@ -313,7 +313,7 @@ SMODS.Booster {
     key = "buffoon_legendary",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 100,
+    cost = 65,
     pos = { x = 0, y = 0 },
     atlas = 'legendaryBP',
     config = { extra = 2, choose = 1 },
@@ -348,7 +348,7 @@ SMODS.Booster {
     key = "buffoon_fortune",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 15,
+    cost = 8,
     pos = { x = 0, y = 0 },
     atlas = 'fortuneBP',
     config = { extra = 2, choose = 1 },
@@ -393,7 +393,7 @@ SMODS.Booster {
     key = "buffoon_fortune_jumbo",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 20,
+    cost = 12,
     pos = { x = 0, y = 0 },
     atlas = 'fortuneBPJumbo',
     config = { extra = 4, choose = 1 },
@@ -438,7 +438,7 @@ SMODS.Booster {
     key = "buffoon_fortune_mega",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 30,
+    cost = 20,
     pos = { x = 0, y = 0 },
     atlas = 'fortuneBPMega',
     config = { extra = 6, choose = 1 },
@@ -483,7 +483,7 @@ SMODS.Booster {
     key = "buffoon_itti",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 25,
+    cost = 15,
     pos = { x = 0, y = 0 },
     atlas = 'ittiBP',
     config = { extra = 2, choose = 1 },
@@ -521,7 +521,7 @@ SMODS.Booster {
     key = "buffoon_deets",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 20,
+    cost = 15,
     pos = { x = 0, y = 0 },
     atlas = 'deetsBP',
     config = { extra = 2, choose = 1 },
@@ -560,7 +560,7 @@ SMODS.Booster {
     key = "buffoon_smp",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 30,
+    cost = 25,
     pos = { x = 0, y = 0 },
     atlas = 'smpBP',
     config = { extra = 2, choose = 1 },
@@ -599,7 +599,7 @@ SMODS.Booster {
     key = "celestial_deets",
     weight = 1,
     kind = 'Celestial', -- You can also use Celestial if you want it to belong to the vanilla kind
-    cost = 20,
+    cost = 8,
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     atlas = 'celestialDeets',

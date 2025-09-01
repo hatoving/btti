@@ -1525,10 +1525,10 @@ SMODS.Joker {
             vars = { card.ability.extra.xmult },
         }
     end,
-    rarity = 2,
+    rarity = 3,
     atlas = 'Steam',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 10,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
