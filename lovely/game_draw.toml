@@ -1,19 +1,33 @@
-[manifest] # Header for the file, this should only be here once at the beginning
+[manifest] # Header for the file, only once at the top
 version = "0.1.0"
-priority = 0 # Priority for loading the file
+priority = 0
 
 [[patches]]
 [patches.pattern]
-target = 'game.lua' # The file you want to patch.
+target = 'game.lua'
+pattern = '''
+end
+timer_checkpoint('debug', 'draw')
+'''
+position = "at"
+payload = '''
+end
+timer_checkpoint('debug', 'draw')
+G.BTTI.MODDRAW_AFTER()
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
 pattern = '''
 love.graphics.setCanvas(G.AA_CANVAS)
 love.graphics.push()
-''' # The line(s) you want to patch. In pattern patches it should be the whole line(s). Make sure it's unique in that file.
-position = "at" # Where you want to patch it: 'before', 'after' or 'at' (this last one replaces the whole pattern)
+'''
+position = "at"
 payload = '''
 G.BTTI.MODDRAW()
 love.graphics.setCanvas(G.AA_CANVAS)
 love.graphics.push()
-''' # What code you want to replace it with.
-
+'''
 match_indent = true

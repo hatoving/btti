@@ -174,12 +174,6 @@ local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
 function G.BTTI.MODDRAW()
     love.graphics.push()
 
-    love.graphics.setColor(1, 1, 1, G.BTTI.dwayneTheRockAlpha)
-    love.graphics.draw(G.BTTI.dwayneTheRockImage, 0, 0, 0, (love.graphics.getWidth() / G.BTTI.dwayneTheRockImage:getWidth()),
-        (love.graphics.getHeight() / G.BTTI.dwayneTheRockImage:getHeight()))
-    love.graphics.setColor(1, 1, 1, G.BTTI.whorseFlashbangAlpha)
-    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-
     G.BTTI.PONG_draw()
     G.BTTI.JDASH_draw()
 
@@ -208,6 +202,13 @@ function G.BTTI.MODDRAW()
         end
     end
 
+    love.graphics.setColor(1, 1, 1, G.BTTI.dwayneTheRockAlpha)
+    love.graphics.draw(G.BTTI.dwayneTheRockImage, 0, 0, 0,
+    (love.graphics.getWidth() / G.BTTI.dwayneTheRockImage:getWidth()),
+        (love.graphics.getHeight() / G.BTTI.dwayneTheRockImage:getHeight()))
+    love.graphics.setColor(1, 1, 1, G.BTTI.whorseFlashbangAlpha)
+    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+
     love.graphics.setColor(G.BTTI.dvdLogo.Color[1], G.BTTI.dvdLogo.Color[2], G.BTTI.dvdLogo.Color[3], G.GAME.dvdLogoAlpha or 0)
     love.graphics.draw(G.BTTI.dvdLogo.Image, G.BTTI.dvdLogo.X, G.BTTI.dvdLogo.Y)
 
@@ -215,9 +216,7 @@ function G.BTTI.MODDRAW()
 end
 
 function G.BTTI.MODDRAW_AFTER()
-    love.graphics.push()
     G.BTTI.fakeCrash:draw()
-    love.graphics.pop()
 end
 
 local loveResize = love.resize

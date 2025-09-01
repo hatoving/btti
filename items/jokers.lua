@@ -968,7 +968,7 @@ SMODS.Joker {
             card.ability.extra.cur = card.ability.extra.xmult * cardAmount
             sendInfoMessage("Found " .. cardAmount .. " cards = x" .. card.ability.extra.xmult * cardAmount .. " Mult", "BTTI")
             if card.ability.extra.xmult * cardAmount > 0 then
-                btti_dwayneTheRockAlpha = 1.0
+                G.BTTI.dwayneTheRockAlpha = 1.0
                 local rets = {
                     {
                         message = "It's about drive,",
@@ -2623,7 +2623,7 @@ SMODS.Joker {
                     message = "Whorse",
                     colour = G.C.WHITE,
                     func = function ()
-                        btti_whorseFlashbangAlpha = 1.0
+                        G.BTTI.whorseFlashbangAlpha = 1.0
                         play_sound("btti_whorseFlashbang")
                         return true
                     end
