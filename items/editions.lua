@@ -1,4 +1,4 @@
-
+-- Digital
 SMODS.Shader ( {
     key = 'digital',
     path = 'digital.fs'

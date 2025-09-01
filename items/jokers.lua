@@ -3589,7 +3589,7 @@ SMODS.Joker {
             vars = { },
         }
     end,
-    rarity = 2,
+    rarity = 'btti_spoingus',
     atlas = 'Spoingus',
     pos = { x = 0, y = 0 },
     cost = 4,
