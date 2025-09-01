@@ -706,10 +706,12 @@ SMODS.Blind {
     end,
     disable = function(self)
         G.BTTI.JDASH_kill()
+        sendInfoMessage("G.BTTI.JDASH_kill BLINDS.lua at 709", "BTTI")
         G.BTTI.JDASH_initByItself = false
     end,
     defeat = function(self)
         G.BTTI.JDASH_kill()
+        sendInfoMessage("G.BTTI.JDASH_kill BLINDS.lua at 709", "BTTI")
         G.BTTI.JDASH_initByItself = false
     end
 }
