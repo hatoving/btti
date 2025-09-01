@@ -280,6 +280,75 @@ SMODS.Joker {
     end
 }
 
+-- Did Somebody Say Pie?
+SMODS.Sound({ key = "famGuyPie", path = "bttiDidSomebodySayPie.ogg", })
+SMODS.Sound({ key = "famGuyPieOp", path = "bttiDidSomebodySayPieOp.ogg", })
+
+SMODS.Atlas {
+    key = "DidSomebodySayPie",
+    path = "bttiDidSomebodySayPie.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'DidSomebodySayPie',
+    loc_txt = {
+        name = 'Did Somebody Say Pie?',
+        text = {
+            "Gains {X:chips,C:white}X#1#{}",
+            "for every 3 scored",
+            "{C:inactive}Currently {X:chips,C:white}X#2#{C:inactive} Chips"
+        }
+    },
+
+    config = { extra = { xchips = 1 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Family Guy" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Seth McFarlane" } }
+        return {
+            vars = { math.pi / 10, card.ability.extra.xchips },
+        }
+    end,
+    rarity = 1,
+    atlas = 'DidSomebodySayPie',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+                xchips_mod = card.ability.extra.xchips,
+                message = "*Family Guy Funny Moment*",
+                sound = "btti_famGuyPieOp",
+                pitch = math.random(.9, 1.1),
+            }
+        end
+        if context.cardarea == G.play and context.individual and context.other_card then
+            local _trigger = false
+            if context.other_card:get_id() == 3 then _trigger = true end
+            if _trigger then
+                card.ability.extra.xchips = card.ability.extra.xchips + (math.pi / 10)
+                context.other_card:juice_up()
+                return {
+                    message = "Did somebody say pie?",
+                    sound = "btti_famGuyPie",
+                    pitch = math.random(.9, 1.1),
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- Gambler Cat
 SMODS.Atlas {
     key = "GamblerCat",
@@ -2733,6 +2802,81 @@ SMODS.Joker {
     end
 }
 
+-- DEETS ?????
+SMODS.Atlas {
+    key = "SecretDEETS",
+    path = "bttiSecretDEETS.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'SecretDEETS',
+    loc_txt = {
+        name = 'RXZEbw==',
+        text = {
+            "{C:green}1 in 3 chance{} to {C:deets}consume{} a",
+            "{C:attention}random card{} from your {C:attention}deck,",
+            "gaining {C:chips}Chips{}, {C:mult}Mult{} and {X:mult,C:white}XMult{}",
+            "equivalent to the card's rank",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips{}, {C:mult}+#2#{} Mult, {X:mult,C:white}X#3#{} Mult"
+        }
+    },
+
+    config = { extra = { mult = 0, xmult = 1, chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "DEETS" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+        return {
+            vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.xmult },
+        }
+    end,
+    rarity = 3,
+    atlas = 'SecretDEETS',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.before and context.cardarea == G.jokers then
+            if pseudorandom('SecretDEETS') < G.GAME.probabilities.normal / 3 then
+                local pc = G.deck.cards[math.random(1, #G.deck.cards)]
+                local ch = pc:get_chip_bonus()
+                local mult = pc:get_chip_mult()
+                local xMult = pc:get_chip_x_mult()
+
+                card.ability.extra.chips = card.ability.extra.chips + ch
+                card.ability.extra.mult = card.ability.extra.mult + mult
+                card.ability.extra.xmult = card.ability.extra.xmult + xMult
+
+                SMODS.destroy_cards(pc)
+
+                return {
+                    message = "Upgrade!"
+                }
+            else
+                return {
+                    message = "Nope!"
+                }
+            end
+        end
+        if context.joker_main then
+            return {
+                mult = card.ability.extra.mult,
+                xmult = card.ability.extra.xmult,
+                chips = card.ability.extra.chips
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
 --#endregion
 
 -- ITTI JOKERS

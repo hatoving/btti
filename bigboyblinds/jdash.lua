@@ -384,7 +384,7 @@ function G.BTTI.JDASH_kill()
 
         player.a = 0.0
         bttiEffectManagerPlay('explosion', player.x + 70, player.y + 65)
-        play_sound('G.BTTI.JDASHLose', math.random(1.0, 1.2))
+        play_sound('btti_JDASHLose', math.random(1.0, 1.2))
 
         G.BTTI.JDASH_state = G.BTTI.JDASH_STATES.GAME_OVER
         G.ROOM.jiggle = G.ROOM.jiggle + 3

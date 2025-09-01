@@ -218,7 +218,7 @@ function G.BTTI.PONG_score()
     G.BTTI.PONG_timerTarget = 3
     G.BTTI.PONG_state = G.BTTI.PONG_STATES.START
     G.BTTI.PONG_plyrScore = G.BTTI.PONG_plyrScore + 1
-    play_sound('G.BTTI.pongScore', (math.random() * 0.2 + 1))
+    play_sound('btti_pongScore', (math.random() * 0.2 + 1))
 end
 
 function G.BTTI.PONG_init()
