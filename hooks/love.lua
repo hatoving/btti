@@ -31,11 +31,23 @@ function G.BTTI.dvdLogoNextColor(current)
     return newColor
 end
 
+G.BTTI.steamCheckTimer = 0.0
+G.BTTI.installedSteamApps = G.BTTI.countInstalledSteamApps()
+G.BTTI.foundSteamApps = G.BTTI.installedSteamApps ~= 0
+
 local screenWidth, screenHeight = love.graphics.getDimensions()
 
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
+
+    if jokerExists('j_btti_Steam') and G.BTTI.foundSteamApps then
+        G.BTTI.steamCheckTimer = G.BTTI.steamCheckTimer + dt
+        if G.BTTI.steamCheckTimer >= 10.0 then
+            G.BTTI.steamCheckTimer = 0.0
+            G.BTTI.installedSteamApps = G.BTTI.countInstalledSteamApps()
+        end
+    end
 
     if (G and G.jokers and G.jokers.cards) and (not jokerExists('j_btti_Huntrix')) then
         for i = 1, #G.jokers.cards do

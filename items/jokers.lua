@@ -1483,6 +1483,77 @@ SMODS.Joker {
     end
 }
 
+-- Steam
+SMODS.Atlas {
+    key = "Steam",
+    path = "bttiSteam.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Steam',
+    loc_txt = {
+        name = 'Steam',
+        text = {
+            "{X:mult,C:white}X0.1{} Mult for every {C:attention}game{}",
+            "you have installed on {C:blue}Steam{}, otherwise",
+            "{X:mult,C:white}X0.1{} Mult for every {C:attention}game{}",
+            "in the {C:default}Valve Complete Pack{} on {C:blue}Steam{}",
+            "{C:inactive}Checks every 10 seconds",
+            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive} Mult"
+        }
+    },
+
+    config = { extra = { xmult = 1 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Valve" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gabe Newell" } }
+        if G.BTTI.foundSteamApps then
+            card.ability.extra.xmult = 1.0 + (G.BTTI.installedSteamApps / 10)
+        else
+            card.ability.extra.xmult = 3.0
+        end
+        return {
+            vars = { card.ability.extra.xmult },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Steam',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            if G.BTTI.foundSteamApps then
+                card.ability.extra.xmult = 1.0 + (G.BTTI.installedSteamApps / 10)
+            else
+                card.ability.extra.xmult = 3.0
+            end
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 -- VOCALOID JOKERS
