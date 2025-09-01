@@ -146,7 +146,7 @@ sendInfoMessage("G.BTTI.JDASH_kill at 72", "BTTI")
         else
             if G.BTTI.JDASH_initialized and G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
                 G.BTTI.JDASH_kill()
-sendInfoMessage("G.BTTI.JDASH_kill at 147", "BTTI")
+--sendInfoMessage("G.BTTI.JDASH_kill at 147", "BTTI")
                 G.BTTI.JDASH_initByItself = true
             end
         end
@@ -186,8 +186,7 @@ local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
     282, 17, 0)
 
 function G.BTTI.MODDRAW()
-    love.graphics.push()
-
+    G.BTTI.JDASH_draw()
     G.BTTI.PONG_draw()
 
     if G.effectmanager then
@@ -224,12 +223,9 @@ function G.BTTI.MODDRAW()
 
     love.graphics.setColor(G.BTTI.dvdLogo.Color[1], G.BTTI.dvdLogo.Color[2], G.BTTI.dvdLogo.Color[3], G.GAME.dvdLogoAlpha or 0)
     love.graphics.draw(G.BTTI.dvdLogo.Image, G.BTTI.dvdLogo.X, G.BTTI.dvdLogo.Y)
-
-    love.graphics.pop()
 end
 
 function G.BTTI.MODDRAW_AFTER()
-    G.BTTI.JDASH_draw()
     G.BTTI.fakeCrash:draw()
 end
 
