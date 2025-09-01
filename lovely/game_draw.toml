@@ -1,0 +1,34 @@
+[manifest] # Header for the file, only once at the top
+version = "0.1.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''
+end
+timer_checkpoint('debug', 'draw')
+'''
+position = "at"
+payload = '''
+end
+timer_checkpoint('debug', 'draw')
+G.BTTI.MODDRAW_AFTER()
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''
+love.graphics.pop()
+    
+    love.graphics.setCanvas(G.AA_CANVAS)
+'''
+position = "at"
+payload = '''
+love.graphics.pop()
+G.BTTI.MODDRAW()
+    love.graphics.setCanvas(G.AA_CANVAS)
+'''
+match_indent = true
