@@ -3675,9 +3675,10 @@ SMODS.Joker {
             elseif card.ability.extra.effect == 4 then
                 local randCard = G.deck.cards[math.random(1, #G.deck.cards)]
                 SMODS.add_card {
-                    set = 'Joker',
+                    set = 'Playing Card',
                     edition = (randCard.edition and randCard.edition.key) or nil,
                     enhancement = next(SMODS.get_enhancements(randCard)),
+                    area = G.deck,
                     seal = randCard.seal
                 }
                 SMODS.destroy_cards(randCard)
