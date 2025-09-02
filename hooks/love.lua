@@ -126,6 +126,9 @@ function love.update(dt)
             end
         end
     else
+        if G.BTTI.biteOf87Ramble:isPlaying() then
+            G.BTTI.biteOf87Ramble:stop()
+        end
         G.BTTI.biteOf87RambleVol = 1.0 * (G.SETTINGS.SOUND.game_sounds_volume / 100)
     end
 
