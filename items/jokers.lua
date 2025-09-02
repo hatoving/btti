@@ -1825,7 +1825,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
-            if #G.play == 4 then
+            if #G.play.cards == 4 then
                 return {
                     repetitions = 4
                 }
