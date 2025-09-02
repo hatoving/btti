@@ -134,7 +134,7 @@ createLevel = function ()
                 if checkCollisionRect(playerRect, tileRect) then
                     LOSE_GAME_NOW()
                     G.BTTI.JDASH_kill()
-                    sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 137", "BTTI")
+                    --sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 137", "BTTI")
                 end
             elseif self.data[i].type == BLOCK_TYPE.WALL then
                 local tileRect = {
@@ -158,7 +158,7 @@ createLevel = function ()
                     else
                         LOSE_GAME_NOW()
                         G.BTTI.JDASH_kill()
-                        sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 161", "BTTI")
+                        --sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 161", "BTTI")
                     end
                 end
             end
@@ -319,7 +319,7 @@ function G.BTTI.JDASH_init()
     if (G.STATE == G.STATES.GAME_OVER or G.STATE == G.STATES.MENU) then
         if G.BTTI.JDASH_initialized then
             G.BTTI.JDASH_kill()
-            sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 322", "BTTI")
+            --sendInfoMessage("G.BTTI.JDASH_kill JDASH.lua at 322", "BTTI")
         end
         return
     end

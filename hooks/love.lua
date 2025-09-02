@@ -69,7 +69,7 @@ function love.update(dt)
             if G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
                 G.BTTI.JDASH_initByItself = true
                 G.BTTI.JDASH_kill()
-sendInfoMessage("G.BTTI.JDASH_kill at 72", "BTTI")
+----sendInfoMessage("G.BTTI.JDASH_kill at 72", "BTTI")
             end
         end
     end
@@ -146,7 +146,7 @@ sendInfoMessage("G.BTTI.JDASH_kill at 72", "BTTI")
         else
             if G.BTTI.JDASH_initialized and G.BTTI.JDASH_state ~= G.BTTI.JDASH_STATES.GAME_OVER then
                 G.BTTI.JDASH_kill()
---sendInfoMessage("G.BTTI.JDASH_kill at 147", "BTTI")
+----sendInfoMessage("G.BTTI.JDASH_kill at 147", "BTTI")
                 G.BTTI.JDASH_initByItself = true
             end
         end

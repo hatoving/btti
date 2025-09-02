@@ -50,6 +50,63 @@ return {
         },
     },
     misc = {
+        quips = {
+            btti_customQuip_0 = {
+                'womp womp'
+            },
+            btti_customQuip_1 = {
+                'dumbass'
+            },
+            btti_customQuip_2 = {
+                'auwghhhhh this',
+                'guy STINKS!'
+            },
+            btti_customQuip_3 = {
+                'balatro uhh more',
+                'like uhh losatro',
+                'amirite or amirite'
+            },
+            btti_customQuip_4 = {
+                'hey that\'s alright',
+                'go check out',
+                'A BALATRO MOVIE',
+                'coming in theatres',
+                'next friday, starring',
+                'ryan reynolds as jimbo'
+            },
+            btti_customQuip_5 = {
+                'WOW you suck'
+            },
+            btti_customQuip_6 = {
+                'the light shines',
+                'even though the',
+                'star is gone'
+            },
+            btti_customQuip_7 = {
+                'jimbuh'
+            },
+            btti_customQuip_8 = {
+                'jibo'
+            },
+            btti_customQuip_9 = {
+                'jimboob'
+            },
+            btti_customQuip_10 = {
+                'jimbra'
+            },
+            btti_customQuip_11 = {
+                'jimbri'
+            },
+            btti_customQuip_12 = {
+                'and this time...',
+                'NO MISTAKES!'
+            },
+            btti_customQuip_13 = {
+                'maybe the balatro is',
+                'the jimbos we made along',
+                'the way'
+            },
+        },
         dictionary = {
             bttiSavedByRegBen = 'Saved by Reg!Ben'
         }
