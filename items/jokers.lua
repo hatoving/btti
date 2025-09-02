@@ -1799,8 +1799,8 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
         return {
             vars = { },
         }
@@ -1824,6 +1824,13 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if #G.play == 4 then
+                return {
+                    repetitions = 4
+                }
+            end
+        end
     end,
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
