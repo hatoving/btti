@@ -37,9 +37,24 @@ G.BTTI.foundSteamApps = G.BTTI.installedSteamApps ~= 0
 
 local screenWidth, screenHeight = love.graphics.getDimensions()
 
+local function jokerAnimUpdate(dt)
+    local scCenter = G.P_CENTERS.j_btti_SayThatAgain
+    scCenter.ticks = scCenter.ticks + dt
+    if scCenter.ticks >= scCenter.frameDur then
+        scCenter.ticks = 0
+        scCenter.frame = scCenter.frame + 1
+        if scCenter.frame > scCenter.maxFrame then
+            scCenter.frame = 0
+        end
+        scCenter.pos.x = math.fmod(scCenter.frame, 6)
+        scCenter.pos.y = math.floor(scCenter.frame/6)
+    end
+end
+
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
+    jokerAnimUpdate(dt)
 
     if jokerExists('j_btti_Steam') and G.BTTI.foundSteamApps then
         G.BTTI.steamCheckTimer = G.BTTI.steamCheckTimer + dt

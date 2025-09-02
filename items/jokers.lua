@@ -1773,6 +1773,63 @@ SMODS.Joker {
     end
 }
 
+SMODS.Atlas {
+    key = "SayThatAgain",
+    path = "bttiSayThatAgain.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'SayThatAgain',
+    loc_txt = {
+        name = '... Say that again.',
+        text = {
+            "Retriggers hand {C:blue}4{} times",
+            "if played hand has {C:blue}4{} cards"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'SayThatAgain',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 -- UTDR JOKERS
