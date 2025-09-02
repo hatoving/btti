@@ -79,12 +79,41 @@ function Card:calculate_joker(context)
             "BTTI"
         )
     end
+    if context.selling_card then
+        if context.card.ability.name == 'j_btti_Springtrap' and not G.GAME.btti_iAlwaysComeBack then
+            sendInfoMessage("he always comes back...", "BTTI")
+            G.GAME.btti_iAlwaysComeBack = true
+        end
+    end
+    if context.destroy_card then
+        if context.destroy_card.ability.name == 'j_btti_Springtrap' and not G.GAME.btti_iAlwaysComeBack then
+            sendInfoMessage("he always comes back...", "BTTI")
+            G.GAME.btti_iAlwaysComeBack = true
+        end
+    end
     if context.end_of_round then
         if btti_PONG_initialized then
             btti_PONG_kill()
         end
         if btti_JDASH_initialized then
             btti_JDASH_kill()
+        end
+        if context.cardarea == G.jokers and G.GAME.btti_iAlwaysComeBack then
+            if pseudorandom('WilliamAfton') < G.GAME.probabilities.normal / 4 then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('glass'..math.random(1, 6), math.random()*0.2 + 0.9,0.5)
+                        play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+                        play_sound("btti_Springtrap")
+                        SMODS.add_card {
+                            key = 'j_btti_Springtrap',
+                            area = G.jokers
+                        }
+                        return true
+                    end
+                }))
+                G.GAME.btti_iAlwaysComeBack = false
+            end
         end
     end
     if context.ante_change and context.ante_end then

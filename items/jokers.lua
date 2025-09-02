@@ -1839,6 +1839,81 @@ SMODS.Joker {
 
 --#endregion
 
+-- FNAF JOKERS
+--#region FNAF JOKERS
+
+SMODS.Sound({ key = "Springtrap", path = "bttiSpringtrap.ogg" })
+-- Springtrap
+SMODS.Atlas {
+    key = "Springtrap",
+    path = "bttiSpringtrap.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Springtrap',
+    loc_txt = {
+        name = 'Springtrap',
+        text = {
+            "Gains {C:attention}$0.5{} of {C:attention}sell value{}",
+            "per card {C:red}discarded",
+            "Once removed from deck,",
+            "has a {C:green}1 in 4{} chance to",
+            "respawn at the {C:attention}end of round",
+            "{C:inactive}(Must have room)"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Scott Cawthon" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Springtrap',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.discard and context.full_hand and not context.blueprint then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                blocking = false,
+                delay = 0,
+                func = function()
+                    card.sell_cost = card.sell_cost + 0.5
+                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                        { message = "...", colour = G.C.PURPLE })
+                    return true
+                end,
+            }))
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+--#endregion
+
 -- UTDR JOKERS
 --#region UTDR JOKERS
 
