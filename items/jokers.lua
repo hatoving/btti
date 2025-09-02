@@ -1872,7 +1872,7 @@ SMODS.Joker {
             }
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "ULTRAKILL" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Hakira / New Blood Interactive" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Hakita / New Blood Interactive" } }
         return {
             vars = { card.ability.extra.chips },
         }
@@ -1934,7 +1934,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { } },
+    config = { extra = {} },
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -1947,7 +1947,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's 3" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Scott Cawthon" } }
         return {
-            vars = { },
+            vars = {},
         }
     end,
     rarity = 2,
@@ -1964,17 +1964,19 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.discard and context.full_hand and not context.blueprint then
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                blocking = false,
-                delay = 0,
-                func = function()
-                    card.sell_cost = card.sell_cost + 0.5
-                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                        { message = "...", colour = G.C.PURPLE })
-                    return true
-                end,
-            }))
+            card.sell_cost = card.sell_cost + 0.5
+            if context.other_card == context.full_hand[#context.full_hand] then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = "...", colour = G.C.PURPLE })
+                        return true
+                    end,
+                }))
+            end
         end
     end,
     in_pool = function(self, args)

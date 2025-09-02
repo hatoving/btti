@@ -95,7 +95,19 @@ local function jokerAnimUpdate(dt)
             scCenter.frame = 0
         end
         scCenter.pos.x = math.fmod(scCenter.frame, 6)
-        scCenter.pos.y = math.floor(scCenter.frame/6)
+        scCenter.pos.y = math.floor(scCenter.frame / 6)
+    end
+
+    scCenter = G.P_CENTERS.j_btti_GIFCompression
+    scCenter.ticks = scCenter.ticks + dt
+    if scCenter.ticks >= scCenter.frameDur then
+        scCenter.ticks = 0
+        scCenter.frame = scCenter.frame + 1
+        if scCenter.frame > scCenter.maxFrame then
+            scCenter.frame = 0
+        end
+        scCenter.pos.x = math.fmod(scCenter.frame, 6)
+        scCenter.pos.y = math.floor(scCenter.frame / 6)
     end
 end
 

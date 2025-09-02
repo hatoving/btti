@@ -196,6 +196,20 @@ G.BTTI.JOKER_COMBOS = {
             'j_btti_Teto',
         }
     },
+    ['j_btti_Skelebros'] = {
+        rarity = 2,
+        jokers = {
+            'j_btti_Sans',
+            'j_btti_Papyrus',
+        }
+    },
+    ['j_btti_GIFCompression'] = {
+        rarity = 2,
+        jokers = {
+            'j_square',
+            'j_btti_SayThatAgain',
+        }
+    },
 }
 
 function G.BTTI.getCombinableJokers(joker_id)
@@ -240,12 +254,12 @@ function G.BTTI.initJokerCombos()
             local joker_id = list[j]
 
             -- Skip jokers starting with "j_btti"
-            if not joker_id:find("^j_btti") then
+            if not joker_id:find("_btti") then
                 local idx = j
                 SMODS.Joker:take_ownership(joker_id, {
                     loc_vars = function(self, info_queue, card)
                         for x = 1, #list2 do
-                            if x ~= idx and not list2[x]:find("^j_btti") then
+                            if x ~= idx then
                                 info_queue[#info_queue + 1] = {
                                     key = 'bttiPossibleCombo',
                                     set = 'Other',

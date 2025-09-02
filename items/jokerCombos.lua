@@ -1986,7 +1986,9 @@ SMODS.Joker {
             "{C:attention}$2{} for each {C:clubs}Club{}, {C:hearts}Heart{},",
             "and {C:diamonds}Diamond{} respectively in",
             "your {C:attention}deck{} excluding {C:spades}Spades{}",
-            "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}"
+            "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}",
+            "{C:inactive}(Hatsune Miku + Kasane Teto",
+            "{C:inactive}Akira Neru)"
         }
     },
 
@@ -2029,7 +2031,7 @@ SMODS.Joker {
     atlas = 'TripleBaka',
     pos = { x = 0, y = 0 },
     cost = 12,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition_COMBO"] = true },
 
     unlocked = true,
     discovered = false,
@@ -2063,7 +2065,183 @@ SMODS.Joker {
         end
     end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = false }
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Skelebros
+SMODS.Atlas {
+    key = "Skelebros",
+    path = "bttiSkelebros.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Skelebros',
+    loc_txt = {
+        name = 'Skelebros',
+        text = {
+            "Will copy the ability of a",
+            "random {C:uncommon}Uncommon {C:joker}Joker{}",
+            "at the beginning of each {C:attention}round",
+            "Gives {C:mult}Mult{} equivalent to",
+            "assigned Joker's {C:attention}sell value{}",
+            "Resets at the end of each {C:attention}round",
+            "{C:inactive}(sans. + THE GREAT PAPYRUS!)"
+        }
+    },
+
+    config = { extra = { currentJoker = nil} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE / DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.chips },
+        }
+    end,
+    rarity = 2,
+    atlas = 'Skelebros',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    -- Thank you to Somthingcom515 for the help with implementing this!!
+    calculate = function(self, card, context)
+        if context.setting_blind and context.cardarea == G.jokers then
+            card.ability.extra.currentJoker = pseudorandom_element(G.P_JOKER_RARITY_POOLS[2], 'seed').key
+            sendInfoMessage("skelebros chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
+            return {
+                message = (math.random(0, 1) == 1 and 'NYEH!') or 'heh.',
+                colour = G.C.BLUE,
+                sound = 'btti_Sans'
+            }
+        end
+        if card.ability.extra.currentJoker then
+            local key = card.ability.extra.currentJoker
+            G.btti_savedJokerCards = G.btti_savedJokerCards or {}
+            G.btti_savedJokerCards[card.sort_id] = G.btti_savedJokerCards[card.sort_id] or {}
+            if not G.btti_savedJokerCards[card.sort_id][key] then
+                local old_ability = copy_table(card.ability)
+                local old_center = card.config.center
+                local old_center_key = card.config.center_key
+                card:set_ability(key, nil, 'quantum')
+                card:update(0.016)
+                G.btti_savedJokerCards[card.sort_id][key] = SMODS.shallow_copy(card)
+                G.btti_savedJokerCards[card.sort_id][key].ability = copy_table(G.btti_savedJokerCards
+                    [card.sort_id][key].ability)
+                for i, v in ipairs({ "T", "VT", "CT" }) do
+                    G.btti_savedJokerCards[card.sort_id][key][v] = copy_table(G.btti_savedJokerCards[card.sort_id]
+                        [key][v])
+                end
+                G.btti_savedJokerCards[card.sort_id][key].config = SMODS.shallow_copy(G.btti_savedJokerCards
+                    [card.sort_id][key].config)
+                card.ability = old_ability
+                card.config.center = old_center
+                card.config.center_key = old_center_key
+                for i, v in ipairs({ 'juice_up', 'start_dissolve', 'remove', 'flip' }) do
+                    G.btti_savedJokerCards[card.sort_id][key][v] = function(_, ...)
+                        return Card[v](card, ...)
+                    end
+                end
+            end
+            return SMODS.merge_effects {
+                G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context),
+                {
+                    mult = G.btti_savedJokerCards[card.sort_id][key].sell_cost
+                }
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- GIF Compression
+SMODS.Atlas {
+    key = "GIFCompression",
+    path = "bttiGIFCompression.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'GIFCompression',
+    loc_txt = {
+        name = 'GIF Compression',
+        text = {
+            "Gives {C:blue}+8{} Chips and",
+            "retriggers hand {C:blue}4{} times",
+            "if played hand has {C:blue}4{} cards",
+            "{C:inactive}(Square Joker + .. Say that again?)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'GIFCompression',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    pixel_size = { w = 71, h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if #G.play.cards == 4 then
+                return {
+                    repetitions = 4
+                }
+            end
+        end
+        if context.joker_main then
+            if #G.play.cards == 4 then
+                return {
+                    chips = 8
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
     end
 }
 
