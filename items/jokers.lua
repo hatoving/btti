@@ -2007,6 +2007,10 @@ SMODS.Joker {
     end
 }
 
+SMODS.Sound({ key = "Papyrus0", path = "bttiPapyrus0.ogg" })
+SMODS.Sound({ key = "Papyrus1", path = "bttiPapyrus1.ogg" })
+SMODS.Sound({ key = "Papyrus2", path = "bttiPapyrus2.ogg" })
+SMODS.Sound({ key = "PapyrusBlue", path = "bttiPapyrusBlue.ogg" })
 -- Papyrus
 SMODS.Atlas {
     key = "Papyrus",
@@ -2026,7 +2030,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 4 } },
+    config = { extra = { mult = 4, sfx = -1 } },
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2059,9 +2063,22 @@ SMODS.Joker {
             local pc = context.other_card
             if pc and (not SMODS.get_enhancements(pc) or next(SMODS.get_enhancements(pc)) == nil) then
                 return {
-                    mult_mod = card.ability.extra.mult,
+                    mult = card.ability.extra.mult,
                     message = "+" .. tostring(card.ability.extra.mult),
-                    colour = G.C.MULT
+                    colour = G.C.MULT,
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            card.ability.extra.sfx = card.ability.extra.sfx + 1
+                            if card.ability.extra.sfx > 2 then
+                                card.ability.extra.sfx = 0
+                            end
+                            play_sound('btti_Papyrus' .. card.ability.extra.sfx)
+                            return true
+                        end,
+                    }))
                 }
             end
         end
@@ -2082,7 +2099,8 @@ SMODS.Joker {
                     c:set_seal("Blue")
                     return {
                         message = "YOU'RE BLUE NOW!",
-                        colour = G.C.BLUE
+                        colour = G.C.BLUE,
+                        sound = 'btti_PapyrusBlue'
                     }
                 end
             end

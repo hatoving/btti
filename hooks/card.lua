@@ -85,12 +85,6 @@ function Card:calculate_joker(context)
             G.GAME.btti_iAlwaysComeBack = true
         end
     end
-    if context.destroy_card then
-        if context.destroy_card.ability.name == 'j_btti_Springtrap' and not G.GAME.btti_iAlwaysComeBack then
-            sendInfoMessage("he always comes back...", "BTTI")
-            G.GAME.btti_iAlwaysComeBack = true
-        end
-    end
     if context.end_of_round then
         if btti_PONG_initialized then
             btti_PONG_kill()
@@ -131,4 +125,13 @@ function Card:calculate_joker(context)
         G.GAME.btti_isBlindBoss = false
     end
     return calcJokerRef(self, context)
+end
+
+local startDissolveRef = Card.start_dissolve
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    if self.ability.name == 'j_btti_Springtrap' and not G.GAME.btti_iAlwaysComeBack then
+        sendInfoMessage("he always comes back...", "BTTI")
+        G.GAME.btti_iAlwaysComeBack = true
+    end
+    return startDissolveRef(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
 end
