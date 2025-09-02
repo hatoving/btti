@@ -1778,10 +1778,6 @@ SMODS.Joker {
 -- UTDR JOKERS
 --#region UTDR JOKERS
 
-SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
-SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
-SMODS.Sound({ key = "tennaTime", path = "bttiTennaTime.ogg" })
-
 -- Papyrus
 SMODS.Atlas {
     key = "Papyrus",
@@ -1811,7 +1807,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE / DELTARUNE" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
@@ -1830,34 +1826,47 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.before then
-            card.ability.extra.mult = 0
-            if G.play.cards then
-                for i, pc in ipairs(G.play.cards) do
-                    if next(SMODS.get_enhancements(pc)) == nil then
-                        card.ability.extra.mult = card.ability.extra.mult + 4
-                        sendInfoMessage(card.ability.extra.mult)
-                    end
-                end
-            end
-            if context.joker_main then
-            if card.ability.extra.mult > 0 then
-                sendInfoMessage(card.ability.extra.mult)
+        if context.individual and context.cardarea == G.play then
+            local pc = context.other_card
+            if pc and (not SMODS.get_enhancements(pc) or next(SMODS.get_enhancements(pc)) == nil) then
                 return {
                     mult_mod = card.ability.extra.mult,
-                    message = card.ability.extra.mult,
+                    message = "+" .. tostring(card.ability.extra.mult),
                     colour = G.C.MULT
                 }
             end
         end
+
+        if context.joker_main then
+            if pseudorandom("Papyrus") < 0.1 then
+                local hearts = {}
+                if G.play.cards then
+                    for _, c in ipairs(G.play.cards) do
+                        if c:is_suit("Hearts") then
+                            table.insert(hearts, c)
+                        end
+                    end
+                end
+
+                if #hearts > 0 then
+                    local c = pseudorandom_element(hearts, "Papyrus")
+                    c:set_seal("Blue")
+                    return {
+                        message = "YOU'RE BLUE NOW!",
+                        colour = G.C.BLUE
+                    }
+                end
+            end
         end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
     end
 }
 
 -- Tenna
+
+SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
+SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
+SMODS.Sound({ key = "tennaTime", path = "bttiTennaTime.ogg" })
+
 SMODS.Atlas {
     key = "Tenna",
     path = "bttiTenna.png",
@@ -1885,7 +1894,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE / DELTARUNE" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
@@ -3703,7 +3712,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Cubey',
     loc_txt = {
-        name = 'Cubey',
+        name = 'C U B E Y',
         text = {
             "{C:chips}+100-1000{} Chips and {X:mult,C:white}X2-10{} Mult",
             "per other {C:purple}Inn-to the Insanity{} {C:attention}Jokers{}",
@@ -3761,6 +3770,82 @@ SMODS.Joker {
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
     end
+}
+
+--#endregion
+
+-- DRAMATIZED JOKERS
+--#region DRAMATIZED JOKERS
+
+-- Teeriffic!
+SMODS.Atlas {
+    key = "Teeriffic",
+    path = "bttiTeeriffic.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Teeriffic',
+	loc_txt = {
+		name = 'Teeriffic!',
+		text = {
+			"{C:mult}+#1#{} Mult per card",
+            "Will debuff 1-2 {C:attention}played cards{}"
+		}
+	},
+
+	config = { extra = { mult = 8, howMuch = 0 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "DRAMATIZED" }}
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+		return {
+            vars = { card.ability.extra.mult, card.ability.extra.howMuch },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Teeriffic',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		if context.before then
+            local rand = math.random(1, 2)
+            if #context.scoring_hand > rand then
+                for i=1,rand,1 do
+                    local rand2 = math.random(1, #context.scoring_hand)
+                    context.scoring_hand[rand2]:set_debuff(true)
+                end
+            elseif #context.scoring_hand == 2 then
+                local rand2 = math.random(1, #context.scoring_hand)
+                context.scoring_hand[rand2]:set_debuff(true)
+            end
+		end
+
+        if context.cardarea == G.play and context.individual and context.other_card then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+            }
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
 }
 
 --#endregion
@@ -4345,484 +4430,6 @@ SMODS.Joker {
     end
 }
 
-
---#endregion
-
--- DRAMATIZED JOKERS
---#region DRAMATIZED JOKERS
-
--- Teeriffic!
-SMODS.Atlas {
-    key = "Teeriffic",
-    path = "bttiTeeriffic.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-	key = 'Teeriffic',
-	loc_txt = {
-		name = 'Teeriffic!',
-		text = {
-			"{C:mult}+#1#{} Mult per card",
-            "Will debuff 1-2 {C:attention}played cards{}"
-		}
-	},
-
-	config = { extra = { mult = 8, howMuch = 0 } },
-	loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "DRAMATIZED" }}
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
-		return {
-            vars = { card.ability.extra.mult, card.ability.extra.howMuch },
-        }
-	end,
-	rarity = 1,
-	atlas = 'Teeriffic',
-	pos = { x = 0, y = 0 },
-	cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-	calculate = function(self, card, context)
-		if context.before then
-            local rand = math.random(1, 2)
-            if #context.scoring_hand > rand then
-                for i=1,rand,1 do
-                    local rand2 = math.random(1, #context.scoring_hand)
-                    context.scoring_hand[rand2]:set_debuff(true)
-                end
-            elseif #context.scoring_hand == 2 then
-                local rand2 = math.random(1, #context.scoring_hand)
-                context.scoring_hand[rand2]:set_debuff(true)
-            end
-		end
-
-        if context.cardarea == G.play and context.individual and context.other_card then
-            return {
-                mult_mod = card.ability.extra.mult,
-                message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
-            }
-		end
-	end,
-    in_pool = function(self, args)
-		return true, { allow_duplicates = false }
-	end
-}
-
---#endregion
-
--- CREATICA JOKERS
---#region CREATICA JOKERS
-
--- Joozie
-SMODS.Atlas {
-    key = "Joozie",
-    path = "bttiJoozie.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-	key = 'Joozie',
-	loc_txt = {
-		name = 'Joozie',
-		text = {
-			"Upgrades played {C:attention}Kings{}",
-            "and {C:attention}Queens{} by",
-            "{C:chips}+0-117{} chips"
-		}
-	},
-
-	config = { extra = { } },
-	loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" }}
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
-		return {
-            vars = { },
-        }
-	end,
-	rarity = 3,
-	atlas = 'Joozie',
-	pos = { x = 0, y = 0 },
-	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function(self, card, dt)
-        card.ability.eternal = true
-    end,
-
-	calculate = function(self, card, context)
-		if context.cardarea == G.play and context.individual and context.other_card then
-            local _trigger = false
-            if context.other_card:get_id() == 12 then _trigger = true end --Queens
-            if context.other_card:get_id() == 13 then _trigger = true end --Kings
-            if _trigger then
-                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + math.random(0, 117)
-                context.other_card:juice_up()
-                return {
-                    message = "Upgrade!"
-                }
-            end
-		end
-
-	end,
-    in_pool = function(self, args)
-		return true, { allow_duplicates = false }
-	end
-}
-
--- Aubree
-SMODS.Atlas {
-    key = "Aubree",
-    path = "bttiAubree.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'Aubree',
-    loc_txt = {
-        name = 'Aubree',
-        text = {
-            "+1 {C:attention}Joker Slot{}, clones",
-            "itself at the {C:attention}start of an ante"
-        }
-    },
-
-    config = { card_limit = 1, extra = {} },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
-        return {
-            vars = {},
-        }
-    end,
-    rarity = 3,
-    atlas = 'Aubree',
-    pos = { x = 0, y = 0 },
-    cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function(self, card, dt)
-        card.ability.eternal = true
-    end,
-
-    calculate = function(self, card, context)
-        if context.ante_change and context.ante_end then
-            return {
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    delay = 0,
-                    func = function()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = "Fine...", colour = G.C.RED })
-                        card:juice_up()
-                        card.ability.card_limit = card.ability.card_limit + 1
-                        G.jokers:change_size(1)
-                        return true
-                    end,
-                }))
-            }
-        end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
--- Cacaa
-SMODS.Atlas {
-    key = "Cacaa",
-    path = "bttiCacaa.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'Cacaa',
-    loc_txt = {
-        name = 'Cacaa',
-        text = {
-            "Played {C:hearts}Hearts{}, {C:diamonds}Diamonds",
-            "and {C:clubs}Clubs{} each give {C:attention}$2"
-        }
-    },
-
-    config = { extra = {} },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "ca850, Juicimated" } }
-        return {
-            vars = {},
-        }
-    end,
-    rarity = 3,
-    atlas = 'Cacaa',
-    pos = { x = 0, y = 0 },
-    cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function(self, card, dt)
-        card.ability.eternal = true
-    end,
-
-    calculate = function(self, card, context)
-        if context.cardarea == G.play and context.individual and context.other_card then
-            local _trigger = false
-            if context.other_card:get_suit() == 'Hearts' then _trigger = true end
-            if context.other_card:get_suit() == 'Diamonds' then _trigger = true end
-            if context.other_card:get_suit() == 'Clubs' then _trigger = true end
-            if _trigger then
-                context.other_card:juice_up()
-                return {
-                    dollars = 2
-                }
-            end
-        end
-
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
--- Kyuu
-SMODS.Atlas {
-    key = "Kyuu",
-    path = "bttiKyuu.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'Kyuu',
-    loc_txt = {
-        name = 'Kyuu',
-        text = {
-            "{C:blue}Upgrades{} your {C:attention}most played hand{}",
-            "twice when beating a {C:attention}Boss Blind{}"
-        }
-    },
-
-    config = { extra = {} },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, Juicimated" } }
-        return {
-            vars = {},
-        }
-    end,
-    rarity = 3,
-    atlas = 'Kyuu',
-    pos = { x = 0, y = 0 },
-    cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function(self, card, dt)
-        card.ability.eternal = true
-    end,
-
-    calculate = function(self, card, context)
-        if context.ante_change and context.ante_end then
-            return {
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    delay = 0,
-                    func = function()
-                        local _handname, _played = 'High Card', -1
-                        for hand_key, hand in pairs(G.GAME.hands) do
-                            if hand.played > _played then
-                                _played = hand.played
-                                _handname = hand_key
-                            end
-                        end
-                        local most_played = _handname
-                        SMODS.smart_level_up_hand(card, most_played, nil, 2)
-                        return true
-                    end,
-                }))
-            }
-        end
-
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
--- Cosmyy
-SMODS.Atlas {
-    key = "Cosmyy",
-    path = "bttiCosmyy.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'Cosmyy',
-    loc_txt = {
-        name = 'Cosmyy',
-        text = {
-            "{C:mult}+2{} Mult per {C:diamonds}Diamond{} in deck",
-            "{C:green}1 in 3{} chance to clone {C:attention}played",
-            "cards{} with a {C:diamonds}Diamond{} suit",
-            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
-        }
-    },
-
-    config = { extra = { mult = 1 } },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8, Juicimated" } }
-        local cardCount = 0
-        if G.deck and G.deck.cards then
-            for i, pc in ipairs(G.deck.cards) do
-                if pc:is_suit('Diamonds') then
-                    cardCount = cardCount + 1
-                end
-            end
-        end
-        return {
-            vars = { card.ability.extra.mult * cardCount },
-        }
-    end,
-    rarity = 3,
-    atlas = 'Cosmyy',
-    pos = { x = 0, y = 0 },
-    cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function(self, card, dt)
-        card.ability.eternal = true
-    end,
-
-    calculate = function(self, card, context)
-        if context.cardarea == G.play and context.individual and context.other_card then
-            local cardCount = 0
-            if G.deck and G.deck.cards then
-                for i, pc in ipairs(G.deck.cards) do
-                    if pc:is_suit('Diamonds') then
-                        cardCount = cardCount + 1
-                    end
-                end
-            end
-            if pseudorandom('Cosmyy') < G.GAME.probabilities.normal / 3 then
-                return SMODS.merge_effects {
-                    {
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'immediate',
-                            blocking = false,
-                            delay = 0,
-                            func = function()
-                                for i, pc in ipairs(G.play.cards) do
-                                    if pc:is_suit('Diamonds') then
-                                        SMODS.add_card {
-                                            key = 'Playing Card',
-                                            suit = 'Diamonds',
-                                            rank = pc.base.value,
-                                            edition = (pc.edition and pc.edition.key) or nil,
-                                            enhancement = pc.config.center.key,
-                                            seal = pc.seal,
-                                            area = G.deck
-                                        }
-                                    end
-                                end
-                                card:juice_up()
-                                return true
-                            end,
-                        }))
-                    },
-                    {
-                        mult = card.ability.extra.mult * cardCount
-                    }
-                }
-            end
-        end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
 
 --#endregion
 
@@ -5674,8 +5281,501 @@ SMODS.Joker {
 
 --#endregion
 
+-- CREATICA JOKERS
+--#region CREATICA JOKERS
+
+-- Joozie
+SMODS.Atlas {
+    key = "Joozie",
+    path = "bttiJoozie.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Joozie',
+	loc_txt = {
+		name = 'Joozie',
+		text = {
+			"Upgrades played {C:attention}Kings{}",
+            "and {C:attention}Queens{} by",
+            "{C:chips}+0-117{} chips"
+		}
+	},
+
+	config = { extra = { } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue+1] = {key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" }}
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Juicimated" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 3,
+	atlas = 'Joozie',
+	pos = { x = 0, y = 0 },
+	cost = 6,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        card.ability.eternal = true
+    end,
+
+	calculate = function(self, card, context)
+		if context.cardarea == G.play and context.individual and context.other_card then
+            local _trigger = false
+            if context.other_card:get_id() == 12 then _trigger = true end --Queens
+            if context.other_card:get_id() == 13 then _trigger = true end --Kings
+            if _trigger then
+                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + math.random(0, 117)
+                context.other_card:juice_up()
+                return {
+                    message = "Upgrade!"
+                }
+            end
+		end
+
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- Aubree
+SMODS.Atlas {
+    key = "Aubree",
+    path = "bttiAubree.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Aubree',
+    loc_txt = {
+        name = 'Aubree',
+        text = {
+            "+1 {C:attention}Joker Slot{}, clones",
+            "itself at the {C:attention}start of an ante"
+        }
+    },
+
+    config = { card_limit = 1, extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LightShine, Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Aubree',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        card.ability.eternal = true
+    end,
+
+    calculate = function(self, card, context)
+        if context.ante_change and context.ante_end then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = "Fine...", colour = G.C.RED })
+                        card:juice_up()
+                        card.ability.card_limit = card.ability.card_limit + 1
+                        G.jokers:change_size(1)
+                        return true
+                    end,
+                }))
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+-- Kyuu
+SMODS.Atlas {
+    key = "Kyuu",
+    path = "bttiKyuu.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Kyuu',
+    loc_txt = {
+        name = 'Kyuu',
+        text = {
+            "{C:blue}Upgrades{} your {C:attention}most played hand{}",
+            "twice when beating a {C:attention}Boss Blind{}"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "hatoving, Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Kyuu',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        card.ability.eternal = true
+    end,
+
+    calculate = function(self, card, context)
+        if context.ante_change and context.ante_end then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        local _handname, _played = 'High Card', -1
+                        for hand_key, hand in pairs(G.GAME.hands) do
+                            if hand.played > _played then
+                                _played = hand.played
+                                _handname = hand_key
+                            end
+                        end
+                        local most_played = _handname
+                        SMODS.smart_level_up_hand(card, most_played, nil, 2)
+                        return true
+                    end,
+                }))
+            }
+        end
+
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+-- Cacaa
+SMODS.Atlas {
+    key = "Cacaa",
+    path = "bttiCacaa.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Cacaa',
+    loc_txt = {
+        name = 'Cacaa',
+        text = {
+            "Played {C:hearts}Hearts{}, {C:diamonds}Diamonds",
+            "and {C:clubs}Clubs{} each give {C:attention}$2"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "ca850, Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Cacaa',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        card.ability.eternal = true
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.individual and context.other_card then
+            local _trigger = false
+            if context.other_card:get_suit() == 'Hearts' then _trigger = true end
+            if context.other_card:get_suit() == 'Diamonds' then _trigger = true end
+            if context.other_card:get_suit() == 'Clubs' then _trigger = true end
+            if _trigger then
+                context.other_card:juice_up()
+                return {
+                    dollars = 2
+                }
+            end
+        end
+
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+-- Cosmyy
+SMODS.Atlas {
+    key = "Cosmyy",
+    path = "bttiCosmyy.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Cosmyy',
+    loc_txt = {
+        name = 'Cosmyy',
+        text = {
+            "{C:mult}+2{} Mult per {C:diamonds}Diamond{} in deck",
+            "{C:green}1 in 3{} chance to clone {C:attention}played",
+            "cards{} with a {C:diamonds}Diamond{} suit",
+            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
+        }
+    },
+
+    config = { extra = { mult = 1 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Creaticas" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8, Juicimated" } }
+        local cardCount = 0
+        if G.deck and G.deck.cards then
+            for i, pc in ipairs(G.deck.cards) do
+                if pc:is_suit('Diamonds') then
+                    cardCount = cardCount + 1
+                end
+            end
+        end
+        return {
+            vars = { card.ability.extra.mult * cardCount },
+        }
+    end,
+    rarity = 3,
+    atlas = 'Cosmyy',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function(self, card, dt)
+        card.ability.eternal = true
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.individual and context.other_card then
+            local cardCount = 0
+            if G.deck and G.deck.cards then
+                for i, pc in ipairs(G.deck.cards) do
+                    if pc:is_suit('Diamonds') then
+                        cardCount = cardCount + 1
+                    end
+                end
+            end
+            if pseudorandom('Cosmyy') < G.GAME.probabilities.normal / 3 then
+                return SMODS.merge_effects {
+                    {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                for i, pc in ipairs(G.play.cards) do
+                                    if pc:is_suit('Diamonds') then
+                                        SMODS.add_card {
+                                            key = 'Playing Card',
+                                            suit = 'Diamonds',
+                                            rank = pc.base.value,
+                                            edition = (pc.edition and pc.edition.key) or nil,
+                                            enhancement = pc.config.center.key,
+                                            seal = pc.seal,
+                                            area = G.deck
+                                        }
+                                    end
+                                end
+                                card:juice_up()
+                                return true
+                            end,
+                        }))
+                    },
+                    {
+                        mult = card.ability.extra.mult * cardCount
+                    }
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+--#endregion
+
 -- DIRECTOR JOKERS
 --#region DIRECTOR JOKERS
+
+-- Juicimated
+SMODS.Atlas {
+    key = "Juicimated",
+    path = "bttiJuicimated.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Juicimated',
+    loc_txt = {
+        name = 'Juicimated',
+        text = {
+            "{C:green}1 in 17{} chance for {C:mult}+117{} Mult",
+            "{C:green}1 in 17{} chance to turn",
+            "{C:attention}played hand orange{}"
+        }
+    },
+
+    config = { extra = { mult = 117, odds = 17 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
+        return {
+            vars = { card.ability.extra.mult },
+        }
+    end,
+    rarity = 4,
+    atlas = 'Juicimated',
+    pos = { x = 0, y = 0 },
+    cost = 20,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local rets = {}
+            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                table.insert(rets, {
+                    mult_mod = card.ability.extra.mult,
+                    message = "Joozin' it",
+                    colour = G.C.ORANGE,
+                })
+            else
+                table.insert(rets, {
+                    message = "We chillin'",
+                    colour = G.C.ORANGE,
+                })
+            end
+            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                if G.play.cards then
+                    table.insert(rets, {
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                sendInfoMessage("Making that shity ass card orange 2...", "BTTI")
+                                for i, c in ipairs(G.play.cards) do
+                                    c:juice_up()
+                                    c:set_seal("btti_orangeSeal", false, true)
+                                    card_eval_status_text(card, 'extra', nil, nil, nil,
+                                        { message = "I joozed", colour = G.C.ORANGE })
+                                    delay(0.1)
+                                end
+                                return true
+                            end,
+                        }))
+                    })
+                end
+            end
+            return SMODS.merge_effects(rets)
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
 
 -- LightShine
 SMODS.Atlas {
@@ -5810,191 +5910,6 @@ SMODS.Joker {
         end
         --sendInfoMessage(rets, "BTTI")
         return SMODS.merge_effects(rets)
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
--- Juicimated
-SMODS.Atlas {
-    key = "Juicimated",
-    path = "bttiJuicimated.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'Juicimated',
-    loc_txt = {
-        name = 'Juicimated',
-        text = {
-            "{C:green}1 in 17{} chance for {C:mult}+117{} Mult",
-            "{C:green}1 in 17{} chance to turn",
-            "{C:attention}played hand orange{}"
-        }
-    },
-
-    config = { extra = { mult = 117, odds = 17 } },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
-        return {
-            vars = { card.ability.extra.mult },
-        }
-    end,
-    rarity = 4,
-    atlas = 'Juicimated',
-    pos = { x = 0, y = 0 },
-    cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-        if context.joker_main then
-            local rets = {}
-            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                table.insert(rets, {
-                    mult_mod = card.ability.extra.mult,
-                    message = "Joozin' it",
-                    colour = G.C.ORANGE,
-                })
-            else
-                table.insert(rets, {
-                    message = "We chillin'",
-                    colour = G.C.ORANGE,
-                })
-            end
-            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                if G.play.cards then
-                    table.insert(rets, {
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'immediate',
-                            blocking = false,
-                            delay = 0,
-                            func = function()
-                                sendInfoMessage("Making that shity ass card orange 2...", "BTTI")
-                                for i, c in ipairs(G.play.cards) do
-                                    c:juice_up()
-                                    c:set_seal("btti_orangeSeal", false, true)
-                                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                                        { message = "I joozed", colour = G.C.ORANGE })
-                                    delay(0.1)
-                                end
-                                return true
-                            end,
-                        }))
-                    })
-                end
-            end
-            return SMODS.merge_effects(rets)
-        end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
--- BlueBen8
-SMODS.Atlas {
-    key = "BlueBen8",
-    path = "bttiBlueBen8.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'BlueBen8',
-    loc_txt = {
-        name = 'BlueBen8',
-        text = {
-            "Any played {C:attention}Straight{} hand will",
-            "be played as a {C:bisexual}Bisexual{} hand",
-            "{C:green}1 in 4{} chance to upgrade {C:attention}Flush{} when played",
-            "{C:chips}+30{} Chips if an {C:gay}Autism{} {C:attention}Joker{} is present"
-        }
-    },
-
-    config = { extra = { odds = 4 } },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
-        return {
-            vars = { card.ability.extra.odds },
-        }
-    end,
-    rarity = 4,
-    atlas = 'BlueBen8',
-    pos = { x = 0, y = 0 },
-    cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-        if context.evaluate_poker_hand and context.poker_hands then
-            if context.scoring_name == "Straight" then
-                return {
-                    replace_scoring_name = "Bisexual",
-                }
-            elseif context.scoring_name == "Straight Flush" then
-                return {
-                    replace_scoring_name = "BisexualFlush",
-                }
-            end
-        end
-
-        if context.joker_main then
-            local rets = {}
-            card.ability.extra.odds = 4
-            if pseudorandom('BlueBen8') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                table.insert(rets, {
-                    message = "Flush Upgrade!!", colour = G.C.BTTIGAY,
-                    func = function()
-                        SMODS.smart_level_up_hand(card, "Flush", nil, 1) -- Level up Flush by 1
-                    end
-                })
-            end
-            for _, jk in ipairs(G.jokers.cards) do
-                local key = jk and jk.config and jk.config.center and jk.config.center.key
-                if key then
-                    if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_LightShine" then
-                        table.insert(rets, {
-                            chip_mod = 30,
-                            message = "+30 Chips",
-                            colour = G.C.BTTIGAY
-                        })
-                        break -- only want to do it once
-                    end
-                end
-            end
-            if #rets > 0 then
-                return SMODS.merge_effects(rets)
-            end
-        end
     end,
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
@@ -6193,6 +6108,100 @@ SMODS.Joker {
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
 	end
+}
+
+-- BlueBen8
+SMODS.Atlas {
+    key = "BlueBen8",
+    path = "bttiBlueBen8.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'BlueBen8',
+    loc_txt = {
+        name = 'BlueBen8',
+        text = {
+            "Any played {C:attention}Straight{} hand will",
+            "be played as a {C:bisexual}Bisexual{} hand",
+            "{C:green}1 in 4{} chance to upgrade {C:attention}Flush{} when played",
+            "{C:chips}+30{} Chips if an {C:gay}Autism{} {C:attention}Joker{} is present"
+        }
+    },
+
+    config = { extra = { odds = 4 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Real Life" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
+        return {
+            vars = { card.ability.extra.odds },
+        }
+    end,
+    rarity = 4,
+    atlas = 'BlueBen8',
+    pos = { x = 0, y = 0 },
+    cost = 20,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.evaluate_poker_hand and context.poker_hands then
+            if context.scoring_name == "Straight" then
+                return {
+                    replace_scoring_name = "Bisexual",
+                }
+            elseif context.scoring_name == "Straight Flush" then
+                return {
+                    replace_scoring_name = "BisexualFlush",
+                }
+            end
+        end
+
+        if context.joker_main then
+            local rets = {}
+            card.ability.extra.odds = 4
+            if pseudorandom('BlueBen8') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                table.insert(rets, {
+                    message = "Flush Upgrade!!", colour = G.C.BTTIGAY,
+                    func = function()
+                        SMODS.smart_level_up_hand(card, "Flush", nil, 1) -- Level up Flush by 1
+                    end
+                })
+            end
+            for _, jk in ipairs(G.jokers.cards) do
+                local key = jk and jk.config and jk.config.center and jk.config.center.key
+                if key then
+                    if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_LightShine" then
+                        table.insert(rets, {
+                            chip_mod = 30,
+                            message = "+30 Chips",
+                            colour = G.C.BTTIGAY
+                        })
+                        break -- only want to do it once
+                    end
+                end
+            end
+            if #rets > 0 then
+                return SMODS.merge_effects(rets)
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
 }
 
 --#endregion
