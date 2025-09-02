@@ -2071,10 +2071,22 @@ SMODS.Joker {
                         blocking = false,
                         delay = 0,
                         func = function()
-                            card.ability.extra.sfx = card.ability.extra.sfx + 1
-                            if card.ability.extra.sfx > 2 then
+                            if card.ability.extra.sfx == nil then
+                                card.ability.extra.sfx = 0
+                                card.ability.extra.second = false
+                            end
+
+                            if card.ability.extra.sfx == 0 then
+                                if card.ability.extra.second then
+                                    card.ability.extra.sfx = 2
+                                else
+                                    card.ability.extra.sfx = 1
+                                end
+                                card.ability.extra.second = not card.ability.extra.second
+                            else
                                 card.ability.extra.sfx = 0
                             end
+
                             play_sound('btti_Papyrus' .. card.ability.extra.sfx)
                             return true
                         end,
