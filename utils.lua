@@ -181,6 +181,12 @@ function loadImage(fn)
     local tempimagedata = assert(love.image.newImageData(file_data), ("Epic fail 2"))
     return (assert(love.graphics.newImage(tempimagedata), ("Epic fail 3")))
 end
+function loadSound(fn,type)
+    local full_path = G.bttiModPath .. 'assets/sounds/' .. fn
+    full_path = full_path:gsub('%\\', '/')
+    local file_data = assert(NFS.newFileData(full_path), ("Epic AUDIO fail"))
+    return assert(love.audio.newSource(file_data, type), ("Epic AUDIO fail 2"))
+end
 function loadImageSpriteSheet(fn, px, py, subimg, orientation)
     local full_path = G.bttiModPath .. 'assets/images/' .. fn
     full_path = full_path:gsub('%\\', '/')

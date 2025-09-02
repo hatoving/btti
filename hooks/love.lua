@@ -3,6 +3,54 @@ G.BTTI.whorseFlashbangAlpha = 0.0
 G.BTTI.dwayneTheRockImage = loadImage('rock.png')
 G.BTTI.dwayneTheRockAlpha = 0.0
 
+G.BTTI.biteOf87Image = loadImage('biteOf87.png')
+G.BTTI.biteOf87Quads = {}
+local bo87W, bo87H = G.BTTI.biteOf87Image:getWidth(), G.BTTI.biteOf87Image:getHeight()
+local bo87QuadW, bo87QuadH = 159, 155
+local bo87Cols = math.floor(bo87W / bo87QuadW)
+local bo87Rows = math.floor(bo87H / bo87QuadH)
+
+for y = 0, bo87Rows - 1 do
+    for x = 0, bo87Cols - 1 do
+        table.insert(G.BTTI.biteOf87Quads,
+            love.graphics.newQuad(x * bo87QuadW, y * bo87QuadH, bo87QuadW, bo87QuadH, bo87W, bo87H))
+    end
+end
+
+G.BTTI.biteOf87_IDLE = { 1, 55 }
+G.BTTI.biteOf87_SHOCK = { 75, 130 }
+G.BTTI.biteOf87_SHOCK_LOOP = { 130, 144 }
+G.BTTI.biteOf87_BITE = { 145, 398 }
+
+SMODS.Sound({ key = "bo87_0", path = "bttiBiteOf87_0.ogg" })
+SMODS.Sound({ key = "bo87_1", path = "bttiBiteOf87_1.ogg" })
+SMODS.Sound({ key = "bo87_2", path = "bttiBiteOf87_2.ogg" })
+
+G.BTTI.biteOf87Tick = 0
+G.BTTI.biteOf87FrameDur = 0.02
+G.BTTI.biteOf87Frame = 1
+G.BTTI.biteOf87LastFrame = 1
+G.BTTI.biteOf87FrameStart = 0
+G.BTTI.biteOf87FrameMax = 55
+G.BTTI.biteOf87Init = false
+G.BTTI.biteOf87Ramble = loadSound("bttiBiteOf87Ramble.ogg", "stream")
+G.BTTI.biteOf87Ramble:setLooping(true)
+G.BTTI.biteOf87RambleVol = 1.0
+G.BTTI.biteOf87PlayedClip = false
+
+function G.BTTI.biteOf87Change(frame, which)
+    G.BTTI.biteOf87PlayedClip = false
+    G.BTTI.biteOf87Frame = frame
+    G.BTTI.biteOf87FrameStart = which[1]
+    G.BTTI.biteOf87FrameMax = which[2]
+
+    if which ~= G.BTTI.biteOf87_IDLE then
+        G.BTTI.biteOf87Ramble:pause()
+    else
+        G.BTTI.biteOf87Ramble:play()
+    end
+end
+
 G.BTTI.dvdLogo = {
     Image = loadImage('dvdLogo.png'),
     X = 0.0,
@@ -55,6 +103,31 @@ local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
     jokerAnimUpdate(dt)
+
+    if jokerExists('j_btti_BiteOf87') then
+        G.BTTI.biteOf87RambleVol = lerp(G.BTTI.biteOf87RambleVol, 0.35 * (G.SETTINGS.SOUND.game_sounds_volume / 100), 2.0 * dt)
+        G.BTTI.biteOf87Ramble:setVolume(G.BTTI.biteOf87RambleVol)
+        G.BTTI.biteOf87Tick = G.BTTI.biteOf87Tick + dt
+        if G.BTTI.biteOf87Frame >= 278 and not G.BTTI.biteOf87PlayedClip then
+            play_sound('btti_bo87_' .. math.random(0, 2))
+            G.BTTI.biteOf87PlayedClip = true
+        end
+        if G.BTTI.biteOf87Tick >= G.BTTI.biteOf87FrameDur then
+            G.BTTI.biteOf87Tick = 0
+            G.BTTI.biteOf87Frame = G.BTTI.biteOf87Frame + 1
+            if G.BTTI.biteOf87Frame > G.BTTI.biteOf87FrameMax then
+                if G.BTTI.biteOf87FrameMax == G.BTTI.biteOf87_BITE then
+                    G.BTTI.biteOf87Change(0, G.BTTI.biteOf87_IDLE)
+                elseif G.BTTI.biteOf87FrameMax == G.BTTI.biteOf87_SHOCK then
+                    G.BTTI.biteOf87Change(0, G.BTTI.biteOf87_SHOCK_LOOP)
+                else
+                    G.BTTI.biteOf87Change(0, G.BTTI.biteOf87_IDLE)
+                end
+            end
+        end
+    else
+        G.BTTI.biteOf87RambleVol = 1.0 * (G.SETTINGS.SOUND.game_sounds_volume / 100)
+    end
 
     if jokerExists('j_btti_Steam') and G.BTTI.foundSteamApps then
         G.BTTI.steamCheckTimer = G.BTTI.steamCheckTimer + dt
@@ -241,6 +314,18 @@ function love.draw()
 
     love.graphics.setColor(G.BTTI.dvdLogo.Color[1], G.BTTI.dvdLogo.Color[2], G.BTTI.dvdLogo.Color[3], G.GAME.dvdLogoAlpha or 0)
     love.graphics.draw(G.BTTI.dvdLogo.Image, G.BTTI.dvdLogo.X, G.BTTI.dvdLogo.Y)
+
+    if jokerExists('j_btti_BiteOf87') then
+        love.graphics.setColor(1, 1, 1, 1)
+        if G.BTTI.biteOf87Quads[G.BTTI.biteOf87Frame] ~= nil then
+            G.BTTI.biteOf87LastFrame = G.BTTI.biteOf87Frame
+            love.graphics.draw(G.BTTI.biteOf87Image, G.BTTI.biteOf87Quads[G.BTTI.biteOf87Frame], 0, 0, 0,
+                1 * (love.graphics.getWidth() / 1280), 1 * (love.graphics.getWidth() / 1280))
+        else
+            love.graphics.draw(G.BTTI.biteOf87Image, G.BTTI.biteOf87Quads[G.BTTI.biteOf87LastFrame], 0, 0, 0,
+                1 * (love.graphics.getWidth() / 1280), 1 * (love.graphics.getWidth() / 1280))
+        end
+    end
     
     G.BTTI.fakeCrash:draw()
 end
