@@ -1782,6 +1782,81 @@ SMODS.Sound({ key = "tennaT", path = "bttiTennaT.ogg" })
 SMODS.Sound({ key = "tennaV", path = "bttiTennaV.ogg" })
 SMODS.Sound({ key = "tennaTime", path = "bttiTennaTime.ogg" })
 
+-- Papyrus
+SMODS.Atlas {
+    key = "Papyrus",
+    path = "bttiPapyrus.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Papyrus',
+    loc_txt = {
+        name = 'THE GREAT PAPYRUS!',
+        text = {
+            "{C:mult}+4{} Mult per {C:attention}card{} played",
+            "without an enhancement",
+            "{C:green}1 in 10{} chance to apply a {C:blue}Blue Seal{}",
+            "to a played {C:hearts}Heart{} card"
+        }
+    },
+
+    config = { extra = { mult = 4 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE/DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.chips },
+        }
+    end,
+    rarity = 1,
+    atlas = 'Papyrus',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.before then
+            card.ability.extra.mult = 0
+            if G.play.cards then
+                for i, pc in ipairs(G.play.cards) do
+                    if next(SMODS.get_enhancements(pc)) == nil then
+                        card.ability.extra.mult = card.ability.extra.mult + 4
+                        sendInfoMessage(card.ability.extra.mult)
+                    end
+                end
+            end
+            if context.joker_main then
+            if card.ability.extra.mult > 0 then
+                sendInfoMessage(card.ability.extra.mult)
+                return {
+                    mult_mod = card.ability.extra.mult,
+                    message = card.ability.extra.mult,
+                    colour = G.C.MULT
+                }
+            end
+        end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- Tenna
 SMODS.Atlas {
     key = "Tenna",
