@@ -43,7 +43,7 @@ function love.update(dt)
 
     if jokerExists('j_btti_Steam') and G.BTTI.foundSteamApps then
         G.BTTI.steamCheckTimer = G.BTTI.steamCheckTimer + dt
-        if G.BTTI.steamCheckTimer >= 10.0 then
+        if G.BTTI.steamCheckTimer >= 120.0 then
             G.BTTI.steamCheckTimer = 0.0
             G.BTTI.installedSteamApps = G.BTTI.countInstalledSteamApps()
         end

@@ -1499,7 +1499,7 @@ SMODS.Joker {
             "you have installed on {C:blue}Steam{}, otherwise",
             "{X:mult,C:white}X0.1{} Mult for every {C:attention}game{}",
             "in the {C:default}Valve Complete Pack{} on {C:blue}Steam{}",
-            "{C:inactive}Checks every 10 seconds",
+            "{C:inactive}Checks every 2 minutes",
             "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive} Mult"
         }
     },
