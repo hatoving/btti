@@ -29,6 +29,27 @@ SMODS.Seal {
     pools = { ["BTTI_modAddition_seals"] = true },
 
     calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            local all_orange = true
+            local half = card:get_chip_bonus() / 2
+
+            for i, pc in ipairs(G.play.cards) do
+                if pc.seal ~= "orange" then
+                    all_orange = false
+                    break
+                end
+            end
+
+            if all_orange then
+                return {
+                    chips = -half
+                }
+            else
+                return {
+                    chips = half
+                }
+            end
+        end
     end
 }
 
