@@ -3086,7 +3086,7 @@ SMODS.Joker {
         name = 'Hanako Takeuchi',
         text = {
             "Adds the {C:attention}sell value{} of",
-            "{C:attention}Jokers{} sold to {C:chipsChips{} and {C:mult}Mult{}",
+            "{C:attention}Jokers{} sold to {C:chips}Chips{} and {C:mult}Mult{}",
             "Does not count previously",
             "sold {C:attention}Jokers{}",
             "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#1#{} Mult"
@@ -5989,8 +5989,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Aubree',
         text = {
-            "+1 {C:attention}Joker Slot{}, clones",
-            "itself at the {C:attention}start of an ante"
+            "Gain {C:attention}+1 Joker Slot{}",
+            "every time you defeat a",
+            "{C:attention}boss blind"
         }
     },
 
