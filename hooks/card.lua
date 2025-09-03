@@ -124,7 +124,18 @@ function Card:calculate_joker(context)
         sendInfoMessage("glitchus deletus : " .. digitalCards, "BTTI")
         G.GAME.btti_isBlindBoss = false
     end
-    return calcJokerRef(self, context)
+    local ret = calcJokerRef(self, context)
+    if context.joker_main then
+        if ret and self.ability.brimstone_mult then
+            return SMODS.merge_effects({
+                ret,
+                {
+                    mult = self.ability.brimstone_mult
+                }
+            })
+        end
+    end
+    return ret
 end
 
 local startDissolveRef = Card.start_dissolve

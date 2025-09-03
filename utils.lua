@@ -90,6 +90,37 @@ function table_contains(tbl, val)
     return false
 end
 
+function print_table(tbl, indent)
+    indent = indent or 0
+    local formatting = string.rep("  ", indent)
+
+    for k, v in pairs(tbl) do
+        if type(v) == "table" then
+            print(formatting .. tostring(k) .. " = {")
+            print_table(v, indent + 1)
+            print(formatting .. "}")
+        else
+            print(formatting .. tostring(k) .. " = " .. tostring(v))
+        end
+    end
+end
+
+function find_allowed(tbl, allowed)
+    for k, v in pairs(tbl) do
+        if type(k) == "string"
+            and allowed[k]
+            and type(v) == "number" then
+            return tbl, k
+        elseif type(v) == "table" then
+            local found_tbl, found_key = find_allowed(v, allowed)
+            if found_tbl then
+                return found_tbl, found_key
+            end
+        end
+    end
+    return nil
+end
+
 function lerp(a, b, t)
     local result = a + t * (b - a)
     return result
@@ -150,6 +181,21 @@ function LOSE_GAME_NOW()
     G:save_settings()
     G.FILE_HANDLER.force = true
     G.STATE_COMPLETE = false
+end
+
+function WIN_ROUND_NOW()
+    G.E_MANAGER:add_event(Event({
+        blocking = false,
+        func = function()
+            if G.STATE == G.STATES.SELECTING_HAND then
+                G.GAME.chips = G.GAME.blind.chips
+                G.STATE = G.STATES.HAND_PLAYED
+                G.STATE_COMPLETE = true
+                end_round()
+                return true
+            end
+        end
+    }))
 end
 
 -- stolen from yahimod, thank you yaha mouse

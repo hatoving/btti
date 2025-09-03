@@ -1839,6 +1839,75 @@ SMODS.Joker {
 
 --#endregion
 
+-- ETG JOKRES
+--#region ETG JOKERS
+
+SMODS.Atlas {
+    key = "Dragun",
+    path = "bttiDragun.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'Dragun',
+    loc_txt = {
+        name = 'The Dragun',
+        text = {
+            "{X:mult,C:white}X5{} Mult if playe hand",
+            "has exactly {C:attention}5 cards"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Enter the Gungeon" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Dodge Roll Games / Devolver Digital" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Dragun',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true },
+
+    pixel_size = { w = 71, h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            if #G.play.cards == 5 then
+                return {
+                    xmult = 5
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+--#endregion
+
 -- ULTRAKILL JOKERS
 --#region ULTRAKILL JOKERS
 
@@ -1900,6 +1969,80 @@ SMODS.Joker {
         end
         if context.end_of_round and context.cardarea == G.jokers then
             card.ability.extra.chips = 15
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+--#endregion
+
+-- ISAAC JOKERS
+--#region ISAAC JOKERS
+
+SMODS.Atlas {
+    key = "Brimstone",
+    path = "bttiBrimstone.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Brimstone',
+    loc_txt = {
+        name = 'Brimstone',
+        text = {
+            "Shoots a Brimstone lase5 to either",
+            "the left or right, adding bonus {C:mult}Mult{} to each",
+            "lasered {C:joker}Joker{} equivalent to its {C:attention}sell value"
+        }
+    },
+
+    config = { extra = { mult = 0, chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Binding of Isaac: Rebirth" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Edmund McMillen / Nicalis" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 3,
+    atlas = 'Brimstone',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local dir = math.random(0, 1) == 1 and 1 or -1
+            local j = G.jokers.cards[getJokerID(card) + dir]
+            if j then
+                j:juice_up()
+                
+                if not j.ability.brimstone_mult then
+                    j.ability.brimstone_mult = 0
+                end
+                j.ability.brimstone_mult = j.ability.brimstone_mult + j.sell_cost
+
+                return {
+                    message = "Upgrade!",
+                    colour = G.C.RED
+                }
+            end
         end
     end,
     in_pool = function(self, args)
@@ -2278,6 +2421,63 @@ SMODS.Joker {
                 end
             end
         end
+    end
+}
+
+SMODS.Atlas {
+    key = "WeirdRoute",
+    path = "bttiWeirdRoute.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'WeirdRoute',
+    loc_txt = {
+        name = 'Weird Route',
+        text = {
+            "Selling this {C:joker}Joker{} to {C:blue}freeze{} the",
+            "current Blind, winning the {C:attention}round",
+            "{C:inactive}(Doesn't work on Boss Blinds)"
+        }
+    },
+
+    config = { extra = { mult = 0, chips = 0 } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UNDERTALE / DELTARUNE" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Toby Fox" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.chips },
+        }
+    end,
+    rarity = 1,
+    atlas = 'WeirdRoute',
+    pos = { x = 0, y = 0 },
+    cost = 6,
+    pools = { ["BTTI_modAddition"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.selling_card then
+            if G.GAME.blind and not G.GAME.blind.boss then
+                WIN_ROUND_NOW()
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
     end
 }
 
