@@ -103,7 +103,7 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
             if pseudorandom('Jonker') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                local rand = math.random(-7, -2)
+                local rand = pseudorandom("btti_" .. card.ability.name, -7, -2)
                 return {
                     dollars = rand,
                     mult_mod = card.ability.extra.mult,
@@ -359,7 +359,7 @@ SMODS.Joker {
                 xchips_mod = card.ability.extra.xchips,
                 message = "*Family Guy Funny Moment*",
                 sound = "btti_famGuyPieOp",
-                pitch = math.random(.9, 1.1),
+                pitch = pseudorandom("btti_" .. card.ability.name, .9, 1.1),
             }
         end
         if context.cardarea == G.play and context.individual and context.other_card then
@@ -371,7 +371,7 @@ SMODS.Joker {
                 return {
                     message = "Did somebody say pie?",
                     sound = "btti_famGuyPie",
-                    pitch = math.random(.9, 1.1),
+                    pitch = pseudorandom("btti_" .. card.ability.name, .9, 1.1),
                 }
             end
         end
@@ -430,7 +430,7 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
 		if context.final_scoring_step then
-            local rand = math.random(0, 1)
+            local rand = pseudorandom("btti_" .. card.ability.name, 0, 1)
             
             local loserMoney = math.floor(G.GAME.dollars * 0.75)
             local winnerMoney = math.ceil(G.GAME.dollars * 1.1)
@@ -570,7 +570,7 @@ SMODS.Joker {
                             blocking = false,
                             delay = 0,
                             func = function()
-                                local idx = math.random(1, #G.play.cards)
+                                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.play.cards)
                                 sendInfoMessage("Making that shity ass card autistic 2...", "BTTI")
                                 G.play.cards[idx]:juice_up()
                                 G.play.cards[idx]:set_seal("btti_autismSeal", false, true)
@@ -701,7 +701,7 @@ SMODS.Joker {
                                     message = "Yay!",
                                     colour = G.C.DARK_EDITION,
                                 })
-                                local idx = math.random(1, #G.play.cards)
+                                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.play.cards)
                                 sendInfoMessage("Making that shitty ass card polychrome...", "BTTI")
                                 G.play.cards[idx]:juice_up()
                                 G.play.cards[idx]:set_edition('e_polychrome', false, true)
@@ -936,7 +936,7 @@ SMODS.Joker {
 
             sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
 
-            if math.random(0, 1) == 1 then   
+            if pseudorandom("btti_" .. card.ability.name, 0, 1) == 1 then   
                 return {
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
@@ -2028,7 +2028,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            local dir = math.random(0, 1) == 1 and 1 or -1
+            local dir = pseudorandom("btti_" .. card.ability.name, 0, 1) == 1 and 1 or -1
             local j = G.jokers.cards[getJokerID(card) + dir]
             if j then
                 j:juice_up()
@@ -2797,7 +2797,7 @@ SMODS.Joker {
             local random = pseudorandom('Caine')
             if random < 0.9 then
                 table.insert(rets, {
-                    chips = math.random(1, 404),
+                    chips = pseudorandom("btti_" .. card.ability.name, 1, 404),
                     message = "I'm your ringmaster!",
                     sound = 'btti_caineRingmaster',
                 })
@@ -2809,7 +2809,7 @@ SMODS.Joker {
                         if #G.jokers.cards > 1 then
                             local idx
                             repeat
-                                idx = math.random(1, #G.jokers.cards)
+                                idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                             until G.jokers.cards[idx] ~= card
                             SMODS.destroy_cards(G.jokers.cards[idx])
                         end
@@ -2876,7 +2876,7 @@ SMODS.Joker {
         end
         if context.repetition and context.cardarea == G.play then
             return {
-                repetitions = math.random(1, 2)
+                repetitions = pseudorandom("btti_" .. card.ability.name, 1, 2)
             }
         end
     end,
@@ -3002,7 +3002,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.setting_blind or context.before or (context.end_of_round and context.cardarea == G.jokers) or context.final_scoring_step then
             if pseudorandom('One') < G.GAME.probabilities.normal / 4 then
-                local idx = math.random(1, #G.jokers.cards)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                 local ed = G.jokers.cards[idx].edition or nil
 
                 sendInfoMessage("one chose " .. idx .. "", "BTTI")
@@ -3193,7 +3193,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            local steal = math.random(1, math.clamp(G.GAME.dollars, 1, 10))
+            local steal = pseudorandom("btti_" .. card.ability.name, 1, math.clamp(G.GAME.dollars, 1, 10))
             if steal > G.GAME.dollars then
                 steal = G.GAME.dollars
             end
@@ -3213,7 +3213,7 @@ SMODS.Joker {
         end
         if context.end_of_round and context.cardarea == G.jokers then
             if pseudorandom('Cassidy') < G.GAME.probabilities.normal / 10 then
-                local steal = math.random(1, math.clamp(G.GAME.dollars, 1, 15))
+                local steal = pseudorandom("btti_" .. card.ability.name, 1, math.clamp(G.GAME.dollars, 1, 15))
                 if steal > G.GAME.dollars then
                     steal = G.GAME.dollars
                 end
@@ -3426,7 +3426,7 @@ SMODS.Joker {
         if context.final_scoring_step then
             if pseudorandom('Horse') < G.GAME.probabilities.normal / 100 then
                 if context.scoring_hand then
-                    local idx = math.random(0, #context.scoring_hand)
+                    local idx = pseudorandom("btti_" .. card.ability.name, 0, #context.scoring_hand)
                     if context.scoring_hand[idx] then
                         return {
                             message = "Horse",
@@ -3543,7 +3543,7 @@ SMODS.Joker {
                         blocking = false,
                         delay = 0,
                         func = function()
-                            card.ability.extra.cooldown = math.random(5, 10)
+                            card.ability.extra.cooldown = pseudorandom("btti_" .. card.ability.name, 5, 10)
                             card_eval_status_text(card, 'extra', nil, nil, nil,
                                 { message = "Closed! Don't come!!", colour = G.C.DEETS })
                             return true
@@ -3620,7 +3620,7 @@ SMODS.Joker {
             if #G.jokers.cards ~= 1 then
                 local idx
                 repeat
-                    idx = math.random(1, #G.jokers.cards)
+                    idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                 until idx ~= getJokerID(card)
                 if idx ~= getJokerID(card) then
                     card.ability.extra.kickedJoker = G.jokers.cards[idx].config.center.key
@@ -3814,8 +3814,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main then
             local rets = {}
-            local m = math.random(0, 100)
-            local ch = math.random(0, 50)
+            local m = pseudorandom("btti_" .. card.ability.name, 0, 100)
+            local ch = pseudorandom("btti_" .. card.ability.name, 0, 50)
 
             table.insert(rets, {
                 message = "+" .. ch .. " Chips",
@@ -3903,7 +3903,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.before and context.cardarea == G.jokers then
             if pseudorandom('SecretDEETS') < G.GAME.probabilities.normal / 3 then
-                local pc = G.deck.cards[math.random(1, #G.deck.cards)]
+                local pc = G.deck.cards[pseudorandom("btti_" .. card.ability.name, 1, #G.deck.cards)]
                 local ch = pc:get_chip_bonus()
                 local mult = pc:get_chip_mult()
                 local xMult = pc:get_chip_x_mult()
@@ -4073,10 +4073,10 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
         if context.joker_main then
-            local rand = math.random(0, 1)
+            local rand = pseudorandom("btti_" .. card.ability.name, 0, 1)
             if rand == 0 then
                 sendInfoMessage("SL rand: " .. rand, "BTTI")
-                local idx = math.random(1, #G.jokers.cards)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                 sendInfoMessage("SL idx: " .. idx, "BTTI")
                 if idx == getJokerID(card) then
                     idx = (getJokerID(card) % #G.jokers.cards) + 1
@@ -4122,7 +4122,7 @@ SMODS.Joker {
                 end
             else
                 sendInfoMessage("SL rand: " .. rand, "BTTI")
-                local idx = math.random(1, #context.scoring_hand)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #context.scoring_hand)
                 sendInfoMessage("SL idx: " .. idx, "BTTI")
 
                 if next(SMODS.find_card("j_btti_GT")) then
@@ -4379,8 +4379,8 @@ SMODS.Joker {
                 if key then
                     if key == "j_btti_GT" or key == "j_btti_SL" or key == "j_btti_Mug" or key == "j_btti_Candle" then
                         table.insert(rets, {
-                            chip_mod = math.random(100, 1000),
-                            Xmult_mod = math.random(2, 10),
+                            chip_mod = pseudorandom("btti_" .. card.ability.name, 100, 1000),
+                            Xmult_mod = pseudorandom("btti_" .. card.ability.name, 2, 10),
                             message = "...",
                             colour = G.C.BLUE
                         })
@@ -4447,14 +4447,14 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
 		if context.before then
-            local rand = math.random(1, 2)
+            local rand = pseudorandom("btti_" .. card.ability.name, 1, 2)
             if #context.scoring_hand > rand then
                 for i=1,rand,1 do
-                    local rand2 = math.random(1, #context.scoring_hand)
+                    local rand2 = pseudorandom("btti_" .. card.ability.name, 1, #context.scoring_hand)
                     context.scoring_hand[rand2]:set_debuff(true)
                 end
             elseif #context.scoring_hand == 2 then
-                local rand2 = math.random(1, #context.scoring_hand)
+                local rand2 = pseudorandom("btti_" .. card.ability.name, 1, #context.scoring_hand)
                 context.scoring_hand[rand2]:set_debuff(true)
             end
 		end
@@ -4710,7 +4710,7 @@ SMODS.Joker {
                         card.ability.extra.keyState = 1
                         if G.play and G.play.cards then
                             if #G.play.cards >= 2 then
-                                local rand = math.random(2, math.clamp(#G.play.cards, 1, 4))
+                                local rand = pseudorandom("btti_" .. card.ability.name, 2, math.clamp(#G.play.cards, 1, 4))
                                 local cards = {}
 
                                 local pool = {}
@@ -4719,7 +4719,7 @@ SMODS.Joker {
                                 end
 
                                 for i = 1, rand do
-                                    local idx = math.random(#pool)
+                                    local idx = pseudorandom("btti_" .. card.ability.name, #pool)
                                     table.insert(cards, pool[idx])
                                     table.remove(pool, idx)
                                 end
@@ -4974,12 +4974,12 @@ SMODS.Joker {
                     }
                     local idx
                     repeat
-                        idx = math.random(1, #G.jokers.cards)
+                        idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                     until idx ~= getJokerID(card)
                     local randJk  = G.jokers.cards[idx]
                     SMODS.add_card {
                         set = 'Joker',
-                        rarity = rarities[math.random(1, 4)],
+                        rarity = rarities[pseudorandom("btti_" .. card.ability.name, 1, 4)],
                         edition = (randJk.edition and randJk.edition.key) or nil,
                         enhancement = nil
                     }
@@ -5031,7 +5031,7 @@ SMODS.Joker {
 					}))
                 end
             elseif card.ability.extra.effect == 4 then
-                local randCard = G.deck.cards[math.random(1, #G.deck.cards)]
+                local randCard = G.deck.cards[pseudorandom("btti_" .. card.ability.name, 1, #G.deck.cards)]
                 SMODS.add_card {
                     set = 'Playing Card',
                     edition = (randCard.edition and randCard.edition.key) or nil,
@@ -5301,13 +5301,13 @@ SMODS.Joker {
                     colour = G.C.GREEN
                 }
             end
-            if math.random(0, 1) == 1 then
+            if pseudorandom("btti_" .. card.ability.name, 0, 1) == 1 then
                 --+13 mult
                 return {
                     mult = 13
                 }
             else
-                local idx = math.random(1, #G.jokers.cards)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                 local ed = G.jokers.cards[idx].edition or nil
 
                 if ed == nil then
@@ -5400,13 +5400,13 @@ SMODS.Joker {
         if context.before then
             local done = false
             if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                local idx = math.random(1, #context.scoring_hand)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #context.scoring_hand)
                 context.scoring_hand[idx]:set_ability("m_stone")
                 done = true
             end
             if not done then
                 if pseudorandom('RegBen') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                    local idx = math.random(1, #context.scoring_hand)
+                    local idx = pseudorandom("btti_" .. card.ability.name, 1, #context.scoring_hand)
                     context.scoring_hand[idx]:set_ability("m_steel")
                 end
             end
@@ -5580,7 +5580,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.clicked_card and context.clicked_card == card and context.card_highlighted == true then
             if card.ability.extra.chips <= 0 and card.ability.extra.mult <= 0 then
-                local idx = math.random(1, #G.jokers.cards)
+                local idx = pseudorandom("btti_" .. card.ability.name, 1, #G.jokers.cards)
                 sendInfoMessage("GOOP CLICKED " .. idx .. "", "BTTI")
                 if idx ~= getJokerID(card) then
                     card.area:remove_from_highlighted(card)
@@ -5963,7 +5963,7 @@ SMODS.Joker {
             if context.other_card:get_id() == 12 then _trigger = true end --Queens
             if context.other_card:get_id() == 13 then _trigger = true end --Kings
             if _trigger then
-                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + math.random(0, 117)
+                context.other_card.ability.perma_bonus = context.other_card.ability.perma_bonus + pseudorandom("btti_" .. card.ability.name, 0, 117)
                 context.other_card:juice_up()
                 return {
                     message = "Upgrade!"
@@ -6471,7 +6471,7 @@ SMODS.Joker {
             for _, jk in ipairs(G.jokers.cards) do
                 local key = jk and jk.config and jk.config.center and jk.config.center.key
                 sendInfoMessage("checking joekr : " .. key .. "...", "BTTI")
-                if math.random(0, 1) == 1 then
+                if pseudorandom("btti_" .. card.ability.name, 0, 1) == 1 then
                     if key ~= card.config.center.key then
                         sendInfoMessage("adding joekr : " .. key .. "...", "BTTI")
                         table.insert(jokersToBackRead, jk)
@@ -6622,7 +6622,7 @@ SMODS.Joker {
                     "BTTI")
             end
             if card.ability.extra.roundsLeft <= 0 then
-                card.ability.extra.roundsLeft = math.random(1, 5)
+                card.ability.extra.roundsLeft = pseudorandom("btti_" .. card.ability.name, 1, 5)
                 sendInfoMessage("rounds left for hatoving... " .. card.ability.extra.roundsLeft .. "", "BTTI")
                 return {
                     message = "Not yet...",

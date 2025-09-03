@@ -590,6 +590,85 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
+    key = "ymfpBP",
+    path = "bttiFriendlyBuffoonPack.png",
+    px = 71,
+    py = 95
+}
+SMODS.Booster {
+    key = "buffoon_ymfp",
+    weight = 0.6,
+    kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
+    cost = 12,
+    pos = { x = 0, y = 0 },
+    atlas = 'ymfpBP',
+    config = { extra = 2, choose = 1 },
+    loc_txt = {
+        name = "Friendly Buffoon Pack",
+        text = {
+            "Choose 1 of up to 2",
+            "{C:hearts}You're My Favorite Person",
+            "{C:attention}Jokers",
+        },
+        group_name = 'Friendly Buffoon Pack'
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        }
+    end,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function(self, card, i)
+        return SMODS.create_card({
+            set = "BTTI_modAddition_YMFP",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+        })
+    end,
+}
+
+SMODS.Atlas {
+    key = "viralBP",
+    path = "bttiViralBuffoonPack.png",
+    px = 71,
+    py = 95
+}
+SMODS.Booster {
+    key = "buffoon_viral",
+    weight = 0.6,
+    kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
+    cost = 8,
+    pos = { x = 0, y = 0 },
+    atlas = 'viralBP',
+    config = { extra = 2, choose = 1 },
+    loc_txt = {
+        name = "Viral Buffoon Pack",
+        text = {
+            "Choose 1 of up to 2",
+            "{C:dark_edition}Internet Jokers",
+        },
+        group_name = 'Viral Buffoon Pack'
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        }
+    end,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function(self, card, i)
+        return SMODS.create_card({
+            set = "BTTI_modAddition_INTERNET",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+        })
+    end,
+}
+
+SMODS.Atlas {
     key = "celestialDeets",
     path = "bttiEquineCelestialPack.png",
     px = 71,
