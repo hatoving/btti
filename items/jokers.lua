@@ -3583,7 +3583,7 @@ SMODS.Joker {
         name = 'Chicken',
         text = {
             "Temporarily kicks a {C:attention}Joker{} out of a played hand",
-            "and adds 10 times its {C:attention}sell value{} to {C:attention}score{}"
+            "and adds 3 times its {C:attention}sell value{} to {C:attention}score{}"
         }
     },
 
@@ -3624,7 +3624,7 @@ SMODS.Joker {
                 until idx ~= getJokerID(card)
                 if idx ~= getJokerID(card) then
                     card.ability.extra.kickedJoker = G.jokers.cards[idx].config.center.key
-                    card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 10
+                    card.ability.extra.mult = G.jokers.cards[idx].sell_cost * 3
                     return SMODS.merge_effects { {
                             message = "CHICKEN!!",
                             colour = G.C.BTTIDEETS,

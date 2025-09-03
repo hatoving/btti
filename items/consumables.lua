@@ -382,6 +382,36 @@ SMODS.Consumable {
     end,
 }
 
+-- The Maze
+SMODS.Atlas {
+    key = "community",
+    path = "bttiCommunity.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "community",
+    set = "Tarot",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 2, mod_conv = 'm_btti_stainedCard' },
+    loc_txt = {
+        name = "The Community",
+        text = {
+            "Enhances {C:attention}2{} selected cards",
+            "into {C:deets}Stained Cards{}"
+        },
+    },
+    pools = { ["BTTI_modAddition_tarots"] = true },
+    atlas = 'community',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end
+}
+
 -- Jonker's Workshop
 SMODS.Atlas {
     key = "jonkersWorkshop",
