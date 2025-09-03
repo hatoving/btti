@@ -34,7 +34,7 @@ SMODS.Seal {
             local half = card:get_chip_bonus() / 2
 
             for i, pc in ipairs(G.play.cards) do
-                if pc.seal ~= "orange" then
+                if pc.seal ~= "btti_orangeSeal" then
                     all_orange = false
                     break
                 end
@@ -42,11 +42,11 @@ SMODS.Seal {
 
             if all_orange then
                 return {
-                    chips = -half
+                    chips = half
                 }
             else
                 return {
-                    chips = half
+                    chips = -half
                 }
             end
         end
