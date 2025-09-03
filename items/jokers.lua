@@ -2405,7 +2405,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Amazing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
             vars = { card.ability.extra.mult },
@@ -2483,7 +2483,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Amazing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.mult },
@@ -2559,7 +2559,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Aamzing Digital Circus" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Amazing Digital Circus" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gooseworx, GLITCH" } }
         return {
             vars = { },
@@ -2594,22 +2594,25 @@ SMODS.Joker {
                     end,
                 }))
             })
-            if pseudorandom('Caine') < G.GAME.probabilities.normal / (9/10) then
+            local random = pseudorandom('Caine')
+            if random < 0.9 then
                 table.insert(rets, {
                     chips = math.random(1, 404),
-                    message = "I am your ringmaster!",
+                    message = "I'm your ringmaster!",
                     sound = 'btti_caineRingmaster',
                 })
-            elseif pseudorandom('Caine') < G.GAME.probabilities.normal / 10 then
+            else
                 table.insert(rets, {
                     message = "I am your bitch!",
                     sound = 'btti_caineBitch',
                     func = function()
-                        local idx
-                        repeat
-                            idx = math.random(1, #G.jokers.cards)
-                        until idx ~= getJokerID(card)
-                        SMODS.destroy_cards(G.jokers.cards[idx])
+                        if #G.jokers.cards > 1 then
+                            local idx
+                            repeat
+                                idx = math.random(1, #G.jokers.cards)
+                            until G.jokers.cards[idx] ~= card
+                            SMODS.destroy_cards(G.jokers.cards[idx])
+                        end
                     end
                 })
             end
