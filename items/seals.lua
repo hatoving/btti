@@ -16,8 +16,10 @@ SMODS.Seal {
         -- Tooltip description
         name = '{C:attention}Orange Seal',
         text = {
-            "Colors this",
-            "card {C:attention}orange"
+            "Gives {C:green}+50%{} of this card's",
+            "{C:chips}Chips{} to score with hands",
+            "containing only {C:attention}orange seals{},",
+            "otherwise {C:red}-50%{}"
         }
     },
 
