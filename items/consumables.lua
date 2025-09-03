@@ -564,7 +564,7 @@ SMODS.Consumable {
                     allowedToDiscard = matched_allowed,
                     rarity = combo_data.rarity or 1
                 })
-                sendInfoMessage("found " .. combo_key, "BTTI")
+                --sendInfoMessage("found " .. combo_key, "BTTI")
             end
         end
 
@@ -627,6 +627,9 @@ SMODS.Consumable {
         end
 
         return false
+    end,
+    in_pool = function (self, args)
+        return true, {allow_duplicates = true}
     end
 }
 

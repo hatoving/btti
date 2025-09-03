@@ -81,5 +81,23 @@ SMODS.ObjectType({
         -- insert base game food jokers
     end,
 })
+SMODS.ObjectType({
+    key = "BTTI_modAddition_YMFP",
+    default = "j_reserved_parking",
+    cards = {},
+    inject = function(self)
+        SMODS.ObjectType.inject(self)
+        -- insert base game food jokers
+    end,
+})
+SMODS.ObjectType({
+    key = "BTTI_modAddition_INTERNET",
+    default = "j_reserved_parking",
+    cards = {},
+    inject = function(self)
+        SMODS.ObjectType.inject(self)
+        -- insert base game food jokers
+    end,
+})
 
 --#endregion
