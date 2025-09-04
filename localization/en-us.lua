@@ -41,6 +41,7 @@ return {
                     " ",
                     "{C:balinsanity}Special thanks to...",
                     "aikoyori, N', garb, charlinear",
+                    "Somthingcom515",
                     "The Balatro Discord Server"
                 }
             },
@@ -120,6 +121,29 @@ return {
                 'maybe the balatro is',
                 'the jimbos we made along',
                 'the way'
+            },
+            btti_customQuip_14 = {
+                'aw man, this stinks',
+                '*alan walker*',
+            },
+            btti_customQuip_WIN_0 = {
+                'this is the life',
+                'Optimus Prime',
+                'would want for you'
+            },
+            btti_customQuip_WIN_1 = {
+                'congratulations, you\'ve',
+                'unlocked balatro 2:',
+                'extreme boogaloo'
+            },
+            btti_customQuip_WIN_2 = {
+                'you\'re all in'
+            },
+            btti_customQuip_WIN_3 = {
+                'so we\'ve got to bring herrrr',
+                'OHHWWHOAHAHAAHAOOOO',
+                'everything that has breath,',
+                'praise the loooorddd'
             },
         },
         dictionary = {

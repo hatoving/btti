@@ -1869,7 +1869,7 @@ SMODS.Joker {
             }
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Enter the Gungeon" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Dodge Roll Games / Devolver Digital" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Dodge Roll Games, Devolver Digital" } }
         return {
             vars = {},
         }
@@ -1941,7 +1941,7 @@ SMODS.Joker {
             }
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "ULTRAKILL" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Hakita / New Blood Interactive" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Hakita, New Blood Interactive" } }
         return {
             vars = { card.ability.extra.chips },
         }
@@ -2009,7 +2009,7 @@ SMODS.Joker {
             }
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Binding of Isaac: Rebirth" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Edmund McMillen / Nicalis" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Edmund McMillen, Nicalis" } }
         return {
             vars = { },
         }
@@ -4992,6 +4992,7 @@ SMODS.Joker {
 							local randomEnhancement = SMODS.poll_enhancement {key = "spoingus", guaranteed = true}
 							G.hand.cards[i]:set_ability(randomEnhancement)
 							G.hand.cards[i]:juice_up()
+                            delay(0.1)
 							return true
 						end,
 					}))
@@ -6320,8 +6321,7 @@ SMODS.Joker {
         name = 'Juicimated',
         text = {
             "{C:green}1 in 17{} chance for {C:mult}+117{} Mult",
-            "{C:green}1 in 17{} chance to turn",
-            "{C:attention}played hand orange{}"
+            "Turns {C:attention}played hand orange{}"
         }
     },
 
@@ -6368,27 +6368,24 @@ SMODS.Joker {
                     colour = G.C.ORANGE,
                 })
             end
-            if pseudorandom('Juicimated') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                if G.play.cards then
-                    table.insert(rets, {
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'immediate',
-                            blocking = false,
-                            delay = 0,
-                            func = function()
-                                sendInfoMessage("Making that shity ass card orange 2...", "BTTI")
-                                for i, c in ipairs(G.play.cards) do
-                                    c:juice_up()
-                                    c:set_seal("btti_orangeSeal", false, true)
-                                    card_eval_status_text(card, 'extra', nil, nil, nil,
-                                        { message = "I joozed", colour = G.C.ORANGE })
-                                    delay(0.1)
-                                end
-                                return true
-                            end,
-                        }))
-                    })
-                end
+            if G.play.cards then
+                table.insert(rets, {
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            for i, c in ipairs(G.play.cards) do
+                                c:juice_up()
+                                c:set_seal("btti_orangeSeal", false, true)
+                                card_eval_status_text(card, 'extra', nil, nil, nil,
+                                    { message = "I joozed", colour = G.C.ORANGE })
+                                delay(0.1)
+                            end
+                            return true
+                        end,
+                    }))
+                })
             end
             return SMODS.merge_effects(rets)
         end
