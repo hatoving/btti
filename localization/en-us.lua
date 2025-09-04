@@ -145,6 +145,12 @@ return {
                 'everything that has breath,',
                 'praise the loooorddd'
             },
+            btti_customQuip_WIN_4 = {
+                'my name is jimbo',
+                'i made the balatro',
+                'it was difficult to',
+                'put the jokers together'
+            },
         },
         dictionary = {
             bttiSavedByRegBen = 'Saved by Reg!Ben'
