@@ -29,7 +29,7 @@ end
 
 local canSellCardRef = Card.can_sell_card
 function Card:can_sell_card(context)
-    if (self.config.center.pools or {}).BTTI_modAddition_CREATICA or ((self.ability and self.ability.extra and type(self.ability.extra) ~= "number") and self.ability.extra.huntrix) then
+    if (self.config.center.pools or {}).BTTI_modAddition_CREATICA or ((self.ability and self.ability.extra and type(self.ability.extra) ~= "number") and self.ability.huntrix) then
         return true
     else
         return canSellCardRef(self, context)

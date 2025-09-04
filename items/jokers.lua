@@ -2934,10 +2934,7 @@ SMODS.Joker {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].ability.name ~= 'j_btti_Huntrix' and not G.jokers.cards[i].ability.eternal then
                     G.jokers.cards[i]:set_eternal(true)
-                    if G.jokers.cards[i].ability.extra == nil then
-                        G.jokers.cards[i].ability.extra = {}
-                    end
-                    G.jokers.cards[i].ability.extra.huntrix = true
+                    G.jokers.cards[i].ability.huntrix = true
                 end
             end
         end

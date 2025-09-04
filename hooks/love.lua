@@ -155,8 +155,8 @@ function love.update(dt)
     if (G and G.jokers and G.jokers.cards) and (not jokerExists('j_btti_Huntrix')) then
         for i = 1, #G.jokers.cards do
             if G.jokers.cards[i].ability.extra and type(G.jokers.cards[i].ability.extra) ~= 'number' then
-                if G.jokers.cards[i].ability.extra.huntrix then
-                    G.jokers.cards[i].ability.extra.huntrix = false
+                if G.jokers.cards[i].ability.huntrix then
+                    G.jokers.cards[i].ability.huntrix = false
                     G.jokers.cards[i].ability.eternal = false
                 end
             end
