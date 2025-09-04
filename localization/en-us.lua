@@ -29,6 +29,21 @@ return {
             }
         },
         Other = {
+            -- thanks to N' from the Balatro Discord Server!
+            bttiCredits = {
+                name = " ",
+                text = {
+                    "{C:balinsanity}Music...",
+                    "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",
+                    "It's TV Time (DELTARUNE Ch. 3) - Toby Fox",
+                    "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
+                    "I Want LeBron (Jackson 5 LeRemix) - ramonisspicyy",
+                    " ",
+                    "{C:balinsanity}Special thanks to...",
+                    "aikoyori, N', garb, charlinear",
+                    "The Balatro Discord Server"
+                }
+            },
             bttiFromWhere = {
                 name = "From Where?!",
                 text = {
