@@ -38,7 +38,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function (self, args)
-        
+        return G.GAME.hands[card.ability.hand_type].visible
     end
 }
 
@@ -76,6 +76,9 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end,
+    in_pool = function(self, args)
+        return G.GAME.hands[card.ability.hand_type].visible
     end
 }
 
@@ -113,6 +116,9 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end,
+    in_pool = function(self, args)
+        return G.GAME.hands[card.ability.hand_type].visible
     end
 }
 
@@ -150,6 +156,9 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end,
+    in_pool = function(self, args)
+        return G.GAME.hands[card.ability.hand_type].visible
     end
 }
 
@@ -187,6 +196,9 @@ SMODS.Consumable {
                 colours = { (G.GAME.hands[card.ability.hand_type].level == 1 and G.C.UI.TEXT_DARK or G.C.HAND_LEVELS[math.min(7, G.GAME.hands[card.ability.hand_type].level)]) }
             }
         }
+    end,
+    in_pool = function(self, args)
+        return G.GAME.hands[card.ability.hand_type].visible
     end
 }
 

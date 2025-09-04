@@ -753,4 +753,11 @@ SMODS.Booster {
         end
         return _card
     end,
+    in_pool = function (self, args)
+        if G.GAME.hands['HighHorse'].visible or G.GAME.hands['TwoHorse'].visible or G.GAME.hands['ThreeHorse'].visible or G.GAME.hands['FourHorsemen'].visible or G.GAME.hands['FullHorse'].visible then
+            return true
+        else
+            return false
+        end
+    end
 }
