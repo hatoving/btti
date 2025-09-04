@@ -6,6 +6,7 @@ From actually kind of cool stuff to just straight up awful memes, this mod adds 
 * Combination Jokers; jokers that you can combine (wow)
 * Blinds that will make you go "wowzers why did that get coded"
 * Super cool art made by me, hatoving, very cool (do not talk about the mindflayer joker)
+* Horrible coding by yours truly, hatoving
 
 # Notes
 * Don't use Talisman with this, or any mod that requires Talisman
