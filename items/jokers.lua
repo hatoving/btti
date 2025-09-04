@@ -2624,7 +2624,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.card_added and context.cardarea == G.jokers then
+        if context.card_added and context.card.ability.set == "Joker" then
             if G.GAME.jokersAlreadySeen == nil then
                 G.GAME.jokersAlreadySeen = {}
             end
