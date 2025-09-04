@@ -428,10 +428,10 @@ SMODS.Consumable {
     loc_txt = {
         name = "Jonker's Workshop",
         text = {
-            "Combines {C:attention}Jokers{} if any",
+            "Combines {C:joker}Jokers{} if any",
             "potential {C:purple}combinations{} are present",
-            "Will prioritize {C:blue}Common Jokers{} over",
-            "{C:purple}Legendary{} {C:attention}Jokers{}"
+            "Will prioritize {C:common}Common Jokers{} over",
+            "{C:legendary}Legendary Jokers{}"
         },
     },
     atlas = 'jonkersWorkshop',

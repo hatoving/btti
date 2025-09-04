@@ -1279,7 +1279,7 @@ SMODS.Joker {
         text = {
             "{C:mult}+3{} Mult for each {C:attention}Joker{} card",
             "Adds the {C:attention}sell value{} of all",
-            "{C:attention}Jokers{} to {C:mult}Mult",
+            "{C:joker}Jokers{} to {C:mult}Mult",
             "{C:inactive}Currently {C:mult}+#1#{} Mult",
             "{C:inactive}(Abstract Joker + Swashbuckler)"
         }

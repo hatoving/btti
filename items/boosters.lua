@@ -321,7 +321,7 @@ SMODS.Booster {
         name = "Legendary Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:attention}Legendary Jokers"
+            "{C:legendary}Legendary Jokers"
         },
         group_name = 'Legendary Buffoon Pack'
     },
@@ -357,7 +357,7 @@ SMODS.Booster {
         name = "Fortune Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:attention}Common/Uncommon Jokers{}",
+            "{C:common}Common{}/{C:uncommon}Uncommon {C:joker}Jokers{}",
             "with a random {C:dark_edition}Edition{}."
         },
         group_name = 'Fortune Buffoon Pack'
@@ -402,7 +402,7 @@ SMODS.Booster {
         name = "Jumbo Fortune Buffoon Pack",
         text = {
             "Choose 1 of up to 4",
-            "{C:attention}Common/Uncommon Jokers{}",
+            "{{C:common}Common{}/{C:uncommon}Uncommon {C:joker}Jokers{}",
             "with a random {C:dark_edition}Edition{}."
         },
         group_name = 'Jumbo Fortune Buffoon Pack'
@@ -447,7 +447,7 @@ SMODS.Booster {
         name = "Mega Fortune Buffoon Pack",
         text = {
             "Choose 1 of up to 6",
-            "{C:attention}Common/Uncommon Jokers{}",
+            "{C:common}Common{}/{C:uncommon}Uncommon {C:joker}Jokers{}",
             "with a random {C:dark_edition}Edition{}."
         },
         group_name = 'Mega Fortune Buffoon Pack'
@@ -491,7 +491,7 @@ SMODS.Booster {
         name = "Insanity Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:purple}Inn-to the Insanity{} {C:attention}Jokers",
+            "{C:balinsanity}Inn-to the Insanity Jokers",
         },
         group_name = 'Insanity Buffoon Pack'
     },
@@ -529,7 +529,7 @@ SMODS.Booster {
         name = "Stables Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:deets}DEETS{} {C:attention}Jokers",
+            "{C:balinsanity}DEETS Jokers",
         },
         group_name = 'Stables Buffoon Pack'
     },
@@ -568,7 +568,7 @@ SMODS.Booster {
         name = "Crowned Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:purple}RegalitySMP{} {C:attention}Jokers",
+            "{C:balinsanity}RegalitySMP Jokers",
         },
         group_name = 'Crowned Buffoon Pack'
     },
@@ -607,8 +607,8 @@ SMODS.Booster {
         name = "Friendly Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:hearts}You're My Favorite Person",
-            "{C:attention}Jokers",
+            "{C:balinsanity}You're My Favorite Person",
+            "{C:balinsanity}Jokers",
         },
         group_name = 'Friendly Buffoon Pack'
     },
@@ -647,7 +647,7 @@ SMODS.Booster {
         name = "Viral Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:dark_edition}Internet Jokers",
+            "{C:balinsanity}Internet Jokers",
         },
         group_name = 'Viral Buffoon Pack'
     },

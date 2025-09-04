@@ -35,7 +35,7 @@ return {
                 text = {
                     "{C:balinsanity}Music...",
                     "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",
-                    "It's TV Time (DELTARUNE Ch. 3) - Toby Fox",
+                    "It's TV Time! (DELTARUNE Ch. 3) - Toby Fox",
                     "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "I Want LeBron (Jackson 5 LeRemix) - ramonisspicyy",
                     " ",

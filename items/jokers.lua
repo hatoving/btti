@@ -470,7 +470,7 @@ SMODS.Joker {
             "{X:mult,C:white}X3{} Mult per card with {C:gay}Autism Seal{} in hand",
             "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to random card",
             "in {C:attention}hand{}",
-            "{C:mult}+20{} Mult per other {C:gay}Autism{} {C:attention}Jokers{}"
+            "{C:mult}+20{} Mult per other {C:gay}Autism Jokers{}"
         }
     },
 
@@ -610,7 +610,7 @@ SMODS.Joker {
             "{C:chips}+143{} Chips per card with {C:gay}Autism Seal{} in {C:attention}full deck{}",
             "{C:green}1 in 40{} chance to add {C:dark_edition}Polychrome{} to random card",
             "in {C:attention}hand{}",
-            "{X:chips,C:white}X8{} Chips per other {C:gay}Autism{} {C:attention}Jokers{}"
+            "{X:chips,C:white}X8{} Chips per other {C:gay}Autism Jokers{}"
         }
     },
 
@@ -806,7 +806,7 @@ SMODS.Joker {
         name = 'LeBron James',
         text = {
             "When {C:attention}Blind{} is selected, {C:red}self-destruct{}",
-            "and create a random {C:purple}Balinsanity{} {C:attention}Joker{}"
+            "and create a random {C:balinsanity}Balinsanity Joker{}"
         }
     },
 
@@ -888,7 +888,7 @@ SMODS.Joker {
         text = {
             "When {C:attention}Blind{} is selected, create a",
             "random {C:blue}Common{} or {C:red}Rare",
-            "{C:purple}Balinsanity{} {C:attention}Joker{}",
+            "{C:balinsanity}Balinsanity Joker{}",
             "{C:inactive}(Must have room)"
         }
     },
@@ -2896,7 +2896,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'HUNTR/X',
         text = {
-            "Makes other {C:attention}Jokers",
+            "Makes other {C:joker}Jokers",
             "eternal but still {C:attention}sellable"
         }
     },
@@ -2963,7 +2963,7 @@ SMODS.Joker {
         name = 'One',
         text = {
             "{C:green}1 in 4{} chance to drain {C:dark_edition}editions{} of",
-            "other {C:attention}Jokers",
+            "other {C:joker}Jokers",
             "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:mult,C:white}X#2#{C:inactive} Mult, {C:mult}+#3#{} Mult"
         }
     },
@@ -3083,9 +3083,9 @@ SMODS.Joker {
         name = 'Hanako Takeuchi',
         text = {
             "Adds the {C:attention}sell value{} of",
-            "{C:attention}Jokers{} sold to {C:chips}Chips{} and {C:mult}Mult{}",
+            "{C:joker}Jokers{} sold to {C:chips}Chips{} and {C:mult}Mult{}",
             "Does not count previously",
-            "sold {C:attention}Jokers{}",
+            "sold {C:joker}Jokers{}",
             "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#1#{} Mult"
         }
     },
@@ -3949,7 +3949,7 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-            "Shuffles all {C:attention}Jokers{} around before",
+            "Shuffles all {C:joker}Jokers{} around before",
             "a hand is played and copies the",
             "{C:attention}Joker{} to the right",
 		}
@@ -4335,7 +4335,7 @@ SMODS.Joker {
         name = 'C U B E Y',
         text = {
             "{C:chips}+100-1000{} Chips and {X:mult,C:white}X2-10{} Mult",
-            "per other {C:purple}Inn-to the Insanity{} {C:attention}Jokers{}",
+            "per other {C:balinsanity}Inn-to the Insanity Jokers{}",
             "held"
         }
     },
@@ -6411,10 +6411,10 @@ SMODS.Joker {
         name = 'LightShine',
         text = {
             "{C:green}1 in 10{} chance to sloppily",
-            "backread {C:attention}Jokers{} to the left",
-            "{C:mult}+10{} Mult per other {C:dark_edition}Autism{} {C:attention}Jokers{}",
+            "backread {C:joker}Jokers{} to the left",
+            "{C:mult}+10{} Mult per other {C:gay}Autism Jokers{}",
             "{X:mult,C:white}X69{} Mult if an",
-            "{C:purple}Inn-to the Insanity {C:attention}Joker{}",
+            "{C:balinsanity}Inn-to the Insanity Joker{}",
             "is present"
         }
     },
