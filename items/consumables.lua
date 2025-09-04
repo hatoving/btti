@@ -38,7 +38,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function (self, args)
-        return G.GAME.hands[card.ability.hand_type].visible
+        return G.GAME.hands['HighHorse'].visible
     end
 }
 
@@ -78,7 +78,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function(self, args)
-        return G.GAME.hands[card.ability.hand_type].visible
+        return G.GAME.hands['TwoHorse'].visible
     end
 }
 
@@ -118,7 +118,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function(self, args)
-        return G.GAME.hands[card.ability.hand_type].visible
+        return G.GAME.hands['ThreeHorse'].visible
     end
 }
 
@@ -158,7 +158,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function(self, args)
-        return G.GAME.hands[card.ability.hand_type].visible
+        return G.GAME.hands['FourHorsemen'].visible
     end
 }
 
@@ -198,7 +198,7 @@ SMODS.Consumable {
         }
     end,
     in_pool = function(self, args)
-        return G.GAME.hands[card.ability.hand_type].visible
+        return G.GAME.hands['FullHorse'].visible
     end
 }
 
