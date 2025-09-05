@@ -2471,7 +2471,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.selling_card then
-            if G.GAME.blind and not G.GAME.blind.boss then
+            if G.GAME.blind.in_blind and {not G.GAME.blind.boss or G.Game.blind:get_type("Boss")} then
                 WIN_ROUND_NOW()
             end
         end
