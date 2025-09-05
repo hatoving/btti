@@ -2635,6 +2635,9 @@ SMODS.Joker {
                     blocking = false,
                     delay = 0,
                     func = function()
+                        if not card.ability.extra.mult then
+                            card.ability.extra.mult = 0
+                        end
                         card.ability.extra.mult = card.ability.extra.mult + 5
                         card_eval_status_text(card, 'extra', nil, nil, nil,
                             { message = "Whatever.", colour = G.C.PURPLE })
