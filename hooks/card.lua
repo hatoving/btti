@@ -92,7 +92,7 @@ function Card:calculate_joker(context)
         if btti_JDASH_initialized then
             btti_JDASH_kill()
         end
-        if context.cardarea == G.jokers and G.GAME.btti_iAlwaysComeBack then
+        if context.cardarea == G.jokers and G.GAME.btti_iAlwaysComeBack and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
             if pseudorandom('WilliamAfton') < G.GAME.probabilities.normal / 4 then
                 G.E_MANAGER:add_event(Event({
                     func = function()

@@ -4633,7 +4633,7 @@ SMODS.Joker {
         text = {
             "Gains +{C:chips}21{} Chips when triggered",
             "{C:green}1 in 5{} chance to glitch, resetting",
-            "{C:chips}Chips{} and turning 2-4 cards in",
+            "{C:chips}Chips{} and turning every card in",
             "{C:attention}played hand{} {C:blue}Digital{}",
             "{C:inactive}Currently +{C:chips}#1#{C:inactive}"
         }
@@ -4707,23 +4707,10 @@ SMODS.Joker {
                         card.ability.extra.keyState = 1
                         if G.play and G.play.cards then
                             if #G.play.cards >= 2 then
-                                local rand = pseudorandom("btti_" .. card.ability.name, 2, math.clamp(#G.play.cards, 1, 4))
-                                local cards = {}
-
-                                local pool = {}
                                 for i = 1, #G.play.cards do
-                                    pool[i] = G.play.cards[i]
-                                end
-
-                                for i = 1, rand do
-                                    local idx = pseudorandom("btti_" .. card.ability.name, #pool)
-                                    table.insert(cards, pool[idx])
-                                    table.remove(pool, idx)
-                                end
-
-                                for i = 1, #cards do
-                                    cards[i]:set_edition('e_btti_digital')
-                                    cards[i]:juice_up()
+                                    G.play.cards[i]:set_edition()
+                                    G.play.cards[i]:set_edition('e_btti_digital')
+                                    G.play.cards[i]:juice_up()
                                 end
                             end
                         end

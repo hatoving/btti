@@ -16,7 +16,7 @@ SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
                     end
                 }))
             end
-            if G.GAME.blind.config.blind.key == 'bl_btti_captainBlind' then
+            if G.GAME.blind.config.blind.key == 'bl_btti_captainBlind' and not G.GAME.blind.disabled then
                 if (
                         key == "x_mult"
                         or key == "xmult"
