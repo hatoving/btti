@@ -320,7 +320,7 @@ SMODS.Joker {
         name = 'Did Somebody Say Pie?',
         text = {
             "Gains {X:chips,C:white}X#1#{}",
-            "for every 3 scored",
+            "for every {C:attention}3{} scored",
             "{C:inactive}Currently {X:chips,C:white}X#2#{C:inactive} Chips"
         }
     },
@@ -4034,7 +4034,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'SL',
 	loc_txt = {
-		name = 'Strawberry Lemoande',
+		name = 'Strawberry Lemonade',
 		text = {
             "Copies either a random {C:attention}Joker{}",
             "or adds a random {C:attention}card's{} {C:chips}chips{} in hand",
