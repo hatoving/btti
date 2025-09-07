@@ -764,7 +764,7 @@ SMODS.Joker {
         text = {
             "{X:mult,C:white}X15{} Mult",
             "{C:green}1 in 500{} chance to be",
-            "destroyed at the end of round",
+            "{C:red}destroyed{} at the end of round",
             "{C:inactive}(Gros Michel + Cavendish)"
         }
     },
@@ -993,7 +993,7 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 4{} chance for each played",
             "{C:attention}8{} to create a {C:purple}Tarot Card{} when scored",
-            "Earn {C:attention}$1{} for each {C:attention}9{} in your full deck",
+            "Earn {C:attention}$1{} for each {C:attention}9{} in your {C:attention}full deck{}",
             "{C:inactive}(8 Ball + Cloud 9)"
         }
     },
@@ -1077,7 +1077,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Celestius',
         text = {
-            'Each {C:attention}Face Card{} held in hand',
+            'Each {C:attention}face card{} held in hand',
             'gives {X:mult,C:white}X13.5{} Mult',
             'Played {C:aces}Aces{} give {C:chips}+100{} Chips',
             'and {C:mult}+20{} Mult when scored',
@@ -1085,7 +1085,7 @@ SMODS.Joker {
             'for each {C:attention}non-face card{} that is scored',
             '{C:green}1 in 4{} chance for each played {C:attention}8{}',
             'to create a {C:purple}Tarot Card{} when scored',
-            'Earn an extra {C:attention}$9{} at end of round',
+            'Earn an extra {C:attention}$9{} at end of {C:attention}round{}',
             '{C:inactive}Currently {C:chips}+#1#{} Chips',
             '{C:inactive}(Royal Moon + Short Scholar + Chance of Clouds)'
         }
@@ -1201,10 +1201,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mineral Joker',
         text = {
-            "Start at {X:mult,C:white}X1{} Mult,",
             "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
-            "in your full deck and {C:chips}+75{} Chips for",
-            "each {C:attention}Stone Card{} in your full deck",
+            "in your {C:attention}full deck{} and {C:chips}+75{} Chips for",
+            "each {C:attention}Stone Card{} in your {C:attentionfull deck{}",
             "{C:inactive}(Steel Joker + Stone Joker)"
         }
     },
@@ -1279,7 +1278,7 @@ SMODS.Joker {
         text = {
             "{C:mult}+3{} Mult for each {C:attention}Joker{} card",
             "Adds the {C:attention}sell value{} of all",
-            "{C:joker}Jokers{} to {C:mult}Mult",
+            "held {C:joker}Jokers{} to {C:mult}Mult",
             "{C:inactive}Currently {C:mult}+#1#{} Mult",
             "{C:inactive}(Abstract Joker + Swashbuckler)"
         }
@@ -1967,6 +1966,81 @@ SMODS.Joker {
     end
 }
 
+-- GIF Compression
+SMODS.Atlas {
+    key = "GIFCompression",
+    path = "bttiGIFCompression.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'GIFCompression',
+    loc_txt = {
+        name = 'GIF Compression',
+        text = {
+            "Gives {C:blue}+8{} Chips and",
+            "retriggers hand {C:blue}4{} times",
+            "if {C:attention}played hand{} has exactly {C:blue}4{} cards",
+            "{C:inactive} It\'s pronounced GIF",
+            "{C:inactive}(Square Joker + ... Say that again.)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'GIFCompression',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    pixel_size = { w = 71, h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if #G.play.cards == 4 then
+                return {
+                    repetitions = 4
+                }
+            end
+        end
+        if context.joker_main then
+            if #G.play.cards == 4 then
+                return {
+                    chips = 8
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
 --#endregion
 
 --#region MOD COMBO JOKERS
@@ -1985,7 +2059,7 @@ SMODS.Joker {
             "{C:chips}+10{} Chips, {C:mult}+4{} Mult and",
             "{C:attention}$2{} for each {C:clubs}Club{}, {C:hearts}Heart{},",
             "and {C:diamonds}Diamond{} respectively in",
-            "your {C:attention}deck{} excluding {C:spades}Spades{}",
+            "your {C:attention}full deck{}",
             "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}",
             "{C:inactive}(Hatsune Miku + Kasane Teto",
             "{C:inactive}Akira Neru)"
@@ -2030,7 +2104,7 @@ SMODS.Joker {
     rarity = 4,
     atlas = 'TripleBaka',
     pos = { x = 0, y = 0 },
-    cost = 12,
+    cost = 20,
     pools = { ["BTTI_modAddition_COMBO"] = true },
 
     unlocked = true,
@@ -2081,10 +2155,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'Skelebros',
         text = {
-            "Will copy the ability of a",
-            "random {C:uncommon}Uncommon {C:joker}Joker{}",
+            "This {C:attention}Joker{} is assigned",
+            "the effect of a random {C:uncommon}Uncommon {C:joker}Joker{}",
             "at the beginning of each {C:attention}round",
-            "Gives {C:mult}Mult{} equivalent to",
+            "Gives extra {C:mult}Mult{} equivalent to",
             "assigned Joker's {C:attention}sell value{}",
             "Resets at the end of each {C:attention}round",
             "{C:inactive}(sans. + THE GREAT PAPYRUS!)"
@@ -2110,7 +2184,7 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Skelebros',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 8,
     pools = { ["BTTI_modAddition_COMBO"] = true },
 
     unlocked = true,
@@ -2164,80 +2238,6 @@ SMODS.Joker {
                     mult = G.btti_savedJokerCards[card.sort_id][key].sell_cost
                 }
             }
-        end
-    end,
-    in_pool = function(self, args)
-        return false, { allow_duplicates = false }
-    end
-}
-
--- GIF Compression
-SMODS.Atlas {
-    key = "GIFCompression",
-    path = "bttiGIFCompression.png",
-    px = 71,
-    py = 95,
-}
-SMODS.Joker {
-    key = 'GIFCompression',
-    loc_txt = {
-        name = 'GIF Compression',
-        text = {
-            "Gives {C:blue}+8{} Chips and",
-            "retriggers hand {C:blue}4{} times",
-            "if played hand has {C:blue}4{} cards",
-            "{C:inactive}(Square Joker + .. Say that again?)"
-        }
-    },
-
-    config = { extra = {} },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
-        return {
-            vars = {},
-        }
-    end,
-    rarity = 2,
-    atlas = 'GIFCompression',
-    pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition_COMBO"] = true },
-
-    pixel_size = { w = 71, h = 95 },
-    frame = 0,
-    maxFrame = 32,
-    frameDur = 0.085,
-    ticks = 0,
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play then
-            if #G.play.cards == 4 then
-                return {
-                    repetitions = 4
-                }
-            end
-        end
-        if context.joker_main then
-            if #G.play.cards == 4 then
-                return {
-                    chips = 8
-                }
-            end
         end
     end,
     in_pool = function(self, args)

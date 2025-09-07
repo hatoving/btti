@@ -1,5 +1,6 @@
 --#region MISC. BLINDS
 
+-- The Tuna
 SMODS.Atlas {
     key = "tunaBlind",
     path = "bttiTunaBlind.png",
@@ -51,6 +52,7 @@ SMODS.Blind {
     end,
 }
 
+-- The Flounder
 SMODS.Atlas {
     key = "flounderBlind",
     path = "bttiFlounderBlind.png",
@@ -69,7 +71,7 @@ SMODS.Blind {
         name = 'The Flounder',
         text = {
             'Discarding cards will',
-			'destroy a joker'
+			'KILL a joker'
         }
     },
     boss = { min = 3 },
@@ -98,6 +100,78 @@ SMODS.Blind {
     end,
 }
 
+-- The Captain
+SMODS.Atlas {
+    key = "captainBlind",
+    path = "bttiCaptainBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "captainBlind",
+    atlas = "captainBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Captain',
+        text = {
+            'Disables all',
+            'xMult effects'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('ffc78d'),
+    calculate = function(self, blind, context)
+    end
+}
+
+-- The Pong
+SMODS.Atlas {
+    key = "pongBlind",
+    path = "bttiPongBlind.png",
+    px = 34,
+    py = 34,
+    frames = 21,
+    atlas_table = 'ANIMATION_ATLAS'
+}
+SMODS.Blind {
+    key = "pongBlind",
+    atlas = "pongBlind",
+    pos = { x = 0, y = 0 },
+    mult = 2,
+    dollars = 10,
+    loc_txt = {
+        name = 'The Pong',
+        text = {
+            'Have some fun with janky Pong!',
+            'Use Arrow Keys and/or W/S',
+            'move the paddle'
+        }
+    },
+    boss = { min = 3 },
+    boss_colour = HEX('272727'),
+    debuff = {},
+    set_blind = function(self)
+        G.BTTI.PONG_init()
+        G.BTTI.PONG_initByItself = false
+    end,
+    disable = function(self)
+        G.BTTI.PONG_kill()
+        G.BTTI.PONG_initByItself = false
+    end,
+    defeat = function(self)
+        G.BTTI.PONG_kill()
+        G.BTTI.PONG_initByItself = false
+    end
+}
+--#endregion
+
+--#region UNTITLED GOOSE GAME BLINDS
+
+-- The Honk
 SMODS.Atlas {
     key = "gooseBlind",
     path = "bttiGooseBlind.png",
@@ -133,36 +207,11 @@ SMODS.Blind {
     end,
 }
 
-SMODS.Atlas {
-    key = "captainBlind",
-    path = "bttiCaptainBlind.png",
-    px = 34,
-    py = 34,
-    frames = 21,
-    atlas_table = 'ANIMATION_ATLAS'
-}
-SMODS.Blind {
-    key = "captainBlind",
-    atlas = "captainBlind",
-    pos = { x = 0, y = 0 },
-    mult = 2,
-    dollars = 10,
-    loc_txt = {
-        name = 'The Captain',
-        text = {
-            'Disables all',
-            'xMult effects'
-        }
-    },
-    boss = { min = 3 },
-    boss_colour = HEX('ffc78d'),
-    calculate = function(self, blind, context)
-    end
-}
-
 --#endregion
 
 --#region SCOLIOSIS MAN BLINDS
+
+-- The Scoliosis
 SMODS.Atlas {
     key = "scoliosisBlind",
     path = "bttiScoliosisBlind.png",
@@ -201,6 +250,7 @@ SMODS.Blind {
 
 --#region AOTA BLINDS
 
+-- The Emerald
 SMODS.Atlas {
     key = "emeraldBlind",
     path = "bttiEmeraldBlind.png",
@@ -236,6 +286,7 @@ SMODS.Blind {
     end,
 }
 
+-- The Four Pillars of Harvern
 SMODS.Atlas {
     key = "pillarBlind",
     path = "bttiPillarBlind.png",
@@ -251,7 +302,7 @@ SMODS.Blind {
     mult = 2,
     dollars = 10,
     loc_txt = {
-        name = 'The Pillar',
+        name = 'The Pillars',
         text = {
             'Cards without suits',
             'are debuffed'
@@ -271,6 +322,7 @@ SMODS.Blind {
     end,
 }
 
+-- The Singularity
 SMODS.Atlas {
     key = "singularityBlind",
     path = "bttiSingularityBlind.png",
@@ -288,7 +340,8 @@ SMODS.Blind {
     loc_txt = {
         name = 'The Singularity',
         text = {
-            'Must only play one card',
+            'Play only one card',
+            'per hand'
         }
     },
     boss = { min = 6 },
@@ -300,6 +353,7 @@ SMODS.Blind {
 
 --#region UT/DR BLINDS
 
+-- The Truck
 SMODS.Sound {
     key = "music_Truck",
     path = "music_bttiTruck.ogg",
@@ -327,7 +381,7 @@ SMODS.Blind {
         name = 'The Truck',
         text = {
             'Debuffs a random poker',
-            'hand before every hand',
+            'hand before every played hand',
             '(Current: #1#)'
         }
     },
@@ -378,6 +432,7 @@ SMODS.Blind {
     end
 }
 
+-- The Salesman
 SMODS.Sound {
     key = "music_Spamton",
     path = "music_bttiSpamton.ogg",
@@ -404,9 +459,9 @@ SMODS.Blind {
     loc_txt = {
         name = 'The Salesman',
         text = {
-            'Steals [[Sweet Moolah!!]] equivalent',
-            'to the [[Value, Value]] of all',
-            '[[CLOWN]] each hand.'
+            'Steals [Sweet Moolah!!] equivalent',
+            'to the [Value, Value] of all',
+            '[CLOWN] each hand.'
         }
     },
     boss = { min = 4 },
@@ -439,6 +494,7 @@ SMODS.Blind {
 
 --#region BFDI BLINDS
 
+-- The Two
 SMODS.Atlas {
     key = "twoBlind",
     path = "bttiTwoBlind.png",
@@ -465,6 +521,7 @@ SMODS.Blind {
     debuff = { value = '2' }
 }
 
+-- The Four
 SMODS.Atlas {
     key = "fourBlind",
     path = "bttiFourBlind.png",
@@ -495,6 +552,7 @@ SMODS.Blind {
 
 --#region DRAMATIZED BLINDS
 
+-- The Ticket
 SMODS.Atlas {
     key = "ticketBlind",
     path = "bttiTicketBlind.png",
@@ -514,7 +572,7 @@ SMODS.Blind {
         text = {
             'Must play this',
             'random hand type',
-            'to disable blind:',
+            'to disable Blind:',
             '#1#'
         }
     },
@@ -603,6 +661,7 @@ SMODS.Blind {
 
 --#region YMFP BLINDS
 
+-- The Level
 SMODS.Atlas {
     key = "levelBlind",
     path = "bttiLevelBlind.png",
@@ -622,7 +681,7 @@ SMODS.Blind {
         text = {
             'Turns a random held',
             'card Digital every',
-            'every 5 seconds'
+            '5 seconds'
         }
     },
     boss = { min = 5 },
@@ -635,47 +694,9 @@ SMODS.Blind {
 
 --#endregion
 
---#region GAME BLINDS
+--#region GEOMETRY DASH BLINDS
 
-SMODS.Atlas {
-    key = "pongBlind",
-    path = "bttiPongBlind.png",
-    px = 34,
-    py = 34,
-    frames = 21,
-    atlas_table = 'ANIMATION_ATLAS'
-}
-SMODS.Blind {
-    key = "pongBlind",
-    atlas = "pongBlind",
-    pos = { x = 0, y = 0 },
-    mult = 2,
-    dollars = 10,
-    loc_txt = {
-        name = 'The Pong',
-        text = {
-            'Have some fun with janky Pong!',
-            'Use Arrow Keys and/or W/S',
-            'move the paddle'
-        }
-    },
-    boss = { min = 3 },
-    boss_colour = HEX('272727'),
-    debuff = {},
-    set_blind = function(self)
-        G.BTTI.PONG_init()
-        G.BTTI.PONG_initByItself = false
-    end,
-    disable = function(self)
-        G.BTTI.PONG_kill()
-        G.BTTI.PONG_initByItself = false
-    end,
-    defeat = function(self)
-        G.BTTI.PONG_kill()
-        G.BTTI.PONG_initByItself = false
-    end
-}
-
+-- The Spike
 SMODS.Atlas {
     key = "gdBlind",
     path = "bttiGDBlind.png",

@@ -16,10 +16,10 @@ SMODS.Seal {
         -- Tooltip description
         name = '{C:attention}Orange Seal',
         text = {
-            "Gives {C:green}+50%{} of this card's",
-            "{C:chips}Chips{} to score with hands",
-            "containing only {C:attention}orange seals{},",
-            "otherwise {C:red}-50%{}"
+            "Adds {C:green}50%{} of this card's",
+            "{C:chips}Chips{} to score if hand",
+            "contains only {C:attention}Orange Seals{},",
+            "Otherwise {C:red}-50%{}"
         }
     },
 
@@ -73,9 +73,9 @@ SMODS.Seal {
         -- Tooltip description
         name = '{C:gay}Autism Seal',
         text = {
-            "Copy seals of other cards in played hand",
+            "Copy seals of other cards in {C:attention}played hand{}",
             "Halve chips of cards without seals in",
-            "played hand"
+            "{C:attention}played hand{}"
         }
     },
     pools = { ["BTTI_modAddition_seals"] = true },

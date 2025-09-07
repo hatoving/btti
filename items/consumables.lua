@@ -92,7 +92,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "trihooft",
     set = "Planet",
-    cost = 3,
+    cost = 10,
     pos = { x = 0, y = 0 },
     config = { hand_type = 'ThreeHorse' },
     loc_txt = {
@@ -223,7 +223,7 @@ SMODS.Consumable {
         name = "Kepler",
         text = {
             "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-            "{C:attention}#2#",
+            "{C:bisexual}#2#",
             "{C:mult}+#3#{} Mult and",
             "{C:chips}+#4#{} chips",
         },
@@ -268,7 +268,7 @@ SMODS.Consumable {
         name = "Pegasi",
         text = {
             "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-            "{C:attention}#2#",
+            "{C:bisexual}#2#",
             "{C:mult}+#3#{} Mult and",
             "{C:chips}+#4#{} chips",
         },
@@ -394,36 +394,6 @@ SMODS.Consumable {
     end,
 }
 
--- The Maze
-SMODS.Atlas {
-    key = "community",
-    path = "bttiCommunity.png", -- placeholder
-    px = 65,
-    py = 95
-}
-SMODS.Consumable {
-    key = "community",
-    set = "Tarot",
-    cost = 5,
-    pos = { x = 0, y = 0 },
-    config = { max_highlighted = 2, mod_conv = 'm_btti_stainedCard' },
-    loc_txt = {
-        name = "The Community",
-        text = {
-            "Enhances {C:attention}2{} selected cards",
-            "into {C:deets}Stained Cards{}"
-        },
-    },
-    pools = { ["BTTI_modAddition_tarots"] = true },
-    atlas = 'community',
-    loc_vars = function(self, info_queue, card)
-        return {
-            vars = {
-            }
-        }
-    end
-}
-
 -- Jonker's Workshop
 SMODS.Atlas {
     key = "jonkersWorkshop",
@@ -441,7 +411,7 @@ SMODS.Consumable {
         name = "Jonker's Workshop",
         text = {
             "Combines {C:joker}Jokers{} if any",
-            "potential {C:purple}combinations{} are present",
+            "potential {C:purple}combinations{} are in hand",
             "Will prioritize {C:common}Common Jokers{} over",
             "{C:legendary}Legendary Jokers{}"
         },
@@ -675,6 +645,38 @@ SMODS.Consumable {
     end
 }
 
+-- The Community
+SMODS.Atlas {
+    key = "community",
+    path = "bttiCommunity.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "community",
+    set = "Tarot",
+    cost = 3,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 2, mod_conv = 'm_btti_stainedCard' },
+    loc_txt = {
+        name = "The Community",
+        text = {
+            "Enhances {C:attention}2{} selected cards",
+            "into {C:deets}Stained Cards{}"
+        },
+    },
+    pools = { ["BTTI_modAddition_tarots"] = true },
+    atlas = 'community',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end
+}
+
+
+
 --#endregion
 
 -- Doubt
@@ -832,7 +834,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "infinity",
     set = "Spectral",
-    cost = 10,
+    cost = 5,
     pos = { x = 0, y = 0 },
     config = { max_highlighted = 1 },
     loc_txt = {
@@ -891,7 +893,7 @@ SMODS.Atlas {
 SMODS.Consumable {
     key = "spawnkler",
     set = "Spectral",
-    cost = 4,
+    cost = 10,
     pos = { x = 0, y = 0 },
     config = { },
     loc_txt = {

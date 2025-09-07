@@ -393,9 +393,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Gambler Cat',
 		text = {
-			"{C:red}Lose{} 75% of your {C:attention}money{}",
+			"{C:red}Lose{} 75% of {C:attention}${}",
             "OR",
-            "{C:green}Win{} 110% of your {C:attention}money{}",
+            "{C:green}Win{} 110% of {C:attention}${}",
             "{C:inactive}He's all in{}"
 		}
 	},
@@ -467,7 +467,7 @@ SMODS.Joker {
     loc_txt = {
         name = '{C:gay}Autism{} Creature',
         text = {
-            "{X:mult,C:white}X3{} Mult per card with {C:gay}Autism Seal{} in hand",
+            "{X:mult,C:white}X3{} Mult per card with {C:gay}Autism Seal{} in {C:attention}hand{}",
             "{C:green}1 in 10{} chance to add {C:gay}Autism Seal{} to random card",
             "in {C:attention}hand{}",
             "{C:mult}+20{} Mult per other {C:gay}Autism Jokers{}"
@@ -806,7 +806,8 @@ SMODS.Joker {
         name = 'LeBron James',
         text = {
             "When {C:attention}Blind{} is selected, {C:red}self-destruct{}",
-            "and create a random {C:balinsanity}Balinsanity Joker{}"
+            "and create a random {C:balinsanity}Balinsanity Joker{}",
+            "{C:inactive}(Must have room){}"
         }
     },
 
@@ -998,7 +999,7 @@ SMODS.Joker {
             "Debuffs any {C:attention}Flushes{}, {C:attention}Pairs{},",
             "{C:attention}Two Pairs{} and {C:deets}Two Horses{}",
             "{C:green}1 in 40{} chance to {C:red}self-destruct{}",
-            "at the end of round",
+            "at the end of {C:attention}round{}",
             "Cannot be sold or destroyed otherwise"
         }
     },
@@ -1087,8 +1088,7 @@ SMODS.Joker {
         text = {
            "{X:mult,C:white}X4{} Mult per {C:attention}Stone Card{} in hand",
            "He will briefly {C:attention}appear{} when this card is",
-           "triggered",
-           "{C:inactive}Currently {X:mult,C:white}X#1#{} Mult"
+           "triggered"
         }
     },
 
@@ -1171,7 +1171,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'hatoving country',
         text = {
-            "{C:green}1 in 40{} chance to disable upcoming",
+            "{C:green}1 in 40{} chance to {C:red}disable{} upcoming",
             "{C:attention}Boss Blind{}"
         }
     },
@@ -1200,7 +1200,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -1277,7 +1277,7 @@ SMODS.Joker {
     atlas = 'pancakes',
     pos = { x = 0, y = 0},
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1336,9 +1336,9 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 8{} chance to spawn {C:attention}Gros Michel",
             "{C:green}1 in 20{} chance to spawn {C:attention}Cavendish",
-            "{C:green}1 in 10{} chance this card is destroyed",
-            "at the end of round",
-            "{C:inactive}Cannot spawn if the joker already exists"
+            "{C:green}1 in 10{} chance to {C:red}self destruct{}",
+            "at end of {C:attention}round{}",
+            "{C:inactive}Won't spawn{} {C:attention}Jokers{} {C:inactive}that are already in hand{}"
         }
     },
 
@@ -1361,8 +1361,8 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'BananaFarm',
     pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    cost = 5,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1449,12 +1449,12 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'PFPBird',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 6,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
     discovered = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -1554,6 +1554,72 @@ SMODS.Joker {
     end
 }
 
+-- Say That Again
+SMODS.Atlas {
+    key = "SayThatAgain",
+    path = "bttiSayThatAgain.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'SayThatAgain',
+    loc_txt = {
+        name = '... Say that again.',
+        text = {
+            "Retriggers played hand {C:blue}4{} times",
+            "if played hand has exactly {C:blue}4{} cards"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'SayThatAgain',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if #G.play.cards == 4 then
+                return {
+                    repetitions = 4
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
+
 --#endregion
 
 -- VOCALOID JOKERS
@@ -1572,7 +1638,7 @@ SMODS.Joker {
         name = 'Hatsune Miku',
         text = {
             "{C:chips}+5{} Chips for every",
-            "{C:clubs}Club{} currently in {C:attention}Deck",
+            "{C:clubs}Club{} currently in {C:attention}full deck",
             "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips"
         }
     },
@@ -1604,8 +1670,8 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Miku',
     pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    cost = 5,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1643,7 +1709,7 @@ SMODS.Joker {
         name = 'Kasane Teto',
         text = {
             "{C:mult}+1{} Mult for every",
-            "{C:hearts}Heart{} currently in {C:attention}Deck",
+            "{C:hearts}Heart{} currently in {C:attention}full deck",
             "{C:inactive}Currently +{C:mult}#1#{C:inactive} Mult"
         }
     },
@@ -1675,8 +1741,8 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Teto',
     pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    cost = 5,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1746,8 +1812,8 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Neru',
     pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    cost = 5,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1773,70 +1839,6 @@ SMODS.Joker {
     end
 }
 
-SMODS.Atlas {
-    key = "SayThatAgain",
-    path = "bttiSayThatAgain.png",
-    px = 71,
-    py = 95,
-}
-SMODS.Joker {
-    key = 'SayThatAgain',
-    loc_txt = {
-        name = '... Say that again.',
-        text = {
-            "Retriggers hand {C:blue}4{} times",
-            "if played hand has {C:blue}4{} cards"
-        }
-    },
-
-    config = { extra = { } },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Fant4stic" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Miles Teller" } }
-        return {
-            vars = { },
-        }
-    end,
-    rarity = 2,
-    atlas = 'SayThatAgain',
-    pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
-
-    pixel_size = { w = 71 , h = 95 },
-    frame = 0,
-    maxFrame = 32,
-    frameDur = 0.085,
-    ticks = 0,
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play then
-            if #G.play.cards == 4 then
-                return {
-                    repetitions = 4
-                }
-            end
-        end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
-
 --#endregion
 
 -- ETG JOKRES
@@ -1854,7 +1856,7 @@ SMODS.Joker {
         name = 'The Dragun',
         text = {
             "{X:mult,C:white}X5{} Mult if played hand",
-            "has exactly {C:attention}5 cards"
+            "has exactly {C:blue}5{} cards"
         }
     },
 
@@ -1877,7 +1879,7 @@ SMODS.Joker {
     rarity = 3,
     atlas = 'Dragun',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTI_modAddition"] = true },
 
     pixel_size = { w = 71, h = 95 },
@@ -1992,9 +1994,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Brimstone',
         text = {
-            "Shoots a Brimstone laser to either",
+            "Shoots a {C:red}Brimstone laser{} to either",
             "the left or right, adding bonus {C:mult}Mult{} to each",
-            "lasered {C:joker}Joker{} equivalent to its {C:attention}sell value"
+            "lasered {C:attention}Joker{} equivalent to its {C:attention}sell value"
         }
     },
 
@@ -2072,7 +2074,7 @@ SMODS.Joker {
             "per card {C:red}discarded",
             "Once removed from deck,",
             "has a {C:green}1 in 4{} chance to",
-            "respawn at the {C:attention}end of round",
+            "respawn at the end of {C:attention}round{}",
             "{C:inactive}(Must have room)"
         }
     },
@@ -2096,12 +2098,12 @@ SMODS.Joker {
     rarity = 2,
     atlas = 'Springtrap',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
     discovered = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -2141,6 +2143,7 @@ SMODS.Joker {
         text = {
             "{C:chips}+87{} Chips",
             "{X:mult,C:white}X3{} Mult every 3 hands",
+            "{C:inactive}A guardian angel watches over you{}"
         }
     },
 
@@ -2232,8 +2235,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'sans.',
         text = {
-            "Will copy the ability of a",
-            "random {C:common}Common {C:joker}Joker{}",
+            "This {C:attention}Joker{} is assigned",
+            "the effect of a random {C:common}Common {C:joker}Joker{}",
             "at the beginning of each {C:attention}round",
             "Resets at the end of each {C:attention}round"
         }
@@ -2263,7 +2266,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -2435,9 +2438,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Weird Route',
         text = {
-            "Selling this {C:joker}Joker{} to {C:blue}freeze{} the",
+            "Sell this {C:joker}Joker{} to {C:blue}freeze{} the",
             "current Blind, winning the {C:attention}round",
-            "{C:inactive}(Doesn't work on Boss Blinds)"
+            "{C:inactive}(Doesn't work on{} {C:attention}Boss Blinds{}{C:inactive}){}"
         }
     },
 
@@ -2465,7 +2468,7 @@ SMODS.Joker {
 
     unlocked = true,
     discovered = false,
-    blueprint_compat = true,
+    blueprint_compat = false,
     eternal_compat = true,
     perishable_compat = false,
 
@@ -2523,7 +2526,7 @@ SMODS.Joker {
     rarity = 1,
     atlas = 'Tenna',
     pos = { x = 0, y = 0 },
-    cost = 6,
+    cost = 4,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
@@ -2670,7 +2673,7 @@ SMODS.Joker {
         name = 'XDDCC',
         text = {
             "{C:mult}+4{} Mult and {C:chips}+15{} Chips",
-            "Gain {C:mult}+4{} Mult and {C:chips}+15{} Chips",
+            "Gains {C:mult}+4{} Mult and {C:chips}+15{} Chips",
             "at the end of each {C:attention}Ante",
             "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult"
         }
@@ -2746,9 +2749,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'My Name is Caine!',
         text = {
-            "Gives a {C:blue}Digital{} Card",
+            "Adds a {C:blue}Digital{} Card to {C:attention}hand{}",
             "{C:green}9 in 10{} chance to give {C:chips}+1-404{} Chips",
-            "{C:green}1 in 10{} chance to abstract a random {C:attention}Joker{}",
+            "{C:green}1 in 10{} chance to {C:red}abstract{} a random {C:attention}Joker{}",
         }
     },
 
@@ -2827,6 +2830,12 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
+--SPONGEBOB JOKERS
+--#region SPONGEBOB JOKERS
+
+--SpongeBob
 SMODS.Atlas {
     key = "SpongeBob",
     path = "bttiSpongeBob.png",
@@ -2836,10 +2845,10 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'SpongeBob',
     loc_txt = {
-        name = 'SpongeBob SquarePants',
+        name = 'SpongeBob',
         text = {
-            "All cards count in scoring",
-            "and get retriggered 1-2 times"
+            "All {C:attention}played cards{} count in scoring",
+            "and get retriggered {C:blue}1-2{} times"
         }
     },
 
@@ -2888,6 +2897,12 @@ SMODS.Joker {
     end
 }
 
+--#endregion
+
+-- KPDH JOKERS
+--#region KPDH JOKERS
+
+-- Huntrix
 SMODS.Atlas {
     key = "Huntrix",
     path = "bttiHuntrix.png",
@@ -2947,8 +2962,10 @@ SMODS.Joker {
     end
 }
 
---if pseudorandom('RegBen') < G.GAME.probabilities.normal / (9/10) then
 --#endregion
+
+--if pseudorandom('RegBen') < G.GAME.probabilities.normal / (9/10) then
+
 
 -- BFDI JOKERS
 --#region BFDI JOKERS
@@ -3158,7 +3175,7 @@ SMODS.Joker {
         text = {
             "Uses {C:attention}${} to gain {C:chips}Chips{} and {C:mult}Mult",
             "{C:green}1 in 10{} chance to waste {C:attention}$",
-            "and get destroyed at end of round",
+            "and {C:red}destroy{} itself at end of {C:attention}round{}",
             "{C:inactive}Currently {C:chips}+#2#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult"
         }
     },
@@ -3254,8 +3271,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mystical Honse',
         text = {
-            "Gives you {C:attention}$1{} at the end of the round",
-            "{C:mult}+5{} Mult per {C:deets}DEETS{} {C:attention}Joker{}",
+            "Gives you {C:attention}$1{} at the end of the {C:attention}round{}",
+            "{C:mult}+5{} Mult per {C:deets}DEETS Joker{}",
             "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
             "Selling this card may result in {C:red}consequences{}"
         }
@@ -3367,9 +3384,9 @@ SMODS.Joker {
         name = 'Horse',
         text = {
             "{C:chips}+80{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
-            "{X:mult,C:white}X3{} Mult if {C:attention}Played Hand{} is a {C:deets}Horse Hand{}",
+            "{X:mult,C:white}X3{} Mult if {C:attention}played hand{} is a {C:deets}horse hand{}",
             "{C:green}1 in 100{} chance to turn random card",
-            "in hand into {C:deets}Horse Card"
+            "in hand into a {C:deets}Horse Card"
         }
     },
 
@@ -3779,7 +3796,7 @@ SMODS.Joker {
             "{C:mult}+0-100{} Mult",
             "{C:chips}+0-50{} Chips",
             "{C:mult}+5{} Mult for every",
-            "{C:deets}DEETS{} {C:attention}Joker{}"
+            "{C:deets}DEETS Joker{}"
         }
     },
 
@@ -3891,7 +3908,7 @@ SMODS.Joker {
     rarity = 3,
     atlas = 'SecretDEETS',
     pos = { x = 0, y = 0 },
-    cost = 4,
+    cost = 5,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
@@ -3952,7 +3969,7 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'God Taco',
 		text = {
-            "Shuffles all {C:joker}Jokers{} around before",
+            "Shuffles all {C:attention}Jokers{} around before",
             "a hand is played and copies the",
             "{C:attention}Joker{} to the right",
 		}
@@ -4037,9 +4054,9 @@ SMODS.Joker {
 		name = 'Strawberry Lemonade',
 		text = {
             "Copies either a random {C:attention}Joker{}",
-            "or adds a random {C:attention}card's{} {C:chips}chips{} in hand",
+            "or retriggers a random {C:attention}card{} in {C:attention}played hand{}",
             "Triggers twice if {C:purple}God Taco{}",
-            "is present"
+            "is in hand"
 		}
 	},
 
@@ -4189,7 +4206,7 @@ SMODS.Joker {
             "{C:attention}hand{} has more {C:mult}Mult{} than {C:chips}Chips{}",
             "{C:mult}-#2#{} Mult if played hand has more",
             "{C:chips}Chips{} than {C:mult}Mult{}",
-            "{C:inactive}(Currently{} {C:mult}+#1#{}{C:inactive} Mult{})"
+            "{C:inactive}Currently{} {C:mult}+#1#{}{C:inactive} Mult{}"
         }
     },
 
@@ -4339,7 +4356,7 @@ SMODS.Joker {
         text = {
             "{C:chips}+100-1000{} Chips and {X:mult,C:white}X2-10{} Mult",
             "per other {C:balinsanity}Inn-to the Insanity Jokers{}",
-            "held"
+            "in hand"
         }
     },
 
@@ -4487,13 +4504,11 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Y/N',
 		text = {
-			"When ENTER is pressed, and this card is",
-            "highlighted, allows you to select a new",
-            "boss blind from your collection",
-            "Cannot select a blind twice in a row",
-            "Becomes inactive until boss blind is defeated",
-            "Press ENTER on a hovered blind from your",
-            "collection to select it once activated"
+			"Press {C:blue}ENTER{} while this {C:attention}Joker{} is",
+            "highlighted to select a new {C:attention}Boss Blind{}",
+            "from your collection",
+            "Cannot select the same {C:attention}Boss Blind{} twice in a row",
+            "Becomes {C:inactive}inactive{} until {C:attention}Boss Blind{} is defeated"
 		}
 	},
 
@@ -4519,7 +4534,7 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'YIN',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 8,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_YMFP"] = true },
 
     unlocked = true,
@@ -4828,8 +4843,8 @@ SMODS.Joker {
         name = 'Frickin\' Fun Band',
         text = {
             "Avoiding plaiyng with a {V:1}#1#",
-            "will grant you a card of that suit",
-            "Suit changes at the start of round",
+            "will grant you a {C:attention}card{} of that suit",
+            "Suit changes at the start of {C:attention}round{}",
         }
     },
 
@@ -5060,7 +5075,7 @@ SMODS.Joker {
 		name = 'Reg!Ben',
 		text = {
 			"Saves you from death if scored chips",
-            "are {C:attention}10%{} of required amount.",
+            "are {C:attention}10%{} of required amount",
             "{C:green}1 in 9{} chance of being {C:red}crystallized{}"
 		}
 	},
@@ -5341,9 +5356,9 @@ SMODS.Joker {
             "Non-{C:attention}Steel Card{} in {C:attention}full deck{}",
             "Debuffs {C:attention}Stone{} and {C:attention}Steel Cards{}",
             "{C:green}1 in 30{} chance to turn a",
-            "random played {C:attention}Card{} into a {C:attention}Stone Card{}",
+            "random {C:attention}played card{} into a {C:attention}Stone Card{}",
             "{C:green}1 in 30{} chance to turn",
-            "a random {C:attention}Card{} into a {C:attention}Steel Card"
+            "a random {C:attention}played card{} into a {C:attention}Steel Card"
         }
     },
 
@@ -5653,7 +5668,7 @@ SMODS.Joker {
 	rarity = 1,
     atlas = 'Checkpoint',
 	pos = { x = 0, y = 0 },
-	cost = 6,
+	cost = 5,
     pools = { ["BTTI_modAddition"] = true },
 
     unlocked = true,
@@ -5836,9 +5851,9 @@ SMODS.Joker {
         name = 'The Universe',
         text = {
             "Levels up all {C:attention}poker hands",
-            "by 1 at the end of each round",
+            "by {C:blue}1{} at the end of each {C:attention}round{}",
             "{C:green}1 in 40{} chance to",
-            "fade away at end of round"
+            "fade away at end of {C:attention}round{}"
         }
     },
 
@@ -5977,9 +5992,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Aubree',
         text = {
-            "Gain {C:attention}+1 Joker Slot{}",
+            "{C:attention}+1 Joker Slot{}",
             "every time you defeat a",
-            "{C:attention}boss blind"
+            "{C:attention}Boss Blind"
         }
     },
 
@@ -6051,8 +6066,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Kyuu',
         text = {
-            "{C:blue}Upgrades{} your {C:attention}most played hand{}",
-            "twice when beating a {C:attention}Boss Blind{}"
+            "Levels up your most played {C:attention}poker hand{}",
+            "twice after beating a {C:attention}Boss Blind{}"
         }
     },
 
@@ -6198,7 +6213,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Cosmyy',
         text = {
-            "{C:mult}+2{} Mult per {C:diamonds}Diamond{} in deck",
+            "{C:mult}+2{} Mult per {C:diamonds}Diamond{} in {C:attention}full deck{}",
             "{C:green}1 in 3{} chance to clone {C:attention}played",
             "cards{} with a {C:diamonds}Diamond{} suit",
             "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
@@ -6397,12 +6412,11 @@ SMODS.Joker {
     loc_txt = {
         name = 'LightShine',
         text = {
-            "{C:green}1 in 10{} chance to sloppily",
-            "backread {C:joker}Jokers{} to the left",
+            "Sloppily backreads {C:attention}Jokers{} to the left",
             "{C:mult}+10{} Mult per other {C:gay}Autism Jokers{}",
             "{X:mult,C:white}X69{} Mult if an",
             "{C:balinsanity}Inn-to the Insanity Joker{}",
-            "is present"
+            "is in hand"
         }
     },
 
@@ -6641,8 +6655,8 @@ SMODS.Joker {
 		name = 'ca850',
 		text = {
 			"{C:mult}+100{} Mult if {C:mult}hatoving{},",
-            "{C:attention}Juicimated{}, or {C:chips}BlueBen8{} aren't present",
-            "{C:mult}Kills{} LightShine if she is present",
+            "{C:attention}Juicimated{}, or {C:chips}BlueBen8{} aren't in hand",
+            "{C:red}Kills{} LightShine if LightShine is in hand",
             "{C:inactive}He carries you{}"
 		}
 	},
@@ -6731,9 +6745,9 @@ SMODS.Joker {
         name = 'BlueBen8',
         text = {
             "Any played {C:attention}Straight{} hand will",
-            "be played as a {C:bisexual}Bisexual{} hand",
+            "be played as a {C:bisexual}Bisexual{} Hand",
             "{C:green}1 in 4{} chance to upgrade {C:attention}Flush{} when played",
-            "{C:chips}+30{} Chips if an {C:gay}Autism{} {C:attention}Joker{} is present"
+            "{C:chips}+30{} Chips if an {C:gay}Autism Joker{} is in hand"
         }
     },
 

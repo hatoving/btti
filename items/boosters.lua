@@ -358,7 +358,7 @@ SMODS.Booster {
         text = {
             "Choose 1 of up to 2",
             "{C:common}Common{}/{C:uncommon}Uncommon {C:joker}Jokers{}",
-            "with a random {C:dark_edition}Edition{}."
+            "with a random {C:dark_edition}Edition{}"
         },
         group_name = 'Fortune Buffoon Pack'
     },
@@ -403,7 +403,7 @@ SMODS.Booster {
         text = {
             "Choose 1 of up to 4",
             "{{C:common}Common{}/{C:uncommon}Uncommon {C:joker}Jokers{}",
-            "with a random {C:dark_edition}Edition{}."
+            "with a random {C:dark_edition}Edition{}"
         },
         group_name = 'Jumbo Fortune Buffoon Pack'
     },
@@ -529,7 +529,7 @@ SMODS.Booster {
         name = "Stables Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:balinsanity}DEETS Jokers",
+            "{C:deets}DEETS Jokers",
         },
         group_name = 'Stables Buffoon Pack'
     },
@@ -686,7 +686,7 @@ SMODS.Booster {
         name = "Equine Celestial Pack",
         text = {
             "Choose 1 of up to 3",
-            "{C:deets}Horse Planet{} {C:attention}cards",
+            "{C:deets}Horse Planet cards{}",
         },
         group_name = 'Equine Celestial Pack'
     },
