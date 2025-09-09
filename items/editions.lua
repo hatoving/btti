@@ -12,8 +12,8 @@ SMODS.Edition {
         name = "Digital",
         label = "Digital",
         text = {
-            "{C:red}Deletes{} itself once the",
-            "{C:attention}ante{} is over"
+            "{C:red}Deletes{} itself once",
+            "the {C:attention}ante{} is over"
         }
     },
     in_shop = true,
