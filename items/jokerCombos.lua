@@ -1404,7 +1404,7 @@ SMODS.Joker {
             return {
                 message = localize('k_plus_stone'),
                 colour = G.C.SECONDARY_SET.Enhanced,
-                func = function()
+                func = function() -- This is for timing purposes, everything here runs after the message
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.deck.config.card_limit = G.deck.config.card_limit + 1
@@ -1412,40 +1412,30 @@ SMODS.Joker {
                         end
                     }))
                     draw_card(G.play, G.deck, 90, 'up')
-                    SMODS.set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate_context({ playing_card_added = true, cards = { stone_card } })
+                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'vremade_certificate_seal' }), area = G.discard }
+					G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+					_card.playing_card = G.playing_card
+					table.insert(G.playing_cards, _card)
+
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							G.hand:emplace(_card)
+							_card:start_materialize()
+							G.GAME.blind:debuff_card(_card)
+							G.hand:sort()
+							if context.blueprint_card then
+								context.blueprint_card:juice_up()
+							else
+								card:juice_up()
+							end
+							SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+							save_run()
+							return true
+						end
+					}))
                 end
             }
-        end
-        if context.first_hand_drawn then
-            local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'btti' }), area = G.discard }
-            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-            _card.playing_card = G.playing_card
-            table.insert(G.playing_cards, _card)
-
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    G.hand:emplace(_card)
-                    _card:start_materialize()
-                    G.GAME.blind:debuff_card(_card)
-                    G.hand:sort()
-                    if context.blueprint_card then
-                        context.blueprint_card:juice_up()
-                    else
-                        card:juice_up()
-                    end
-                    SMODS.set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate_context({ playing_card_added = true, cards = { _card } })
-                    save_run()
-                    return true
-                end
-            }))
-
-            return nil, true
         end
     end,
     in_pool = function(self, args)
@@ -1684,7 +1674,7 @@ SMODS.Joker {
             return {
                 message = localize('k_plus_stone'),
                 colour = G.C.SECONDARY_SET.Enhanced,
-                func = function()
+                func = function() -- This is for timing purposes, everything here runs after the message
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             G.deck.config.card_limit = G.deck.config.card_limit + 1
@@ -1692,43 +1682,34 @@ SMODS.Joker {
                         end
                     }))
                     draw_card(G.play, G.deck, 90, 'up')
-                    SMODS.set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate_context({ playing_card_added = true, cards = { stone_card } })
+                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'vremade_certificate_seal' }), area = G.discard }
+					G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+					_card.playing_card = G.playing_card
+					table.insert(G.playing_cards, _card)
+
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							G.hand:emplace(_card)
+							_card:start_materialize()
+							G.GAME.blind:debuff_card(_card)
+							G.hand:sort()
+							if context.blueprint_card then
+								context.blueprint_card:juice_up()
+							else
+								card:juice_up()
+							end
+							SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+							save_run()
+							return true
+						end
+					}))
                 end
             }
         end
-        if context.first_hand_drawn then
-            local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'btti' }), area = G.discard }
-            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-            _card.playing_card = G.playing_card
-            table.insert(G.playing_cards, _card)
-
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    G.hand:emplace(_card)
-                    _card:start_materialize()
-                    G.GAME.blind:debuff_card(_card)
-                    G.hand:sort()
-                    if context.blueprint_card then
-                        context.blueprint_card:juice_up()
-                    else
-                        card:juice_up()
-                    end
-                    SMODS.set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate_context({ playing_card_added = true, cards = { _card } })
-                    save_run()
-                    return true
-                end
-            }))
-
-            return nil, true
-        end
-        if context.playing_card_added and not context.blueprint then
-            card.ability.extra.Xmult = card.ability.extra.Xmult + #context.cards * 0.25
+		if context.playing_card_added and not context.blueprint then
+            -- See note about SMODS Scaling Manipulation on the wiki
+            card.ability.extra.Xmult = card.ability.extra.Xmult + #context.cards * card.ability.extra.Xmult_gain
             return {
                 message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.Xmult } },
             }

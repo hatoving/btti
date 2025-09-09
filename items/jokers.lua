@@ -92,7 +92,7 @@ SMODS.Joker {
 	atlas = 'Jonker',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -164,7 +164,7 @@ SMODS.Joker {
     atlas = 'MetalPipe',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -257,7 +257,7 @@ SMODS.Joker {
     atlas = 'GoodMorning',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -345,7 +345,7 @@ SMODS.Joker {
     atlas = 'DidSomebodySayPie',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -420,7 +420,7 @@ SMODS.Joker {
 	atlas = 'GamblerCat',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -494,7 +494,7 @@ SMODS.Joker {
     atlas = 'AutismCreature',
     pos = { x = 0, y = 0 },
     cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -634,7 +634,7 @@ SMODS.Joker {
     atlas = 'BentismCreature',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -762,7 +762,7 @@ SMODS.Joker {
     atlas = 'jokelinear',
     pos = {x = 0, y = 0},
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true },
 
     unlocked = true,
     discovered = false, 
@@ -831,7 +831,7 @@ SMODS.Joker {
     atlas = 'LeBron',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -843,27 +843,25 @@ SMODS.Joker {
         if context.setting_blind then
             local chosen = nil
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 2 then
-                chosen = 'Common'
+                chosen = 'BTTI_modAddition_COMMON'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 6 then
-                chosen = 'Uncommon'
+                chosen = 'BTTI_modAddition_UNCOMMON'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 10 then
-                chosen = 'Rare'
+                chosen = 'BTTI_modAddition_RARE'
             end
             if pseudorandom('LeBron') < G.GAME.probabilities.normal / 100 then
-                chosen = 'Legendary'
+                chosen = 'BTTI_modAddition_LEGENDARY'
             end
             if chosen == nil then
-                chosen = 'Common'
+                chosen = 'BTTI_modAddition_COMMON'
             end
 
             sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
 
             local c = SMODS.add_card {
                 set = 'BTTI_modAddition',
-                rarity = chosen,
-                key_append = 'LeBron'
             }
             SMODS.destroy_cards(card)
         end
@@ -914,7 +912,7 @@ SMODS.Joker {
     atlas = 'Kendrick',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -924,15 +922,12 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.setting_blind and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-            local chosen = nil
+            local chosen = 'BTTI_modAddition_COMMON'
             if pseudorandom('Kendrick') < G.GAME.probabilities.normal / 2 then
-                chosen = 'Common'
+                chosen = 'BTTI_modAddition_COMMON'
             end
             if pseudorandom('Kendrick') < G.GAME.probabilities.normal / 4 then
-                chosen = 'Rare'
-            end
-            if chosen == nil then
-                chosen = 'Common'
+                chosen = 'BTTI_modAddition_RARE'
             end
 
             sendInfoMessage("Chosen rarity=" .. chosen, "BTTI")
@@ -945,9 +940,8 @@ SMODS.Joker {
                         delay = 0,
                         func = function()
                             SMODS.add_card {
-                                set = 'BTTI_modAddition',
-                                rarity = chosen,
-                                key_append = 'Kendrick'
+                                set = chosen,
+								area = G.jokers,
                             }
                             play_sound("btti_Kendrick0")
                             card_eval_status_text(card, 'extra', nil, nil, nil,
@@ -964,9 +958,8 @@ SMODS.Joker {
                         delay = 0,
                         func = function()
                             SMODS.add_card {
-                                set = 'BTTI_modAddition',
-                                rarity = chosen,
-                                key_append = 'Kendrick'
+                                set = chosen,
+								area = G.jokers,
                             }
                             play_sound("btti_Kendrick1")
                             card_eval_status_text(card, 'extra', nil, nil, nil,
@@ -1024,7 +1017,7 @@ SMODS.Joker {
     atlas = 'Mimic',
     pos = { x = 0, y = 0 },
     cost = 2,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -1112,7 +1105,7 @@ SMODS.Joker {
     atlas = 'Rock',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1196,7 +1189,7 @@ SMODS.Joker {
     atlas = 'hatovingCountry',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -1277,7 +1270,7 @@ SMODS.Joker {
     atlas = 'pancakes',
     pos = { x = 0, y = 0},
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -1362,7 +1355,7 @@ SMODS.Joker {
     atlas = 'BananaFarm',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1450,7 +1443,7 @@ SMODS.Joker {
     atlas = 'PFPBird',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -1529,7 +1522,7 @@ SMODS.Joker {
     atlas = 'Steam',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1591,7 +1584,7 @@ SMODS.Joker {
     atlas = 'SayThatAgain',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     pixel_size = { w = 71 , h = 95 },
     frame = 0,
@@ -1671,7 +1664,7 @@ SMODS.Joker {
     atlas = 'Miku',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1742,7 +1735,7 @@ SMODS.Joker {
     atlas = 'Teto',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1813,7 +1806,7 @@ SMODS.Joker {
     atlas = 'Neru',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1880,7 +1873,7 @@ SMODS.Joker {
     atlas = 'Dragun',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     pixel_size = { w = 71, h = 95 },
     frame = 0,
@@ -1952,7 +1945,7 @@ SMODS.Joker {
     atlas = 'Mindflayer',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2020,7 +2013,7 @@ SMODS.Joker {
     atlas = 'Brimstone',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2099,7 +2092,7 @@ SMODS.Joker {
     atlas = 'Springtrap',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2167,7 +2160,7 @@ SMODS.Joker {
     atlas = 'BiteOf87',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2262,7 +2255,7 @@ SMODS.Joker {
     atlas = 'Sans',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2274,12 +2267,17 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.setting_blind and context.cardarea == G.jokers then
             card.ability.extra.currentJoker = pseudorandom_element(G.P_JOKER_RARITY_POOLS[1], 'seed').key
-            sendInfoMessage("sans chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
-            return {
-                message = '\'sup.',
-                colour = G.C.BLUE,
-                sound = 'btti_Sans'
-            }
+            if not card.ability.extra.currentJoker.discovered then
+                card.ability.extra.currentJoker = nil
+            else
+                sendInfoMessage("sans chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
+                return {
+                    message = '\'sup.',
+                    colour = G.C.BLUE,
+                    sound = 'btti_Sans'
+                }
+            end
+            
         end
         if card.ability.extra.currentJoker then
             local key = card.ability.extra.currentJoker
@@ -2357,7 +2355,7 @@ SMODS.Joker {
     atlas = 'Papyrus',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2371,7 +2369,6 @@ SMODS.Joker {
             if pc and (not SMODS.get_enhancements(pc) or next(SMODS.get_enhancements(pc)) == nil) then
                 return {
                     mult = card.ability.extra.mult,
-                    message = "+" .. tostring(card.ability.extra.mult),
                     colour = G.C.MULT,
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
@@ -2464,7 +2461,7 @@ SMODS.Joker {
     atlas = 'WeirdRoute',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2473,7 +2470,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.selling_card then
+        if context.selling_card and context.main_eval then
             if G.GAME.blind.in_blind and {not G.GAME.blind.boss or G.Game.blind:get_type("Boss")} then
                 WIN_ROUND_NOW()
             end
@@ -2527,7 +2524,7 @@ SMODS.Joker {
     atlas = 'Tenna',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2618,7 +2615,7 @@ SMODS.Joker {
     atlas = 'Jax',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2699,7 +2696,7 @@ SMODS.Joker {
     atlas = 'Pomni',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2775,7 +2772,7 @@ SMODS.Joker {
     atlas = 'Caine',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2872,7 +2869,7 @@ SMODS.Joker {
     atlas = 'SpongeBob',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -2915,7 +2912,7 @@ SMODS.Joker {
         name = 'HUNTR/X',
         text = {
             "Makes other {C:joker}Jokers",
-            "eternal but still {C:attention}sellable"
+            "eternal but still {C:attention}sellable",
         }
     },
 
@@ -2939,7 +2936,7 @@ SMODS.Joker {
     atlas = 'Huntrix',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -3008,7 +3005,7 @@ SMODS.Joker {
     atlas = 'One',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -3130,7 +3127,7 @@ SMODS.Joker {
     atlas = 'Hanako',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -3200,7 +3197,7 @@ SMODS.Joker {
     atlas = 'Cassidy',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -3298,7 +3295,7 @@ SMODS.Joker {
     atlas = 'Honse',
     pos = { x = 0, y = 0 },
     cost = 1,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3410,7 +3407,7 @@ SMODS.Joker {
     atlas = 'Horse',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3508,7 +3505,7 @@ SMODS.Joker {
     atlas = 'Haykeeper',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3624,7 +3621,7 @@ SMODS.Joker {
     atlas = 'Chicken',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3734,7 +3731,7 @@ SMODS.Joker {
     atlas = 'Whorse',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3820,7 +3817,7 @@ SMODS.Joker {
     atlas = 'Emma',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DEETS"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_DEETS"] = true },
 
     unlocked = true,
     discovered = false,
@@ -3909,7 +3906,7 @@ SMODS.Joker {
     atlas = 'SecretDEETS',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -3995,7 +3992,7 @@ SMODS.Joker {
 	atlas = 'GT',
 	pos = { x = 0, y = 0 },
 	cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_ITTI"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_ITTI"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4080,7 +4077,7 @@ SMODS.Joker {
 	atlas = 'SL',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_ITTI"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_ITTI"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4230,7 +4227,7 @@ SMODS.Joker {
     atlas = 'Mug',
     pos = {x = 0, y = 0},
     cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_ITTI"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_ITTI"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4307,7 +4304,7 @@ SMODS.Joker {
     atlas = 'Candle',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_ITTI"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_ITTI"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4380,7 +4377,7 @@ SMODS.Joker {
     atlas = 'Cubey',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_ITTI"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, ["BTTI_modAddition_ITTI"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4454,7 +4451,7 @@ SMODS.Joker {
 	atlas = 'Teeriffic',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -4535,7 +4532,7 @@ SMODS.Joker {
 	atlas = 'YIN',
 	pos = { x = 0, y = 0 },
 	cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_YMFP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_YMFP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4693,7 +4690,7 @@ SMODS.Joker {
     atlas = 'Donor',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_YMFP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_YMFP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4804,7 +4801,7 @@ SMODS.Joker {
     atlas = 'MissBreward',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_YMFP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_YMFP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -4868,7 +4865,7 @@ SMODS.Joker {
     atlas = 'FrickinFunBand',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_YMFP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_YMFP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -5100,7 +5097,7 @@ SMODS.Joker {
 	atlas = 'RegBen',
 	pos = { x = 0, y = 0 },
 	cost = 10,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_SMP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_SMP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -5178,7 +5175,7 @@ SMODS.Joker {
 	atlas = 'RegVince',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_SMP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_SMP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -5288,7 +5285,7 @@ SMODS.Joker {
     atlas = 'RegMoszy',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5382,7 +5379,7 @@ SMODS.Joker {
     atlas = 'Myst',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_SMP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, ["BTTI_modAddition_SMP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -5487,7 +5484,7 @@ SMODS.Joker {
     atlas = 'RoyalRegality',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_SMP"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_SMP"] = true },
 
     unlocked = true,
     discovered = false,
@@ -5572,7 +5569,7 @@ SMODS.Joker {
     atlas = 'Goop',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5669,7 +5666,7 @@ SMODS.Joker {
     atlas = 'Checkpoint',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5748,7 +5745,7 @@ SMODS.Joker {
     atlas = 'GreatArchbird',
     pos = { x = 0, y = 0 },
     cost = 8,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5810,7 +5807,7 @@ SMODS.Joker {
     atlas = 'Abyss',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5877,7 +5874,7 @@ SMODS.Joker {
     atlas = 'Universe',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -5948,7 +5945,7 @@ SMODS.Joker {
 	atlas = 'Joozie',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_CREATICA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -6018,7 +6015,7 @@ SMODS.Joker {
     atlas = 'Aubree',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_CREATICA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -6091,7 +6088,7 @@ SMODS.Joker {
     atlas = 'Kyuu',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_CREATICA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -6169,7 +6166,7 @@ SMODS.Joker {
     atlas = 'Cacaa',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_CREATICA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -6248,7 +6245,7 @@ SMODS.Joker {
     atlas = 'Cosmyy',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_CREATICA"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_CREATICA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -6280,7 +6277,7 @@ SMODS.Joker {
                             func = function()
                                 for i, pc in ipairs(G.play.cards) do
                                     if pc:is_suit('Diamonds') then
-                                        SMODS.add_card {
+                                        local c = SMODS.add_card {
                                             key = 'Playing Card',
                                             suit = 'Diamonds',
                                             rank = pc.base.value,
@@ -6289,6 +6286,7 @@ SMODS.Joker {
                                             seal = pc.seal,
                                             area = G.deck
                                         }
+										SMODS.calculate_context { playing_card_added = true, blueprint = false, cards = {c} }
                                     end
                                 end
                                 card:juice_up()
@@ -6350,7 +6348,7 @@ SMODS.Joker {
     atlas = 'Juicimated',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -6440,7 +6438,7 @@ SMODS.Joker {
     atlas = 'LightShine',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -6577,7 +6575,7 @@ SMODS.Joker {
     atlas = 'Hatoving',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -6681,7 +6679,7 @@ SMODS.Joker {
     atlas = 'Ca850',
 	pos = { x = 0, y = 0 },
 	cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,
@@ -6771,7 +6769,7 @@ SMODS.Joker {
     atlas = 'BlueBen8',
     pos = { x = 0, y = 0 },
     cost = 20,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, },
 
     unlocked = true,
     discovered = false,

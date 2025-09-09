@@ -209,9 +209,12 @@ function love.update(dt)
             end
 
             if G.GAME.blind.config.blind.key == 'bl_btti_levelBlind' then
-                G.GAME.G.BTTI.levelBlindCountdown = G.GAME.G.BTTI.levelBlindCountdown - dt
-                if G.GAME.G.BTTI.levelBlindCountdown <= 0.0 then
-                    G.GAME.G.BTTI.levelBlindCountdown = 5.0
+				if G.BTTI.levelBlindCountdown == nil then
+					G.BTTI.levelBlindCountdown = 5
+				end
+                G.BTTI.levelBlindCountdown = G.BTTI.levelBlindCountdown - dt
+                if G.BTTI.levelBlindCountdown <= 0.0 then
+                    G.BTTI.levelBlindCountdown = 5.0
                     local emptyEditionIndices = {}
                     for i, card in ipairs(G.hand.cards) do
                         if card.edition == nil then

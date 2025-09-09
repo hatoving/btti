@@ -586,14 +586,31 @@ SMODS.Consumable {
 
         if #results > 0 then
             local result = results[1]
+            local destroyed_keys = {}
 
             for _, c in ipairs(result.neededToDiscard) do
-                c:remove()
+                local k = c.key or c:get_key()
+                if not destroyed_keys[k] then
+                    c:remove()
+                    destroyed_keys[k] = true
+                end
             end
 
             if #result.allowedToDiscard > 0 then
-                local idx = math.random(1, #result.allowedToDiscard)
-                result.allowedToDiscard[idx]:remove()
+                local shuffled = { table.unpack(result.allowedToDiscard) }
+                for i = #shuffled, 2, -1 do
+                    local j = math.random(i)
+                    shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
+                end
+
+                for _, c in ipairs(shuffled) do
+                    local k = c.key or c:get_key()
+                    if not destroyed_keys[k] then
+                        c:remove()
+                        destroyed_keys[k] = true
+                        break
+                    end
+                end
             end
 
             local c = SMODS.add_card { key = result.key }

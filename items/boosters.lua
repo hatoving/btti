@@ -508,6 +508,7 @@ SMODS.Booster {
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
+            key_append = "btti"
         })
     end,
 }
@@ -546,6 +547,7 @@ SMODS.Booster {
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
+            key_append = "btti"
         })
     end,
 }
@@ -585,6 +587,7 @@ SMODS.Booster {
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
+            key_append = "btti"
         })
     end,
 }
@@ -625,6 +628,7 @@ SMODS.Booster {
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
+            key_append = "btti"
         })
     end,
 }
@@ -664,6 +668,7 @@ SMODS.Booster {
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
+            key_append = "btti"
         })
     end,
 }
