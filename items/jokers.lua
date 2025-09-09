@@ -3146,7 +3146,7 @@ SMODS.Joker {
             }
         end
 
-        if context.selling_card then
+        if context.selling_card and context.card.ability.set == 'Joker' then
             if context.card ~= card then
                 card.ability.extra.schips = card.ability.extra.schips + context.card.cost
                 card.ability.extra.smult = card.ability.extra.smult + context.card.sell_cost

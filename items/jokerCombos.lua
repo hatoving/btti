@@ -1808,10 +1808,7 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    SMODS.set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
+                    SMODS.calculate_effect({ message = localize('k_plus_tarot'), colour = G.C.PURPLE },
                         context.blueprint_card or card)
                     return true
                 end)
@@ -1825,11 +1822,9 @@ SMODS.Joker {
         end
         if context.joker_main then
             return {
-                xmult = card.ability.extra.xmult
-            }
-        else
-            card.ability.extra.xmult = 1 +
+                mult = card.ability.extra.xmult +
                     (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0))
+            }
         end
     end,
     in_pool = function(self, args)
