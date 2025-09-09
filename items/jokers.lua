@@ -5276,7 +5276,7 @@ SMODS.Joker {
             vars = { },
         }
     end,
-    rarity = 2,
+    rarity = 3,
     atlas = 'RegMoszy',
     pos = { x = 0, y = 0 },
     cost = 6,
