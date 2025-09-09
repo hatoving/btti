@@ -1659,7 +1659,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.setting_blind then
-            local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
+            local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.hand }
             G.playing_card = (G.playing_card and G.playing_card + 1) or 1
             stone_card.playing_card = G.playing_card
             table.insert(G.playing_cards, stone_card)
@@ -1677,33 +1677,30 @@ SMODS.Joker {
                 func = function() -- This is for timing purposes, everything here runs after the message
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            G.deck.config.card_limit = G.deck.config.card_limit + 1
+                            G.deck.config.card_limit = G.deck.config.card_limit + 2
                             return true
                         end
                     }))
                     draw_card(G.play, G.deck, 90, 'up')
                     SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
-					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'vremade_certificate_seal' }), area = G.discard }
+					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'btti' }), area = G.hand }
 					G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 					_card.playing_card = G.playing_card
 					table.insert(G.playing_cards, _card)
 
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							G.hand:emplace(_card)
-							_card:start_materialize()
-							G.GAME.blind:debuff_card(_card)
-							G.hand:sort()
-							if context.blueprint_card then
-								context.blueprint_card:juice_up()
-							else
-								card:juice_up()
-							end
-							SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
-							save_run()
-							return true
-						end
-					}))
+					G.hand:emplace(_card)
+                    _card:start_materialize()
+                    G.GAME.blind:debuff_card(_card)
+                    G.hand:sort()
+                    if context.blueprint_card then
+                        context.blueprint_card:juice_up()
+                    else
+                        card:juice_up()
+                    end
+                    SMODS.calculate_context({ playing_card_added = true, cards = { _card } })
+                    save_run()
+
+                    return true
                 end
             }
         end
