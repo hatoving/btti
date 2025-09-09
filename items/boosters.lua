@@ -474,26 +474,26 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
-    key = "ittiBP",
-    path = "bttiInsanityBuffoonPack.png",
+    key = "viralBP",
+    path = "bttiViralBuffoonPack.png",
     px = 71,
     py = 95
 }
 SMODS.Booster {
-    key = "buffoon_itti",
+    key = "buffoon_viral",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 15,
+    cost = 8,
     pos = { x = 0, y = 0 },
-    atlas = 'ittiBP',
+    atlas = 'viralBP',
     config = { extra = 2, choose = 1 },
     loc_txt = {
-        name = "Insanity Buffoon Pack",
+        name = "Viral Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:balinsanity}Inn-to the Insanity Jokers",
+            "{C:balinsanity}Internet Jokers",
         },
-        group_name = 'Insanity Buffoon Pack'
+        group_name = 'Viral Buffoon Pack'
     },
     loc_vars = function(self, info_queue, card)
         return {
@@ -504,7 +504,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddition_ITTI",
+            set = "BTTI_modAddition_INTERNET",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -512,6 +512,7 @@ SMODS.Booster {
         })
     end,
 }
+
 SMODS.Atlas {
     key = "deetsBP",
     path = "bttiStablesBuffoonPack.png",
@@ -553,26 +554,26 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
-    key = "smpBP",
-    path = "bttiCrownedBuffoonPack.png",
+    key = "ittiBP",
+    path = "bttiInsanityBuffoonPack.png",
     px = 71,
     py = 95
 }
 SMODS.Booster {
-    key = "buffoon_smp",
+    key = "buffoon_itti",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 25,
+    cost = 15,
     pos = { x = 0, y = 0 },
-    atlas = 'smpBP',
+    atlas = 'ittiBP',
     config = { extra = 2, choose = 1 },
     loc_txt = {
-        name = "Crowned Buffoon Pack",
+        name = "Insanity Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:balinsanity}RegalitySMP Jokers",
+            "{C:balinsanity}Inn-to the Insanity Jokers",
         },
-        group_name = 'Crowned Buffoon Pack'
+        group_name = 'Insanity Buffoon Pack'
     },
     loc_vars = function(self, info_queue, card)
         return {
@@ -583,7 +584,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddition_SMP",
+            set = "BTTI_modAddition_ITTI",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
@@ -634,26 +635,26 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
-    key = "viralBP",
-    path = "bttiViralBuffoonPack.png",
+    key = "smpBP",
+    path = "bttiCrownedBuffoonPack.png",
     px = 71,
     py = 95
 }
 SMODS.Booster {
-    key = "buffoon_viral",
+    key = "buffoon_smp",
     weight = 0.6,
     kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 8,
+    cost = 25,
     pos = { x = 0, y = 0 },
-    atlas = 'viralBP',
+    atlas = 'smpBP',
     config = { extra = 2, choose = 1 },
     loc_txt = {
-        name = "Viral Buffoon Pack",
+        name = "Crowned Buffoon Pack",
         text = {
             "Choose 1 of up to 2",
-            "{C:balinsanity}Internet Jokers",
+            "{C:balinsanity}RegalitySMP Jokers",
         },
-        group_name = 'Viral Buffoon Pack'
+        group_name = 'Crowned Buffoon Pack'
     },
     loc_vars = function(self, info_queue, card)
         return {
@@ -664,7 +665,7 @@ SMODS.Booster {
     end,
     create_card = function(self, card, i)
         return SMODS.create_card({
-            set = "BTTI_modAddition_INTERNET",
+            set = "BTTI_modAddition_SMP",
             area = G.pack_cards,
             skip_materialize = true,
             soulable = true,
