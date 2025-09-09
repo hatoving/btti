@@ -2470,8 +2470,8 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.selling_card and context.main_eval then
-            if G.GAME.blind.in_blind and {not G.GAME.blind.boss or G.Game.blind:get_type("Boss")} then
+        if context.selling_card and context.card == card then
+            if G.GAME.blind.in_blind and (not G.GAME.blind.boss or G.GAME.blind:get_type("Boss")) then
                 WIN_ROUND_NOW()
             end
         end
