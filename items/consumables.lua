@@ -589,7 +589,7 @@ SMODS.Consumable {
             local destroyed_keys = {}
 
             for _, c in ipairs(result.neededToDiscard) do
-                local k = c.key or c:get_key()
+                local k = c.key
                 if not destroyed_keys[k] then
                     c:remove()
                     destroyed_keys[k] = true
@@ -604,7 +604,7 @@ SMODS.Consumable {
                 end
 
                 for _, c in ipairs(shuffled) do
-                    local k = c.key or c:get_key()
+                    local k = c.key
                     if not destroyed_keys[k] then
                         c:remove()
                         destroyed_keys[k] = true
