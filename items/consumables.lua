@@ -393,7 +393,14 @@ SMODS.Consumable {
         }))
     end,
 }
-
+local function card_key(card)
+    if card.key then return card.key end
+    if card.get_key then return card:get_key() end
+    if card.config and card.config.center and card.config.center.key then
+        return card.config.center.key
+    end
+    return nil
+end
 -- Jonker's Workshop
 SMODS.Atlas {
     key = "jonkersWorkshop",
@@ -420,6 +427,16 @@ SMODS.Consumable {
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
 
+        -- helper to get a card's key (robust to different card shapes)
+        local function card_key(card)
+            if card.key then return card.key end
+            if card.get_key then return card:get_key() end
+            if card.config and card.config.center and card.config.center.key then
+                return card.config.center.key
+            end
+            return nil
+        end
+
         -- I'm doing this check three times but idc leave me along ;-;
         if G.jokers ~= nil then
             local results = {}
@@ -431,17 +448,28 @@ SMODS.Consumable {
                 local matched_needed = {}
                 local matched_allowed = {}
 
+                -- track which joker keys we've already matched so we only add one card per key
+                local seen_needed = {}
+                local seen_allowed = {}
+
                 for _, player_card in ipairs(G.jokers.cards) do
+                    local pk = card_key(player_card)
+                    -- check required jokers
                     for _, required in ipairs(needed) do
-                        if player_card.config.center.key == required then
+                        if pk == required and not seen_needed[required] then
                             found[required] = true
                             table.insert(matched_needed, player_card)
+                            seen_needed[required] = true
+                            break -- no need to check other required entries for this card
                         end
                     end
+
+                    -- check allowed jokers (stop at first allowed match for this card)
                     for _, allowed_jk in ipairs(allowed) do
-                        if player_card.config.center.key == allowed_jk then
+                        if pk == allowed_jk and not seen_allowed[allowed_jk] then
                             found[allowed_jk] = true
                             table.insert(matched_allowed, player_card)
+                            seen_allowed[allowed_jk] = true
                             break
                         end
                     end
@@ -485,14 +513,14 @@ SMODS.Consumable {
                 local combo = results[1]
                 local str_parts = {}
 
-                for _, card in ipairs(combo.neededToDiscard) do
+                for _, c in ipairs(combo.neededToDiscard) do
                     table.insert(str_parts,
-                        localize { type = "name_text", set = "Joker", key = card.config.center.key })
+                        localize { type = "name_text", set = "Joker", key = card_key(c) })
                 end
 
-                for _, card in ipairs(combo.allowedToDiscard) do
+                for _, c in ipairs(combo.allowedToDiscard) do
                     table.insert(str_parts,
-                        localize { type = "name_text", set = "Joker", key = card.config.center.key })
+                        localize { type = "name_text", set = "Joker", key = card_key(c) })
                 end
 
                 local str = table.concat(str_parts, " + ")
@@ -586,38 +614,26 @@ SMODS.Consumable {
 
         if #results > 0 then
             local result = results[1]
-            local destroyed_keys = {}
 
+            -- only destroy one card per joker key
+            local destroyed_keys = {}
             for _, c in ipairs(result.neededToDiscard) do
-                local k = c.key
-                if not destroyed_keys[k] then
+                local k = card_key(c)
+                if k and not destroyed_keys[k] then
                     c:remove()
                     destroyed_keys[k] = true
                 end
             end
 
             if #result.allowedToDiscard > 0 then
-                local shuffled = { table.unpack(result.allowedToDiscard) }
-                for i = #shuffled, 2, -1 do
-                    local j = math.random(i)
-                    shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
-                end
-
-                for _, c in ipairs(shuffled) do
-                    local k = c.key
-                    if not destroyed_keys[k] then
-                        c:remove()
-                        destroyed_keys[k] = true
-                        break
-                    end
-                end
+                local idx = math.random(1, #result.allowedToDiscard)
+                result.allowedToDiscard[idx]:remove()
             end
 
             local c = SMODS.add_card { key = result.key }
             c:juice_up()
             SMODS.calculate_context { combined_joker = c }
         end
-
         delay(0.5)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
