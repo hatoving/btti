@@ -12,7 +12,7 @@ SMODS.Edition {
         name = "Digital",
         label = "Digital",
         text = {
-            "{C:red}Destroys{} itself once the",
+            "{C:red}Deletes{} itself once the",
             "{C:attention}ante{} is over"
         }
     },
