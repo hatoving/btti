@@ -1357,7 +1357,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = {} },
+    config = { extra = {Xmult_gain = 0.25, Xmult = 1} },
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do

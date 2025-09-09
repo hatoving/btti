@@ -2267,17 +2267,12 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.setting_blind and context.cardarea == G.jokers then
             card.ability.extra.currentJoker = pseudorandom_element(G.P_JOKER_RARITY_POOLS[1], 'seed').key
-            if not card.ability.extra.currentJoker.discovered then
-                card.ability.extra.currentJoker = nil
-            else
-                sendInfoMessage("sans chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
-                return {
-                    message = '\'sup.',
-                    colour = G.C.BLUE,
-                    sound = 'btti_Sans'
-                }
-            end
-            
+            sendInfoMessage("sans chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
+            return {
+                message = '\'sup.',
+                colour = G.C.BLUE,
+                sound = 'btti_Sans'
+            }
         end
         if card.ability.extra.currentJoker then
             local key = card.ability.extra.currentJoker
