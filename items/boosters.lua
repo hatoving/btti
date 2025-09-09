@@ -732,7 +732,7 @@ SMODS.Booster {
                 end
             end
             if _hand then
-                for _, planet_center in pairs(G.P_CENTER_POOLS.Planet) do
+                for _, planet_center in pairs(G.P_CENTER_POOLS.BTTI_modAddition_DEETSPlanets) do
                     if planet_center.config.hand_type == _hand then
                         _planet = planet_center.key
                     end
@@ -745,7 +745,7 @@ SMODS.Booster {
                 soulable = true,
                 key = _planet,
                 key_append =
-                "btti"
+                "vremade_pl1"
             }
         else
             _card = {
@@ -754,7 +754,7 @@ SMODS.Booster {
                 skip_materialize = true,
                 soulable = true,
                 key_append =
-                "btti"
+                "vremade_pl1"
             }
         end
         return _card

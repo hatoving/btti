@@ -110,7 +110,7 @@ SMODS.ObjectType({
 })
 SMODS.ObjectType({
     key = "BTTI_modAddition_DEETSPlanets",
-
+    default = "c_btti_mysticalia",
     cards = {},
     inject = function(self)
         SMODS.ObjectType.inject(self)
