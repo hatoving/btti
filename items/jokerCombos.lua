@@ -1411,7 +1411,7 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    draw_card(G.play, G.deck, 90, 'up')
+                    draw_card(G.play, G.hand, 90, 'up')
                     SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
 					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'vremade_certificate_seal' }), area = G.discard }
 					G.playing_card = (G.playing_card and G.playing_card + 1) or 1
@@ -1681,7 +1681,7 @@ SMODS.Joker {
                             return true
                         end
                     }))
-                    draw_card(G.play, G.deck, 90, 'up')
+                    draw_card(G.play, G.hand, 90, 'up')
                     SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
 					local _card = SMODS.create_card { set = "Base", seal = SMODS.poll_seal({ guaranteed = true, type_key = 'btti' }), area = G.hand }
 					G.playing_card = (G.playing_card and G.playing_card + 1) or 1
