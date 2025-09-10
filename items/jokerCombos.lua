@@ -1605,7 +1605,7 @@ SMODS.Joker {
             "to your hand",
             "This {C:attention}Joker{} gains {X:mult,C:white}X0.5{} Mult every time",
             "a {C:attention}playing card{} is added to your deck",
-            "{C:inactive}Currectly {X:mult,C:white}X#1#{} Mult",
+            "{C:inactive}Currently {X:mult,C:white}X#1#{} Mult",
             "{C:inactive}(Resume + Hologram)"
         }
     },
