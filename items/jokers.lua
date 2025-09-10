@@ -3327,16 +3327,16 @@ SMODS.Joker {
         if context.joker_main then
             local rets = {}
 
+            local ch = 0
             for _, c in ipairs(G.playing_cards) do
-                local ch = 0
                 if SMODS.has_enhancement(c, "m_btti_horseCard") then
                     ch = ch + 20
                 end
-                if ch > 0 then
-                    table.insert(rets, {
-                        chips = ch,
-                    })
-                end
+            end
+            if ch > 0 then
+                table.insert(rets, {
+                    chips = ch,
+                })
             end
 
             for _, jk in ipairs(G.jokers.cards) do
