@@ -1646,7 +1646,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "VOCALOID" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Crypton Future Media, INC." } }
         local cardCount = 0
         if G.deck and G.deck.cards then
@@ -1717,7 +1717,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "UTAU" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
@@ -1788,7 +1788,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "VOCALOID (Derivative)" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Smith Hioka" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
@@ -2003,7 +2003,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Binding of Isaac: Rebirth" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Binding of Isaac" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Edmund McMillen, Nicalis" } }
         return {
             vars = { },
@@ -2082,7 +2082,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's 3" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Scott Cawthon" } }
         return {
             vars = {},
@@ -2150,7 +2150,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's 4" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Five Nights at Freddy's" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Markiplier" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
@@ -2990,7 +2990,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island: The Power of Two" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Battle for Dream Island" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "jacknjellify" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.Xmult, card.ability.extra.mult },

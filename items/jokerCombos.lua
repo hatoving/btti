@@ -2052,7 +2052,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Vocaloids" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "VOCALOID / UTAU" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "LamazeP" } }
         local cardCountM = 0
         local cardCountT = 0
