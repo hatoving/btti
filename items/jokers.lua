@@ -3328,7 +3328,7 @@ SMODS.Joker {
                 if SMODS.has_enhancement(c, "m_btti_horseCard") then
                     ch = ch + 20
                 end
-                if chips > 0 then
+                if ch > 0 then
                     table.insert(rets, {
                         chips = ch,
                     })
