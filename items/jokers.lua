@@ -4314,7 +4314,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.joker_main and context.other_joker == card then
+        if context.joker_main then
             local ch = hand_chips
             local m = mult
             if ch > m then
