@@ -1,6 +1,6 @@
 SMODS.Atlas {
     key = 'VirusDeck',
-    path = 'bttiDonor1.png',
+    path = 'bttiVirusDeck.png',
     px = 71,
     py = 95,
 }

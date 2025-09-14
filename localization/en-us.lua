@@ -119,8 +119,8 @@ return {
             },
             btti_customQuip_13 = {
                 'maybe the balatro is',
-                'the jimbos we made along',
-                'the way'
+                'the jimbos we made',
+                'along the way'
             },
             btti_customQuip_14 = {
                 'aw man, this stinks',

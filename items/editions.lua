@@ -21,12 +21,16 @@ SMODS.Edition {
     apply_to_float = false,
     sound = { sound = "holo1", per = 1.2 * 1.58, vol = 0.4 },
     loc_vars = function(self, info_queue, card)
-        return { vars = { currentAnte = nil } }
+        return { vars = { } }
     end,
     config = { extra = { ante = 0 } },
     get_weight = function(self)
         return G.GAME.edition_rate * self.weight
     end,
     calculate = function(self, card, context)
+        if context.ante_change and context.ante_end then
+            sendInfoMessage("Ante change!", "BTTI")
+            G.GAME.btti_isBlindBoss = false
+        end
     end
 }
