@@ -10,7 +10,8 @@ SMODS.Back({
     loc_txt = {
         name = "Virus Deck",
         text = {
-            "Start with a Digital Deck"
+            "Start with",
+            "all {C:blue}Digital{} cards"
         },
     },
 

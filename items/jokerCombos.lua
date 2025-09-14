@@ -1828,6 +1828,9 @@ SMODS.Joker {
     },
 
     config = { extra = { } },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -1960,6 +1963,9 @@ SMODS.Joker {
     },
 
     config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2139,6 +2145,9 @@ SMODS.Joker {
     },
 
     config = { extra = { currentJoker = nil} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
