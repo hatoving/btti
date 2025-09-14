@@ -32,6 +32,7 @@ SMODS.Gradient {
 G.C.BTTICYAN = HEX('17e6e6')
 G.C.BTTIPINK = HEX('FFA5A5')
 G.C.BTTIDEETS = HEX('9e5c00')
+G.C.BTTISPOINGUS = HEX('a4000f')
 SMODS.Gradient {
 	key = "MAIN_MOD_C",
 	colours = {

@@ -6,7 +6,7 @@ SMODS.Rarity {
     },
     pools = {Joker = true},
     badge_colour = G.C.BTTICYAN,
-    default_weight = 0.0117
+    default_weight = 0.02
 }
 
 -- Spoingus
@@ -16,6 +16,6 @@ SMODS.Rarity {
         name = "Spoingus"
     },
     pools = {Joker = true},
-    badge_colour = G.C.PALE_GREEN,
+    badge_colour = G.C.BTTISPOINGUS,
     default_weight = 0.0117
 }
