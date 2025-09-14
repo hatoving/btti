@@ -439,7 +439,33 @@ SMODS.Sound {
     pitch = 1,
     volume = 1.0,
     select_music_track = function(self)
-        return G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_btti_spamtonBlind'
+        if G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_btti_spamtonBlind' then
+            if G.jokers then
+                for _, j in ipairs(G.jokers.cards) do
+                    if j.config and j.config.center and j.config.center.key == "j_btti_Tenna" then
+                        return false
+                    end
+                end
+            end
+            return true
+        end
+    end
+}
+SMODS.Sound {
+    key = "music_Spamtenna",
+    path = "music_bttiSpamtenna.ogg",
+    pitch = 1,
+    volume = 1.0,
+    select_music_track = function(self)
+        if G.GAME.blind and G.GAME.blind.in_blind and G.GAME.blind.config.blind.key == 'bl_btti_spamtonBlind' then
+            if G.jokers then
+                for _, j in ipairs(G.jokers.cards) do
+                    if j.config and j.config.center and j.config.center.key == "j_btti_Tenna" then
+                        return true
+                    end
+                end
+            end
+        end
     end
 }
 SMODS.Atlas {
@@ -470,6 +496,12 @@ SMODS.Blind {
     calculate = function(self, blind, context)
         if not blind.disabled then
             if G.jokers then
+                for _, j in ipairs(G.jokers.cards) do
+                    if j.config.center.key == "j_btti_Tenna" then
+                        j.debuff = true
+                    end
+                end
+
                 if context.before then
                     local ret = {}
                     for i = 1, #G.jokers.cards do
