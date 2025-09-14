@@ -1352,7 +1352,7 @@ SMODS.Joker {
             vars = { card.ability.extra.xmult },
         }
     end,
-    rarity = 3,
+    rarity = 'btti_dynamic',
     atlas = 'Steam',
     pos = { x = 0, y = 0 },
     cost = 10,
