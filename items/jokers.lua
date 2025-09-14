@@ -3303,7 +3303,7 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.selling_card then
+        if context.selling_card and context.card == card then
             G.GAME.horseCondemn = true
             for _, c in ipairs(G.playing_cards) do
                 if SMODS.has_enhancement(c, "m_btti_horseCard") then
