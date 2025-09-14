@@ -6182,9 +6182,9 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.cardarea == G.play and context.individual and context.other_card then
             local _trigger = false
-            if context.other_card:get_suit() == 'Hearts' then _trigger = true end
-            if context.other_card:get_suit() == 'Diamonds' then _trigger = true end
-            if context.other_card:get_suit() == 'Clubs' then _trigger = true end
+            if context.other_card:is_suit('Hearts') then _trigger = true end
+            if context.other_card:is_suit('Diamonds') then _trigger = true end
+            if context.other_card:is_suit('Clubs') then _trigger = true end
             if _trigger then
                 context.other_card:juice_up()
                 return {
