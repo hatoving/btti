@@ -2041,7 +2041,7 @@ SMODS.Joker {
             "your {C:attention}full deck{}",
             "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}",
             "{C:inactive}(Hatsune Miku + Kasane Teto",
-            "{C:inactive}Akira Neru)"
+            "{C:inactive}+ Akira Neru)"
         }
     },
 
