@@ -1,14 +1,15 @@
+-- Restart Deck
 SMODS.Atlas {
-    key = 'VirusDeck',
-    path = 'bttiVirusDeck.png',
+    key = 'RestartDeck',
+    path = 'bttiRestartDeck.png',
     px = 71,
     py = 95,
 }
 
 SMODS.Back({
-    key = "virusDeck",
+    key = "restartDeck",
     loc_txt = {
-        name = "Virus Deck",
+        name = "Restart Deck",
         text = {
             "Start with",
             "all {C:blue}Digital{} cards"
@@ -18,7 +19,7 @@ SMODS.Back({
     config = { hands = 0, discards = 0, consumeables = 'c_opentolan' },
     pos = { x = 0, y = 0 },
     order = 1,
-    atlas = "VirusDeck",
+    atlas = "RestartDeck",
     unlocked = true,
 
     apply = function(self)
