@@ -29,6 +29,7 @@ SMODS.Gradient {
 	cycle = 8
 }
 
+G.C.BTTIBLACK = HEX('000000')
 G.C.BTTICYAN = HEX('17e6e6')
 G.C.BTTIPINK = HEX('FFA5A5')
 G.C.BTTIDEETS = HEX('9e5c00')
@@ -52,6 +53,7 @@ function loc_colour(_c, _default)
 		loc_colour_ref()
 	end
 
+	G.ARGS.LOC_COLOURS.black = G.C.BTTIBLACK
 	G.ARGS.LOC_COLOURS.bisexual = G.C.BTTIBI
 	G.ARGS.LOC_COLOURS.gay = G.C.BTTIGAY
 	G.ARGS.LOC_COLOURS.deets = G.C.BTTIDEETS

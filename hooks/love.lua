@@ -83,6 +83,8 @@ G.BTTI.steamCheckTimer = 0.0
 G.BTTI.installedSteamApps = G.BTTI.countInstalledSteamApps()
 G.BTTI.foundSteamApps = G.BTTI.installedSteamApps ~= 0
 
+G.BTTI.ytDataCheckTimer = 0.0
+
 local screenWidth, screenHeight = love.graphics.getDimensions()
 
 local function jokerAnimUpdate(dt)
@@ -114,6 +116,12 @@ end
 local updateReal = love.update
 function love.update(dt)
     updateReal(dt)
+    G.BTTI.ytDataCheckTimer = G.BTTI.ytDataCheckTimer - dt
+    if G.BTTI.ytDataCheckTimer <= 0.0 then
+        G.BTTI.HTTPS.getYouTubeData()
+        G.BTTI.ytDataCheckTimer = 3600 -- this roughly an hour in seconds
+    end
+
     if G then
         jokerAnimUpdate(dt)
 

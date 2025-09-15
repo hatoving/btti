@@ -45,6 +45,17 @@ SMODS.ObjectType({
         -- insert base game food jokers
     end,
 })
+
+SMODS.ObjectType({
+    key = "BTTI_modAddition_DYNAMIC",
+
+    cards = {},
+    inject = function(self)
+        SMODS.ObjectType.inject(self)
+        -- insert base game food jokers
+    end,
+})
+
 SMODS.ObjectType({
     key = "BTTI_modAddition_COMBO",
 
