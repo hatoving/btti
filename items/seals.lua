@@ -19,7 +19,7 @@ SMODS.Seal {
             "Adds {C:green}50%{} of this card's",
             "{C:chips}Chips{} to score if hand",
             "contains only {C:attention}Orange Seals{},",
-            "Otherwise {C:red}-50%{}"
+            "otherwise {C:red}-50%{}"
         }
     },
 

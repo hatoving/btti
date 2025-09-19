@@ -4920,7 +4920,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Frickin\' Fun Band',
         text = {
-            "Avoiding plaiyng with a {V:1}#1#",
+            "Avoiding playing with a {V:1}#1#",
             "will grant you a {C:attention}card{} of that suit",
             "Suit changes at the start of {C:attention}round{}",
         }
