@@ -140,7 +140,7 @@ SMODS.Joker {
             "{C:green}1 in 20{} Chance to turn {C:attention}played",
             "{C:attention}cards{} into {C:attention}Steel Cards{}",
             "{C:inactive}Soothens your ears",
-            "{C:inactive}Currently{} {X:Mult,C:white}X#3#{}{C:inactive} Mult"
+            "{C:inactive}Currently{} {X:mult,C:white}X#3#{}{C:inactive} Mult"
         }
     },
 
@@ -5559,7 +5559,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Royal Regality',
         text = {
-            "{C:mult}+#1#{} mult",
+            "{C:mult}+#1#{} Mult",
             "If {C:attention}played hand{} is a {C:attention}Flush{}, this {C:attention}Joker{} will",
             "add the base {C:chips}Chips{} and {C:mult}Mult{} of {C:attention}Royal Flush{}",
             "(at the same level as {C:attention}Flush{}) to {C:attention}score{}",
