@@ -11,7 +11,7 @@
     "main_file": "BTTI.lua",
     "badge_colour": "c7638f",
     "dependencies": [
-        "Steamodded (>=1.0.0~BETA-0711a)"
+        "Steamodded (>=1.0.0~BETA-0827c)"
     ],
     "conflicts": [
     ],
