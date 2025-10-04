@@ -34,15 +34,22 @@ return {
                 name = " ",
                 text = {
                     "{C:balinsanity}Music...",
+                    "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",
                     "It's TV Time! (DELTARUNE Ch. 3) - Toby Fox",
-                    "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "I Want LeBron (Jackson 5 LeRemix) - ramonisspicyy",
                     " ",
                     "{C:balinsanity}Special thanks to...",
                     "aikoyori, N', garb, charlinear",
                     "Somthingcom515",
                     "The Balatro Discord Server"
+                }
+            },
+            bttiFromBy = {
+                name = "From Where?! By Who!?",
+                text = {
+                    "{X:dark_edition,C:white}#1#{}",
+                    "{C:dark_edition}#2#{}"
                 }
             },
             bttiFromWhere = {
