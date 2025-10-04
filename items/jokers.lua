@@ -1446,6 +1446,86 @@ SMODS.Joker {
     end
 }
 
+-- Number Go Up
+SMODS.Atlas {
+    key = "NumberGoUp",
+    path = "bttiNumberGoUp.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'NumberGoUp',
+    loc_txt = {
+        name = 'Number Go Up',
+        text = {
+            "{C:chips}+5{} Chips, {X:chips,C:white}X0.1{} Chips, {C:mult}+1{} Mult",
+            "{X:mult,C:white}X0.1{} Mult, and {C:attention}+$1{} for every",
+            "{X:red,C:white}50K{} views on {X:black,C:attention}The Stupendium{}'s",
+            "Balatro song, {C:dark_edition}\"Number Go Up\"",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:chips,C:white}X#2#{C:inactive} Chips,",
+            "{C:mult}+#3#{C:inactive} Mult, {X:mult,C:white}X#4#{C:inactive} Mult, {C:attention}+$#5#{C:inactive}"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "TheStupendium" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
+
+        local times = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.NUMBER_GO_UP / 50000)
+        local chips = times * 5
+        local Xchips = times * 0.1
+        local mult = times
+        local Xmult = times * 0.1
+        local dollars = times
+
+        return {
+            vars = { chips, Xchips, mult, Xmult, dollars },
+        }
+    end,
+    rarity = 'btti_dynamic',
+    atlas = 'NumberGoUp',
+    pos = { x = 0, y = 0 },
+    cost = 7,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local times = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.NUMBER_GO_UP / 50000)
+            local c = times * 5
+            local Xc = times * 0.1
+            local m = times
+            local Xm = times * 0.1
+            local d = times
+
+            return {
+                chips = c,
+                xchips = Xc,
+                mult = m,
+                xmult = Xm,
+                dollars = d
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- Woker
 SMODS.Atlas {
     key = "Woker",
@@ -1956,85 +2036,6 @@ SMODS.Joker {
     end
 }
 
--- Number Go Up
-SMODS.Atlas {
-    key = "NumberGoUp",
-    path = "bttiNumberGoUp.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'NumberGoUp',
-    loc_txt = {
-        name = 'Number Go Up',
-        text = {
-            "{C:chips}+5{} Chips, {X:chips,C:white}X0.1{} Chips, {C:mult}+1{} Mult",
-            "{X:mult,C:white}X0.1{} Mult, and {C:attention}+$1{} for every",
-            "{X:red,C:white}50K{} views on {X:black,C:attention}The Stupendium{}'s",
-            "Balatro song, {C:dark_edition}\"Number Go Up\"",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:chips,C:white}X#2#{C:inactive} Chips,",
-            "{C:mult}+#3#{C:inactive} Mult, {X:mult,C:white}X#4#{C:inactive} Mult, {C:attention}+$#5#{C:inactive}"
-        }
-    },
-
-    config = { extra = { } },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "TheStupendium" } }
-        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
-
-        local times = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.NUMBER_GO_UP / 50000)
-        local chips = times * 5
-        local Xchips = times * 0.1
-        local mult = times
-        local Xmult = times * 0.1
-        local dollars = times
-
-        return {
-            vars = { chips, Xchips, mult, Xmult, dollars },
-        }
-    end,
-    rarity = 'btti_dynamic',
-    atlas = 'NumberGoUp',
-    pos = { x = 0, y = 0 },
-    cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    calculate = function(self, card, context)
-        if context.joker_main then
-            local times = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.NUMBER_GO_UP / 50000)
-            local c = times * 5
-            local Xc = times * 0.1
-            local m = times
-            local Xm = times * 0.1
-            local d = times
-
-            return {
-                chips = c,
-                xchips = Xc,
-                mult = m,
-                xmult = Xm,
-                dollars = d
-            }
-        end
-    end,
-    in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
-}
 
 --#endregion
 
