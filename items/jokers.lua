@@ -2076,7 +2076,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 0, chips = 0 } },
+    config = { extra = { brimstone = {} } },
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2105,22 +2105,44 @@ SMODS.Joker {
     perishable_compat = false,
 
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.before and context.cardarea == G.jokers then
             local dir = pseudorandom("btti_" .. card.ability.name, 0, 1) == 1 and 1 or -1
             local j = G.jokers.cards[getJokerID(card) + dir]
             if j then
                 j:juice_up()
                 
-                if not j.ability.brimstone_mult then
-                    j.ability.brimstone_mult = 0
+                if not card.ability.extra.brimstone[j.ability.name] then
+                    card.ability.extra.brimstone[j.ability.name] = 0
                 end
-                j.ability.brimstone_mult = j.ability.brimstone_mult + j.sell_cost
-
+                card.ability.extra.brimstone[j.ability.name] = card.ability.extra.brimstone[j.ability.name] + j.sell_cost
+                sendInfoMessage("brimstone: " .. j.ability.name .. ", " .. card.ability.extra.brimstone[j.ability.name], "BTTI")
+                
                 return {
                     message = "Upgrade!",
                     colour = G.C.RED
                 }
             end
+        end
+        if context.joker_main then
+            local ret = {}
+            for n, m in pairs(card.ability.extra.brimstone) do
+                local j = G.jokers.cards[getJoker(n)]
+                if j then
+                    table.insert(ret, {
+                        mult = m,
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'immediate',
+                            blocking = false,
+                            delay = 0,
+                            func = function()
+                                j:juice_up()
+                                return true
+                            end,
+                        }))
+                    })
+                end
+            end
+            return SMODS.merge_effects(ret)
         end
     end,
     in_pool = function(self, args)

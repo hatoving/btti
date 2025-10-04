@@ -1,4 +1,4 @@
 {
-    "Lua.workspace.library" : ["C:\\Users\\kutia\\AppData\\Roaming\\Balatro\\Mods\\smods",
-        "C:\\Users\\kutia\\AppData\\Roaming\\Balatro\\Mods\\lovely\\dump", "${3rd}/love2d/library"]
+    "Lua.workspace.library" : ["/home/deck/.steam/steam/steamapps/compatdata/2379780/pfx/drive_c/users/steamuser/AppData/Roaming/Balatro/Mods/smods/",
+        "/home/deck/.steam/steam/steamapps/compatdata/2379780/pfx/drive_c/users/steamuser/AppData/Roaming/Balatro/Mods/lovely/dump/", "${3rd}/love2d/library"]
 }

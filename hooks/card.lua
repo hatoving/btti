@@ -114,16 +114,6 @@ function Card:calculate_joker(context)
         G.GAME.btti_isBlindBoss = false
     end
     local ret = calcJokerRef(self, context)
-    if context.joker_main then
-        if ret and self.ability.brimstone_mult then
-            return SMODS.merge_effects({
-                ret,
-                {
-                    mult = self.ability.brimstone_mult
-                }
-            })
-        end
-    end
     return ret
 end
 
