@@ -1343,7 +1343,7 @@ SMODS.Joker {
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Valve" } }
         info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "Gabe Newell" } }
-        if G.BTTI.foundSteamApps then
+        if G.BTTI.foundSteamApps and G.BTTI.installedSteamApps ~= nil then
             card.ability.extra.xmult = 1.0 + (G.BTTI.installedSteamApps / 10)
         else
             card.ability.extra.xmult = 3.0
@@ -1366,7 +1366,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            if G.BTTI.foundSteamApps then
+            if G.BTTI.foundSteamApps and G.BTTI.installedSteamApps ~= nil then
                 card.ability.extra.xmult = 1.0 + (G.BTTI.installedSteamApps / 10)
             else
                 card.ability.extra.xmult = 3.0
