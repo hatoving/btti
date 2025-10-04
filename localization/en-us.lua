@@ -65,7 +65,7 @@ return {
                 },
             },
             bttiPossibleCombo = {
-                name = "Possible Combination!",
+                name = "Possible Combination!!!",
                 text = {
                     "{X:green,C:white}#1#{}"
                 },
