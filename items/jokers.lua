@@ -1446,6 +1446,58 @@ SMODS.Joker {
     end
 }
 
+-- Woker
+SMODS.Atlas {
+    key = "Woker",
+    path = "bttiWoker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Woker',
+	loc_txt = {
+		name = 'Woker',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "The Internet" } }
+        info_queue[#info_queue + 1] = { key = 'bttiByWho', set = 'Other', vars = { "BlueBen8" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Woker',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
 --#endregion
 
 -- FAMILY GUY JOKERS
