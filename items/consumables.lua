@@ -425,6 +425,8 @@ SMODS.Consumable {
     pools = { ["BTTI_modAddition_tarots"] = true },
     atlas = 'community',
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "You're My Favorite Person", "Juicimated" } }
+        
         return {
             vars = {
             }
@@ -456,7 +458,7 @@ SMODS.Consumable {
     },
     atlas = 'jonkersWorkshop',
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Brain" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Brain", "BlueBen8" } }
 
         -- helper to get a card's key (robust to different card shapes)
         local function card_key(card)

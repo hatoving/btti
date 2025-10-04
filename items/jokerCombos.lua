@@ -29,7 +29,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -91,7 +90,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -151,7 +149,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -211,7 +208,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -272,7 +268,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -333,7 +328,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -394,7 +388,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -455,7 +448,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -518,7 +510,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -597,7 +588,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -658,7 +648,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -718,7 +707,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -779,7 +767,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { },
         }
@@ -845,7 +832,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -927,7 +913,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -1008,7 +993,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -1101,7 +1085,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.chips },
         }
@@ -1218,7 +1201,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { },
         }
@@ -1294,7 +1276,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         local sell_cost = 0
         for _, joker in ipairs(G.jokers and G.jokers.cards or {}) do
             if joker ~= card then
@@ -1367,7 +1348,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -1472,7 +1452,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }
@@ -1533,7 +1512,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }
@@ -1620,7 +1598,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.Xmult },
         }
@@ -1751,7 +1728,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = { card.ability.extra.xmult + (0.5 * (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.tarot or 0)) },
         }
@@ -1840,7 +1816,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {  },
         }
@@ -1900,7 +1875,6 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        --info_queue[#info_queue + 1] = { key = 'bttiFromWhere', set = 'Other', vars = { "Combo!!" } }
         return {
             vars = {},
         }

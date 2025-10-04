@@ -52,18 +52,6 @@ return {
                     "{C:dark_edition}#2#{}"
                 }
             },
-            bttiFromWhere = {
-                name = "From Where?!",
-                text = {
-                    "{X:dark_edition,C:white}#1#{}"
-                },
-            },
-            bttiByWho = {
-                name = "By Who?!",
-                text = {
-                    "{C:dark_edition}#1#{}"
-                },
-            },
             bttiPossibleCombo = {
                 name = "Possible Combination!!!",
                 text = {
