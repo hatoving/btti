@@ -6469,10 +6469,10 @@ SMODS.Joker {
                             for i, c in ipairs(G.play.cards) do
                                 c:juice_up()
                                 c:set_seal("btti_orangeSeal", false, true)
-                                card_eval_status_text(card, 'extra', nil, nil, nil,
-                                    { message = "I joozed", colour = G.C.ORANGE })
                                 delay(0.1)
                             end
+                            card_eval_status_text(card, 'extra', nil, nil, nil,
+                                { message = "I joozed", colour = G.C.ORANGE })
                             return true
                         end,
                     }))
@@ -6890,8 +6890,7 @@ SMODS.Joker {
                 if key then
                     if key == "j_btti_AutismCreature" or key == "j_btti_BentismCreature" or key == "j_btti_LightShine" then
                         table.insert(rets, {
-                            chip_mod = 30,
-                            message = "+30 Chips",
+                            chip = 30,
                             colour = G.C.BTTIGAY
                         })
                         break -- only want to do it once
