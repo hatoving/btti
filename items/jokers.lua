@@ -2431,7 +2431,10 @@ SMODS.Joker {
                     end
                 end
             end
-            return G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context)
+            local ret = G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context)
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Sans']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+            return ret
         end
     end
 }
