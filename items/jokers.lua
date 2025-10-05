@@ -2392,6 +2392,12 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = false,
 
+    -- We need this because Sans decided it'd be funny to cosplay as a pink furry
+    update = function (self, card, dt)
+        card.children.center.atlas = G.ASSET_ATLAS['btti_Sans']
+        card.children.center:set_sprite_pos({ x = 0, y = 0 })
+    end,
+
     -- Thank you to Somthingcom515 for the help with implementing this!!
     calculate = function(self, card, context)
         if context.setting_blind and context.cardarea == G.jokers then
@@ -2431,10 +2437,7 @@ SMODS.Joker {
                     end
                 end
             end
-            local ret = G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context)
-            card.children.center.atlas = G.ASSET_ATLAS['btti_Sans']
-            card.children.center:set_sprite_pos({ x = 0, y = 0 })
-            return ret
+            return G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context)
         end
     end
 }
