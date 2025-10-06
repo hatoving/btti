@@ -1932,7 +1932,7 @@ SMODS.Joker {
             "retriggers hand {C:blue}4{} times",
             "if {C:attention}played hand{} has exactly {C:blue}4{} cards",
             "{C:inactive} It\'s pronounced GIF",
-            "{C:inactive}(Square Joker + ... Say that again.)"
+            "{C:inactive}(Square Joker + ...Say that again?)"
         }
     },
 

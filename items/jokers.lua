@@ -1376,7 +1376,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'SayThatAgain',
     loc_txt = {
-        name = '... Say that again.',
+        name = '...Say that again?',
         text = {
             "Retriggers played hand {C:blue}4{} times",
             "if played hand has exactly {C:blue}4{} cards"
