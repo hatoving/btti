@@ -2717,7 +2717,7 @@ SMODS.Joker {
         name = 'The Funny One',
         text = {
             "{C:mult}+5{} Mult for every {C:attention}Joker{}",
-            "you've held this run",
+            "you've held this run after purchase",
             "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
         }
     },
@@ -4316,6 +4316,8 @@ SMODS.Joker {
             "{C:attention}hand{} has more {C:mult}Mult{} than {C:chips}Chips{}",
             "{C:mult}-#2#{} Mult if played hand has more",
             "{C:chips}Chips{} than {C:mult}Mult{}",
+            "{C:mult}+5{} Mult Bonus per {C:deets}Stained Card{}",
+            "in played hand",
             "{C:inactive}Currently{} {C:mult}+#1#{}{C:inactive} Mult{}"
         }
     },
@@ -4351,8 +4353,16 @@ SMODS.Joker {
         if context.joker_main then
             if card.ability.extra.mult > 0 then
                 return {
-                    mult_mod = card.ability.extra.mult,
-                    message = "Mugtastic!"
+                    mult = card.ability.extra.mult
+                }
+            end
+        end
+
+        if context.individual and context.cardarea == G.play then
+            local pc = context.other_card
+            if pc and SMODS.has_enhancement(pc, "m_btti_stainedCard") then
+                return {
+                    mult = 5
                 }
             end
         end
