@@ -1120,7 +1120,7 @@ SMODS.Joker {
                         play_sound('btti_pancakes')
                         bttiEffectManagerPlay('explosion', card.tilt_var.mx, card.tilt_var.my)
                         play_sound('btti_JDASHLose', math.random(1.0, 1.2))
-                        SMODS.destroy_cards(card)
+                        SMODS.destroy_cards(card, true, true)
                         return true
                     end,
                 }))
