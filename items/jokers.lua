@@ -1052,6 +1052,7 @@ SMODS.Joker {
 }
 
 -- Pancakes
+SMODS.Sound({ key = "pancakes", path = "bttiPancakes.ogg" })
 SMODS.Atlas {
     key="pancakes",
     path="bttiPancakes.png", --placeholder
@@ -1116,11 +1117,10 @@ SMODS.Joker {
                     blocking = false,
                     delay = 0,
                     func = function()
+                        play_sound('btti_pancakes')
+                        bttiEffectManagerPlay('explosion', card.tilt_var.mx, card.tilt_var.my)
+                        play_sound('btti_JDASHLose', math.random(1.0, 1.2))
                         SMODS.destroy_cards(card)
-                        card_eval_status_text(card, 'extra', nil, nil, nil, {
-                            message = "Exploded with mind",
-                            colour = G.C.RED,
-                        })
                         return true
                     end,
                 }))
