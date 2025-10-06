@@ -4402,11 +4402,14 @@ SMODS.Joker {
         text = {
             "If {C:attention}played hand{} has more",
             "{C:chips}Chips{} than {C:mult}Mult{}, switch",
-            "{C:chips}Chips{} and {C:mult}Mult{}"
+            "{C:chips}Chips{} and {C:mult}Mult{}",
+            "Adds {X:mult,C:white}X0.2{} Mult per every",
+            "time {C:chips}fire{} {C:mult}score{} is triggered",
+            "{C:inactive}Currently{} {X:mult,C:white}X#1#{}{C:inactive} Mult{}"
         }
     },
 
-    config = { extra = { mult = 10, odds = 10 } },
+    config = { extra = { xmult = 1.0 } },
     loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -4418,7 +4421,7 @@ SMODS.Joker {
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
         return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
+            vars = { card.ability.extra.xmult },
         }
     end,
     rarity = 2,
@@ -4451,6 +4454,17 @@ SMODS.Joker {
                 return {
                     message = "Nope!",
                     colour = G.C.YELLOW
+                }
+            end
+        end
+
+        if context.after then
+            if SMODS.last_hand_oneshot then
+                card.ability.extra.xmult = card.ability.extra.xmult + 0.2
+                return {
+                    message = "Hot, hot!!",
+                    colour = G.C.YELLOW,
+                    card = card
                 }
             end
         end
