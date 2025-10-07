@@ -1563,7 +1563,7 @@ SMODS.Joker {
                     delay = 0.0,
                     func = function ()
                         card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = "The woke left...", colour = G.C.DARK_EDITION })
+                            { message = "Queerious!", colour = G.C.DARK_EDITION })
                         for i = 1, #G.hand.cards do
                             G.hand.cards[i]:set_edition('e_polychrome')
                             G.hand.cards[i]:juice_up()
