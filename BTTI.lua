@@ -53,6 +53,7 @@ function loc_colour(_c, _default)
 		loc_colour_ref()
 	end
 
+	G.ARGS.LOC_COLOURS.pink = G.C.BTTIPINK
 	G.ARGS.LOC_COLOURS.black = G.C.BTTIBLACK
 	G.ARGS.LOC_COLOURS.bisexual = G.C.BTTIBI
 	G.ARGS.LOC_COLOURS.gay = G.C.BTTIGAY
