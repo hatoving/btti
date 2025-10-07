@@ -56,3 +56,17 @@ SMODS.calculate_effect = function(effect, scored_card, from_edition, pre_jokers)
     end
     return ret
 end
+
+SMODS.collection_pool = function(_base_pool)
+    local pool = {}
+    if type(_base_pool) ~= 'table' then return pool end
+    local is_array = _base_pool[1]
+    local ipairs = is_array and ipairs or pairs
+    for _, v in ipairs(_base_pool) do
+        if (not G.ACTIVE_MOD_UI or v.mod == G.ACTIVE_MOD_UI) and (not v.no_collection or _base_pool == G.P_CENTER_POOLS.BTTI_modAddition_COMBO) then
+            pool[#pool+1] = v
+        end
+    end
+    if not is_array then table.sort(pool, function(a,b) return a.order < b.order end) end
+    return pool
+end

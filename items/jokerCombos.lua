@@ -44,6 +44,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -105,6 +106,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -164,6 +166,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -223,6 +226,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -283,6 +287,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -343,6 +348,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -403,6 +409,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -463,6 +470,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -523,6 +531,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -583,6 +592,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -642,6 +652,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -702,6 +713,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -767,6 +779,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -848,6 +861,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -928,6 +942,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1020,6 +1035,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1136,6 +1152,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1217,6 +1234,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1283,6 +1301,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1387,6 +1406,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1447,6 +1467,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1550,6 +1571,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1663,6 +1685,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1751,6 +1774,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     add_to_deck = function(self, card, from_debuff)
         G.hand:change_size(2)
@@ -1810,6 +1834,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
@@ -1891,6 +1916,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
+    no_collection = true,
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
@@ -1983,6 +2009,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     calculate = function(self, card, context)
         if context.joker_main then
@@ -2065,6 +2092,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
+    no_collection = true,
 
     -- Thank you to Somthingcom515 for the help with implementing this!!
     calculate = function(self, card, context)
@@ -2163,6 +2191,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = false,
     perishable_compat = false,
+    no_collection = true,
 
     set_badges = function(self, card, badges)
         badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)

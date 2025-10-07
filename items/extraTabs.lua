@@ -26,11 +26,52 @@ SMODS.current_mod.extra_tabs = function()
                 }
             end,
         },
-        {
-            label = 'Config',
-            tab_definition_function = function ()
-                
-            end,
-        },
+    }
+end
+create_UIBox_your_collection_combo_jokers = function() 
+    return SMODS.card_collection_UIBox(G.P_CENTER_POOLS.BTTI_modAddition_COMBO, {5,5,5}, {
+        no_materialize = true, 
+        modify_card = function(card, center) card.sticker = get_joker_win_sticker(center) end,
+        h_mod = 0.95,
+    })
+end
+
+G.FUNCS.your_collection_combo_jokers = function()
+    G.SETTINGS.paused = true
+    G.FUNCS.overlay_menu {
+        definition = create_UIBox_your_collection_combo_jokers()
+    }
+end
+
+local function get_pool()
+    local jkrs = {}
+    for _, jkr in pairs(G.P_CENTER_POOLS.BTTI_modAddition_COMBO) do
+        jkrs[#jkrs+1] = jkr
+    end
+    return jkrs
+end
+
+local function get_tally_of_combo()
+    local tally, of = 0, 0
+    for _, card in pairs(get_pool()) do
+        of = of + 1
+        if card.discovered then
+            tally = tally + 1
+        end
+    end
+    return {tally = tally, of = of}
+end
+
+SMODS.current_mod.custom_collection_tabs = function()
+    local count = get_tally_of_combo()
+    return {
+      UIBox_button({
+        button = 'your_collection_combo_jokers',
+        id = 'your_collection_combo_jokers',
+        label = { "Combination Jokers" },
+        count = { tally = count.tally, of = count.of },
+        minw = 5,
+        minh = 1
+      })
     }
 end
