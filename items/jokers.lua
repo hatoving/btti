@@ -2634,7 +2634,11 @@ SMODS.Joker {
     -- Thank you to Somthingcom515 for the help with implementing this!!
     calculate = function(self, card, context)
         if context.setting_blind and context.cardarea == G.jokers then
-            card.ability.extra.currentJoker = pseudorandom_element(G.P_JOKER_RARITY_POOLS[1], 'seed').key
+            local jkr
+            repeat
+                jkr = pseudorandom_element(G.P_JOKER_RARITY_POOLS[1], 'seed')
+            until jkr.discovered
+            card.ability.extra.currentJoker = jkr.key
             sendInfoMessage("sans chose: " .. card.ability.extra.currentJoker .. "", "BTTI")
             return {
                 message = '\'sup.',
