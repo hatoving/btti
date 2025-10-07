@@ -1285,7 +1285,7 @@ SMODS.Joker {
             G.GAME.btti_pfpBirdBudgie = math.clamp(G.GAME.btti_pfpBirdBudgie, 0, 50)
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.GAME.discount_percent = G.GAME.btti_pfpBirdBudgie
+                    G.GAME.discount_percent = G.GAME.discount_percent + 5
                     for _, v in pairs(G.I.CARD) do
                         if v.set_cost then v:set_cost() end
                     end
