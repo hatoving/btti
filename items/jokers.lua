@@ -1540,7 +1540,7 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'Woker',
 	pos = { x = 0, y = 0 },
 	cost = 4,
