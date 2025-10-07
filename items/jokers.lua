@@ -2627,8 +2627,10 @@ SMODS.Joker {
 
     -- We need this because Sans decided it'd be funny to cosplay as a pink furry
     update = function (self, card, dt)
-        card.children.center.atlas = G.ASSET_ATLAS['btti_Sans']
-        card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        if card.discovered then
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Sans']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        end
     end,
 
     -- Thank you to Somthingcom515 for the help with implementing this!!
