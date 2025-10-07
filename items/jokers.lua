@@ -1693,7 +1693,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "McDonald's", "Chris Kempczinski" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "McDonald's", "Ronald McDonald" } }
 		return {
             vars = { },
         }
@@ -1744,7 +1744,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "McDonald's", "Chris Kempczinski" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "McDonald's", "Ronald McDonald" } }
 		return {
             vars = { },
         }

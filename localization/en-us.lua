@@ -33,6 +33,12 @@ return {
             bttiCredits = {
                 name = " ",
                 text = {
+                    "{C:mult}hatoving",
+                    "Creator / Programmer / Artist",
+                    " ",
+                    "{C:chips}BlueBen8                    {C:attention}Juicimated",
+                    "Programmer / Ideas        Programmer / Ideas",
+                    " ",
                     "{C:balinsanity}Music...",
                     "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",

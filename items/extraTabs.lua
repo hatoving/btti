@@ -26,5 +26,11 @@ SMODS.current_mod.extra_tabs = function()
                 }
             end,
         },
+        {
+            label = 'Config',
+            tab_definition_function = function ()
+                
+            end,
+        },
     }
 end
