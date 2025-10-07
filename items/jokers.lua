@@ -1113,13 +1113,18 @@ SMODS.Joker {
             card.ability.extra.mult = card.ability.extra.mult - 1
             if card.ability.extra.mult <= 1 then
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    delay = 0,
                     func = function()
+                        card:juice_up()
                         play_sound('btti_pancakes')
+                        return true
+                    end,
+                }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 1.3 * G.SETTINGS.GAMESPEED,
+                    func = function()
+                        play_sound('btti_explosion')
                         bttiEffectManagerPlay('explosion', card.tilt_var.mx, card.tilt_var.my)
-                        play_sound('btti_JDASHLose', math.random(1.0, 1.2))
                         SMODS.destroy_cards(card, true, true)
                         return true
                     end,

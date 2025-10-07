@@ -87,6 +87,8 @@ G.BTTI.ytDataCheckTimer = 0.0
 
 local screenWidth, screenHeight = love.graphics.getDimensions()
 
+SMODS.Sound({ key = "explosion", path = "bttiExplosion.ogg" })
+
 local function jokerAnimUpdate(dt)
     local scCenter = G.P_CENTERS.j_btti_SayThatAgain
     scCenter.ticks = scCenter.ticks + dt
