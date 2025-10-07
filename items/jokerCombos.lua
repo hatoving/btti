@@ -480,86 +480,6 @@ SMODS.Joker {
     end
 }
 
-
-SMODS.Atlas {
-    key = "ultimateJoker",
-    path = "bttiUltimateJoker.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-    key = 'ultimateJoker',
-    loc_txt = {
-        name = 'Ultimate Joker',
-        text = {
-            "{C:mult}+16{} Mult and {C:chips}+120{} Chips",
-            "for each {C:attention}Poker Hand{} contained in {C:attention}played hand",
-            "{C:inactive}(Jovial Joker, Confused Joker, Genius Joker,",
-            "{C:inactive}Bonkers Joker OR Deliberate Joker + ",
-            "{C:inactive}The Universe)"
-        }
-    },
-
-    config = { extra = {} },
-    loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
-        }
-    end,
-    rarity = 4,
-    atlas = 'ultimateJoker',
-    pos = { x = 0, y = 0 },
-    cost = 20,
-    pools = { ["BTTI_modAddition_COMBO"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = false,
-    perishable_compat = false,
-
-    set_badges = function(self, card, badges)
-        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
-    end,
-    calculate = function(self, card, context)
-        
-        if context.joker_main then
-            local handAmount = 0
-            for k, v in pairs(G.GAME.hands) do
-                if next(context.poker_hands[k]) then
-                    handAmount = handAmount + 1
-                end
-            end
-            sendInfoMessage("there are " .. handAmount .. " hands", "BTTI")
-            local m = 16 * handAmount
-            local ch = 120 * handAmount
-            return SMODS.merge_effects {
-                {
-                    message = "+" .. ch .. "",
-                    colour = G.C.CHIPS,
-                    chips = ch,
-                },
-                {
-                    message = "+" .. m .. "",
-                    colour = G.C.MULT,
-                    mult = m,
-                }
-            }
-        end
-    end,
-    in_pool = function(self, args)
-        return false, { allow_duplicates = false }
-    end
-}
-
 SMODS.Atlas {
     key = "splitJovialJoker",
     path = "bttiSplitJovialJoker.png",
@@ -2189,6 +2109,86 @@ SMODS.Joker {
                 G.btti_savedJokerCards[card.sort_id][key]:calculate_joker(context),
                 {
                     mult = G.btti_savedJokerCards[card.sort_id][key].sell_cost
+                }
+            }
+        end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Ultimate Joker
+SMODS.Atlas {
+    key = "ultimateJoker",
+    path = "bttiUltimateJoker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'ultimateJoker',
+    loc_txt = {
+        name = 'Ultimate Joker',
+        text = {
+            "{C:mult}+16{} Mult and {C:chips}+120{} Chips",
+            "for each {C:attention}Poker Hand{} contained in {C:attention}played hand",
+            "{C:inactive}(Jovial Joker, Confused Joker, Genius Joker,",
+            "{C:inactive}Bonkers Joker OR Deliberate Joker + ",
+            "{C:inactive}The Universe)"
+        }
+    },
+
+    config = { extra = {} },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+    end,
+    rarity = 4,
+    atlas = 'ultimateJoker',
+    pos = { x = 0, y = 0 },
+    cost = 20,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = false,
+    perishable_compat = false,
+
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    calculate = function(self, card, context)
+        
+        if context.joker_main then
+            local handAmount = 0
+            for k, v in pairs(G.GAME.hands) do
+                if next(context.poker_hands[k]) then
+                    handAmount = handAmount + 1
+                end
+            end
+            sendInfoMessage("there are " .. handAmount .. " hands", "BTTI")
+            local m = 16 * handAmount
+            local ch = 120 * handAmount
+            return SMODS.merge_effects {
+                {
+                    message = "+" .. ch .. "",
+                    colour = G.C.CHIPS,
+                    chips = ch,
+                },
+                {
+                    message = "+" .. m .. "",
+                    colour = G.C.MULT,
+                    mult = m,
                 }
             }
         end

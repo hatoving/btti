@@ -43,6 +43,7 @@ return {
                     "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",
                     "It's TV Time! (DELTARUNE Ch. 3) - Toby Fox",
+                    "Asgore Runs Over Dess WITH LYRICS - Bub8les",
                     "I Want LeBron (Jackson 5 LeRemix) - ramonisspicyy",
                     " ",
                     "{C:balinsanity}Special thanks to...",

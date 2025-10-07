@@ -1521,7 +1521,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Woker',
 		text = {
-			"{C:attention}"
+			"When {C:attention}Boss Blind{} is selected,",
+            "apply {C:dark_edition}Polychrome{} to all cards",
+            "in {C:attention}full hand{}"
 		}
 	},
 
@@ -1553,7 +1555,24 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		-- TO DO
+		if context.setting_blind and G.GAME.blind.boss then
+            if G.hand.cards then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0.0,
+                    func = function ()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = "The woke left...", colour = G.C.DARK_EDITION })
+                        for i = 1, #G.hand.cards do
+                            G.hand.cards[i]:set_edition('e_polychrome')
+                            G.hand.cards[i]:juice_up()
+                        end
+                        return true
+                    end
+                }))
+            end
+        end
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
