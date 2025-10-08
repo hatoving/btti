@@ -1678,7 +1678,7 @@ SMODS.Joker {
 
 	calculate = function(self, card, context)
         if context.joker_main then
-            card.ability.extra.chips = (card.ability.extra.chips or 0) + 400
+            card.ability.extra.chips = (card.ability.extra.chips or 0) + 20
             return {
                 message = "Mmm!",
                 colour = G.C.CHIPS,
