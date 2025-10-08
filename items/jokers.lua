@@ -1675,16 +1675,26 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
+SMODS.Atlas {
+    key = "KFCBucketEmpty",
+    path = "bttiKFCBucketEmpty.png",
+    px = 71,
+    py = 95
+}
 SMODS.Joker {
 	key = 'KFCBucket',
 	loc_txt = {
 		name = 'KFC Bucket',
 		text = {
-			"{C:attention}"
+			"Clicking {C:attention}5{} times quickly",
+            "consumes the bucket and",
+            "gives {X:mult,C:white}X11{} Mult that drains",
+            "by {X:mult,C:white}X0.1{} Mult every second",
+            "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
 		}
 	},
 
-	config = { extra = { mult = 10, odds = 10 } },
+	config = { extra = { xmult = 1.0, timer = 1.0, activate = false, clicks = {} } },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -1696,7 +1706,7 @@ SMODS.Joker {
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Kentucky Fried Chicken", "Colonel Sanders" } }
 		return {
-            vars = { },
+            vars = { card.ability.extra.xmult },
         }
 	end,
 	rarity = 1,
@@ -1711,9 +1721,55 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = false,
 
+    update = function(self, card, dt)
+        if card.ability.extra.activated then
+            card.ability.extra.timer = (card.ability.extra.timer or 0) + dt
+            local xmult = math.max(1, 11 - (card.ability.extra.timer * 0.1))
+            card.ability.extra.xmult = xmult
+            if card.ability.extra.xmult <= 1 then
+                card.ability.extra.activated = false
+                card.ability.extra.timer = 0
+                card.children.center.atlas = G.ASSET_ATLAS['btti_KFCBucketEmpty']
+                card.children.center:set_sprite_pos({ x = 0, y = 0 })
+                card:juice_up()
+            end
+        else
+            card.ability.extra.xmult = 1.0
+        end
+    end,
+
 	calculate = function(self, card, context)
-		-- TO DO
-	end,
+        if context.clicked_card and context.clicked_card == card then
+            local now = love.timer.getTime()
+            card.ability.extra.clicks = card.ability.extra.clicks or {}
+            if type(card.ability.extra.clicks) ~= "table" then
+                card.ability.extra.clicks = {}
+            end
+            table.insert(card.ability.extra.clicks, now)
+
+            for i = #card.ability.extra.clicks, 1, -1 do
+                if now - card.ability.extra.clicks[i] > 0.5 then
+                    table.remove(card.ability.extra.clicks, i)
+                end
+            end
+
+            if #card.ability.extra.clicks >= 5 and not card.ability.extra.activated then
+                print("5 fast clicks detected!")
+                card_eval_status_text(card, 'extra', nil, nil, nil,
+                    { message = "Yum!", colour = G.C.RED })
+                card.ability.extra.activated = true
+                card.ability.extra.time = 0
+                card.ability.extra.clicks = {}
+            end
+        end
+
+        if context.joker_main and card.ability.extra.activated then
+            return {
+                colour = G.C.MULT,
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
 	end
