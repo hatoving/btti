@@ -1586,8 +1586,26 @@ SMODS.Joker {
 
 -- Milk
 SMODS.Atlas {
-    key = "Milk",
-    path = "bttiMilk.png",
+    key = "Milk1",
+    path = "bttiMilk1.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "Milk2",
+    path = "bttiMilk2.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "Milk3",
+    path = "bttiMilk3.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas {
+    key = "Milk4",
+    path = "bttiMilk4.png",
     px = 71,
     py = 95
 }
@@ -1604,7 +1622,7 @@ SMODS.Joker {
 		}
 	},
 
-	config = { extra = { mult = 10, odds = 10 } },
+	config = { extra = { } },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -1627,7 +1645,7 @@ SMODS.Joker {
         }
     end,
 	rarity = 'btti_dynamic',
-	atlas = 'Milk',
+	atlas = 'Milk1',
 	pos = { x = 0, y = 0 },
 	cost = 7,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true },
@@ -1638,9 +1656,29 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = false,
 
+    update = function (self, card, dt)
+        local month = tonumber(os.date("%m"))
+        local day = tonumber(os.date("%d"))
+        local date = tonumber(string.format("%02d%02d", month, day))
+        local percent = 100 - (((card.ability.extra.chips or 0) / date) * 100)
+        if percent > 75 then
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Milk1']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        elseif percent > 50 then
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Milk2']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        elseif percent > 25 then
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Milk3']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        else
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Milk4']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+        end
+    end,
+
 	calculate = function(self, card, context)
         if context.joker_main then
-            card.ability.extra.chips = (card.ability.extra.chips or 0) + 20
+            card.ability.extra.chips = (card.ability.extra.chips or 0) + 400
             return {
                 message = "Mmm!",
                 colour = G.C.CHIPS,
@@ -1648,18 +1686,20 @@ SMODS.Joker {
             }
         end
 
-        if context.end_of_round then
+        if (context.final_scoring_step == true and context.cardarea == G.jokers) then
             local date = tonumber(os.date("%m%d"))
             local chips = card.ability.extra.chips or 0
             if chips >= date then
-                G.E_MANAGER:add_event(Event({
-                    func = function ()
-                        card_eval_status_text(card, 'extra', nil, nil, nil,
-                            { message = "Expired!", colour = G.C.RED })
-                        card:start_dissolve()
-                        return true
-                    end
-                }))
+                return {
+                    message = "Expired!",
+                    colour = G.C.MULT,
+                    G.E_MANAGER:add_event(Event({
+                        func = function ()
+                            card:start_dissolve()
+                            return true
+                        end
+                    }))
+                }
             end
         end
 	end,
