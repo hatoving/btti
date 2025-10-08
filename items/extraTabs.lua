@@ -28,7 +28,35 @@ SMODS.current_mod.extra_tabs = function()
         },
     }
 end
-create_UIBox_your_collection_combo_jokers = function() 
+
+SMODS.current_mod.config_tab = function ()
+    return {
+        n = G.UIT.ROOT,
+        config = { align = 'cm', minw = 10, minh = 5, padding = 0.15, emboss = 0.05, r = 0.1, colour = G.C.BLACK },
+        nodes = {
+            {
+                n = G.UIT.C,
+                config = { align = 'cm', padding = 0.1 },
+                nodes = {
+                    {
+                        n = G.UIT.R,
+                        config = { align = 'cm', padding = 0.1 },
+                        nodes = {
+                            create_toggle {
+                                label = localize("bttiStreamerMode"),
+                                info = localize("bttiStreamerModeInfo"),
+                                ref_table = G.BTTI.config,
+                                ref_value = 'streamer_mode'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+end
+
+local create_UIBox_your_collection_combo_jokers = function() 
     return SMODS.card_collection_UIBox(G.P_CENTER_POOLS.BTTI_modAddition_COMBO, {5,5,5}, {
         no_materialize = true, 
         modify_card = function(card, center) card.sticker = get_joker_win_sticker(center) end,

@@ -39,7 +39,7 @@ return {
                     "{C:chips}BlueBen8                    {C:attention}Juicimated",
                     "Programmer / Ideas        Programmer / Ideas",
                     " ",
-                    "{C:balinsanity}Music...",
+                    "{C:balinsanity}Music",
                     "NOW'S YOUR CHANCE TO BE A (DELTARUNE Ch. 2) - Toby Fox",
                     "TV WORLD (DELTARUNE Ch. 3) - Toby Fox",
                     "It's TV Time! (DELTARUNE Ch. 3) - Toby Fox",
@@ -155,6 +155,11 @@ return {
             },
         },
         dictionary = {
+            bttiStreamerMode = 'Streamer Mode',
+            bttiStreamerModeInfo = {
+                'Prevents copyrighted music from',
+                'starting during gameplay'
+            },
             bttiSavedByRegBen = 'Saved by Reg!Ben'
         }
     }
