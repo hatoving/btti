@@ -1563,9 +1563,9 @@ SMODS.Joker {
 		if context.setting_blind and G.GAME.blind.boss then
             if G.hand.cards then
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
+                    trigger = 'after',
                     blocking = false,
-                    delay = 0.0,
+                    delay = 1.3 * G.SETTINGS.GAMESPEED,
                     func = function ()
                         card_eval_status_text(card, 'extra', nil, nil, nil,
                             { message = "Queerious!", colour = G.C.DARK_EDITION })
