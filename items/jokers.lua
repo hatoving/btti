@@ -2412,7 +2412,18 @@ SMODS.Joker {
                 
                 return {
                     message = "Upgrade!",
-                    colour = G.C.RED
+                    colour = G.C.RED,
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
+                        blocking = false,
+                        delay = 0,
+                        func = function()
+                            play_sound('btti_brimstone' .. (math.random(3) - 1))
+                            bttiEffectManagerPlay('brimstone', card.tilt_var.mx, card.tilt_var.my - math.random(10, 25), dir)
+                            j:juice_up(0.6, 1)
+                            return true
+                        end,
+                    }))
                 }
             end
         end

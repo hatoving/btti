@@ -89,6 +89,10 @@ local screenWidth, screenHeight = love.graphics.getDimensions()
 
 SMODS.Sound({ key = "explosion", path = "bttiExplosion.ogg" })
 
+SMODS.Sound({ key = "brimstone0", path = "bttiBrimstone0.ogg" })
+SMODS.Sound({ key = "brimstone1", path = "bttiBrimstone1.ogg" })
+SMODS.Sound({ key = "brimstone2", path = "bttiBrimstone2.ogg" })
+
 local function jokerAnimUpdate(dt)
     local scCenter = G.P_CENTERS.j_btti_SayThatAgain
     scCenter.ticks = scCenter.ticks + dt
@@ -206,8 +210,22 @@ function love.update(dt)
                     if _eff.frame > _eff.maxframe then
                         _eff.frame = 1
                     end
+
+                    if _eff.name == "brimstone" then
+                        _eff.yscale = _eff.yscale - (dt * 2.2)
+                        if _eff.yscale <= 0 then
+                            _eff.yscale = 0
+                        end
+                    end
                 elseif G.effectmanager[i][1].duration ~= nil and G.effectmanager[i][1].duration <= 0 then
-                    G.effectmanager[i] = nil
+                    if G.effectmanager[i][1].name ~= "brimstone" then
+                        G.effectmanager[i] = nil
+                    else
+                        G.effectmanager[i][1].duration = 99
+                        if G.effectmanager[i][1].yscale <= 0 then
+                            G.effectmanager[i] = nil
+                        end
+                    end
                 end
             end
         end
@@ -299,8 +317,9 @@ function love.update(dt)
 end
 
 local explosion = loadImage("explosion.png")
-local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200,
-    282, 17, 0)
+local explosionSpriteSheet = loadImageSpriteSheet("explosion.png", 200, 282, 17, 0)
+local brimstone = loadImage("brimstone.png")
+local brimstoneSpriteSheet = loadImageSpriteSheet("brimstone.png", 352, 276, 4, 0)
 
 local loveDrawRef = love.draw
 function love.draw()
@@ -325,10 +344,23 @@ function love.draw()
                     --print("_imgindex".. _imgindex)
                     love.graphics.setColor(1, 1, 1, 1)
                 end
+                if G.effectmanager[i][1].name == "brimstone" then
+                    bttiEffectManagerImgToDraw = brimstone
+                    bttiEffectManagerQuadToDraw = brimstoneSpriteSheet
+                    bttiEffectManagerImgIndex = G.effectmanager[i][1].frame
+                    bttiEffectManagerXPos = G.effectmanager[i][1].xpos
+                    bttiEffectManagerYPos = G.effectmanager[i][1].ypos - (276 / 2)
+                    --print("_imgindex".. _imgindex)
+                    love.graphics.setColor(1, 1, 1, 1)
+                end
                 if bttiEffectManagerQuadToDraw ~= nil then
+                    local offsetY = 0
+                    if G.effectmanager[i][1].name == "brimstone" then
+                        offsetY = 276 * (1 - (G.effectmanager[i][1].yscale or 1)) / 2
+                    end
                     love.graphics.draw(bttiEffectManagerImgToDraw, bttiEffectManagerQuadToDraw
                         [bttiEffectManagerImgIndex],
-                        bttiEffectManagerXPos, bttiEffectManagerYPos, 0, 1, 1)
+                        bttiEffectManagerXPos, bttiEffectManagerYPos + offsetY, 0, G.effectmanager[i][1].xscale, G.effectmanager[i][1].yscale or 1)
                 end
             end
         end

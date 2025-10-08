@@ -199,7 +199,7 @@ function WIN_ROUND_NOW()
 end
 
 -- stolen from yahimod, thank you yaha mouse
-function bttiEffectManagerPlay(effect,x,y)
+function bttiEffectManagerPlay(effect,x,y,xscale)
     if effect == "explosion" then
         bttiEffectManagerNewEffect =
         {
@@ -216,6 +216,26 @@ function bttiEffectManagerPlay(effect,x,y)
             ypos = y,
             xvel = 0,
             yvel = 0,
+            xscale = xscale or 1,
+        }
+    elseif effect == "brimstone" then
+        bttiEffectManagerNewEffect =
+        {
+            name = "brimstone",
+            duration = 99,
+
+            frame = 1,
+            maxframe = 4,
+            fps = 60,
+            tfps = 0, -- ticks per frame per second
+
+
+            xpos = x,
+            ypos = y,
+            xvel = 0,
+            yvel = 0,
+            xscale = xscale or 1,
+            yscale = 1,
         }
     end
     table.insert(G.effectmanager, { bttiEffectManagerNewEffect })
