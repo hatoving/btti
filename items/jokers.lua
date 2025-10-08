@@ -139,7 +139,7 @@ SMODS.Joker {
             "{C:green}1 in 20{} Chance to turn {C:attention}played",
             "{C:attention}cards{} into {C:attention}Steel Cards{}",
             "{C:inactive}Soothens your ears",
-            "{C:inactive}Currently{} {X:mult,C:white}X#3#{}{C:inactive} Mult"
+            "{C:inactive}(Currently{} {X:mult,C:white}X#3#{}{C:inactive} Mult)"
         }
     },
 
@@ -1070,7 +1070,7 @@ SMODS.Joker {
             "Gets {C:red}blown up with mind{} when",
             "at {X:chips,C:white}X1{} Chips",
             "{C:inactive}Good with syrup{}",
-            "{C:inactive}Currently{} {X:chips,C:white}X#1#{} {C:inactive}Chips{}"
+            "{C:inactive}(Currently{} {X:chips,C:white}X#1#{} {C:inactive}Chips){}"
         }
     },
 
@@ -1244,7 +1244,7 @@ SMODS.Joker {
         text = {
             "Reduces shop prices by {C:attenion}5%{}",
             "for each {C:attention}Blind{} skipped",
-            "{C:inactive}Currently {C:attention}#1#%{}",
+            "{C:inactive}(Currently {C:attention}#1#%{})",
             "{C:inactive}Fly high, little budgie"
         }
     },
@@ -1318,7 +1318,7 @@ SMODS.Joker {
             "{X:mult,C:white}X0.1{} Mult for every {C:attention}game{}",
             "in the {C:default}Valve Complete Pack{} on {C:blue}Steam{}",
             "{C:inactive}Checks every 2 minutes",
-            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive} Mult"
+            "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
         }
     },
 
@@ -1451,8 +1451,8 @@ SMODS.Joker {
             "{X:mult,C:white}X0.1{} Mult, and {C:attention}+$1{} for every",
             "{X:red,C:white}50K{} views on {X:black,C:attention}The Stupendium{}'s",
             "Balatro song, {C:dark_edition}\"Number Go Up\"",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:chips,C:white}X#2#{C:inactive} Chips,",
-            "{C:mult}+#3#{C:inactive} Mult, {X:mult,C:white}X#4#{C:inactive} Mult, {C:attention}+$#5#{C:inactive}"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {X:chips,C:white}X#2#{C:inactive} Chips,",
+            "{C:mult}+#3#{C:inactive} Mult, {X:mult,C:white}X#4#{C:inactive} Mult, {C:attention}+$#5#{C:inactive})"
         }
     },
 
@@ -1550,8 +1550,8 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'Woker',
 	pos = { x = 0, y = 0 },
-	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+	cost = 10,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1596,7 +1596,11 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Milk',
 		text = {
-			"{C:attention}"
+			"{C:chips}+20{} Chips every hand",
+            "{C:mult}Expires{} when {C:chips}Chips{} is greater",
+            "than or equal to the {C:attention}current date{}",
+            "{C:inactive}(#2# -> #3#){}",
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
 		}
 	},
 
@@ -1611,14 +1615,21 @@ SMODS.Joker {
             }
         end
         info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
-		return {
-            vars = { },
+
+        local month = tonumber(os.date("%m"))
+        local day = tonumber(os.date("%d"))
+        local month_name = os.date("%B")
+
+        local date = tonumber(string.format("%02d%02d", month, day))
+
+        return {
+            vars = { card.ability.extra.chips or 0, date, string.format("%s %d", month_name, day) }
         }
-	end,
+    end,
 	rarity = 'btti_dynamic',
 	atlas = 'Milk',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 7,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true },
 
     unlocked = true,
@@ -1628,7 +1639,29 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		-- TO DO
+        if context.joker_main then
+            card.ability.extra.chips = (card.ability.extra.chips or 0) + 20
+            return {
+                message = "Mmm!",
+                colour = G.C.CHIPS,
+                chips = card.ability.extra.chips
+            }
+        end
+
+        if context.end_of_round then
+            local date = tonumber(os.date("%m%d"))
+            local chips = card.ability.extra.chips or 0
+            if chips >= date then
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        card_eval_status_text(card, 'extra', nil, nil, nil,
+                            { message = "Expired!", colour = G.C.RED })
+                        card:start_dissolve()
+                        return true
+                    end
+                }))
+            end
+        end
 	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
@@ -1816,7 +1849,7 @@ SMODS.Joker {
             "{C:mult}+#1#{} Mult per round",
             "Repeats itself each round",
             "{C:inactive}Blesses your ears when triggered",
-            "{C:inactive]Currently {C:mult}+#2#{} Mult"
+            "{C:inactive}(Currently {C:mult}+#2#{} {C:inactive}Mult)"
         }
     },
 
@@ -1903,7 +1936,7 @@ SMODS.Joker {
         text = {
             "Gains {X:chips,C:white}X#1#{}",
             "for every {C:attention}3{} scored",
-            "{C:inactive}Currently {X:chips,C:white}X#2#{C:inactive} Chips"
+            "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)"
         }
     },
 
@@ -1980,7 +2013,7 @@ SMODS.Joker {
         text = {
             "{C:chips}+5{} Chips for every",
             "{C:clubs}Club{} currently in {C:attention}full deck",
-            "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips"
+            "{C:inactive}(Currently +{C:chips}#1#{C:inactive} Chips)"
         }
     },
 
@@ -2050,7 +2083,7 @@ SMODS.Joker {
         text = {
             "{C:mult}+1{} Mult for every",
             "{C:hearts}Heart{} currently in {C:attention}full deck",
-            "{C:inactive}Currently +{C:mult}#1#{C:inactive} Mult"
+            "{C:inactive}(Currently +{C:mult}#1#{C:inactive} Mult)"
         }
     },
 
@@ -2120,7 +2153,7 @@ SMODS.Joker {
         text = {
             "Gain {C:attention}$0.5{} for every",
             "{C:diamonds}Diamond{} currently in {C:attention}Deck",
-            "{C:inactive}Currently {C:attention}$#1#{C:inactive}"
+            "{C:inactive}(Currently {C:attention}$#1#{C:inactive})"
         }
     },
 
@@ -2266,7 +2299,7 @@ SMODS.Joker {
             "{C:chips}+10{} Chips for every {C:attention}card",
             "played this {C:attention}round",
             "Resets at end of {C:attention}round",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
         }
     },
 
@@ -2867,7 +2900,7 @@ SMODS.Joker {
         text = {
             "Gains {C:mult}+10{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
             "Gains {C:chips}+20{} Chips per {C:purple}Combination{} {C:attention}Joker{} created",
-            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} Chips"
+            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} Chips)"
         }
     },
 
@@ -2958,7 +2991,7 @@ SMODS.Joker {
             "{C:mult}+4{} Mult and {C:chips}+15{} Chips",
             "Gains {C:mult}+4{} Mult and {C:chips}+15{} Chips",
             "at the end of each {C:attention}Ante",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
         }
     },
 
@@ -3030,7 +3063,7 @@ SMODS.Joker {
         text = {
             "{C:mult}+5{} Mult for every {C:attention}Joker{}",
             "you've held this run after purchase",
-            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
+            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
     },
 
@@ -3343,7 +3376,7 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 4{} chance to drain {C:dark_edition}editions{} of",
             "other {C:joker}Jokers",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {X:mult,C:white}X#2#{C:inactive} Mult, {C:mult}+#3#{} Mult"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {X:mult,C:white}X#2#{C:inactive} Mult, {C:mult}+#3#{} Mult)"
         }
     },
 
@@ -3464,7 +3497,7 @@ SMODS.Joker {
             "{C:joker}Jokers{} sold to {C:chips}Chips{} and {C:mult}Mult{}",
             "Does not count previously",
             "sold {C:joker}Jokers{}",
-            "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#1#{} Mult"
+            "{C:inactive}(Currently {C:chips}+#2#{} Chips, {C:mult}+#1#{} Mult)"
         }
     },
 
@@ -3533,7 +3566,7 @@ SMODS.Joker {
             "Uses {C:attention}${} to gain {C:chips}Chips{} and {C:mult}Mult",
             "{C:green}1 in 10{} chance to waste {C:attention}$",
             "and {C:red}destroy{} itself at end of {C:attention}round{}",
-            "{C:inactive}Currently {C:chips}+#2#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult"
+            "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult)"
         }
     },
 
@@ -4237,7 +4270,7 @@ SMODS.Joker {
             "{C:attention}random card{} from your {C:attention}deck,",
             "gaining {C:chips}Chips{}, {C:mult}Mult{} and {X:mult,C:white}XMult{}",
             "equivalent to the card's rank",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips{}, {C:mult}+#2#{} Mult, {X:mult,C:white}X#3#{} Mult"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips{}, {C:mult}+#2#{} Mult, {X:mult,C:white}X#3#{} Mult)"
         }
     },
 
@@ -4557,7 +4590,7 @@ SMODS.Joker {
             "{C:chips}Chips{} than {C:mult}Mult{}",
             "{C:mult}+5{} Mult Bonus per {C:deets}Stained Card{}",
             "in played hand",
-            "{C:inactive}Currently{} {C:mult}+#1#{}{C:inactive} Mult{}"
+            "{C:inactive}(Currently{} {C:mult}+#1#{}{C:inactive} Mult){}"
         }
     },
 
@@ -4644,7 +4677,7 @@ SMODS.Joker {
             "{C:chips}Chips{} and {C:mult}Mult{}",
             "Adds {X:mult,C:white}X0.2{} Mult per every",
             "time {C:chips}fire{} {C:mult}score{} is triggered",
-            "{C:inactive}Currently{} {X:mult,C:white}X#1#{}{C:inactive} Mult{}"
+            "{C:inactive}(Currently{} {X:mult,C:white}X#1#{}{C:inactive} Mult){}"
         }
     },
 
@@ -5021,7 +5054,7 @@ SMODS.Joker {
             "{C:green}1 in 5{} chance to glitch, resetting",
             "{C:chips}Chips{} and turning every card in",
             "{C:attention}played hand{} {C:blue}Digital{}",
-            "{C:inactive}Currently +{C:chips}#1#{C:inactive}"
+            "{C:inactive}(Currently +{C:chips}#1#{C:inactive})"
         }
     },
 
@@ -5147,7 +5180,7 @@ SMODS.Joker {
         text = {
             "Gains {X:mult,C:white}X0.25{} Mult",
             "per {C:deets}Stained Card{} leak",
-            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive}"
+            "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive})"
         }
     },
 
@@ -5519,7 +5552,7 @@ SMODS.Joker {
             "{X:mult,C:white}X5{} Mult per {C:purple}Tarot Card{} sold",
             "Removes {C:mult}-15{} Mult from {C:attention}played hand{}",
             "per {C:purple}Tarot Card{} used",
-            "{C:inactive}Currently {X:mult,C:white}x#2#{C:inactive} Mult, {X:mult,C:white}#3#{} Mult"
+            "{C:inactive}(Currently {X:mult,C:white}x#2#{C:inactive} Mult, {X:mult,C:white}#3#{} Mult)"
 		}
 	},
 
@@ -5823,7 +5856,7 @@ SMODS.Joker {
             "If {C:attention}played hand{} is a {C:attention}Flush{}, this {C:attention}Joker{} will",
             "add the base {C:chips}Chips{} and {C:mult}Mult{} of {C:attention}Royal Flush{}",
             "(at the same level as {C:attention}Flush{}) to {C:attention}score{}",
-            "{C:inactive}Currently {C:chips}+#2#{} Chips, {C:mult}+#3#{} Mult"
+            "{C:inactive}(Currently {C:chips}+#2#{} Chips, {C:mult}+#3#{} Mult)"
         }
     },
 
@@ -5907,7 +5940,7 @@ SMODS.Joker {
             "At {C:chips}0{} Chips, {C:mult}+30{} Mult. {C:mult}-1{} Mult per {C:attention}hand played",
             "{C:inactive}\"Please don't sell me when I am out of",
             "{C:mult}Mult{C:inactive}, I am just {C:green}Goop{C:inactive}\"",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
         }
     },
 
@@ -6003,7 +6036,7 @@ SMODS.Joker {
 		text = {
 			"Saves the first {C:attention}played hand{} of round",
             "and adds triple its {C:attention}score{} to {C:attention}final hand{}",
-            "{C:inactive}Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips"
+            "{C:inactive}(Currently {C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips)"
 		}
 	},
 
@@ -6142,7 +6175,7 @@ SMODS.Joker {
         text = {
             "{X:mult,C:white}X0.75{} Mult for each {C:attention}Joker{} destroyed",
             "after this {C:attention}Joker{} is acquired",
-            "{C:inactive}Currently {X:mult,C:white}X#1#{C:inactive} Mult"
+            "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
         }
     },
 
@@ -6659,7 +6692,7 @@ SMODS.Joker {
             "{C:mult}+2{} Mult per {C:diamonds}Diamond{} in {C:attention}full deck{}",
             "{C:green}1 in 3{} chance to clone {C:attention}played",
             "cards{} with a {C:diamonds}Diamond{} suit",
-            "{C:inactive}Currently {C:mult}+#1#{C:inactive} Mult"
+            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
         }
     },
 
@@ -6994,7 +7027,7 @@ SMODS.Joker {
             "Stores the final scored {C:mult}Mult{} and {C:chips}Chips{}",
             "of one ended round and unleashes it",
             "a random amount of rounds later",
-            "{C:inactive}Currently {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
+            "{C:inactive}(Currently {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips)"
         }
     },
 

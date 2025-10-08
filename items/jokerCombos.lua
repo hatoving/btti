@@ -831,7 +831,7 @@ SMODS.Joker {
             "and {C:mult}+4{} Mult when scored",
             "This {C:attention}Joker{} gains {C:chips}+8{} Chips",
             "when each played {C:attention}2{} is scored",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips",
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
             "{C:inactive}(Scholar + Wee Joker)"
         }
     },
@@ -1005,7 +1005,7 @@ SMODS.Joker {
             '{C:green}1 in 4{} chance for each played {C:attention}8{}',
             'to create a {C:purple}Tarot Card{} when scored',
             'Earn an extra {C:attention}$9{} at end of {C:attention}round{}',
-            '{C:inactive}Currently {C:chips}+#1#{} Chips',
+            '{C:inactive}(Currently {C:chips}+#1#{} Chips)',
             '{C:inactive}(Royal Moon + Short Scholar + Chance of Clouds)'
         }
     },
@@ -1198,7 +1198,7 @@ SMODS.Joker {
             "{C:mult}+3{} Mult for each {C:attention}Joker{} card",
             "Adds the {C:attention}sell value{} of all",
             "held {C:joker}Jokers{} to {C:mult}Mult",
-            "{C:inactive}Currently {C:mult}+#1#{} Mult",
+            "{C:inactive}(Currently {C:mult}+#1#{} Mult)",
             "{C:inactive}(Abstract Joker + Swashbuckler)"
         }
     },
@@ -1524,7 +1524,7 @@ SMODS.Joker {
             "to your hand",
             "This {C:attention}Joker{} gains {X:mult,C:white}X0.5{} Mult every time",
             "a {C:attention}playing card{} is added to your deck",
-            "{C:inactive}Currently {X:mult,C:white}X#1#{} Mult",
+            "{C:inactive}(Currently {X:mult,C:white}X#1#{} Mult)",
             "{C:inactive}(Resume + Hologram)"
         }
     },
@@ -1958,7 +1958,7 @@ SMODS.Joker {
             "{C:attention}$2{} for each {C:clubs}Club{}, {C:hearts}Heart{},",
             "and {C:diamonds}Diamond{} respectively in",
             "your {C:attention}full deck{}",
-            "{C:inactive}Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive}",
+            "{C:inactive}(Currently +{C:chips}#1#{C:inactive} Chips, +{C:mult}#2#{C:inactive} Mult, +{C:attention}$#3#{C:inactive})",
             "{C:inactive}(Hatsune Miku + Kasane Teto",
             "{C:inactive}+ Akira Neru)"
         }
