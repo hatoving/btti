@@ -2,6 +2,8 @@ if G.BTTI == nil then
 	G.BTTI = {}
 end
 
+G.BTTI.config = SMODS.current_mod.config
+
 -- stolen from the yahiamouse
 G.effectmanager = {}
 

@@ -760,10 +760,22 @@ SMODS.Booster {
         return _card
     end,
     in_pool = function (self, args)
-        if G.GAME.hands['HighHorse'].visible or G.GAME.hands['TwoHorse'].visible or G.GAME.hands['ThreeHorse'].visible or G.GAME.hands['FourHorsemen'].visible or G.GAME.hands['FullHorse'].visible then
-            return true
-        else
-            return false
+        local hands = G.GAME.hands
+        local hand_names = {
+            'HighHorse',
+            'TwoHorse',
+            'ThreeHorse',
+            'FourHorsemen',
+            'FullHorse'
+        }
+
+        for _, name in ipairs(hand_names) do
+            local hand = hands[name]
+            if hand and hand.visible then
+                return true
+            end
         end
+
+        return false
     end
 }

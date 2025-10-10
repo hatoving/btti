@@ -10,7 +10,7 @@ SMODS.Sound {
     pitch = 1,
     volume = 1.0,
     select_music_track = function(self)
-        return (not jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and not G.GAME.blind.in_blind
+        return not G.BTTI.config.streamer_mode and ((not jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and (G.GAME.blind and not G.GAME.blind.in_blind))
     end
 }
 SMODS.Sound {
@@ -19,7 +19,7 @@ SMODS.Sound {
     pitch = 1,
     volume = 1.0,
     select_music_track = function(self)
-        return (jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and not G.GAME.blind.in_blind
+        return not G.BTTI.config.streamer_mode and ((jokerExists("j_btti_Ca850") and jokerExists("j_btti_LeBron")) and (G.GAME.blind and not G.GAME.blind.in_blind))
     end
 }
 
@@ -7282,7 +7282,7 @@ SMODS.Joker {
             end
         end
 		if context.joker_main then
-            if not next(SMODS.find_card("j_btti_Hatoving")) or not next(SMODS.find_card("j_btti_Juicimated")) or not next(SMODS.find_card("j_btti_BlueBen8")) then
+            if not next(SMODS.find_card("j_btti_Hatoving")) and not next(SMODS.find_card("j_btti_Juicimated")) and not next(SMODS.find_card("j_btti_BlueBen8")) then
                 sendInfoMessage("them bitches aren't present!! party!!", "BTTI")
                 return SMODS.merge_effects {
                     {
