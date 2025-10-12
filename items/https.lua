@@ -9,7 +9,10 @@ G.BTTI.HTTPS = {
 }
 
 G.BTTI.HTTPS.YOUTUBE_CONSTS = {
-    NUMBER_GO_UP = "iXZX_HAmbTU"
+    NUMBER_GO_UP = "iXZX_HAmbTU",
+    HATOVING = "hatoving",
+    JUICIMATED = "juicimated",
+    BLUEBEN8 = "bennoh01"
 }
 G.BTTI.HTTPS.URLS = {
     YOUTUBE_DATA = "https://raw.githubusercontent.com/hatoving/btti-https/refs/heads/main/youtube_data.json"
@@ -22,6 +25,9 @@ function G.BTTI.HTTPS.getYouTubeData()
         if type(parsed) ~= "table" then
         else
             G.BTTI.HTTPS.YOUTUBE_DATA.NUMBER_GO_UP = (parsed["views"])[G.BTTI.HTTPS.YOUTUBE_CONSTS.NUMBER_GO_UP]
+            G.BTTI.HTTPS.YOUTUBE_DATA.HATOVING_SUBS = (parsed["subscribers"])[G.BTTI.HTTPS.YOUTUBE_CONSTS.HATOVING]
+            G.BTTI.HTTPS.YOUTUBE_DATA.JUICIMATED_SUBS = (parsed["subscribers"])[G.BTTI.HTTPS.YOUTUBE_CONSTS.JUICIMATED]
+            G.BTTI.HTTPS.YOUTUBE_DATA.BLUEBEN8_SUBS = (parsed["subscribers"])[G.BTTI.HTTPS.YOUTUBE_CONSTS.BLUEBEN8]
         end
     end
 end

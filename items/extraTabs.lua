@@ -71,17 +71,17 @@ G.FUNCS.your_collection_combo_jokers = function()
     }
 end
 
-local function get_pool()
+local function get_pool(pool)
     local jkrs = {}
-    for _, jkr in pairs(G.P_CENTER_POOLS.BTTI_modAddition_COMBO) do
+    for _, jkr in pairs(pool) do
         jkrs[#jkrs+1] = jkr
     end
     return jkrs
 end
 
-local function get_tally_of_combo()
+local function get_tally_of_pool(pool)
     local tally, of = 0, 0
-    for _, card in pairs(get_pool()) do
+    for _, card in pairs(get_pool(pool)) do
         of = of + 1
         if card.discovered then
             tally = tally + 1
@@ -91,15 +91,15 @@ local function get_tally_of_combo()
 end
 
 SMODS.current_mod.custom_collection_tabs = function()
-    local count = get_tally_of_combo()
+    local comboCount = get_tally_of_pool(G.P_CENTER_POOLS.BTTI_modAddition_COMBO)
     return {
       UIBox_button({
         button = 'your_collection_combo_jokers',
         id = 'your_collection_combo_jokers',
         label = { "Combination Jokers" },
-        count = { tally = count.tally, of = count.of },
+        count = { tally = comboCount.tally, of = comboCount.of },
         minw = 5,
         minh = 1
-      })
+      }),
     }
 end

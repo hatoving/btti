@@ -1301,6 +1301,70 @@ SMODS.Joker {
     end
 }
 
+-- Say That Again
+SMODS.Atlas {
+    key = "SayThatAgain",
+    path = "bttiSayThatAgain.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'SayThatAgain',
+    loc_txt = {
+        name = '...Say that again?',
+        text = {
+            "Retriggers played hand {C:blue}4{} times",
+            "if played hand has exactly {C:blue}4{} cards"
+        }
+    },
+
+    config = { extra = { } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Fant4stic", "Miles Teller" } }
+        return {
+            vars = { },
+        }
+    end,
+    rarity = 2,
+    atlas = 'SayThatAgain',
+    pos = { x = 0, y = 0 },
+    cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 32,
+    frameDur = 0.085,
+    ticks = 0,
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if #G.play.cards == 4 then
+                return {
+                    repetitions = 4
+                }
+            end
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}
+
 -- Steam
 SMODS.Atlas {
     key = "Steam",
@@ -1371,25 +1435,34 @@ SMODS.Joker {
     end
 }
 
--- Say That Again
+-- Subscribe
 SMODS.Atlas {
-    key = "SayThatAgain",
-    path = "bttiSayThatAgain.png",
+    key = "Subscribe",
+    path = "bttiSubscribe1.png",
     px = 71,
-    py = 95,
+    py = 95
+}
+SMODS.Atlas {
+    key = "Subscribed",
+    path = "bttiSubscribe2.png",
+    px = 71,
+    py = 95
 }
 SMODS.Joker {
-    key = 'SayThatAgain',
-    loc_txt = {
-        name = '...Say that again?',
-        text = {
-            "Retriggers played hand {C:blue}4{} times",
-            "if played hand has exactly {C:blue}4{} cards"
-        }
-    },
+	key = 'Subscribe Button',
+	loc_txt = {
+		name = 'Subscribe',
+		text = {
+			"{C:chips}+5{} Chips for every 50 subscribers {C:chips}BlueBen8{} has",
+            "{C:mult}+1{} Mult for every 50 subscribers {C:mult}hatoving{} has",
+            "{C:attention}$2{} for every 50 subscribers {C:attention}Juicimated{} has",
+            "Click {C:attention}5{} times quickly {C:red}subscribe{}",
+            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult, {C:attention}$#3#{C:inactive}"
+		}
+	},
 
-    config = { extra = { } },
-    loc_vars = function(self, info_queue, card)
+	config = { extra = { chips = 0, mult = 0, dollars = 0, activate = false, clicks = {} } },
+	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
             info_queue[#info_queue + 1] = {
@@ -1398,22 +1471,17 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Fant4stic", "Miles Teller" } }
-        return {
-            vars = { },
-        }
-    end,
-    rarity = 2,
-    atlas = 'SayThatAgain',
-    pos = { x = 0, y = 0 },
-    cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "BlueBen8" } }
 
-    pixel_size = { w = 71 , h = 95 },
-    frame = 0,
-    maxFrame = 32,
-    frameDur = 0.085,
-    ticks = 0,
+		return {
+            vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.dollars },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Subscribe',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1421,18 +1489,60 @@ SMODS.Joker {
     eternal_compat = true,
     perishable_compat = false,
 
-    calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play then
-            if #G.play.cards == 4 then
-                return {
-                    repetitions = 4
-                }
-            end
+    update = function (self, card, dt)
+        card.ability.extra.chips = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.BLUEBEN8_SUBS / 50) * 5
+        card.ability.extra.mult = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.HATOVING_SUBS / 50)
+        card.ability.extra.dollars = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.JUICIMATED_SUBS / 50) * 2
+
+        if card.ability.extra.activated then
+            card.ability.extra.activated = false
+
+            love.system.openURL("https://www.youtube.com/hatoving")
+            love.system.openURL("https://www.youtube.com/juicimated")
+            love.system.openURL("https://www.youtube.com/@Bennoh01")
+
+            card.children.center.atlas = G.ASSET_ATLAS['btti_Subscribed']
+            card.children.center:set_sprite_pos({ x = 0, y = 0 })
+            card.ability.extra.clicks = {}
+            card:juice_up()
         end
     end,
+
+	calculate = function(self, card, context)
+        if context.clicked_card and context.clicked_card == card then
+            local now = love.timer.getTime()
+            card.ability.extra.clicks = card.ability.extra.clicks or {}
+            if type(card.ability.extra.clicks) ~= "table" then
+                card.ability.extra.clicks = {}
+            end
+            table.insert(card.ability.extra.clicks, now)
+
+            for i = #card.ability.extra.clicks, 1, -1 do
+                if now - card.ability.extra.clicks[i] > 0.5 then
+                    table.remove(card.ability.extra.clicks, i)
+                end
+            end
+
+            if #card.ability.extra.clicks >= 5 and not card.ability.extra.activated then
+                print("5 fast clicks detected!")
+                card_eval_status_text(card, 'extra', nil, nil, nil,
+                    { message = "Subscribed!", colour = G.C.RED })
+                card.ability.extra.activated = true
+                card.ability.extra.clicks = {}
+            end
+        end
+
+		if context.joker_main then
+            return {
+                chips = card.ability.extra.chips,
+                mult = card.ability.extra.mult,
+                dollars = card.ability.extra.dollars
+            }
+		end
+	end,
     in_pool = function(self, args)
-        return true, { allow_duplicates = false }
-    end
+		return true, { allow_duplicates = false }
+	end
 }
 
 -- Number Go Up
