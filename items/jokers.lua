@@ -121,98 +121,6 @@ SMODS.Joker {
 	end
 }
 
-SMODS.Atlas {
-    key = "Jonker",
-    path = "bttiJonker.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-	key = 'Microphone',
-	loc_txt = {
-		name = 'Microphone',
-		text = {
-			"Microphone"
-		}
-	},
-
-	config = { extra = { mic_result = nil, peak = -99.0 } },
-	loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "hatoving" } }
-		return {
-            vars = { card.ability.extra.mult, card.ability.extra.money },
-        }
-	end,
-	rarity = 1,
-	atlas = 'Jonker',
-	pos = { x = 0, y = 0 },
-	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
-
-    unlocked = true,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-    update = function (self, card, dt)
-        if G.BTTI.MICROPHONE:isRecording() and G.BTTI.MICROPHONE:getSampleCount() > 0 then
-            local sd = G.BTTI.MICROPHONE:getData()
-
-            local channels = sd:getChannels()
-            local count = sd:getSampleCount()
-            for i = 0, count-1 do
-                local v = sd:getSample(i)
-                local a = math.abs(v)
-                if a > card.ability.extra.peak then
-                    card.ability.extra.peak = a
-                end
-            end
-        end
-    end,
-
-	calculate = function(self, card, context)
-        if context.before and context.cardarea == G.jokers then
-            return {
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    delay = 0,
-                    func = function()
-                        card.ability.extra.mic_result = G.BTTI.MICROPHONE:start(4096, 44100, 16, 1)
-                        return true
-                    end,
-                }))
-            }
-        end
-		if context.joker_main then
-            return {
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'immediate',
-                    blocking = false,
-                    delay = 0,
-                    func = function()
-                        G.BTTI.MICROPHONE:stop()
-                        sendInfoMessage("PEAK : " .. card.ability.extra.peak, "BTTI")
-                        return true
-                    end,
-                }))
-            }
-		end
-	end,
-    in_pool = function(self, args)
-		return true, { allow_duplicates = false }
-	end
-}
-
 -- Metal Pipe
 SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg" })
 
@@ -2012,6 +1920,162 @@ SMODS.Joker {
             }
         end
     end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "Microphone1", path = "bttiMicrophone1.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone2", path = "bttiMicrophone2.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone3", path = "bttiMicrophone3.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone4", path = "bttiMicrophone4.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone5", path = "bttiMicrophone5.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone6", path = "bttiMicrophone6.png", px = 71, py = 95
+}
+SMODS.Atlas {
+    key = "Microphone7", path = "bttiMicrophone7.png", px = 71, py = 95
+}
+SMODS.Joker {
+	key = 'Microphone',
+	loc_txt = {
+		name = 'Microphone',
+		text = {
+			"Records your microphone and gives",
+            "{C:mult}Mult{} based on how loud",
+            "{C:attention}screamed{} on the next hand",
+            "{C:inactive}Currently {C:attention}#1#{} == {C:mult}+#2#{} Mult"
+		}
+	},
+
+	config = { extra = { mic_result = nil, peak = 0.0 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "hatoving" } }
+		return {
+            vars = { card.ability.extra.peak, math.floor(card.ability.extra.peak * 100) },
+        }
+	end,
+	rarity = 'btti_dynamic',
+	atlas = 'Microphone1',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function (self, card, dt)
+        if G.BTTI.MICROPHONE:isRecording() and G.BTTI.MICROPHONE:getSampleCount() > 0 then
+            local sd = G.BTTI.MICROPHONE:getData()
+
+            local channels = sd:getChannels()
+            local count = sd:getSampleCount()
+            for i = 0, count-1 do
+                local v = sd:getSample(i)
+                local a = math.abs(v)
+
+                local aa = math.floor(a * 100)
+
+                if aa <= 0 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone1']
+                elseif aa <= 25 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone2']
+                elseif aa <= 50 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone3']
+                elseif aa <= 60 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone4']
+                elseif aa <= 75 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone5']
+                elseif aa <= 99 then
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone6']
+                else
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone7']
+                end
+
+                card.children.center:set_sprite_pos({ x = 0, y = 0 })
+
+                if a > card.ability.extra.peak then
+                    card.ability.extra.peak = math.clamp(a, 0, math.huge)
+                end
+            end
+        end
+    end,
+
+	calculate = function(self, card, context)
+        if context.before and context.cardarea == G.jokers then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        card.ability.extra.peak = 0
+                        card.ability.extra.mic_result = G.BTTI.MICROPHONE:start(4096, 44100, 16, 1)
+                        return true
+                    end,
+                }))
+            }
+        end
+		if context.pre_joker and context.cardarea == G.jokers then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        G.BTTI.MICROPHONE:stop()
+                        local aa = math.floor(card.ability.extra.peak * 100)
+
+                        if aa <= 0 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone1']
+                        elseif aa <= 25 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone2']
+                        elseif aa <= 50 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone3']
+                        elseif aa <= 60 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone4']
+                        elseif aa <= 75 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone5']
+                        elseif aa <= 99 then
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone6']
+                        else
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone7']
+                        end
+
+                        card.children.center:set_sprite_pos({ x = 0, y = 0 })
+                        return true
+                    end,
+                }))
+            }
+		end
+
+        if context.joker_main then
+            return {
+                mult = math.floor(card.ability.extra.peak * 100)
+            }
+        end
+	end,
     in_pool = function(self, args)
 		return true, { allow_duplicates = false }
 	end
