@@ -121,6 +121,98 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Atlas {
+    key = "Jonker",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Microphone',
+	loc_txt = {
+		name = 'Microphone',
+		text = {
+			"Microphone"
+		}
+	},
+
+	config = { extra = { mic_result = nil, peak = -99.0 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "hatoving" } }
+		return {
+            vars = { card.ability.extra.mult, card.ability.extra.money },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Jonker',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    update = function (self, card, dt)
+        if G.BTTI.MICROPHONE:isRecording() and G.BTTI.MICROPHONE:getSampleCount() > 0 then
+            local sd = G.BTTI.MICROPHONE:getData()
+
+            local channels = sd:getChannels()
+            local count = sd:getSampleCount()
+            for i = 0, count-1 do
+                local v = sd:getSample(i)
+                local a = math.abs(v)
+                if a > card.ability.extra.peak then
+                    card.ability.extra.peak = a
+                end
+            end
+        end
+    end,
+
+	calculate = function(self, card, context)
+        if context.before and context.cardarea == G.jokers then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        card.ability.extra.mic_result = G.BTTI.MICROPHONE:start(4096, 44100, 16, 1)
+                        return true
+                    end,
+                }))
+            }
+        end
+		if context.joker_main then
+            return {
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    blocking = false,
+                    delay = 0,
+                    func = function()
+                        G.BTTI.MICROPHONE:stop()
+                        sendInfoMessage("PEAK : " .. card.ability.extra.peak, "BTTI")
+                        return true
+                    end,
+                }))
+            }
+		end
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
 -- Metal Pipe
 SMODS.Sound({ key = "metalPipeMult", path = "bttiMetalPipeMult.ogg" })
 

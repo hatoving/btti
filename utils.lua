@@ -272,3 +272,22 @@ function loadImageSpriteSheet(fn, px, py, subimg, orientation)
 
     return spritesheet
 end
+
+function computePeak(samples)
+    local peak = 0
+    for i, v in ipairs(samples) do
+        local a = math.abs(v)
+        if a > peak then
+            peak = a
+        end
+    end
+    return peak
+end
+
+function computeRMS(samples)
+    local sum = 0
+    for i, v in ipairs(samples) do
+        sum = sum + v * v
+    end
+    return math.sqrt(sum / #samples)
+end

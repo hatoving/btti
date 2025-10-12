@@ -118,4 +118,6 @@ for _, file in ipairs(files) do
 	f()
 end
 
+G.BTTI.MICROPHONE = love.audio.getRecordingDevices()[1]
+
 G.BTTI.initJokerCombos()
