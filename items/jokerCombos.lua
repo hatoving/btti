@@ -1,3 +1,16 @@
+--#region FONTS
+
+--#region UTDR
+
+SMODS.Font({ 
+    key = "dt", 
+    path = "bttiDetermination.ttf"
+})
+
+--#endregion
+
+--#endregion
+
 --#region VANILLA COMBO JOKERS
 
 -- Avariocious
@@ -2051,7 +2064,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Skelebros',
     loc_txt = {
-        name = 'Skelebros',
+        name = '{f:btti_dt}Skelebros',
         text = {
             "This {C:attention}Joker{} is assigned",
             "the effect of a random {C:uncommon}Uncommon {C:joker}Joker{}",

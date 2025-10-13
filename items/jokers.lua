@@ -1,5 +1,23 @@
 require("nativefs")
 
+--#region FONTS
+
+--#region UTDR
+
+SMODS.Font({ 
+    key = "sans", 
+    path = "bttiSans.ttf" 
+})
+
+SMODS.Font({ 
+    key = "papyrus", 
+    path = "bttiPapyrus.ttf" 
+})
+
+--#endregion
+
+--#endregion
+
 --#region MUSIC
 
 --#region LeBron
@@ -2997,7 +3015,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Sans',
     loc_txt = {
-        name = 'sans.',
+        name = '{f:btti_sans}sans.',
         text = {
             "This {C:attention}Joker{} is assigned",
             "the effect of a random {C:common}Common {C:joker}Joker{}",
@@ -3103,7 +3121,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Papyrus',
     loc_txt = {
-        name = 'THE GREAT PAPYRUS!',
+        name = '{f:btti_papyrus}THE GREAT PAPYRUS!',
         text = {
             "{C:mult}+4{} Mult per {C:attention}card{} played",
             "without an enhancement",
@@ -3200,6 +3218,7 @@ SMODS.Joker {
     end
 }
 
+-- Weird Route
 SMODS.Atlas {
     key = "WeirdRoute",
     path = "bttiWeirdRoute.png",
@@ -3209,7 +3228,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'WeirdRoute',
     loc_txt = {
-        name = 'Weird Route',
+        name = '{f:btti_dt}Weird Route',
         text = {
             "Sell this {C:joker}Joker{} to {C:blue}freeze{} the",
             "current Blind, winning the {C:attention}round",
@@ -3271,7 +3290,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Tenna',
     loc_txt = {
-        name = 'Mr. (Ant) Tenna',
+        name = '{f:btti_dt}Mr. (Ant) Tenna',
         text = {
             "Gains {C:mult}+10{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
             "Gains {C:chips}+20{} Chips per {C:purple}Combination{} {C:attention}Joker{} created",
