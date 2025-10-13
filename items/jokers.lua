@@ -1449,15 +1449,15 @@ SMODS.Atlas {
     py = 95
 }
 SMODS.Joker {
-	key = 'Subscribe Button',
+	key = 'Subscribe',
 	loc_txt = {
-		name = 'Subscribe',
+		name = 'Subscribe Button',
 		text = {
 			"{C:chips}+5{} Chips for every 50 subscribers {C:chips}BlueBen8{} has",
             "{C:mult}+1{} Mult for every 50 subscribers {C:mult}hatoving{} has",
             "{C:attention}$2{} for every 50 subscribers {C:attention}Juicimated{} has",
-            "Click {C:attention}5{} times quickly {C:red}subscribe{}",
-            "{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult, {C:attention}$#3#{C:inactive}"
+            "Click {C:attention}5{} times quickly to {C:red}subscribe{}",
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult, {C:attention}$#3#{C:inactive})"
 		}
 	},
 
@@ -1477,10 +1477,10 @@ SMODS.Joker {
             vars = { card.ability.extra.chips, card.ability.extra.mult, card.ability.extra.dollars },
         }
 	end,
-	rarity = 1,
+	rarity = 'btti_dynamic',
 	atlas = 'Subscribe',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
@@ -1497,9 +1497,9 @@ SMODS.Joker {
         if card.ability.extra.activated then
             card.ability.extra.activated = false
 
+            love.system.openURL("https://www.youtube.com/@Bennoh01")
             love.system.openURL("https://www.youtube.com/hatoving")
             love.system.openURL("https://www.youtube.com/juicimated")
-            love.system.openURL("https://www.youtube.com/@Bennoh01")
 
             card.children.center.atlas = G.ASSET_ATLAS['btti_Subscribed']
             card.children.center:set_sprite_pos({ x = 0, y = 0 })
@@ -1727,7 +1727,7 @@ SMODS.Joker {
 			"{C:chips}+20{} Chips every hand",
             "{C:mult}Expires{} when {C:chips}Chips{} is greater",
             "than or equal to the {C:attention}current date{}",
-            "{C:inactive}(#2# -> #3#){}",
+            "{C:inactive}(#3# -> #2#){}",
             "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)"
 		}
 	},
@@ -1925,36 +1925,38 @@ SMODS.Joker {
 	end
 }
 
+-- Volume
 SMODS.Atlas {
-    key = "Microphone1", path = "bttiMicrophone1.png", px = 71, py = 95
+    key = "Volume1", path = "bttiVolume1.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone2", path = "bttiMicrophone2.png", px = 71, py = 95
+    key = "Volume2", path = "bttiVolume2.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone3", path = "bttiMicrophone3.png", px = 71, py = 95
+    key = "Volume3", path = "bttiVolume3.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone4", path = "bttiMicrophone4.png", px = 71, py = 95
+    key = "Volume4", path = "bttiVolume4.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone5", path = "bttiMicrophone5.png", px = 71, py = 95
+    key = "Volume5", path = "bttiVolume5.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone6", path = "bttiMicrophone6.png", px = 71, py = 95
+    key = "Volume6", path = "bttiVolume6.png", px = 71, py = 95
 }
 SMODS.Atlas {
-    key = "Microphone7", path = "bttiMicrophone7.png", px = 71, py = 95
+    key = "Volume7", path = "bttiVolume7.png", px = 71, py = 95
 }
 SMODS.Joker {
-	key = 'Microphone',
+	key = 'Volume',
 	loc_txt = {
-		name = 'Microphone',
+		name = 'Volume',
 		text = {
-			"Records your microphone and gives",
+			"Records your {C:attention}voice{} and gives",
             "{C:mult}Mult{} based on how loud",
-            "{C:attention}screamed{} on the next hand",
-            "{C:inactive}Currently {C:attention}#1#{} == {C:mult}+#2#{} Mult"
+            "you {C:mult}screamed{} on {c:attention}next hand{}",
+            "{C:inactive}Switch device in config{}",
+            "{C:inactive}(Currently {C:attention}#1#{} -> {C:mult}+#2#{} Mult)"
 		}
 	},
 
@@ -1974,9 +1976,9 @@ SMODS.Joker {
         }
 	end,
 	rarity = 'btti_dynamic',
-	atlas = 'Microphone1',
+	atlas = 'Volume1',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 7,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
     unlocked = true,
@@ -1998,19 +2000,19 @@ SMODS.Joker {
                 local aa = math.floor(a * 100)
 
                 if aa <= 0 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone1']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume1']
                 elseif aa <= 25 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone2']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume2']
                 elseif aa <= 50 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone3']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume3']
                 elseif aa <= 60 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone4']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume4']
                 elseif aa <= 75 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone5']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume5']
                 elseif aa <= 99 then
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone6']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume6']
                 else
-                    card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone7']
+                    card.children.center.atlas = G.ASSET_ATLAS['btti_Volume7']
                 end
 
                 card.children.center:set_sprite_pos({ x = 0, y = 0 })
@@ -2048,19 +2050,19 @@ SMODS.Joker {
                         local aa = math.floor(card.ability.extra.peak * 100)
 
                         if aa <= 0 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone1']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume1']
                         elseif aa <= 25 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone2']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume2']
                         elseif aa <= 50 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone3']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume3']
                         elseif aa <= 60 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone4']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume4']
                         elseif aa <= 75 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone5']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume5']
                         elseif aa <= 99 then
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone6']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume6']
                         else
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Microphone7']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Volume7']
                         end
 
                         card.children.center:set_sprite_pos({ x = 0, y = 0 })
