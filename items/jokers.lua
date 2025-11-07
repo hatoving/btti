@@ -2101,6 +2101,425 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Atlas {
+    key = "NyanCat",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'NyanCat',
+    loc_txt = {
+        name = 'Nyan Cat',
+        text = {
+            "{C:chips}+25{} Chips for each",
+            "remaining {C:attention}hand{}",
+            "Turns one card",
+            "{C:dark_edition}Polychrome{} at",
+            "end of {C:attention}round"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "Chris Torres" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'NyanCat',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "TacNayn",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'TacNayn',
+    loc_txt = {
+        name = 'Tac Nayn',
+        text = {
+            "{X:mult,C:white}X0.25{} Mult for each",
+            "remaining {C:attention}discard{}",
+            "Turns one card {C:chips}Digital{}",
+            "every played hand"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "FrankieDudeUltimate" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'TacNayn',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "MatPat",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'MatPat',
+    loc_txt = {
+        name = 'Matthew Patrick',
+        text = {
+            "Theorizes played hand\'s base",
+            "{C:chips}Chips{} and {C:mult}Mult{} and adds it to {C:attention}score"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "hatoving" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'MatPat',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "BadApple",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'BadApple',
+    loc_txt = {
+        name = 'Bad Apple!!',
+        text = {
+            "Gives {C:chips}Chips{} based on",
+            "how many {c:attention}pixels{} of this",
+            "card are black on {C:attention}score"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touhou Project", "Masayoshi Minoshima" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 'btti_dynamic',
+	atlas = 'BadApple',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "Rhett",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Rhett',
+    loc_txt = {
+        name = 'Rhett McLaughlin',
+        text = {
+            "{c:attention}Duplicates{} the first",
+            "{c:attention}played card{} in your hand",
+            "if the rank is a number"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Rhett',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "Link",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Link',
+    loc_txt = {
+        name = 'Link Neal',
+        text = {
+            "{c:attention}Duplicates{} the last",
+            "{c:attention}played card{} in your hand",
+            "if the rank is a number"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'Link',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "Bibinos",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Bibinos',
+    loc_txt = {
+        name = 'bbno$',
+        text = {
+            "{c:attention}"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'Bibinos',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "Halloween",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Halloween',
+    loc_txt = {
+        name = 'This is Halloween',
+        text = {
+            "If before or after",
+            "October 31, gives $1",
+            "If during October 31, adds",
+            "+31 Chips and +10 Mult",
+            "(Currently +0 Chips",
+            "and +0 Mult)"
+        }
+    },
+
+    config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touchstone Pictures", "Tim Burton" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 'btti_dynamic',
+	atlas = 'Halloween',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
 --#endregion
 
 -- MCDONALD'S JOKERS
@@ -3363,6 +3782,368 @@ SMODS.Joker {
     in_pool = function(self, args)
         return true, { allow_duplicates = false }
     end
+}
+
+--#endregion
+
+-- ALAN BECKER JOKERS
+--#region ALAN BECKER JOKERS
+
+-- victim
+SMODS.Atlas {
+    key = "Victim",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Victim',
+	loc_txt = {
+		name = 'victim',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'Victim',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- The Chosen One
+SMODS.Atlas {
+    key = "ChosenOne",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'ChosenOne',
+	loc_txt = {
+		name = 'The Chosen One',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'ChosenOne',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- The Dark Lord
+SMODS.Atlas {
+    key = "DarkLord",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'DarkLord',
+	loc_txt = {
+		name = 'The Dark Lord',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 3,
+	atlas = 'DarkLord',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- The Second Coming
+SMODS.Atlas {
+    key = "SecondComing",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'SecondComing',
+	loc_txt = {
+		name = 'Orange',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 3,
+	atlas = 'SecondComing',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- Color Gang
+SMODS.Atlas {
+    key = "ColorGang",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'ColorGang',
+	loc_txt = {
+		name = 'Color Gang',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 1,
+	atlas = 'ColorGang',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- King Orange
+SMODS.Atlas {
+    key = "KingOrange",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'KingOrange',
+	loc_txt = {
+		name = 'King Orange',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'KingOrange',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
+}
+
+-- Purple
+SMODS.Atlas {
+    key = "Purple",
+    path = "bttiJonker.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'Purple',
+	loc_txt = {
+		name = 'Purple',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'Purple',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return true, { allow_duplicates = false }
+	end
 }
 
 --#endregion
