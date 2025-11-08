@@ -88,6 +88,15 @@ for _, file in ipairs(files) do
 	end
 	f()
 end
+files = NFS.getDirectoryItems(G.bttiModPath .. "items/jokers")
+for _, file in ipairs(files) do
+	print("[BTTI] Loading lua file " .. file)
+	f, err = SMODS.load_file("items/jokers/" .. file)
+	if err then
+		error(err)
+	end
+	f()
+end
 files = NFS.getDirectoryItems(G.bttiModPath .. "bigboyblinds")
 for _, file in ipairs(files) do
 	print("[BTTI] Loading lua file " .. file)
