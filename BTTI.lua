@@ -128,7 +128,7 @@ local jokers = {
 local function load_jokers(path)
     local f, err = SMODS.load_file(path)
     if err then
-        error(("Error loading %s:\n%s"):format(path, err))
+        error(("[BTTI] Error loading %s:\n%s"):format(path, err))
     end
     f()
 end
