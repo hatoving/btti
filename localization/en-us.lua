@@ -53,10 +53,11 @@ return {
                 }
             },
             bttiFromBy = {
-                name = "From Where?! By Who!?",
+                name = "From?! By!? Idea?!?",
                 text = {
                     "{X:dark_edition,C:white}#1#{}",
-                    "{C:dark_edition}#2#{}"
+                    "{C:dark_edition}#2#{}",
+                    "{X:dark_edition,C:white}#3#{}",
                 }
             },
             bttiPossibleCombo = {
