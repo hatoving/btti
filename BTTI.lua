@@ -94,6 +94,161 @@ if err then
 	error(err)
 end
 f()
+f, err = SMODS.load_file('jokers/mcdonaldsJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/fgJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/smilingJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/boysJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/dexterJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/vocaloidJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/gungeonJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/ultrakillJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/isaacJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/fnafJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/ddlcJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/baldiJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/hkJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/utdrJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/avaJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/tadcJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/spongebobJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/kpdhJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/bfdiJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/hanakoJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/deetsJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/ittiJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/dramatizedJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/staceyJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/ymfpJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/regalityJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/scoliosisJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/aotaJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/agasJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/creaticaJokers.lua')
+if err then
+	error(err)
+end
+f()
+f, err = SMODS.load_file('jokers/directorJokers.lua')
+if err then
+	error(err)
+end
+f()
 f, err = SMODS.load_file('jokers/jokerCombos.lua')
 if err then
 	error(err)
