@@ -89,12 +89,12 @@ for _, file in ipairs(files) do
 	f()
 end
 
-f, err = SMODS.load_file('items/jokers/jokers.lua')
+f, err = SMODS.load_file('jokers/jokers.lua')
 if err then
 	error(err)
 end
 f()
-f, err = SMODS.load_file('items/jokers/jokerCombos.lua')
+f, err = SMODS.load_file('jokers/jokerCombos.lua')
 if err then
 	error(err)
 end
