@@ -89,171 +89,53 @@ for _, file in ipairs(files) do
 	f()
 end
 
-f, err = SMODS.load_file('jokers/jokers.lua')
-if err then
-	error(err)
+local jokers = {
+    "jokers/jokers.lua",
+    "jokers/mcdonaldsJokers.lua",
+    "jokers/fgJokers.lua",
+    "jokers/smilingJokers.lua",
+    "jokers/boysJokers.lua",
+    "jokers/dexterJokers.lua",
+    "jokers/vocaloidJokers.lua",
+    "jokers/gungeonJokers.lua",
+    "jokers/ultrakillJokers.lua",
+    "jokers/isaacJokers.lua",
+    "jokers/fnafJokers.lua",
+    "jokers/ddlcJokers.lua",
+    "jokers/baldiJokers.lua",
+    "jokers/hkJokers.lua",
+    "jokers/utdrJokers.lua",
+    "jokers/avaJokers.lua",
+    "jokers/tadcJokers.lua",
+    "jokers/spongebobJokers.lua",
+    "jokers/kpdhJokers.lua",
+    "jokers/bfdiJokers.lua",
+    "jokers/hanakoJokers.lua",
+    "jokers/deetsJokers.lua",
+    "jokers/ittiJokers.lua",
+    "jokers/dramatizedJokers.lua",
+    "jokers/staceyJokers.lua",
+    "jokers/ymfpJokers.lua",
+    "jokers/regalityJokers.lua",
+    "jokers/scoliosisJokers.lua",
+    "jokers/aotaJokers.lua",
+    "jokers/agasJokers.lua",
+    "jokers/creaticaJokers.lua",
+    "jokers/directorJokers.lua",
+    "jokers/jokerCombos.lua",
+}
+
+local function load_jokers(path)
+    local f, err = SMODS.load_file(path)
+    if err then
+        error(("Error loading %s:\n%s"):format(path, err))
+    end
+    f()
 end
-f()
-f, err = SMODS.load_file('jokers/mcdonaldsJokers.lua')
-if err then
-	error(err)
+
+for _, path in ipairs(jokers) do
+    load_jokers(path)
 end
-f()
-f, err = SMODS.load_file('jokers/fgJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/smilingJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/boysJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/dexterJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/vocaloidJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/gungeonJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/ultrakillJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/isaacJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/fnafJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/ddlcJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/baldiJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/hkJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/utdrJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/avaJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/tadcJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/spongebobJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/kpdhJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/bfdiJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/hanakoJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/deetsJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/ittiJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/dramatizedJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/staceyJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/ymfpJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/regalityJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/scoliosisJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/aotaJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/agasJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/creaticaJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/directorJokers.lua')
-if err then
-	error(err)
-end
-f()
-f, err = SMODS.load_file('jokers/jokerCombos.lua')
-if err then
-	error(err)
-end
-f()
 
 files = NFS.getDirectoryItems(G.bttiModPath .. "bigboyblinds")
 for _, file in ipairs(files) do
