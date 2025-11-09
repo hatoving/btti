@@ -28,7 +28,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "ULTRAKILL", "Hakita, New Blood Interactive", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "ULTRAKILL", "Arsi \"Hakita\" Patala, New Blood Interactive", "BlueBen8" } }
         return {
             vars = { card.ability.extra.chips },
         }

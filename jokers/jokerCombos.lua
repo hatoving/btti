@@ -13,7 +13,7 @@ SMODS.Font({
 
 --#region VANILLA COMBO JOKERS
 
--- Avariocious
+-- Avaricious Joker
 SMODS.Atlas {
     key = "avariciousJoker",
     path = "bttiAvariciousJoker.png",
@@ -137,6 +137,7 @@ SMODS.Joker {
     end
 }
 
+-- Sinful Joker
 SMODS.Atlas {
     key = "sinfulJoker",
     path = "bttiSinfulJoker.png",
@@ -196,6 +197,7 @@ SMODS.Joker {
     end
 }
 
+--Jovial Joker
 SMODS.Atlas {
     key = "jovialJoker",
     path = "bttiJovialJoker.png",
@@ -257,6 +259,7 @@ SMODS.Joker {
     end
 }
 
+-- Confused Joker
 SMODS.Atlas {
     key = "confusedJoker",
     path = "bttiConfusedJoker.png",
@@ -318,6 +321,7 @@ SMODS.Joker {
     end
 }
 
+-- Genius Joker
 SMODS.Atlas {
     key = "geniusJoker",
     path = "bttiGeniusJoker.png",
@@ -379,6 +383,7 @@ SMODS.Joker {
     end
 }
 
+-- Bonkers Joker
 SMODS.Atlas {
     key = "bonkersJoker",
     path = "bttiBonkersJoker.png",
@@ -440,6 +445,7 @@ SMODS.Joker {
     end
 }
 
+-- Deliberate Joker
 SMODS.Atlas {
     key = "deliberateJoker",
     path = "bttiDeliberateJoker.png",
@@ -501,6 +507,7 @@ SMODS.Joker {
     end
 }
 
+-- Split Jovial Joker
 SMODS.Atlas {
     key = "splitJovialJoker",
     path = "bttiSplitJovialJoker.png",
@@ -562,6 +569,7 @@ SMODS.Joker {
     end
 }
 
+-- Split Confused Joker
 SMODS.Atlas {
     key = "splitConfusedJoker",
     path = "bttiSplitConfusedJoker.png",
@@ -623,6 +631,7 @@ SMODS.Joker {
     end
 }
 
+-- Zero Theo
 SMODS.Atlas {
     key = "zeroTheo",
     path = "bttiZeroTheo.png",
@@ -683,6 +692,7 @@ SMODS.Joker {
     end
 }
 
+-- True Banana
 SMODS.Atlas {
     key = "trueBanana",
     path = "bttiTrueBanana.png",
@@ -748,6 +758,7 @@ SMODS.Joker {
     end
 }
 
+-- Royal Moon
 SMODS.Atlas {
     key = "royalMoon",
     path = "bttiRoyalMoon.png",
@@ -829,6 +840,7 @@ SMODS.Joker {
     end
 }
 
+-- Short Scholar
 SMODS.Atlas {
     key = "shortScholar",
     path = "bttiShortScholar.png",
@@ -912,6 +924,7 @@ SMODS.Joker {
     end
 }
 
+-- Chance of Clouds
 SMODS.Atlas {
     key = "chanceOfClouds",
     path = "bttiChanceOfClouds.png",
@@ -998,6 +1011,7 @@ SMODS.Joker {
     end
 }
 
+-- Celestius
 SMODS.Atlas {
     key = "celestius",
     path = "bttiCelestius.png",
@@ -1122,6 +1136,7 @@ SMODS.Joker {
     end
 }
 
+-- Mineral Joker
 SMODS.Atlas {
     key = "mineralJoker",
     path = "bttiMineralJoker.png",
@@ -1197,6 +1212,7 @@ SMODS.Joker {
     end
 }
 
+-- Abstractbuckler
 SMODS.Atlas {
     key = "abstractbuckler",
     path = "bttiAbstractbuckler.png",
@@ -1270,6 +1286,7 @@ SMODS.Joker {
     end
 }
 
+-- Resume
 SMODS.Atlas {
     key = "resume",
     path = "bttiResume.png",
@@ -1375,6 +1392,7 @@ SMODS.Joker {
     end
 }
 
+-- Bat
 SMODS.Atlas {
     key = "bat",
     path = "bttiBat.png",
@@ -1437,6 +1455,7 @@ SMODS.Joker {
     end
 }
 
+-- Mountain Burglar
 SMODS.Atlas {
     key = "mountainBurglar",
     path = "bttiMountainBurglar.png",
@@ -1514,6 +1533,7 @@ SMODS.Joker {
     end
 }
 
+-- Holo Resume
 SMODS.Atlas {
     key = "holoResume",
     path = "bttiHoloResume.png",
@@ -1654,6 +1674,7 @@ SMODS.Joker {
     end
 }
 
+-- Lunatic
 SMODS.Atlas {
     key = "lunatic",
     path = "bttiLunatic.png",
@@ -1742,6 +1763,7 @@ SMODS.Joker {
     end
 }
 
+-- Wine Juggler
 SMODS.Atlas {
     key = "wineJuggler",
     path = "bttiWineJuggler.png",
@@ -1804,6 +1826,7 @@ SMODS.Joker {
     end
 }
 
+-- PhotoChad
 SMODS.Atlas {
     key = "photoChad",
     path = "bttiPhotoChad.png",
@@ -1956,6 +1979,7 @@ SMODS.Joker {
 
 --#region MOD COMBO JOKERS
 
+-- Triple-Baka!!
 SMODS.Atlas {
     key = "TripleBaka",
     path = "bttiTripleBaka.png",
