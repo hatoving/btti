@@ -1461,9 +1461,9 @@ SMODS.Joker {
         if card.ability.extra.activated then
             card.ability.extra.activated = false
 
-            love.system.openURL("https://www.youtube.com/@Bennoh01")
-            love.system.openURL("https://www.youtube.com/hatoving")
-            love.system.openURL("https://www.youtube.com/juicimated")
+            love.system.openURL("HTTPS://www.youtube.com/@Bennoh01")
+            love.system.openURL("HTTPS://www.youtube.com/hatoving")
+            love.system.openURL("HTTPS://www.youtube.com/juicimated")
 
             card.children.center.atlas = G.ASSET_ATLAS['btti_Subscribed']
             card.children.center:set_sprite_pos({ x = 0, y = 0 })

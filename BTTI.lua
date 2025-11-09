@@ -3,6 +3,7 @@ if G.BTTI == nil then
 end
 
 G.BTTI.config = SMODS.current_mod.config
+G.BTTI.combining = false
 
 -- stolen from the yahiamouse
 G.effectmanager = {}

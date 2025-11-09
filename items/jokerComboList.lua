@@ -246,6 +246,37 @@ function G.BTTI.getCombinableJokers(joker_id)
     return result
 end
 
+function G.BTTI.getCombinableJokerKeys(joker_id)
+    local result = {}
+
+    for _, combo in pairs(G.BTTI.JOKER_COMBOS) do
+        if combo.jokers then
+            local in_jokers = table_contains(combo.jokers, joker_id)
+            local in_allowed = combo.allowed and table_contains(combo.allowed, joker_id)
+
+            if in_jokers then
+                -- Combo with multiple jokers and no allowed list
+                if #combo.jokers > 1 and not combo.allowed then
+                    for _, j in ipairs(combo.jokers) do
+                        if j ~= joker_id then
+                            table.insert(result, j)
+                        end
+                    end
+                end
+                if combo.allowed then
+                    for _, j in ipairs(combo.allowed) do
+                        table.insert(result, j)
+                    end
+                end
+            elseif in_allowed and #combo.jokers == 1 then
+                table.insert(result, combo.jokers[1])
+            end
+        end
+    end
+
+    return result
+end
+
 function G.BTTI.initJokerCombos()
     local function processComboList(combo_name, list, list2, listType)
         sendInfoMessage("COMBO:  " .. combo_name .. " ---", "BTTI")
