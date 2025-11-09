@@ -26,7 +26,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "BlueBen8", "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -105,7 +105,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "vincemarz" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "vincemarz", "BlueBen8" } }
 		return { vars = { card.ability.extra.xmult, card.ability.extra.xmultres, card.ability.extra.mult } }
 	end,
 	rarity = 2,
@@ -212,7 +212,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "_moszy13" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "_moszy13", "BlueBen8" } }
         return {
             vars = { },
         }
@@ -305,7 +305,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP & Beyond...", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP & Beyond...", "BlueBen8", "BlueBen8" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.odds },
         }
@@ -409,7 +409,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "hatoving, BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "RegalitySMP", "_moszy13", "hatoving, BlueBen8" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.addChip, card.ability.extra.addMult },
         }

@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Hollow Knight", "Team Cherry" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Hollow Knight", "Team Cherry", "Juicimated" } }
 		return {
             vars = { },
         }

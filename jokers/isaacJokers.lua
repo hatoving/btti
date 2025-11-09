@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -76,7 +76,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
         return {
             vars = { },
         }
@@ -175,7 +175,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -225,7 +225,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
 		return {
             vars = { },
         }

@@ -26,7 +26,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated", "hatoving" } }
 		return {
             vars = { },
         }
@@ -110,7 +110,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated", "hatoving" } }
 		return {
             vars = { },
         }
@@ -261,7 +261,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "Lightshine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "Lightshine, Juicimated", "BlueBen8" } }
         return {
             vars = {card.ability.extra.mult, card.ability.extra.mult_gain},
         }
@@ -348,7 +348,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated", "BlueBen8" } }
         return {
             vars = { card.ability.extra.xmult },
         }
@@ -429,7 +429,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -480,7 +480,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "LightShine, Juicimated", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -533,7 +533,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "beanrollup" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Inn-to the Insanity", "beanrollup", "hatoving" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }

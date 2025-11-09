@@ -26,7 +26,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID", "Crypton Future Media, INC." } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID", "Crypton Future Media, INC.", "hatoving" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do
@@ -96,7 +96,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UTAU", "Smith Hioka" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UTAU", "Smith Hioka", "hatoving" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do
@@ -166,7 +166,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID (Derivative)", "Smith Hioka" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID (Derivative)", "Smith Hioka", "hatoving" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do

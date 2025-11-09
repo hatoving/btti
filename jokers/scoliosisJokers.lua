@@ -28,7 +28,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Scoliosis Man", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Scoliosis Man", "BlueBen8", "BlueBen8" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.mult },
         }
@@ -124,7 +124,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Scoliosis Man", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Scoliosis Man", "BlueBen8", "BlueBen8" } }
 		return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }

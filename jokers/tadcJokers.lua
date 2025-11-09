@@ -27,7 +27,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH", "Juicimated" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.mult },
         }
@@ -99,7 +99,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH", "Juicimated" } }
         return {
             vars = { card.ability.extra.mult },
         }
@@ -181,7 +181,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Amazing Digital Circus", "Gooseworx, GLITCH", "Juicimated" } }
         return {
             vars = { },
         }

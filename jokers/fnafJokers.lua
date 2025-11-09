@@ -30,7 +30,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Five Nights at Freddy's", "Scott Cawthon" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Five Nights at Freddy's", "Scott Cawthon", "hatoving" } }
         return {
             vars = {},
         }
@@ -97,7 +97,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Five Nights at Freddy's", "Markiplier" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Five Nights at Freddy's", "Markiplier", "Juicimated" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }

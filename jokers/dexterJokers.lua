@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Dexter", "Jeff Lindsay" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Dexter", "Jeff Lindsay", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -75,7 +75,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Dexter", "Jeff Lindsay" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Dexter", "Jeff Lindsay", "Juicimated" } }
 		return {
             vars = { },
         }

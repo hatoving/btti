@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -75,7 +75,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -126,7 +126,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -177,7 +177,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -330,7 +330,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }

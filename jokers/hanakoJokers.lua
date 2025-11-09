@@ -28,7 +28,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "YOURS TRULY, HANAKO", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "YOURS TRULY, HANAKO", "hatoving", "hatoving" } }
         return {
             vars = { card.ability.extra.smult, card.ability.extra.schips },
         }
@@ -97,7 +97,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "YOURS TRULY, HANAKO", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "YOURS TRULY, HANAKO", "hatoving", "hatoving" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }

@@ -26,7 +26,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Battle for Dream Island", "jacknjellify" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Battle for Dream Island", "jacknjellify", "BlueBen8" } }
         return {
             vars = { card.ability.extra.chips, card.ability.extra.Xmult, card.ability.extra.mult },
         }

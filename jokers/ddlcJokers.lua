@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato", "hatoving, Juicimated" } }
 		return {
             vars = { },
         }
@@ -75,7 +75,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -126,7 +126,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -177,7 +177,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Doki Doki Literature Club!", "Dan Salvato", "Juicimated" } }
 		return {
             vars = { },
         }

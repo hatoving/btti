@@ -26,7 +26,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "Juicimated", "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -95,7 +95,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "LightShine, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "LightShine, Juicimated", "Juicimated" } }
         return {
             vars = {},
         }
@@ -167,7 +167,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "hatoving, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "hatoving, Juicimated", "Juicimated" } }
         return {
             vars = {},
         }
@@ -244,7 +244,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "ca850, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "ca850, Juicimated", "Juicimated" } }
         return {
             vars = {},
         }
@@ -314,7 +314,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "BlueBen8, Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Creaticas", "BlueBen8, Juicimated", "Juicimated" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do

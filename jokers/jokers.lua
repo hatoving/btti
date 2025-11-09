@@ -206,7 +206,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "u/cdub_synth", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "cdub_synth", "BlueBen8" } }
 		return {
             vars = { card.ability.extra.mult, card.ability.extra.money },
         }
@@ -1616,7 +1616,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "Reddit, Probably", "BlueBen8" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "Reddit, probably", "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -1934,7 +1934,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Humanity", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Sound", "hatoving" } }
 		return {
             vars = { card.ability.extra.peak, math.floor(card.ability.extra.peak * 100) },
         }
@@ -2180,7 +2180,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "MatPat", "hatoving" } }
 		return {
             vars = { },
         }
@@ -2232,7 +2232,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touhou Project", "Masayoshi Minoshima" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touhou Project", "ZUN", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -2284,7 +2284,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Mythical", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -2336,7 +2336,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Mythical", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -2386,7 +2386,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Alexander Leon Gumuchian", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -2441,7 +2441,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touchstone Pictures", "Tim Burton" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Touchstone Pictures", "Tim Burton", "Juicimated" } }
 		return {
             vars = { },
         }
