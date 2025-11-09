@@ -23,7 +23,7 @@ function G.UIDEF.use_and_sell_buttons(card)
                 {n=G.UIT.B, config = {w=0.1,h=0.6}},
                 {n=G.UIT.C, config={align = "tm"}, nodes={
                 {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
-                    {n=G.UIT.T, config={text = "Combine",colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+                    {n=G.UIT.T, config={text = "COMBINE",colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
                 }},
                 {n=G.UIT.R, config={align = "cm"}, nodes={
                     {n=G.UIT.T, config={text = "???",colour = G.C.WHITE, scale = 0.4, shadow = true}},
