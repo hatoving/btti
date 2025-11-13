@@ -122,7 +122,7 @@ local jokers = {
     "aotaJokers",
     "agasJokers",
     "creaticaJokers",
-    "directorJokers",
+    "actsanityJokers",
     "jokerCombos",
 }
 
