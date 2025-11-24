@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Jokers = {
-            bttiJokerDonor = {
+            bttiJokerFriend = {
                 name = 'Friend...?',
                 text = {
                     "Gains {C:chips}+21{} Chips when triggered",
@@ -11,13 +11,13 @@ return {
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive})"
                 }
             },
-            bttiJokerDonor_alt = {
+            bttiJokerFriend_alt = {
                 name = 'The Donor',
                 text = {
                     "You're my favorite person."
                 }
             },
-            bttiJokerDonor_keepName = {
+            bttiJokerFriend_keepName = {
                 name = 'The Donor',
                 text = {
                     "Gains {C:chips}+21{} Chips when triggered",

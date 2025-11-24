@@ -136,21 +136,21 @@ SMODS.Joker {
 	end
 }
 
--- Donor
+-- Friend
 SMODS.Atlas {
-    key = "Donor",
-    path = "bttiDonor1.png",
+    key = "Friend",
+    path = "bttiFriend1.png",
     px = 71,
     py = 95
 }
 SMODS.Atlas {
-    key = "DonorReal",
-    path = "bttiDonor2.png",
+    key = "FriendReal",
+    path = "bttiFriend2.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-    key = 'Donor',
+    key = 'Friend',
     loc_txt = {
         name = 'Friend...?',
         text = {
@@ -175,26 +175,26 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "You're My Favorite Person", "Juicimated", "Juicimated" } }
         if card.ability.extra.keyState == 1 then
             return {
-                key = 'bttiJokerDonor_alt',
+                key = 'bttiJokerFriend_alt',
                 set = 'Jokers',
                 vars = { card.ability.extra.chips },
             }
         elseif card.ability.extra.keyState == 2 then
             return {
-                key = 'bttiJokerDonor_keepName',
+                key = 'bttiJokerFriend_keepName',
                 set = 'Jokers',
                 vars = { card.ability.extra.chips },
             }
         else
             return {
-                key = 'bttiJokerDonor',
+                key = 'bttiJokerFriend',
                 set = 'Jokers',
                 vars = { card.ability.extra.chips },
             }
         end
     end,
     rarity = 1,
-    atlas = 'Donor',
+    atlas = 'Friend',
     pos = { x = 0, y = 0 },
     cost = 4,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_YMFP"] = true },
@@ -208,10 +208,10 @@ SMODS.Joker {
     set_sprites = function(self, card, front)
         if card.ability and card.ability.extra then
             if card.ability.extra.keyState == 1 then
-                card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
+                card.children.center.atlas = G.ASSET_ATLAS['btti_FriendReal']
                 card.children.center:set_sprite_pos({ x = 0, y = 0 })
             else
-                card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
+                card.children.center.atlas = G.ASSET_ATLAS['btti_Friend']
                 card.children.center:set_sprite_pos({ x = 0, y = 0 })
             end
         end
@@ -219,7 +219,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.joker_main then
-            if pseudorandom('Donor') < G.GAME.probabilities.normal / 5 then
+            if pseudorandom('Friend') < G.GAME.probabilities.normal / 5 then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',
                     blocking = false,
@@ -238,7 +238,7 @@ SMODS.Joker {
                         end
                         card.ability.extra.chips = 0
                         card:juice_up()
-                        card.children.center.atlas = G.ASSET_ATLAS['btti_DonorReal']
+                        card.children.center.atlas = G.ASSET_ATLAS['btti_FriendReal']
                         card.children.center:set_sprite_pos({ x = 0, y = 0 })
                         return true
                     end,
@@ -257,7 +257,7 @@ SMODS.Joker {
                                 card.ability.extra.keyState = 2
                             end
                             card:juice_up()
-                            card.children.center.atlas = G.ASSET_ATLAS['btti_Donor']
+                            card.children.center.atlas = G.ASSET_ATLAS['btti_Friend']
                             card.children.center:set_sprite_pos({ x = 0, y = 0 })
                             return true
                         end,
