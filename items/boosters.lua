@@ -635,46 +635,6 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
-    key = "smpBP",
-    path = "bttiCrownedBuffoonPack.png",
-    px = 71,
-    py = 95
-}
-SMODS.Booster {
-    key = "buffoon_smp",
-    weight = 0.6,
-    kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
-    cost = 25,
-    pos = { x = 0, y = 0 },
-    atlas = 'smpBP',
-    config = { extra = 2, choose = 1 },
-    loc_txt = {
-        name = "Crowned Buffoon Pack",
-        text = {
-            "Choose 1 of up to 2",
-            "{C:balinsanity}RegalitySMP Jokers",
-        },
-        group_name = 'Crowned Buffoon Pack'
-    },
-    loc_vars = function(self, info_queue, card)
-        return {
-        }
-    end,
-    ease_background_colour = function(self)
-        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
-    end,
-    create_card = function(self, card, i)
-        return SMODS.create_card({
-            set = "BTTI_modAddition_SMP",
-            area = G.pack_cards,
-            skip_materialize = true,
-            soulable = true,
-            key_append = "btti"
-        })
-    end,
-}
-
-SMODS.Atlas {
     key = "celestialDeets",
     path = "bttiEquineCelestialPack.png",
     px = 71,

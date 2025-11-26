@@ -276,3 +276,94 @@ SMODS.Joker {
 		return true, { allow_duplicates = false }
 	end
 }
+
+-- ???
+SMODS.Atlas {
+    key = "Myst",
+    path = "bttiMyst.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+    key = 'Myst',
+    loc_txt = {
+        name = '???????????',
+        text = {
+            "{C:mult}+#1#{} Mult for each Non-{C:attention}Stone{}/",
+            "Non-{C:attention}Steel Card{} in {C:attention}full deck{}",
+            "Debuffs {C:attention}Stone{} and {C:attention}Steel Cards{}",
+            "{C:green}1 in 30{} chance to turn a",
+            "random {C:attention}played card{} into a {C:attention}Stone Card{}",
+            "{C:green}1 in 30{} chance to turn",
+            "a random {C:attention}played card{} into a {C:attention}Steel Card"
+        }
+    },
+
+    config = { extra = { mult = 5, odds = 30, debuffed = {} } },
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "AOTA", "BlueBen8", "BlueBen8" } }
+        return {
+            vars = { card.ability.extra.mult, card.ability.extra.odds },
+        }
+    end,
+    rarity = 4,
+    atlas = 'Myst',
+    pos = { x = 0, y = 0 },
+    cost = 20,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_LEGENDARY"] = true, ["BTTI_modAddition_SMP"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+    calculate = function(self, card, context)
+        local cardAmount = 0
+        if G.playing_cards then
+            for _, pc in ipairs(G.playing_cards) do
+                if pc.config.center.key ~= "m_stone" and pc.config.center.key ~= "m_steel" then
+                    cardAmount = cardAmount + 1
+                end
+            end
+        end
+
+        if context.cardarea == G.play and context.individual and context.other_card then
+            if context.other_card.config.center.key == "m_stone" or context.other_card.config.center.key == "m_steel" then
+                SMODS.debuff_card(context.other_card, true, 'Myst')
+                context.other_card:juice_up()
+                table.insert(card.ability.extra.debuffed, context.other_card)
+            end
+        end
+
+        if context.joker_main then 
+            sendInfoMessage("Found " .. cardAmount .. " cards = +" .. card.ability.extra.mult * cardAmount .. " Mult")
+            return SMODS.merge_effects {
+                { message = "Gray... oh so gray...", colour = G.C.GREY }, {
+                    mult_mod = card.ability.extra.mult * cardAmount,
+                    colour = G.C.RED,
+                    message = "+" .. card.ability.extra.mult * cardAmount .. " Mult",
+                }
+            }
+        end
+
+        if context.final_scoring_step then
+            for i, c in ipairs(card.ability.extra.debuffed) do
+                SMODS.debuff_card(c, false, 'Myst')
+                c:juice_up()
+            end
+            card.ability.extra.debuffed = {}
+        end
+    end,
+    in_pool = function(self, args)
+        return true, { allow_duplicates = false }
+    end
+}

@@ -160,8 +160,7 @@ return {
             bttiStreamerModeInfo = {
                 'Prevents copyrighted music from',
                 'starting during gameplay'
-            },
-            bttiSavedByRegBen = 'Saved by Reg!Ben'
+            }
         }
     }
 }
