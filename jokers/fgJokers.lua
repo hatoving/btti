@@ -30,7 +30,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Family Guy", "Seth McFarlane", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Family Guy", "Seth MacFarlane", "hatoving" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.rep },
         }
@@ -117,7 +117,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Family Guy", "Seth McFarlane", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Family Guy", "Seth MacFarlane", "hatoving" } }
         return {
             vars = { math.pi / 10, card.ability.extra.xchips },
         }
