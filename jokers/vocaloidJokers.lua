@@ -166,7 +166,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID (Derivative)", "Smith Hioka", "hatoving" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID", "Smith Hioka", "hatoving" } }
         local cardCount = 0
         if G.deck and G.deck.cards then
             for i, pc in ipairs(G.deck.cards) do
