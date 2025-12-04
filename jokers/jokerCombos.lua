@@ -2113,7 +2113,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UNDERTALE / DELTARUNE", "Toby Fox" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UNDERTALE", "Toby Fox" } }
         return {
             vars = { card.ability.extra.mult, card.ability.extra.chips },
         }
