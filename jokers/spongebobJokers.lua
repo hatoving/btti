@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "sponge", 
+    path = "bttiSponge.ttf"
+})
+
 --SpongeBob
 SMODS.Atlas {
     key = "SpongeBob",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'SpongeBob',
     loc_txt = {
-        name = 'SpongeBob',
+        name = '{f:btti_sponge}SpongeBob',
         text = {
             "All {C:attention}played cards{} count in scoring",
             "and get retriggered {C:blue}1-2{} times"
