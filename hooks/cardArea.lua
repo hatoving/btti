@@ -74,7 +74,7 @@ function CardArea:add_to_highlighted(card, silent)
         if #self.highlighted >= self.config.highlighted_limit and not skip then 
             self:remove_from_highlighted(self.highlighted[1])
         end
-        self.highlighted[#self.highlighted+1] = card
+        table.insert(self.highlighted, 1, card)
         card:highlight(true)
         if not silent then play_sound('cardSlide1') end
     else
@@ -91,3 +91,4 @@ function CardArea:add_to_highlighted(card, silent)
     end
     
 end
+

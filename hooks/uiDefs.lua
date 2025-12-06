@@ -1,7 +1,6 @@
 function G.UIDEF.use_and_sell_buttons(card)
   local sell = nil
   local use = nil
-  local bruh = nil
   if card.area and card.area.config.type == 'joker' then
     if not G.BTTI.combining then
         sell = {n=G.UIT.C, config={align = "cr"}, nodes={
@@ -73,11 +72,6 @@ function G.UIDEF.use_and_sell_buttons(card)
   end
     local t = {
       n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
-        {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
-          {n=G.UIT.R, config={align = 'cl'}, nodes={
-            bruh
-          }},
-        }},
         {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
           {n=G.UIT.R, config={align = 'cl'}, nodes={
             sell

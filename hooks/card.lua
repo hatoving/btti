@@ -130,6 +130,14 @@ function Card:highlight(is_higlighted)
     self.highlighted = is_higlighted
     if self.ability.consumeable or self.ability.set == 'Joker' or (self.area and self.area == G.pack_cards) then
         if self.highlighted and self.area and self.area.config.type ~= 'shop' then
+            if self.children.use_button then
+                self.children.use_button:remove()
+                self.children.use_button = nil
+            end
+            if self.children.extra_button then
+                self.children.extra_button:remove()
+                self.children.extra_button = nil
+            end
             local x_off = (self.ability.consumeable and -0.1 or 0)
             self.children.use_button = UIBox{
                 definition = G.UIDEF.use_and_sell_buttons(self), 
@@ -137,7 +145,7 @@ function Card:highlight(is_higlighted)
                         ((self.area == G.jokers) or (self.area == G.consumeables)) and "cr" or
                         "bmi"
                     , offset = 
-                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.7,y=0} or
+                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.4,y=0} or
                         {x=0,y=0.65},
                     parent =self}
             }
@@ -198,11 +206,11 @@ function Card:draw(layer)
         G.shared_shadow:draw_shader('dissolve', self.shadow_height)
     end
 
-    if (layer == 'card' or layer == 'both') and self.area ~= G.hand then 
+    if (layer == 'card' or layer == 'both' or layer == 'fuckyou') and self.area ~= G.hand then 
         if self.children.focused_ui then self.children.focused_ui:draw() end
     end
     
-    if (layer == 'card' or layer == 'both') then
+    if (layer == 'card' or layer == 'both' or layer == 'fuckyou') then
         -- for all hover/tilting:
         self.tilt_var = self.tilt_var or {mx = 0, my = 0, dx = self.tilt_var.dx or 0, dy = self.tilt_var.dy or 0, amt = 0}
         local tilt_factor = 0.3
@@ -222,20 +230,22 @@ function Card:draw(layer)
         if self.children.particles then self.children.particles:draw() end
 
         --Draw any tags/buttons
-        if self.children.price then self.children.price:draw() end
-        if self.children.buy_button then
-            if self.highlighted then
-                self.children.buy_button.states.visible = true
-                self.children.buy_button:draw()
-                if self.children.buy_and_use_button then 
-                    self.children.buy_and_use_button:draw()
+        if layer ~= 'fuckyou' then
+            if self.children.price then self.children.price:draw() end
+            if self.children.buy_button then
+                if self.highlighted then
+                    self.children.buy_button.states.visible = true
+                    self.children.buy_button:draw()
+                    if self.children.buy_and_use_button then 
+                        self.children.buy_and_use_button:draw()
+                    end
+                else
+                    self.children.buy_button.states.visible = false
                 end
-            else
-                self.children.buy_button.states.visible = false
             end
+            if self.children.use_button and self.highlighted then self.children.use_button:draw() end
+            if self.children.sex_button and self.highlighted then self.children.sex_button:draw() end
         end
-        if self.children.use_button and self.highlighted then self.children.use_button:draw() end
-        if self.children.sex_button and self.highlighted then self.children.sex_button:draw() end
 
         if self.vortex then
             if self.facing == 'back' then 
@@ -424,5 +434,21 @@ function Card:draw(layer)
 
         add_to_drawhash(self)
         self:draw_boundingrect()
+    end
+    if layer == 'fuckyou' then
+        if self.children.price then self.children.price:draw() end
+        if self.children.buy_button then
+            if self.highlighted then
+                self.children.buy_button.states.visible = true
+                self.children.buy_button:draw()
+                if self.children.buy_and_use_button then 
+                    self.children.buy_and_use_button:draw()
+                end
+            else
+                self.children.buy_button.states.visible = false
+            end
+        end
+        if self.children.use_button and self.highlighted then self.children.use_button:draw() end
+        if self.children.sex_button and self.highlighted then self.children.sex_button:draw() end
     end
 end
