@@ -1,3 +1,12 @@
+SMODS.Font({ 
+    key = "arial", 
+    path = "bttiArial.ttf"
+})
+SMODS.Font({ 
+    key = "mc", 
+    path = "bttiMinecraft.ttf"
+})
+
 -- victim
 SMODS.Atlas {
     key = "Victim",
@@ -8,7 +17,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Victim',
 	loc_txt = {
-		name = 'victim',
+		name = '{f:btti_arial}victim',
 		text = {
 			"{C:attention}"
 		}
@@ -59,7 +68,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'ChosenOne',
 	loc_txt = {
-		name = 'The Chosen One',
+		name = '{f:btti_arial}The Chosen One',
 		text = {
 			"{C:attention}"
 		}
@@ -110,7 +119,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'DarkLord',
 	loc_txt = {
-		name = 'The Dark Lord',
+		name = '{f:btti_arial}The Dark Lord',
 		text = {
 			"{C:attention}"
 		}
@@ -161,7 +170,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'SecondComing',
 	loc_txt = {
-		name = 'Orange',
+		name = '{f:btti_arial}Orange',
 		text = {
 			"{C:attention}"
 		}
@@ -212,7 +221,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'ColorGang',
 	loc_txt = {
-		name = 'Color Gang',
+		name = '{f:btti_arial}Color Gang',
 		text = {
 			"{C:attention}"
 		}
@@ -228,7 +237,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animator vs. Animation", "Alan Becker", "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -263,7 +272,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'KingOrange',
 	loc_txt = {
-		name = 'King Orange',
+		name = '{f:btti_mc}King Orange',
 		text = {
 			"{C:attention}"
 		}
@@ -279,7 +288,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Animation vs. Minecraft", "Alan Becker", "Juicimated" } }
 		return {
             vars = { },
         }
@@ -314,7 +323,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Purple',
 	loc_txt = {
-		name = 'Purple',
+		name = '{f:btti_mc}Purple',
 		text = {
 			"{C:attention}"
 		}

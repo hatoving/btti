@@ -1,3 +1,9 @@
+SMODS.Font({ 
+    key = "vcr", 
+    path = "bttiVcr.ttf"
+})
+
+
 -- Mindflayer
 SMODS.Atlas {
     key = "Mindflayer",
@@ -8,7 +14,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Mindflayer',
     loc_txt = {
-        name = 'Mindflayer',
+        name = '{f:btti_vcr}Mindflayer',
         text = {
             "{C:chips}+15{} Chips",
             "{C:chips}+10{} Chips for every {C:attention}card",

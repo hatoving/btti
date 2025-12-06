@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "mc", 
+    path = "bttiMinecraft.ttf"
+})
+
 -- Great Archbird
 SMODS.Atlas {
     key = "GreatArchbird",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'GreatArchbird',
     loc_txt = {
-        name = ' Great Archbird',
+        name = '{f:btti_mc}Great Archbird',
         text = {
             "{C:green}1 in 10{} chance to bring back",
             "a {C:attention}Joker{} that was just {C:red}destroyed{}"
@@ -68,7 +73,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Abyss',
     loc_txt = {
-        name = 'The Abyss',
+        name = '{f:btti_mc}The Abyss',
         text = {
             "{X:mult,C:white}X0.75{} Mult for each {C:attention}Joker{} destroyed",
             "after this {C:attention}Joker{} is acquired",
@@ -133,7 +138,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Universe',
     loc_txt = {
-        name = 'The Universe',
+        name = '{f:btti_mc}The Universe',
         text = {
             "Levels up all {C:attention}poker hands",
             "by {C:blue}1{} at the end of each {C:attention}round{}",
@@ -236,7 +241,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Nobody',
 	loc_txt = {
-		name = 'NOBODY',
+		name = '{f:btti_mc}NOBODY',
 		text = {
 			"{C:attention}"
 		}
@@ -287,7 +292,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Myst',
     loc_txt = {
-        name = '???????????',
+        name = '{f:btti_mc}???????????',
         text = {
             "{C:mult}+#1#{} Mult for each Non-{C:attention}Stone{}/",
             "Non-{C:attention}Steel Card{} in {C:attention}full deck{}",

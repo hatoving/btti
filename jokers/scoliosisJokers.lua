@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "vcr", 
+    path = "bttiVcr.ttf"
+})
+
 -- Goop
 SMODS.Atlas {
     key = "Goop",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Goop',
     loc_txt = {
-        name = 'Goop',
+        name = '{f:btti_vcr}Goop',
         text = {
             "{C:chips}+70{} Chips, {C:chips}-5{} Chips per {C:attention}hand played",
             "At {C:chips}0{} Chips, {C:mult}+30{} Mult. {C:mult}-1{} Mult per {C:attention}hand played",
@@ -106,7 +111,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Checkpoint',
 	loc_txt = {
-		name = 'Checkpoint',
+		name = '{f:btti_vcr}Checkpoint',
 		text = {
 			"Saves the first {C:attention}played hand{} of round",
             "and adds triple its {C:attention}score{} to {C:attention}final hand{}",

@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "w95",
+    path = "bttiW95.ttf"
+})
+
 -- Y/N
 SMODS.Atlas {
     key = "YIN",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'YIN',
 	loc_txt = {
-		name = 'Y/N',
+		name = '{f:btti_w95}Y/N',
 		text = {
 			"Press {C:blue}ENTER{} while this {C:attention}Joker{} is",
             "highlighted to select a new {C:attention}Boss Blind{}",
@@ -152,7 +157,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Friend',
     loc_txt = {
-        name = 'Friend...?',
+        name = '{f:btti_w95}Friend...?',
         text = {
             "Gains +{C:chips}21{} Chips when triggered",
             "{C:green}1 in 5{} chance to glitch, resetting",
@@ -280,7 +285,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'MissBreward',
     loc_txt = {
-        name = 'Miss Breward',
+        name = '{f:btti_w95}Miss Breward',
         text = {
             "Gains {X:mult,C:white}X0.25{} Mult",
             "per {C:deets}Stained Card{} leak",
@@ -343,7 +348,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'FrickinFunBand',
     loc_txt = {
-        name = 'Frickin\' Fun Band',
+        name = '{f:btti_w95}Frickin\' Fun Band',
         text = {
             "Avoiding playing with a {V:1}#1#",
             "will grant you a {C:attention}card{} of that suit",
@@ -429,7 +434,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Spoingus',
     loc_txt = {
-        name = 'Spoingus',
+        name = '{f:btti_w95}Spoingus',
         text = {
             "Spoingus"
         }
