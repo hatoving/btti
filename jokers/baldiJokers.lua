@@ -1,7 +1,7 @@
 -- Baldi
 SMODS.Atlas {
     key = "Baldi",
-    path = "bttiJonker.png",
+    path = "bttiBaldi1.png",
     px = 71,
     py = 95
 }
@@ -24,7 +24,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics in Education and Learning", "Basically Games" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics", "Basically Games" } }
 		return {
             vars = { },
         }
@@ -75,7 +75,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics in Education and Learning", "Basically Games" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics", "Basically Games" } }
 		return {
             vars = { },
         }
@@ -126,7 +126,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics in Education and Learning", "Basically Games" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics", "Basically Games" } }
 		return {
             vars = { },
         }

@@ -103,7 +103,7 @@ SMODS.Joker {
 -- VOX POPULI
 SMODS.Atlas {
     key = "Vox",
-    path = "bttiJonker.png",
+    path = "bttiVox.png",
     px = 71,
     py = 95
 }
