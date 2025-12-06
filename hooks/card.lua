@@ -137,12 +137,12 @@ function Card:highlight(is_higlighted)
                         ((self.area == G.jokers) or (self.area == G.consumeables)) and "cr" or
                         "bmi"
                     , offset = 
-                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.6,y=0} or
+                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.7,y=0} or
                         {x=0,y=0.65},
                     parent =self}
             }
-            self.children.sex_button = UIBox{
-                definition = G.UIDEF.sex_button(self), 
+            self.children.extra_button = UIBox{
+                definition = G.UIDEF.extra_button(self), 
                 config = {align=
                         ((self.area == G.jokers) or (self.area == G.consumeables)) and "cl" or
                         "bmi"
@@ -151,17 +151,17 @@ function Card:highlight(is_higlighted)
                         {x=0,y=-0.65},
                     parent =self}
             }
-        elseif self.children.use_button and self.children.sex_button then
+        elseif self.children.use_button and self.children.extra_button then
             self.children.use_button:remove()
             self.children.use_button = nil
-            self.children.sex_button:remove()
-            self.children.sex_button = nil
+            self.children.extra_button:remove()
+            self.children.extra_button = nil
         elseif self.children.use_button then
             self.children.use_button:remove()
             self.children.use_button = nil
-        elseif self.children.sex_button then
-            self.children.sex_button:remove()
-            self.children.sex_button = nil
+        elseif self.children.extra_button then
+            self.children.extra_button:remove()
+            self.children.extra_button = nil
         end
         
     end

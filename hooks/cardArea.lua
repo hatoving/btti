@@ -37,12 +37,30 @@ function CardArea:add_to_highlighted(card, silent)
     elseif self.config.type == 'joker' or self.config.type == 'consumeable' then
         local comb = G.BTTI.getCombinableJokerKeys(card.ability.name)
         local skip = false
+        if #self.highlighted > 1 then
+            for _, combo in pairs(G.BTTI.JOKER_COMBOS) do
+                if combo.allowed then
+                    for i, val in ipairs(self.highlighted) do
+                        if table_contains(combo.jokers, val.ability.name) then
+                            for i, val2 in ipairs(self.highlighted) do
+                                self:remove_from_highlighted(val2, true)
+                            end
+                            self:add_to_highlighted(card, silent)
+                            return
+                        end
+                    end
+                end
+            end
+        end
         G.BTTI.combining = false
         if #comb ~= 0 then
             for index, value in ipairs(self.highlighted) do
                 for i2, v2 in ipairs(comb) do
                     if value.ability.name == v2 then
-                        value.children.use_button:remove()
+                        if value.children.use_button ~= nil then
+                            value.children.use_button:remove()
+                            value.children.use_button = nil
+                        end
                         skip = true
                         G.BTTI.combining = true
                     end
@@ -71,4 +89,5 @@ function CardArea:add_to_highlighted(card, silent)
             self:parse_highlighted()
         end
     end
+    
 end
