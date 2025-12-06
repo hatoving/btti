@@ -271,7 +271,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Confused Joker',
         text = {
-            "{C:mult}+12{} Mult and {C:chips}+100{} Chips",
+            "{C:chips}+100{} Chips and {C:mult}+12{} Mult",
             "if played hand contains a",
             "{C:attention}Three of a Kind",
             "{C:inactive}(Zany Joker + Wily Joker)"
@@ -333,7 +333,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Genius Joker',
         text = {
-            "{C:mult}+10{} Mult and {C:chips}+80{} Chips",
+            "{C:chips}+80{} Chips and {C:mult}+10{} Mult",
             "if played hand contains a",
             "{C:attention}Two Pair",
             "{C:inactive}(Mad Joker + Clever Joker)"
@@ -395,7 +395,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Bonkers Joker',
         text = {
-            "{C:mult}+12{} Mult and {C:chips}+100{} Chips",
+            "{C:chips}+100{} Chips and {C:mult}+12{} Mult",
             "if played hand contains a",
             "{C:attention}Straight",
             "{C:inactive}(Crazy Joker + Devious Joker)"
@@ -457,7 +457,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Deliberate Joker',
         text = {
-            "{C:mult}+10{} Mult and {C:chips}+80{} Chips",
+            "{C:chips}+80{} Chips and {C:mult}+10{} Mult",
             "if played hand contains a",
             "{C:attention}Flush",
             "{C:inactive}(Droll Joker + Crafty Joker)"
@@ -519,7 +519,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Split Jovial Joker',
         text = {
-            "{C:mult}+28{} Mult and {C:chips}+80{} Chips",
+            "{C:chips}+80{} Chips and {C:mult}+28{} Mult",
             "if played hand contains a",
             "{C:attention}Pair",
             "{C:inactive}(Jovial Joker + Half Joker)"
@@ -643,8 +643,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Zero Theo',
         text = {
-            "Played cards give {C:mult}+4{} Mult",
-            "and {C:chips}+31{} Chips",
+            "Played cards give {C:chips}+31{} Chips",
+            "and {C:mult}+4{} Mult",
             "{C:inactive}(Even Steven + Odd Todd)"
         }
     },
@@ -1023,12 +1023,12 @@ SMODS.Joker {
     loc_txt = {
         name = 'Celestius',
         text = {
-            'Each {C:attention}face card{} held in hand',
-            'gives {X:mult,C:white}X13.5{} Mult',
-            'Played {C:aces}Aces{} give {C:chips}+100{} Chips',
-            'and {C:mult}+20{} Mult when scored',
             'This {C:attention}Joker{} gains {C:chips}+10{} Chips',
             'for each {C:attention}non-face card{} that is scored',
+            'Played {C:aces}Aces{} give {C:chips}+100{} Chips',
+            'and {C:mult}+20{} Mult when scored',
+            'Each {C:attention}face card{} held in hand',
+            'gives {X:mult,C:white}X13.5{} Mult',
             '{C:green}1 in 4{} chance for each played {C:attention}8{}',
             'to create a {C:purple}Tarot Card{} when scored',
             'Earn an extra {C:attention}$9{} at end of {C:attention}round{}',
@@ -1148,9 +1148,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mineral Joker',
         text = {
-            "Gives {X:mult,C:white}X0.5{} Mult for each {C:attention}Steel Card",
-            "in your {C:attention}full deck{} and {C:chips}+75{} Chips for",
-            "each {C:attention}Stone Card{} in your {C:attentionfull deck{}",
+            "Gives {C:chips}+75{} Chips each {C:attention}Stone Card{} ",
+            "in your {C:attention}full deck{} and {X:mult,C:white}X0.5{} Mult for",
+            "each {C:attention}Steel Card in your {C:attention}full deck{}",
             "{C:inactive}(Steel Joker + Stone Joker)"
         }
     },
@@ -2199,7 +2199,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Ultimate Joker',
         text = {
-            "{C:mult}+16{} Mult and {C:chips}+120{} Chips",
+            "{C:chips}+120{} Chips and {C:mult}+16{} Mult",
             "for each {C:attention}Poker Hand{} contained in {C:attention}played hand",
             "{C:inactive}(Jovial Joker, Confused Joker, Genius Joker,",
             "{C:inactive}Bonkers Joker OR Deliberate Joker + ",

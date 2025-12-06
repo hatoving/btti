@@ -10,9 +10,9 @@ SMODS.Joker {
     loc_txt = {
         name = 'Mystical Honse',
         text = {
-            "Gives you {C:attention}$1{} at the end of the {C:attention}round{}",
-            "{C:mult}+5{} Mult per {C:deets}DEETS Joker{}",
             "{C:chips}+20{} Chips per {C:deets}Horse Card{} in {C:attention}full deck",
+            "{C:mult}+5{} Mult per {C:deets}DEETS Joker{}",
+            "Gives you {C:attention}$1{} at the end of the {C:attention}round{}",
             "Selling this card may result in {C:red}consequences{}"
         }
     },
@@ -529,8 +529,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Emma',
         text = {
-            "{C:mult}+0-100{} Mult",
             "{C:chips}+0-50{} Chips",
+            "{C:mult}+0-100{} Mult",
             "{C:mult}+5{} Mult for every",
             "{C:deets}DEETS Joker{}"
         }

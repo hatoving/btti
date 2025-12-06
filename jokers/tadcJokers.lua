@@ -10,8 +10,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'XDDCC',
         text = {
-            "{C:mult}+4{} Mult and {C:chips}+15{} Chips",
-            "Gains {C:mult}+4{} Mult and {C:chips}+15{} Chips",
+            "{C:chips}+15{} Chips and {C:mult}+4{} Mult",
+            "Gains {C:chips}+15{} Chips and {C:mult}+4{} Mult",
             "at the end of each {C:attention}Ante",
             "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult)"
         }
