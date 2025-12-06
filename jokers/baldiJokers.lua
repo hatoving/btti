@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "sans", 
+    path = "bttiSans.ttf" 
+})
+
 -- Baldi
 SMODS.Atlas {
     key = "Baldi",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Baldi',
 	loc_txt = {
-		name = 'Baldi',
+		name = '{f:btti_sans}Baldi',
 		text = {
 			"{C:attention}"
 		}
@@ -24,7 +29,7 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics", "Basically Games" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Baldi's Basics", "Basically Games", "BlueBen8" } }
 		return {
             vars = { },
         }
@@ -59,7 +64,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'PrincipalOfTheThing',
 	loc_txt = {
-		name = 'Principal of the Thing',
+		name = '{f:btti_sans}Principal of the Thing',
 		text = {
 			"{C:attention}"
 		}
@@ -110,7 +115,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'ArtsAndCrafters',
 	loc_txt = {
-		name = 'Arts and Crafters',
+		name = '{f:btti_sans}Arts and Crafters',
 		text = {
 			"{C:attention}"
 		}
