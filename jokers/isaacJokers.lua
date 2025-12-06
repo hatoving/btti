@@ -1,3 +1,8 @@
+SMODS.Font({ 
+    key = "isaac", 
+    path = "bttiIsaac.ttf"
+})
+
 -- D6
 SMODS.Atlas {
     key = "D6",
@@ -8,7 +13,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'D6',
 	loc_txt = {
-		name = 'D6',
+		name = '{f:btti_isaac}D6',
 		text = {
 			"{C:attention}"
 		}
@@ -58,7 +63,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Brimstone',
     loc_txt = {
-        name = 'Brimstone',
+        name = '{f:btti_isaac}Brimstone',
         text = {
             "Shoots a {C:red}Brimstone laser{} to either",
             "the left or right, adding bonus {C:mult}Mult{} to each",
@@ -159,7 +164,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'D62',
 	loc_txt = {
-		name = 'D6?',
+		name = '{f:btti_isaac}D6?',
 		text = {
 			"{C:attention}"
 		}
@@ -209,7 +214,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'Brimstone2',
 	loc_txt = {
-		name = 'Brimstone?',
+		name = '{f:btti_isaac}Brimstone?',
 		text = {
 			"{C:attention}"
 		}
