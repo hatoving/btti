@@ -12,7 +12,7 @@ SMODS.Joker {
         text = {
             "{C:green}1 in 4{} chance to drain {C:dark_edition}editions{} of",
             "other {C:joker}Jokers",
-            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {X:mult,C:white}X#2#{C:inactive} Mult, {C:mult}+#3#{} Mult)"
+            "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#3#{} Mult, {X:mult,C:white}X#2#{C:inactive} Mult)"
         }
     },
 

@@ -317,9 +317,9 @@ SMODS.Joker {
     loc_txt = {
         name = '{f:btti_dt}Mr. (Ant) Tenna',
         text = {
-            "Gains {C:mult}+10{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
             "Gains {C:chips}+20{} Chips per {C:purple}Combination{} {C:attention}Joker{} created",
-            "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} Chips)"
+            "Gains {C:mult}+10{} Mult per {C:purple}Combination{} {C:attention}Joker{} created",
+            "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips, {C:mult}+#1#{C:inactive} Mult)"
         }
     },
 

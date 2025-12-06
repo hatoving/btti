@@ -233,10 +233,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'hatoving',
         text = {
-            "Stores the final scored {C:mult}Mult{} and {C:chips}Chips{}",
+            "Stores the final scored {C:chips}Chips{} and {C:mult}Mult{}",
             "of one ended round and unleashes it",
             "a random amount of rounds later",
-            "{C:inactive}(Currently {C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips)"
+            "{C:inactive}(Currently {C:chips}+#2#{} Chips and {C:mult}+#1#{} Mult)"
         }
     },
 
