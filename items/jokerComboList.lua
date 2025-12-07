@@ -225,7 +225,7 @@ function G.BTTI.getCombinableJokers(joker_id)
                 if #combo.jokers > 1 and not combo.allowed then
                     for _, j in ipairs(combo.jokers) do
                         if j ~= joker_id then
-                            table.insert(names, localize { type = "name_text", set = "Joker", key = j })
+                            table.insert(names, localize { type = "name_text", set = "Joker", key = j } or j)
                         end
                     end
                     if #names > 0 then
@@ -234,11 +234,11 @@ function G.BTTI.getCombinableJokers(joker_id)
                 end
                 if combo.allowed then
                     for _, j in ipairs(combo.allowed) do
-                        table.insert(result, localize { type = "name_text", set = "Joker", key = j })
+                        table.insert(result, localize { type = "name_text", set = "Joker", key = j } or j)
                     end
                 end
             elseif in_allowed and #combo.jokers == 1 then
-                table.insert(result, localize { type = "name_text", set = "Joker", key = combo.jokers[1] })
+                table.insert(result, localize { type = "name_text", set = "Joker", key = combo.jokers[1] } or combo.jokers[1])
             end
         end
     end

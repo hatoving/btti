@@ -72,7 +72,7 @@ SMODS.Joker {
                                     card.ability.extra.Xmult = card.ability.extra.Xmult + 1.5
                                 elseif ed.key == 'e_holo' then
                                     card.ability.extra.mult = card.ability.extra.mult + 10
-                                elseif ed.key == 'e_negative' then
+                                elseif ed.key == 'e_negative' and (card.edition or nil) ~= "e_negative" then
                                     card:set_edition('e_negative')
                                 end
 

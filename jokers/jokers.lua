@@ -1,5 +1,9 @@
 require("nativefs")
 
+G.BTTI.JOKER_FUNCS = {
+
+}
+
 SMODS.Sound {
     key = "music_LeBron",
     path = "music_bttiLebron.ogg",
@@ -1400,6 +1404,23 @@ SMODS.Joker {
 }
 
 -- Subscribe
+
+function G.FUNCS.joker_can_subscribe(e)
+    e.config.colour = G.C.RED
+    e.config.button = "joker_subscribe"
+end
+function G.FUNCS.joker_subscribe(e)
+    local card = e.config.ref_table
+    love.system.openURL("https://www.youtube.com/@Bennoh01")
+    love.system.openURL("https://www.youtube.com/hatoving")
+    love.system.openURL("https://www.youtube.com/juicimated")
+
+    card.children.center.atlas = G.ASSET_ATLAS['btti_Subscribed']
+    card.children.center:set_sprite_pos({ x = 0, y = 0 })
+    card.ability.extra.clicks = {}
+    card:juice_up()
+end
+
 SMODS.Atlas {
     key = "Subscribe",
     path = "bttiSubscribe1.png",
@@ -1420,7 +1441,7 @@ SMODS.Joker {
 			"{C:chips}+5{} Chips for every 50 subscribers {C:chips}BlueBen8{} has",
             "{C:mult}+1{} Mult for every 50 subscribers {C:mult}hatoving{} has",
             "{C:attention}$2{} for every 50 subscribers {C:attention}Juicimated{} has",
-            "Click {C:attention}5{} times quickly to {C:red}subscribe{}",
+            "Click to {C:red}subscribe{}",
             "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult, {C:attention}$#3#{C:inactive})"
 		}
 	},
@@ -1457,45 +1478,9 @@ SMODS.Joker {
         card.ability.extra.chips = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.BLUEBEN8_SUBS / 50) * 5
         card.ability.extra.mult = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.HATOVING_SUBS / 50)
         card.ability.extra.dollars = math.floor(G.BTTI.HTTPS.YOUTUBE_DATA.JUICIMATED_SUBS / 50) * 2
-
-        if card.ability.extra.activated then
-            card.ability.extra.activated = false
-
-            love.system.openURL("HTTPS://www.youtube.com/@Bennoh01")
-            love.system.openURL("HTTPS://www.youtube.com/hatoving")
-            love.system.openURL("HTTPS://www.youtube.com/juicimated")
-
-            card.children.center.atlas = G.ASSET_ATLAS['btti_Subscribed']
-            card.children.center:set_sprite_pos({ x = 0, y = 0 })
-            card.ability.extra.clicks = {}
-            card:juice_up()
-        end
     end,
 
 	calculate = function(self, card, context)
-        if context.clicked_card and context.clicked_card == card then
-            local now = love.timer.getTime()
-            card.ability.extra.clicks = card.ability.extra.clicks or {}
-            if type(card.ability.extra.clicks) ~= "table" then
-                card.ability.extra.clicks = {}
-            end
-            table.insert(card.ability.extra.clicks, now)
-
-            for i = #card.ability.extra.clicks, 1, -1 do
-                if now - card.ability.extra.clicks[i] > 0.5 then
-                    table.remove(card.ability.extra.clicks, i)
-                end
-            end
-
-            if #card.ability.extra.clicks >= 5 and not card.ability.extra.activated then
-                print("5 fast clicks detected!")
-                card_eval_status_text(card, 'extra', nil, nil, nil,
-                    { message = "Subscribed!", colour = G.C.RED })
-                card.ability.extra.activated = true
-                card.ability.extra.clicks = {}
-            end
-        end
-
 		if context.joker_main then
             return {
                 chips = card.ability.extra.chips,
