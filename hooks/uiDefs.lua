@@ -88,18 +88,29 @@ function G.UIDEF.extra_button(card)
     local bruh = nil
     if card.ability.name == "j_btti_Subscribe" then
       bruh = {n=G.UIT.C, config={align = "cl"}, nodes={
-        {n=G.UIT.C, config={ref_table = card, align = "cl",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'joker_subscribe', func = 'joker_can_subscribe'}, nodes={
-            {n=G.UIT.B, config = {w=-0.1,h=0.6}},
-            {n=G.UIT.C, config={align = "tm"}, nodes={
-              {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
-                  {n=G.UIT.T, config={text = " Like and ",colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
-              }},
-              {n=G.UIT.R, config={align = "cm"}, nodes={
-                  {n=G.UIT.T, config={text = " Subscribe ",colour = G.C.WHITE, scale = 0.4, shadow = true}},
+          {n=G.UIT.C, config={ref_table = card, align = "cl",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'joker_subscribe', func = 'joker_can_subscribe'}, nodes={
+              {n=G.UIT.B, config = {w=-0.1,h=0.6}},
+              {n=G.UIT.C, config={align = "tm"}, nodes={
+                {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+                    {n=G.UIT.T, config={text = " Like and ",colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+                }},
+                {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.T, config={text = " Subscribe ",colour = G.C.WHITE, scale = 0.4, shadow = true}},
+                }}
               }}
-            }}
-        }},
-    }}
+          }},
+      }}
+    elseif card.ability.name == "j_btti_KFCBucket" then
+      bruh = {n=G.UIT.C, config={align = "cl"}, nodes={
+          {n=G.UIT.C, config={ref_table = card, align = "cl",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'joker_eat_kfc', func = 'joker_can_eat_kfc'}, nodes={
+              {n=G.UIT.B, config = {w=-0.1,h=0.6}},
+              {n=G.UIT.C, config={align = "cm"}, nodes={
+                {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+                    {n=G.UIT.T, config={text = " Eat ",colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+                }}
+              }}
+          }},
+      }}
     end
     local t = {
       n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={

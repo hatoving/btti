@@ -1768,6 +1768,26 @@ SMODS.Joker {
 }
 
 -- KFC Bucket
+function G.FUNCS.joker_can_eat_kfc(e)
+    local card = e.config.ref_table
+    if not card.ability.extra.activated and not card.ability.extra.eaten then
+        e.config.colour = G.C.RED
+        e.config.button = "joker_eat_kfc"
+    else
+      e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+      e.config.button = nil
+    end
+end
+function G.FUNCS.joker_eat_kfc(e)
+    local card = e.config.ref_table
+    if not card.ability.extra.activated then
+        card_eval_status_text(card, 'extra', nil, nil, nil,
+            { message = "Yum!", colour = G.C.RED })
+        card.ability.extra.activated = true
+        card.ability.extra.time = 0
+        card.ability.extra.clicks = {}
+    end
+end
 SMODS.Atlas {
     key = "KFCBucket",
     path = "bttiKFCBucket.png",
@@ -1793,7 +1813,7 @@ SMODS.Joker {
 		}
 	},
 
-	config = { extra = { xmult = 1.0, timer = 1.0, activate = false, clicks = {} } },
+	config = { extra = { xmult = 1.0, timer = 1.0, activate = false, eaten = false } },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -1827,6 +1847,7 @@ SMODS.Joker {
             card.ability.extra.xmult = xmult
             if card.ability.extra.xmult <= 1 then
                 card.ability.extra.activated = false
+                card.ability.extra.eaten = true
                 card.ability.extra.timer = 0
                 card.children.center.atlas = G.ASSET_ATLAS['btti_KFCBucketEmpty']
                 card.children.center:set_sprite_pos({ x = 0, y = 0 })
@@ -1838,30 +1859,6 @@ SMODS.Joker {
     end,
 
 	calculate = function(self, card, context)
-        if context.clicked_card and context.clicked_card == card then
-            local now = love.timer.getTime()
-            card.ability.extra.clicks = card.ability.extra.clicks or {}
-            if type(card.ability.extra.clicks) ~= "table" then
-                card.ability.extra.clicks = {}
-            end
-            table.insert(card.ability.extra.clicks, now)
-
-            for i = #card.ability.extra.clicks, 1, -1 do
-                if now - card.ability.extra.clicks[i] > 0.5 then
-                    table.remove(card.ability.extra.clicks, i)
-                end
-            end
-
-            if #card.ability.extra.clicks >= 5 and not card.ability.extra.activated then
-                print("5 fast clicks detected!")
-                card_eval_status_text(card, 'extra', nil, nil, nil,
-                    { message = "Yum!", colour = G.C.RED })
-                card.ability.extra.activated = true
-                card.ability.extra.time = 0
-                card.ability.extra.clicks = {}
-            end
-        end
-
         if context.joker_main and card.ability.extra.activated then
             return {
                 colour = G.C.MULT,
