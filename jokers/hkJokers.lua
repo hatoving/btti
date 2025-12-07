@@ -32,10 +32,10 @@ SMODS.Joker {
 	rarity = 'btti_dynamic',
 	atlas = 'Silksong',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 5,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -45,6 +45,6 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }

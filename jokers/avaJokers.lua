@@ -41,10 +41,10 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'Victim',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -54,7 +54,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -95,7 +95,7 @@ SMODS.Joker {
 	cost = 4,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -105,7 +105,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -143,10 +143,10 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'DarkLord',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 7,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -156,7 +156,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -194,10 +194,10 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'SecondComing',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -207,7 +207,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -242,13 +242,13 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 1,
+	rarity = 2,
 	atlas = 'ColorGang',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 8,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -258,7 +258,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -293,13 +293,13 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 2,
+	rarity = 3,
 	atlas = 'KingOrange',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 8,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -309,7 +309,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -347,10 +347,10 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'Purple',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 5,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -360,6 +360,6 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }

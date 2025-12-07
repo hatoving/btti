@@ -35,7 +35,7 @@ SMODS.Joker {
 	cost = 4,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -45,6 +45,6 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }

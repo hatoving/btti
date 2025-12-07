@@ -35,7 +35,7 @@ SMODS.Joker {
 	cost = 4,
     pools = { ["BTTI_modAddition"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -45,7 +45,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -83,10 +83,10 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'BigMac',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -96,7 +96,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -131,13 +131,13 @@ SMODS.Joker {
             vars = { },
         }
 	end,
-	rarity = 2,
+	rarity = 3,
 	atlas = 'HappyMeal',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 7,
     pools = { ["BTTI_modAddition"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -147,7 +147,7 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
 
@@ -185,10 +185,10 @@ SMODS.Joker {
 	rarity = 3,
 	atlas = 'McRib',
 	pos = { x = 0, y = 0 },
-	cost = 4,
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true },
 
-    unlocked = true,
+    unlocked = false,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -198,6 +198,6 @@ SMODS.Joker {
 		-- TO DO
 	end,
     in_pool = function(self, args)
-		return true, { allow_duplicates = false }
+		return false, { allow_duplicates = false }
 	end
 }
