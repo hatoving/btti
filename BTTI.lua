@@ -35,6 +35,9 @@ SMODS.Gradient {
 G.C.BTTIBLACK = HEX('000000')
 G.C.BTTICYAN = HEX('17e6e6')
 G.C.BTTIPINK = HEX('FFA5A5')
+G.C.BTTIORANGE = HEX('ff7b00')
+G.C.BTTIDARKPINK = HEX('FF6183')
+G.C.BTTIPINK = HEX('FFA5A5')
 G.C.BTTIDEETS = HEX('9e5c00')
 G.C.BTTISPOINGUS = HEX('a4000f')
 SMODS.Gradient {
@@ -46,9 +49,19 @@ SMODS.Gradient {
 	},
 	cycle = 2
 }
+SMODS.Gradient {
+	key = "MAIN_MOD_C_SLOW",
+	colours = {
+		G.C.BTTIPINK,
+		G.C.BLUE,
+		G.C.ORANGE
+	},
+	cycle = 7.5
+}
 G.C.BTTIBI = SMODS.Gradients.btti_BISEXUAL_TITLE
 G.C.BTTIGAY = SMODS.Gradients.btti_GAY
 G.C.BTTI_MAINMODC = SMODS.Gradients.btti_MAIN_MOD_C
+G.C.BTTI_MAINMODCSLOW = SMODS.Gradients.btti_MAIN_MOD_C_SLOW
 
 local loc_colour_ref = loc_colour
 function loc_colour(_c, _default)
@@ -57,13 +70,38 @@ function loc_colour(_c, _default)
 	end
 
 	G.ARGS.LOC_COLOURS.pink = G.C.BTTIPINK
+	G.ARGS.LOC_COLOURS.darkpink = G.C.BTTIDARKPINK
 	G.ARGS.LOC_COLOURS.black = G.C.BTTIBLACK
 	G.ARGS.LOC_COLOURS.bisexual = G.C.BTTIBI
 	G.ARGS.LOC_COLOURS.gay = G.C.BTTIGAY
 	G.ARGS.LOC_COLOURS.deets = G.C.BTTIDEETS
+	G.ARGS.LOC_COLOURS.bttiorange = G.C.BTTIORANGE
 	G.ARGS.LOC_COLOURS.balinsanity = G.C.BTTI_MAINMODC
+	G.ARGS.LOC_COLOURS.balinsanity_slow = G.C.BTTI_MAINMODCSLOW
 
 	return loc_colour_ref(_c, _default)
+end
+
+G.C.mid_flash = 0
+G.C.vort_time = 3.5
+G.C.vort_speed = 0.2
+-- from yahimod :) (from cryptid :})
+local oldfunc = Game.main_menu
+Game.main_menu = function(change_context)
+	local ret = oldfunc(change_context)
+	G.SPLASH_BACK:define_draw_steps({
+			{
+				shader = "splash",
+				send = {
+					{ name = "time", ref_table = G.TIMERS, ref_value = "REAL_SHADER" },
+           			{name = 'vort_speed', val = G.C.vort_speed},
+            		{name = 'colour_1', ref_table = G.C, ref_value = 'BTTI_MAINMODCSLOW'},
+            		{name = 'colour_2', ref_table = G.C, ref_value = 'BTTI_MAINMODCSLOW'},
+            		{name = 'mid_flash', ref_table = G.C, ref_value = 'mid_flash'},
+				},
+			},
+		})
+	return ret
 end
 
 G.bttiModPath = "" .. SMODS.current_mod.path

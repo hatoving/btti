@@ -2,15 +2,15 @@ G.BTTI.JOKER_COMBOS = {
     ['j_btti_avariciousJoker'] = {
         rarity = 2,
         jokers = {
-            'j_lusty_joker',
-            'j_greedy_joker'
+            'Lusty Joker',
+            'Greedy Joker'
         }
     },
     ['j_btti_sullenJoker'] = {
         rarity = 2,
         jokers = {
-            'j_wrathful_joker',
-            'j_gluttenous_joker'
+            'Wrathful Joker',
+            'Gluttonous Joker'
         }
     },
     ['j_btti_sinfulJoker'] = {
@@ -23,36 +23,36 @@ G.BTTI.JOKER_COMBOS = {
     ['j_btti_jovialJoker'] = {
         rarity = 1,
         jokers = {
-            'j_jolly',
-            'j_sly'
+            'Jolly Joker',
+            'Sly Joker'
         }
     },
     ['j_btti_confusedJoker'] = {
         rarity = 1,
         jokers = {
-            'j_zany',
-            'j_wily'
+            'Zany Joker',
+            'Wily Joker'
         }
     },
     ['j_btti_geniusJoker'] = {
         rarity = 2,
         jokers = {
-            'j_mad',
-            'j_clever'
+            'Mad Joker',
+            'Clever Joker'
         }
     },
     ['j_btti_bonkersJoker'] = {
         rarity = 3,
         jokers = {
-            'j_crazy',
-            'j_devious'
+            'Crazy Joker',
+            'Devious Joker'
         }
     },
     ['j_btti_deliberateJoker'] = {
         rarity = 3,
         jokers = {
-            'j_droll',
-            'j_crafty'
+            'Droll Joker',
+            'Crafty Joker'
         }
     },
     ['j_btti_ultimateJoker'] = {
@@ -72,49 +72,49 @@ G.BTTI.JOKER_COMBOS = {
         rarity = 2,
         jokers = {
             'j_btti_jovialJoker',
-            'j_half'
+            'Half Joker'
         }
     },
     ['j_btti_splitConfusedJoker'] = {
         rarity = 2,
         jokers = {
             'j_btti_confusedJoker',
-            'j_half'
+            'Half Joker'
         }
     },
     ['j_btti_zeroTheo'] = {
         rarity = 2,
         jokers = {
-            'j_even_steven',
-            'j_odd_todd',
+            'Even Steven',
+            'Odd Todd',
         }
     },
     ['j_btti_trueBanana'] = {
         rarity = 3,
         jokers = {
-            'j_gros_michel',
-            'j_cavendish',
+            'Gros Michel',
+            'Cavendish',
         }
     },
     ['j_btti_royalMoon'] = {
         rarity = 2,
         jokers = {
-            'j_baron',
-            'j_shoot_the_moon',
+            'Baron',
+            'Shoot the Moon',
         }
     },
     ['j_btti_shortScholar'] = {
         rarity = 2,
         jokers = {
-            'j_scholar',
-            'j_wee',
+            'Scholar',
+            'Wee',
         }
     },
     ['j_btti_chanceOfClouds'] = {
         rarity = 2,
         jokers = {
-            'j_8_ball',
-            'j_cloud_9',
+            '8 Ball',
+            'Cloud 9',
         }
     },
     ['j_btti_celestius'] = {
@@ -128,64 +128,64 @@ G.BTTI.JOKER_COMBOS = {
     ['j_btti_mineralJoker'] = {
         rarity = 3,
         jokers = {
-            'j_steel_joker',
-            'j_stone'
+            'Steel Joker',
+            'Stone Joker'
         }
     },
     ['j_btti_abstractbuckler'] = {
         rarity = 2,
         jokers = {
-            'j_abstract',
-            'j_swashbuckler'
+            'Abstract Joker',
+            'Swashbuckler'
         }
     },
     ['j_btti_resume'] = {
         rarity = 3,
         jokers = {
-            'j_marble',
-            'j_certificate'
+            'Marble Joker',
+            'Certificate'
         }
     },
     ['j_btti_bat'] = {
         rarity = 3,
         jokers = {
-            'j_dusk',
-            'j_acrobat'
+            'Dusk',
+            'Acrobat'
         }
     },
     ['j_btti_mountainBurglar'] = {
         rarity = 2,
         jokers = {
-            'j_mystic_summit',
-            'j_burglar'
+            'Mystic Summit',
+            'Burglar'
         }
     },
     ['j_btti_holoResume'] = {
         rarity = 3,
         jokers = {
             'j_btti_resume',
-            'j_hologram'
+            'Hologram'
         }
     },
     ['j_btti_lunatic'] = {
         rarity = 3,
         jokers = {
-            'j_cartomancer',
-            'j_fortune_teller'
+            'Cartomancer',
+            'Fortune Teller'
         }
     },
     ['j_btti_wineJuggler'] = {
         rarity = 3,
         jokers = {
-            'j_juggler',
-            'j_drunkard'
+            'Juggler',
+            'Drunkard'
         }
     },
     ['j_btti_photoChad'] = {
         rarity = 3,
         jokers = {
-            'j_photograph',
-            'j_hanging_chad'
+            'Photograph',
+            'Hanging Chad'
         }
     },
     ['j_btti_TripleBaka'] = {
@@ -206,7 +206,7 @@ G.BTTI.JOKER_COMBOS = {
     ['j_btti_GIFCompression'] = {
         rarity = 2,
         jokers = {
-            'j_square',
+            'Square Joker',
             'j_btti_SayThatAgain',
         }
     },

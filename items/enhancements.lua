@@ -127,6 +127,7 @@ SMODS.Enhancement {
     replace_base_card = true,
     no_rank = true,
     no_suit = true,
+    any_suit = true,
     always_scores = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "DEETS", "BlueBen8" } }

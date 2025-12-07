@@ -31,13 +31,13 @@ G.FUNCS.combine_card = function(e)
 
         for _, player_card in ipairs(G.jokers.highlighted) do
             for _, required in ipairs(needed) do
-                if player_card.config.center.key == required then
+                if player_card.ability.name == required then
                     found[required] = true
                     table.insert(matched_needed, player_card)
                 end
             end
             for _, allowed_jk in ipairs(allowed) do
-                if player_card.config.center.key == allowed_jk then
+                if player_card.ability.name == allowed_jk then
                     found[allowed_jk] = true
                     table.insert(matched_allowed, player_card)
                     break
