@@ -151,12 +151,10 @@ function Card:highlight(is_higlighted)
             }
             self.children.extra_button = UIBox{
                 definition = G.UIDEF.extra_button(self), 
-                config = {align=
-                        ((self.area == G.jokers) or (self.area == G.consumeables)) and "cl" or
-                        "bmi"
+                config = {align="bm"
                     , offset = 
-                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off + 0.4,y=0} or
-                        {x=0,y=-0.6},
+                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off,y=0} or
+                        {x=0,y=-.6},
                     parent =self}
             }
         elseif self.children.use_button and self.children.extra_button then
@@ -183,19 +181,6 @@ end
 
 local ogCardDraw = Card.draw
 function Card:draw(layer)
-    if self.children.price then self.children.price:draw() end
-        if self.children.buy_button then
-            if self.highlighted then
-                self.children.buy_button.states.visible = true
-                self.children.buy_button:draw()
-                if self.children.buy_and_use_button then 
-                    self.children.buy_and_use_button:draw()
-                end
-            else
-                self.children.buy_button.states.visible = false
-        end
-    end
-    if self.children.use_button and self.highlighted then self.children.use_button:draw() end
-    if self.children.extra_button and self.highlighted then self.children.extra_button:draw() end
     ogCardDraw(self, layer)
+    if self.children.extra_button and self.highlighted then self.children.extra_button:draw() end
 end

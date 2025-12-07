@@ -4,6 +4,26 @@ SMODS.Font({
 })
 
 -- Y/N
+function G.FUNCS.joker_can_activate_yin(e)
+    local card = e.config.ref_table
+    if card.ability.extra.allow and G.STATE == G.STATES.BLIND_SELECT and not G.SETTINGS.paused then
+        e.config.colour = G.C.BLUE
+        e.config.button = "joker_activate_yin"
+    else
+      e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+      e.config.button = nil
+    end
+end
+function G.FUNCS.joker_activate_yin(e)
+    local card = e.config.ref_table
+    if card.ability.extra.allow and G.STATE == G.STATES.BLIND_SELECT and not G.SETTINGS.paused then
+        card.ability.extra.active = not card.ability.extra.active
+        card:juice_up()
+        local msg = (card.ability.extra.active and 'Active.') or 'Inactive.'
+        card_eval_status_text(card, 'extra', nil, nil, nil,
+            { message = msg, colour = G.C.JOKER_GREY })
+    end
+end
 SMODS.Atlas {
     key = "YIN",
     path = "bttiYIN.png",
@@ -16,8 +36,8 @@ SMODS.Joker {
 		name = '{f:btti_w95}Y/N',
 		text = {
 			"Press {C:blue}ENTER{} while this {C:attention}Joker{} is",
-            "highlighted to select a new {C:attention}Boss Blind{}",
-            "from your collection",
+            "highlighted and activated to select a new",
+            "{C:attention}Boss Blind{} from your collection",
             "Cannot select the same {C:attention}Boss Blind{} twice in a row",
             "Becomes {C:inactive}inactive{} until {C:attention}Boss Blind{} is defeated"
 		}
@@ -56,13 +76,6 @@ SMODS.Joker {
     update = function (self, card, dt)
         card.ability.extra.activeText = (card.ability.extra.active and 'Active') or 'Inactive'
         if card.ability.extra.allow then
-            if (card.highlighted and (love.keyboard.isDown('return') and not card.ability.extra.lastEnter)) and G.STATE == G.STATES.BLIND_SELECT and not G.SETTINGS.paused then
-                card.ability.extra.active = not card.ability.extra.active
-                card:juice_up()
-                local msg = (card.ability.extra.active and 'Active.') or 'Inactive'
-                card_eval_status_text(card, 'extra', nil, nil, nil,
-                    { message = msg, colour = G.C.JOKER_GREY })
-            end
             if card.ability.extra.active then
                 if love.keyboard.isDown('return') then
                     local _element = G.CONTROLLER.hovering.target
