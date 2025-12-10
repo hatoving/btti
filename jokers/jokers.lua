@@ -2031,7 +2031,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "NyanCat",
-    path = "bttiJonker.png",
+    path = "bttiNyanCat.png",
     px = 71,
     py = 95
 }
@@ -2048,7 +2048,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 10, odds = 10 } },
+    config = { extra = { chips = 25 } },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2069,6 +2069,12 @@ SMODS.Joker {
 	cost = 6,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 11,
+    frameDur = 0.085,
+    ticks = 0,
+    
     unlocked = false,
     discovered = false,
     blueprint_compat = true,
@@ -2076,16 +2082,45 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		-- TO DO
+		if context.joker_main then
+            local hands = G.GAME.current_round.hands_left or 0
+            local c = card.ability.extra.chips * hands
+            return {
+                chips = c,
+                colour = G.C.CHIPS
+            }
+        end
+
+        if context.end_of_round and context.cardarea == G.jokers then
+            local could = {}
+            for _, pc in ipairs(G.playing_cards) do
+                if not pc.edition or pc.edition.key ~= "e_polychrome" then
+                    could[#could+1] = pc
+                end
+            end
+
+            if #could > 0 then
+                local picked = could[math.random(#could)]
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {
+                            colour = G.C.CHIPS, message = "Nyan~!"
+                        })
+                        picked:set_edition('e_polychrome', false, true)
+                        return true
+                    end
+                }))
+            end
+        end
 	end,
     in_pool = function(self, args)
-		return false, { allow_duplicates = false }
+		return true, { allow_duplicates = false }
 	end
 }
 
 SMODS.Atlas {
     key = "TacNayn",
-    path = "bttiJonker.png",
+    path = "bttiTacNayn.png",
     px = 71,
     py = 95
 }
@@ -2101,7 +2136,7 @@ SMODS.Joker {
         }
     },
 
-    config = { extra = { mult = 10, odds = 10 } },
+    config = { extra = {} },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2122,6 +2157,12 @@ SMODS.Joker {
 	cost = 5,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 11,
+    frameDur = 0.085,
+    ticks = 0,
+    
     unlocked = false,
     discovered = false,
     blueprint_compat = true,
@@ -2129,10 +2170,39 @@ SMODS.Joker {
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		-- TO DO
+		if context.joker_main then
+            local discards = G.GAME.current_round.discards_left or 0
+            local m = discards * 0.25
+            return {
+                xmult = 1 + m,
+                colour = G.C.MULT
+            }
+        end
+
+        if context.after then
+            local could = {}
+            for _, pc in ipairs(G.playing_cards) do
+                if not pc.edition or pc.edition.key ~= "e_btti_digital" then
+                    could[#could+1] = pc
+                end
+            end
+
+            if #could > 0 then
+                local picked = could[math.random(#could)]
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {
+                            colour = G.C.MULT, message = "Grr..."
+                        })
+                        picked:set_edition('e_btti_digital', false, true)
+                        return true
+                    end
+                }))
+            end
+        end
 	end,
     in_pool = function(self, args)
-		return false, { allow_duplicates = false }
+		return true, { allow_duplicates = false }
 	end
 }
 
