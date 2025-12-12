@@ -6,7 +6,7 @@ SMODS.Rarity {
     },
     pools = {Joker = true},
     badge_colour = G.C.BTTICYAN,
-    default_weight = 0.02
+    default_weight = 0.0075
 }
 
 -- Spoingus

@@ -10,7 +10,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'McDonald\'s Fries',
 		text = {
-			"{C:attention}"
+			"{C:mult}+10{} Mult",
+            "After all {C:attention}Jokers{} have beeen",
+            "triggered, additional {C:mult}+0-5{} Mult"
 		}
 	},
 
@@ -61,7 +63,8 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Big Mac',
 		text = {
-			"{C:attention}"
+			"{X:mult,C:white}X1.5{} Mult if current {C:attention}Ante{}",
+            "is a multiple of {C:attention}2{}"
 		}
 	},
 
