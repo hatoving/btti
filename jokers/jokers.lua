@@ -2320,8 +2320,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Rhett McLaughlin',
         text = {
-            "{c:attention}Duplicates{} the first",
-            "{c:attention}played card{} in your hand",
+            "{C:attention}Duplicates{} the first",
+            "{C:attention}played card{} in your hand",
             "if the rank is a number"
         }
     },
@@ -2372,8 +2372,8 @@ SMODS.Joker {
     loc_txt = {
         name = 'Link Neal',
         text = {
-            "{c:attention}Duplicates{} the last",
-            "{c:attention}played card{} in your hand",
+            "{C:attention}Duplicates{} the last",
+            "{C:attention}played card{} in your hand",
             "if the rank is a number"
         }
     },
@@ -2424,7 +2424,10 @@ SMODS.Joker {
     loc_txt = {
         name = 'bbno$',
         text = {
-            "{c:attention}"
+            "{C:mult}+10{} Mult",
+            "Gives you {C:attention}$20{} if you have",
+            "no {C:attention}${}",
+            "{C:inactive}\"When I popped off\"{}"
         }
     },
 
@@ -2475,9 +2478,9 @@ SMODS.Joker {
         name = 'This is Halloween',
         text = {
             "If before or after",
-            "October 31, gives $1",
-            "If during October 31, adds",
-            "+31 Chips and +10 Mult",
+            "{C:attention}October 31{}, gives {C:attention}$1{}",
+            "If during {C:attention}October 31{}, adds",
+            "{C:chips}+31{} Chips and {C:mult}+10{} Mult",
             "(Currently +0 Chips",
             "and +0 Mult)"
         }
