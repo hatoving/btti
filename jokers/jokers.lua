@@ -1921,7 +1921,7 @@ SMODS.Joker {
             vars = { card.ability.extra.peak, math.floor(card.ability.extra.peak * 100) },
         }
 	end,
-	rarity = 'btti_dynamic',
+	rarity = 3,
 	atlas = 'Volume1',
 	pos = { x = 0, y = 0 },
 	cost = 7,
