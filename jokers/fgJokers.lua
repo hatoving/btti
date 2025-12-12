@@ -140,6 +140,7 @@ SMODS.Joker {
                 xchips_mod = card.ability.extra.xchips,
                 message = "*Family Guy Funny Moment*",
                 sound = "btti_famGuyPieOp",
+                xchips = card.ability.extra.xchips,
                 pitch = pseudorandom("btti_" .. card.ability.name, .9, 1.1),
             }
         end
