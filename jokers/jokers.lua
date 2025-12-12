@@ -1441,7 +1441,7 @@ SMODS.Joker {
 			"{C:chips}+5{} Chips for every 50 subscribers {C:chips}BlueBen8{} has",
             "{C:mult}+1{} Mult for every 50 subscribers {C:mult}hatoving{} has",
             "{C:attention}$2{} for every 50 subscribers {C:attention}Juicimated{} has",
-            "Click to {C:red}subscribe{}",
+            "Press the button to {C:red}subscribe{}",
             "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, {C:mult}+#2#{C:inactive} Mult, {C:attention}$#3#{C:inactive})"
 		}
 	},
@@ -1805,9 +1805,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'KFC Bucket',
 		text = {
-			"Clicking {C:attention}5{} times quickly",
-            "consumes the bucket and",
-            "gives {X:mult,C:white}X11{} Mult that drains",
+			"Press the button to",
+            "consume the bucket",
+            "Gives {X:mult,C:white}X11{} Mult that drains",
             "by {X:mult,C:white}X0.1{} Mult every second",
             "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
 		}
@@ -2075,7 +2075,7 @@ SMODS.Joker {
     frameDur = 0.085,
     ticks = 0,
     
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
@@ -2163,7 +2163,7 @@ SMODS.Joker {
     frameDur = 0.085,
     ticks = 0,
     
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,

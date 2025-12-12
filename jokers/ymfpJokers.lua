@@ -35,9 +35,9 @@ SMODS.Joker {
 	loc_txt = {
 		name = '{f:btti_w95}Y/N',
 		text = {
-			"Press {C:blue}ENTER{} while this {C:attention}Joker{} is",
-            "highlighted and activated to select a new",
-            "{C:attention}Boss Blind{} from your collection",
+			"Press the button to toggle this {C:attention}Joker{}",
+            "When active, choose the next {C:attention}Boss Blind{}",
+            "by selecting it from your collection",
             "Cannot select the same {C:attention}Boss Blind{} twice in a row",
             "Becomes {C:inactive}inactive{} until {C:attention}Boss Blind{} is defeated"
 		}
