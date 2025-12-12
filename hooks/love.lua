@@ -114,8 +114,8 @@ local function jokerAnimUpdate(dt)
         if scCenter.frame > scCenter.maxFrame then
             scCenter.frame = 0
         end
-        scCenter.pos.x = math.fmod(scCenter.frame, 6)
-        scCenter.pos.y = math.floor(scCenter.frame / 6)
+        scCenter.pos.x = scCenter.frame % 4
+        scCenter.pos.y = math.floor(scCenter.frame / 4)
     end
 
     scCenter = G.P_CENTERS.j_btti_TacNayn
@@ -126,8 +126,8 @@ local function jokerAnimUpdate(dt)
         if scCenter.frame > scCenter.maxFrame then
             scCenter.frame = 0
         end
-        scCenter.pos.x = math.fmod(scCenter.frame, 6)
-        scCenter.pos.y = math.floor(scCenter.frame / 6)
+        scCenter.pos.x = scCenter.frame % 4
+        scCenter.pos.y = math.floor(scCenter.frame / 4)
     end
 
     scCenter = G.P_CENTERS.j_btti_GIFCompression
