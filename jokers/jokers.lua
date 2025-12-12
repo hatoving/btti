@@ -2208,7 +2208,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "MatPat",
-    path = "bttiJonker.png",
+    path = "bttiMatPat.png",
     px = 71,
     py = 95
 }
