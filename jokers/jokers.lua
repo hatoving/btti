@@ -2311,7 +2311,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "Rhett",
-    path = "bttiJonker.png",
+    path = "bttiRhett.png",
     px = 71,
     py = 95
 }
@@ -2363,7 +2363,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "Link",
-    path = "bttiJonker.png",
+    path = "bttiLink.png",
     px = 71,
     py = 95
 }
@@ -2415,7 +2415,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "Bibinos",
-    path = "bttiJonker.png",
+    path = "bttiBibinos.png",
     px = 71,
     py = 95
 }
