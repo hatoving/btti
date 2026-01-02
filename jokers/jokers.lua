@@ -2425,13 +2425,13 @@ SMODS.Joker {
         name = 'bbno$',
         text = {
             "{C:mult}+10{} Mult",
-            "Gives you {C:attention}$20{} if you have",
-            "no {C:attention}${}",
+            "Gives you {C:attention}$20{} if",
+            "you have no {C:attention}${}",
             "{C:inactive}\"When I popped off\"{}"
         }
     },
 
-    config = { extra = { mult = 10, odds = 10 } },
+    config = { extra = { mult = 10, dollars = 20 } },
 	loc_vars = function(self, info_queue, card)
         local combinable = G.BTTI.getCombinableJokers(card.ability.name)
         for _, line in ipairs(combinable) do
@@ -2441,28 +2441,42 @@ SMODS.Joker {
                 vars = { line }
             }
         end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Alexander Leon Gumuchian", "Juicimated" } }
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Real Life", "Alexander Leon Gumuchian", "BlueBen8" } }
 		return {
-            vars = { },
+            vars = { card.ability.extra.mult, card.ability.extra.dollars },
         }
 	end,
 	rarity = 2,
 	atlas = 'Bibinos',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
 
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = false,
 
 	calculate = function(self, card, context)
-		-- TO DO
+		if context.joker_main then
+            return {
+                mult_mod = card.ability.extra.mult,
+                message = "I-T B-O-Y"
+            }
+        end
+
+        if context.end_of_round and context.cardarea == G.jokers then
+            if G.GAME.dollars <= 0 then
+                return {
+                    dollars = card.ability.extra.dollars,
+                    message = "B-B-N-O-$"
+                }
+            end
+        end
 	end,
     in_pool = function(self, args)
-		return false, { allow_duplicates = false }
+		return true, { allow_duplicates = false }
 	end
 }
 
