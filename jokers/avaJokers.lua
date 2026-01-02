@@ -10,7 +10,7 @@ SMODS.Font({
 -- victim
 SMODS.Atlas {
     key = "Victim",
-    path = "bttiJonker.png",
+    path = "bttiVictim.png",
     px = 71,
     py = 95
 }
@@ -61,7 +61,7 @@ SMODS.Joker {
 -- The Chosen One
 SMODS.Atlas {
     key = "ChosenOne",
-    path = "bttiJonker.png",
+    path = "bttiChosenOne.png",
     px = 71,
     py = 95
 }
@@ -112,7 +112,7 @@ SMODS.Joker {
 -- The Dark Lord
 SMODS.Atlas {
     key = "DarkLord",
-    path = "bttiJonker.png",
+    path = "bttiDarkLord.png",
     px = 71,
     py = 95
 }
@@ -163,7 +163,7 @@ SMODS.Joker {
 -- The Second Coming
 SMODS.Atlas {
     key = "SecondComing",
-    path = "bttiJonker.png",
+    path = "bttiSecondComing.png",
     px = 71,
     py = 95
 }
@@ -214,7 +214,7 @@ SMODS.Joker {
 -- Color Gang
 SMODS.Atlas {
     key = "ColorGang",
-    path = "bttiJonker.png",
+    path = "bttiColorGang.png",
     px = 71,
     py = 95
 }
@@ -265,7 +265,7 @@ SMODS.Joker {
 -- King Orange
 SMODS.Atlas {
     key = "KingOrange",
-    path = "bttiJonker.png",
+    path = "bttiKingOrangeEmpty.png",
     px = 71,
     py = 95
 }
@@ -316,7 +316,7 @@ SMODS.Joker {
 -- Purple
 SMODS.Atlas {
     key = "Purple",
-    path = "bttiJonker.png",
+    path = "bttiPurple.png",
     px = 71,
     py = 95
 }

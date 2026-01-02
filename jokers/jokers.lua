@@ -2482,7 +2482,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "Halloween",
-    path = "bttiJonker.png",
+    path = "bttiHalloween.png",
     px = 71,
     py = 95
 }
