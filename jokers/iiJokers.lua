@@ -1,7 +1,7 @@
 -- MePhone4
 SMODS.Atlas {
     key = "MePhone",
-    path = "bttiJonker.png",
+    path = "bttiMePhone.png",
     px = 71,
     py = 95
 }
