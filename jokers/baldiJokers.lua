@@ -57,7 +57,7 @@ SMODS.Joker {
 -- Principal of the Thing
 SMODS.Atlas {
     key = "PrincipalOfTheThing",
-    path = "bttiJonker.png",
+    path = "bttiPrincipalOfTheThing.png",
     px = 71,
     py = 95
 }
@@ -107,13 +107,13 @@ SMODS.Joker {
 
 -- Arts and Crafters
 SMODS.Atlas {
-    key = "ArtsAndCrafters",
-    path = "bttiJonker.png",
+    key = "ArtsCrafters",
+    path = "bttiArtsCrafters.png",
     px = 71,
     py = 95
 }
 SMODS.Joker {
-	key = 'ArtsAndCrafters',
+	key = 'ArtsCrafters',
 	loc_txt = {
 		name = '{f:btti_sans}Arts and Crafters',
 		text = {
@@ -137,7 +137,7 @@ SMODS.Joker {
         }
 	end,
 	rarity = 2,
-	atlas = 'ArtsAndCrafters',
+	atlas = 'ArtsCrafters',
 	pos = { x = 0, y = 0 },
 	cost = 4,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },

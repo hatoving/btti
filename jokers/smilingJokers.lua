@@ -1,7 +1,7 @@
 -- Mr. Frog
 SMODS.Atlas {
     key = "MrFrog",
-    path = "bttiJonker.png",
+    path = "bttiMrFrog.png",
     px = 71,
     py = 95
 }
