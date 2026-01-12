@@ -1,7 +1,7 @@
 -- Stacey Venn
 SMODS.Atlas {
     key = "Stacey",
-    path = "bttiJonker.png",
+    path = "bttiStacey.png",
     px = 71,
     py = 95
 }
@@ -52,7 +52,7 @@ SMODS.Joker {
 -- Reni Slziphu
 SMODS.Atlas {
     key = "Reni",
-    path = "bttiJonker.png",
+    path = "bttiReni.png",
     px = 71,
     py = 95
 }

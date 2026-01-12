@@ -1,7 +1,7 @@
 -- Dexter Morgan
 SMODS.Atlas {
     key = "Dexter",
-    path = "bttiJonker.png",
+    path = "bttiDexter.png",
     px = 71,
     py = 95
 }
@@ -52,7 +52,7 @@ SMODS.Joker {
 -- Sgt. James Doakes
 SMODS.Atlas {
     key = "Doakes",
-    path = "bttiJonker.png",
+    path = "bttiDoakes.png",
     px = 71,
     py = 95
 }

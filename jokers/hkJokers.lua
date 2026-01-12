@@ -1,7 +1,7 @@
 -- Silksong
 SMODS.Atlas {
     key = "Silksong",
-    path = "bttiJonker.png",
+    path = "bttiSilksong.png",
     px = 71,
     py = 95
 }

@@ -6,7 +6,7 @@ SMODS.Font({
 -- D6
 SMODS.Atlas {
     key = "D6",
-    path = "bttiJonker.png",
+    path = "bttiD6.png",
     px = 71,
     py = 95
 }
@@ -38,6 +38,56 @@ SMODS.Joker {
 	atlas = 'D6',
 	pos = { x = 0, y = 0 },
 	cost = 5,
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
+
+    unlocked = false,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+
+	calculate = function(self, card, context)
+		-- TO DO
+	end,
+    in_pool = function(self, args)
+		return false, { allow_duplicates = false }
+	end
+}
+
+SMODS.Atlas {
+    key = "D62",
+    path = "bttiD62.png",
+    px = 71,
+    py = 95
+}
+SMODS.Joker {
+	key = 'D62',
+	loc_txt = {
+		name = '{f:btti_isaac}D6?',
+		text = {
+			"{C:attention}"
+		}
+	},
+
+	config = { extra = { mult = 10, odds = 10 } },
+	loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
+		return {
+            vars = { },
+        }
+	end,
+	rarity = 2,
+	atlas = 'D62',
+	pos = { x = 0, y = 0 },
+	cost = 6,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
 
     unlocked = false,
@@ -156,58 +206,8 @@ SMODS.Joker {
 }
 
 SMODS.Atlas {
-    key = "D62",
-    path = "bttiJonker.png",
-    px = 71,
-    py = 95
-}
-SMODS.Joker {
-	key = 'D62',
-	loc_txt = {
-		name = '{f:btti_isaac}D6?',
-		text = {
-			"{C:attention}"
-		}
-	},
-
-	config = { extra = { mult = 10, odds = 10 } },
-	loc_vars = function(self, info_queue, card)
-        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
-        for _, line in ipairs(combinable) do
-            info_queue[#info_queue + 1] = {
-                key = 'bttiPossibleCombo',
-                set = 'Other',
-                vars = { line }
-            }
-        end
-        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Binding of Isaac", "Edmund McMillen, Nicalis", "Juicimated" } }
-		return {
-            vars = { },
-        }
-	end,
-	rarity = 2,
-	atlas = 'D62',
-	pos = { x = 0, y = 0 },
-	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
-
-    unlocked = false,
-    discovered = false,
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = false,
-
-	calculate = function(self, card, context)
-		-- TO DO
-	end,
-    in_pool = function(self, args)
-		return false, { allow_duplicates = false }
-	end
-}
-
-SMODS.Atlas {
     key = "Brimstone2",
-    path = "bttiJonker.png",
+    path = "bttiBrimstone2.png",
     px = 71,
     py = 95
 }

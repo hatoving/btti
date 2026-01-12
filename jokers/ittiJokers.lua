@@ -406,7 +406,7 @@ SMODS.Joker {
 -- Music Box
 SMODS.Atlas {
     key = "MusicBox",
-    path = "bttiJonker.png",
+    path = "bttiMusicBox.png",
     px = 71,
     py = 95
 }
@@ -457,7 +457,7 @@ SMODS.Joker {
 -- Camera
 SMODS.Atlas {
     key = "Camera",
-    path = "bttiJonker.png",
+    path = "bttiCamera.png",
     px = 71,
     py = 95
 }

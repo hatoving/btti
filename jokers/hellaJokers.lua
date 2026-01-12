@@ -1,7 +1,7 @@
 -- Loser, Baby
 SMODS.Atlas {
     key = "Husk",
-    path = "bttiJonker.png",
+    path = "bttiHusk.png",
     px = 71,
     py = 95
 }
@@ -52,7 +52,7 @@ SMODS.Joker {
 -- Alastor
 SMODS.Atlas {
     key = "Alastor",
-    path = "bttiJonker.png",
+    path = "bttiAlastor.png",
     px = 71,
     py = 95
 }

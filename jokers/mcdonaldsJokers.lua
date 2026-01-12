@@ -120,7 +120,7 @@ SMODS.Joker {
 -- Happy Meal
 SMODS.Atlas {
     key = "HappyMeal",
-    path = "bttiJonker.png",
+    path = "bttiHappyMeal.png",
     px = 71,
     py = 95
 }
@@ -171,7 +171,7 @@ SMODS.Joker {
 -- McRib
 SMODS.Atlas {
     key = "McRib",
-    path = "bttiJonker.png",
+    path = "bttiMcRib.png",
     px = 71,
     py = 95
 }
