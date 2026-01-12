@@ -1,7 +1,7 @@
 -- Soldier Boy
 SMODS.Atlas {
     key = "SoldierBoy",
-    path = "bttiJonker.png",
+    path = "bttiSoldierBoy.png",
     px = 71,
     py = 95
 }
