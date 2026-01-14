@@ -131,7 +131,6 @@ local function jokerAnimUpdate(dt)
     end
 
     scCenter = G.P_CENTERS.j_btti_BadApple
-    scCenter.frameDur = 24 / love.timer.getFPS()
     scCenter.ticks = scCenter.ticks + dt
     if scCenter.ticks >= scCenter.frameDur then
         scCenter.ticks = 0

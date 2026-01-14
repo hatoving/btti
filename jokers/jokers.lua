@@ -2298,7 +2298,7 @@ SMODS.Joker {
     pixel_size = { w = 71 , h = 95 },
     frame = 0,
     maxFrame = 5223,
-    frameDur = 0.004,
+    frameDur = 0.034,
     ticks = 0,
 
     unlocked = false,
