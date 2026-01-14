@@ -2259,7 +2259,7 @@ SMODS.Joker {
 
 SMODS.Atlas {
     key = "BadApple",
-    path = "bttiJonker.png",
+    path = "bttiBadApple.png",
     px = 71,
     py = 95
 }
@@ -2294,6 +2294,12 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	cost = 7,
     pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+
+    pixel_size = { w = 71 , h = 95 },
+    frame = 0,
+    maxFrame = 5223,
+    frameDur = 0.004,
+    ticks = 0,
 
     unlocked = false,
     discovered = false,
