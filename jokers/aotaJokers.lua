@@ -234,7 +234,7 @@ SMODS.Joker {
 -- NOBODY
 SMODS.Atlas {
     key = "Nobody",
-    path = "bttiJonker.png",
+    path = "bttiNobody.png",
     px = 71,
     py = 95
 }

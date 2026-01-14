@@ -52,7 +52,7 @@ SMODS.Joker {
 -- Punching Bag Wife
 SMODS.Atlas {
     key = "PunchingBagWife",
-    path = "bttiJonker.png",
+    path = "bttiPunchingBagWife.png",
     px = 71,
     py = 95
 }
@@ -103,7 +103,7 @@ SMODS.Joker {
 -- Emo Daughter
 SMODS.Atlas {
     key = "EmoDaughter",
-    path = "bttiJonker.png",
+    path = "bttiEmoDaughter.png",
     px = 71,
     py = 95
 }
@@ -154,7 +154,7 @@ SMODS.Joker {
 -- Marketable Sidekick
 SMODS.Atlas {
     key = "MarketableSidekick",
-    path = "bttiJonker.png",
+    path = "bttiMarketableSidekick.png",
     px = 71,
     py = 95
 }
