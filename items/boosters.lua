@@ -514,6 +514,86 @@ SMODS.Booster {
 }
 
 SMODS.Atlas {
+    key = "broadcastBP",
+    path = "bttiBroadcastBuffoonPack.png",
+    px = 71,
+    py = 95
+}
+SMODS.Booster {
+    key = "buffoon_broadcast",
+    weight = 0.6,
+    kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
+    cost = 8,
+    pos = { x = 0, y = 0 },
+    atlas = 'broadcastBP',
+    config = { extra = 2, choose = 1 },
+    loc_txt = {
+        name = "Broadcast Buffoon Pack",
+        text = {
+            "Choose 1 of up to 2",
+            "{C:balinsanity}Media Jokers",
+        },
+        group_name = 'Broadcast Buffoon Pack'
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        }
+    end,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function(self, card, i)
+        return SMODS.create_card({
+            set = "BTTI_modAddition_MEDIA",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+            key_append = "btti"
+        })
+    end,
+}
+
+SMODS.Atlas {
+    key = "gamingBP",
+    path = "bttiGamingBuffoonPack.png",
+    px = 71,
+    py = 95
+}
+SMODS.Booster {
+    key = "buffoon_gaming",
+    weight = 0.6,
+    kind = 'Buffoon', -- You can also use Buffoon if you want it to belong to the vanilla kind
+    cost = 8,
+    pos = { x = 0, y = 0 },
+    atlas = 'gamingBP',
+    config = { extra = 2, choose = 1 },
+    loc_txt = {
+        name = "Gaming Buffoon Pack",
+        text = {
+            "Choose 1 of up to 2",
+            "{C:balinsanity}Video Game Jokers",
+        },
+        group_name = 'Game Buffoon Pack'
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        }
+    end,
+    ease_background_colour = function(self)
+        ease_background_colour_blind(G.STATES.BUFFOON_PACK)
+    end,
+    create_card = function(self, card, i)
+        return SMODS.create_card({
+            set = "BTTI_modAddition_GAME",
+            area = G.pack_cards,
+            skip_materialize = true,
+            soulable = true,
+            key_append = "btti"
+        })
+    end,
+}
+
+SMODS.Atlas {
     key = "deetsBP",
     path = "bttiStablesBuffoonPack.png",
     px = 71,

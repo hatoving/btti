@@ -639,3 +639,62 @@ SMODS.Consumable {
         }))
     end,
 }
+
+-- Blahaj
+SMODS.Atlas {
+    key = "blahaj",
+    path = "bttiBlahaj.png", -- placeholder
+    px = 65,
+    py = 95
+}
+SMODS.Consumable {
+    key = "blahaj",
+    set = "Spectral",
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
+    loc_txt = {
+        name = "Blahaj",
+        text = {
+            "Adds an {C:shark}Shark Seal{} to",
+            "{C:attention}1{} selected card in hand"
+        },
+    },
+    pools = { ["BTTI_modAddition_spectrals"] = true },
+    atlas = 'blahaj',
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+            }
+        }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal('btti_sharkSeal', nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+}

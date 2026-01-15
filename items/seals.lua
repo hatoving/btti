@@ -164,3 +164,37 @@ SMODS.Seal {
         end
     end,
 }
+
+-- Shark Seal
+SMODS.Atlas {
+    key = "sharkSeal",
+    path = "bttiSharkSeal.png",
+    px = 71,
+    py = 95
+}
+SMODS.Seal {
+    name = "sharkSeal",
+    key = "sharkSeal",
+    badge_colour = G.C.BTTISHARK,
+    config = { },
+    loc_txt = {
+        -- Badge name (displayed on card description when seal is applied)
+        label = 'Shark Seal',
+        -- Tooltip description
+        name = '{C:shark}Shark Seal',
+        text = {
+            " "
+        }
+    },
+
+    loc_vars = function(self, info_queue)
+        return { vars = { } }
+    end,
+    atlas = "sharkSeal",
+    pos = { x = 0, y = 0 },
+    pools = { ["BTTI_modAddition_seals"] = true },
+
+    calculate = function(self, card, context)
+        -- to do
+    end
+}
