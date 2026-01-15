@@ -1897,6 +1897,226 @@ SMODS.Joker {
     end
 }
 
+-- Corporate Greed
+SMODS.Atlas {
+    key = "CorporateGreed",
+    path = "bttiCorporateGreed.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'CorporateGreed',
+    loc_txt = {
+        name = 'Corporate Greed',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Balatro", "localthunk", "BlueBen8" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'CorporateGreed',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Space Race
+SMODS.Atlas {
+    key = "SpaceRace",
+    path = "bttiSpaceRace.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'SpaceRace',
+    loc_txt = {
+        name = 'Space Race',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Balatro", "localthunk", "charlinear" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'SpaceRace',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Missing Link
+SMODS.Atlas {
+    key = "MissingLink",
+    path = "bttiMissingLink.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'MissingLink',
+    loc_txt = {
+        name = 'Missing Link',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Balatro", "localthunk", "MrCr33ps" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'MissingLink',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Bluestorm
+SMODS.Atlas {
+    key = "Bluestorm",
+    path = "bttiBluestorm.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'Bluestorm',
+    loc_txt = {
+        name = 'Bluestorm',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "Balatro", "localthunk", "ValleyVA" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 4,
+    atlas = 'Bluestorm',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
 -- GIF Compression
 SMODS.Atlas {
     key = "GIFCompression",
@@ -1978,6 +2198,391 @@ SMODS.Joker {
 --#endregion
 
 --#region MOD COMBO JOKERS
+
+-- Good Mythical Morning!
+SMODS.Atlas {
+    key = "GMM",
+    path = "bttiGMM.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'GMM',
+    loc_txt = {
+        name = 'Good Mythical Morning!',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Internet", "Mythical", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'GMM',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Combo Meal
+SMODS.Atlas {
+    key = "ComboMeal",
+    path = "bttiComboMeal.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'ComboMeal',
+    loc_txt = {
+        name = 'Combo Meal',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "McDonald's", "Ronald McDonald", "ValleyVA" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'ComboMeal',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Homelander
+SMODS.Atlas {
+    key = "Homelander",
+    path = "bttiHomelander.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'Homelander',
+    loc_txt = {
+        name = 'Homelander',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "The Boys", "Eric Kripke", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Homelander',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Static
+SMODS.Atlas {
+    key = "Static",
+    path = "bttiStatic.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'Static',
+    loc_txt = {
+        name = 'Static',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "VOCALOID", "FLAVOR FOLEY", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'Static',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- BIRDBRAIN
+SMODS.Atlas {
+    key = "Birdbrain",
+    path = "bttiBirdbrain.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'Birdbrain',
+    loc_txt = {
+        name = 'BIRDBRAIN',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UTAU", "Jamie Paige", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'Birdbrain',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Spoken For
+SMODS.Atlas {
+    key = "SpokenFor",
+    path = "bttiSpokenFor.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'SpokenFor',
+    loc_txt = {
+        name = 'Spoken For',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UTAU", "FLAVOR FOLEY", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 'btti_dynamic',
+    atlas = 'SpokenFor',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Machine Love
+SMODS.Atlas {
+    key = "MachineLove",
+    path = "bttiMachineLove.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'MachineLove',
+    loc_txt = {
+        name = 'Machine Love',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "UTAU", "Jamie Paige", "Juicimated" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 2,
+    atlas = 'MachineLove',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
 
 -- Triple-Baka!!
 SMODS.Atlas {
@@ -2181,6 +2786,61 @@ SMODS.Joker {
                 }
             }
         end
+    end,
+    in_pool = function(self, args)
+        return false, { allow_duplicates = false }
+    end
+}
+
+-- Head in a Bottle
+SMODS.Atlas {
+    key = "HeadInABottle",
+    path = "bttiHeadInABottle.png",
+    px = 71,
+    py = 95,
+}
+SMODS.Joker {
+    key = 'HeadInABottle',
+    loc_txt = {
+        name = 'Head in a Bottle',
+        text = {
+            " "
+        }
+    },
+
+    config = { extra = {} },
+    set_badges = function(self, card, badges)
+        badges[#badges + 1] = create_badge('Combination Joker', G.C.DARK_EDITION, G.C.WHITE, 1.2)
+    end,
+    loc_vars = function(self, info_queue, card)
+        local combinable = G.BTTI.getCombinableJokers(card.ability.name)
+        for _, line in ipairs(combinable) do
+            info_queue[#info_queue + 1] = {
+                key = 'bttiPossibleCombo',
+                set = 'Other',
+                vars = { line }
+            }
+        end
+        info_queue[#info_queue + 1] = { key = 'bttiFromBy', set = 'Other', vars = { "AOTA", "BlueBen8", "BlueBen8" } }
+        return {
+            vars = {},
+        }
+    end,
+    rarity = 3,
+    atlas = 'HeadInABottle',
+    pos = { x = 0, y = 0 },
+    cost = 0,
+    pools = { ["BTTI_modAddition_COMBO"] = true },
+
+    unlocked = true,
+    discovered = false,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    no_collection = true,
+
+    calculate = function(self, card, context)
+        -- to do
     end,
     in_pool = function(self, args)
         return false, { allow_duplicates = false }
