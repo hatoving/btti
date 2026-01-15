@@ -656,7 +656,7 @@ SMODS.Consumable {
     loc_txt = {
         name = "Blahaj",
         text = {
-            "Adds an {C:shark}Shark Seal{} to",
+            "Adds a {C:shark}Shark Seal{} to",
             "{C:attention}1{} selected card in hand"
         },
     },
