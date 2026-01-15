@@ -33,7 +33,7 @@ SMODS.Joker {
 	atlas = 'Sayori',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = false,
     discovered = false,
@@ -84,7 +84,7 @@ SMODS.Joker {
 	atlas = 'Yuri',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = false,
     discovered = false,
@@ -135,7 +135,7 @@ SMODS.Joker {
 	atlas = 'Natsuki',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = false,
     discovered = false,
@@ -186,7 +186,7 @@ SMODS.Joker {
 	atlas = 'Monika',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = false,
     discovered = false,

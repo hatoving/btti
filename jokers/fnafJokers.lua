@@ -39,7 +39,7 @@ SMODS.Joker {
     atlas = 'Springtrap',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -106,7 +106,7 @@ SMODS.Joker {
     atlas = 'BiteOf87',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,

@@ -1149,7 +1149,7 @@ SMODS.Joker {
     atlas = 'BananaFarm',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -1305,7 +1305,7 @@ SMODS.Joker {
     atlas = 'SayThatAgain',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     pixel_size = { w = 71 , h = 95 },
     frame = 0,
@@ -1378,7 +1378,7 @@ SMODS.Joker {
     atlas = 'Steam',
     pos = { x = 0, y = 0 },
     cost = 10,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -2293,7 +2293,7 @@ SMODS.Joker {
 	atlas = 'BadApple',
 	pos = { x = 0, y = 0 },
 	cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_GAME"] = true },
 
     pixel_size = { w = 71 , h = 95 },
     frame = 0,
@@ -2351,7 +2351,7 @@ SMODS.Joker {
 	atlas = 'Rhett',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -2403,7 +2403,7 @@ SMODS.Joker {
 	atlas = 'Link',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -2525,7 +2525,7 @@ SMODS.Joker {
 	atlas = 'Halloween',
 	pos = { x = 0, y = 0 },
 	cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,

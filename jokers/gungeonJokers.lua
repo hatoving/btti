@@ -34,7 +34,7 @@ SMODS.Joker {
     atlas = 'Dragun',
     pos = { x = 0, y = 0 },
     cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_GAME"] = true },
 
     pixel_size = { w = 71, h = 95 },
     frame = 0,

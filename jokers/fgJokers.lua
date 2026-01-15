@@ -39,7 +39,7 @@ SMODS.Joker {
     atlas = 'GoodMorning',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = true,
     discovered = false,
@@ -126,7 +126,7 @@ SMODS.Joker {
     atlas = 'DidSomebodySayPie',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = true,
     discovered = false,

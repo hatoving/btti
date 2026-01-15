@@ -35,7 +35,7 @@ SMODS.Joker {
     atlas = 'Huntrix',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = true,
     discovered = false,

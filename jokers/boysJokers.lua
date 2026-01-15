@@ -33,7 +33,7 @@ SMODS.Joker {
 	atlas = 'SoldierBoy',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,

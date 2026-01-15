@@ -42,7 +42,7 @@ SMODS.Joker {
 	atlas = 'Victim',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -93,7 +93,7 @@ SMODS.Joker {
 	atlas = 'ChosenOne',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -144,7 +144,7 @@ SMODS.Joker {
 	atlas = 'DarkLord',
 	pos = { x = 0, y = 0 },
 	cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -195,7 +195,7 @@ SMODS.Joker {
 	atlas = 'SecondComing',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -246,7 +246,7 @@ SMODS.Joker {
 	atlas = 'ColorGang',
 	pos = { x = 0, y = 0 },
 	cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -297,7 +297,7 @@ SMODS.Joker {
 	atlas = 'KingOrange',
 	pos = { x = 0, y = 0 },
 	cost = 8,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -348,7 +348,7 @@ SMODS.Joker {
 	atlas = 'Purple',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,

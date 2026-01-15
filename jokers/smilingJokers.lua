@@ -33,7 +33,7 @@ SMODS.Joker {
 	atlas = 'MrFrog',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_INTERNET"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,

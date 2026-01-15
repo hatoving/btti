@@ -33,7 +33,7 @@ SMODS.Joker {
 	atlas = 'DadCharacter',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -84,7 +84,7 @@ SMODS.Joker {
 	atlas = 'PunchingBagWife',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_UNCOMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -135,7 +135,7 @@ SMODS.Joker {
 	atlas = 'EmoDaughter',
 	pos = { x = 0, y = 0 },
 	cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,
@@ -186,7 +186,7 @@ SMODS.Joker {
 	atlas = 'MarketableSidekick',
 	pos = { x = 0, y = 0 },
 	cost = 7,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_RARE"] = true, ["BTTI_modAddition_MEDIA"] = true },
 
     unlocked = false,
     discovered = false,

@@ -33,7 +33,7 @@ SMODS.Joker {
 	atlas = 'Silksong',
 	pos = { x = 0, y = 0 },
 	cost = 5,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_DYNAMIC"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = false,
     discovered = false,

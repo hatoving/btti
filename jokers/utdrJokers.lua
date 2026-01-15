@@ -68,7 +68,7 @@ SMODS.Joker {
     atlas = 'Sans',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -174,7 +174,7 @@ SMODS.Joker {
     atlas = 'Papyrus',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -280,7 +280,7 @@ SMODS.Joker {
     atlas = 'WeirdRoute',
     pos = { x = 0, y = 0 },
     cost = 6,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
@@ -342,7 +342,7 @@ SMODS.Joker {
     atlas = 'Tenna',
     pos = { x = 0, y = 0 },
     cost = 4,
-    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, },
+    pools = { ["BTTI_modAddition"] = true, ["BTTI_modAddition_COMMON"] = true, ["BTTI_modAddition_GAME"] = true },
 
     unlocked = true,
     discovered = false,
