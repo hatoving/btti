@@ -2,7 +2,7 @@ return {
     descriptions = {
         Jokers = {
             bttiJokerFriend = {
-                name = '{f:btti_ymfp}Friend...?',
+                name = '{f:btti_ymfp}Friend',
                 text = {
                     "Gains {C:chips}+21{} Chips when triggered",
                     "{C:green}1 in 5{} chance to glitch, resetting",
@@ -18,7 +18,7 @@ return {
                 }
             },
             bttiJokerFriend_keepName = {
-                name = '{f:btti_ymfp}The Donor',
+                name = '{f:btti_ymfp}Friend...?',
                 text = {
                     "Gains {C:chips}+21{} Chips when triggered",
                     "{C:green}1 in 5{} chance to glitch, resetting",

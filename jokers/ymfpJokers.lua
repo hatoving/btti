@@ -170,7 +170,7 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'Friend',
     loc_txt = {
-        name = '{f:btti_ymfp}Friend...?',
+        name = '{f:btti_ymfp}Friend',
         text = {
             "Gains +{C:chips}21{} Chips when triggered",
             "{C:green}1 in 5{} chance to glitch, resetting",
